@@ -1,0 +1,1652 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>سهم</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="سهم">
+<meta name="theme-color" content="#f2ece5">
+<script>/* pick the saved theme before the first paint, so the edges never flash another colour */
+try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png?v=7.0">
+<style>
+/* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
+@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
+@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:700;font-display:swap;src:url(plex-ar-700.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
+@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-la-400.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:700;font-display:swap;src:url(plex-la-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Layout: status chip on top; one page at a time in the middle (Home / Qibla share the compass dial,
+   Favourites and Settings are scrolling lists); a tab bar fixed to the bottom. */
+:root{
+  --bg:#17110d; --bg2:#22180f; --panel:#221a14; --panel2:#2c2119; --line:#3a2d23; --fg:#f4e9dc; --dim:#a8927e;
+  --arrow:#ff9330; --arrow2:#d9620c; --good:#4cc38a; --good2:#2f9a68; --ok:#f2a64e; --bad:#e5604f; --onArrow:#2a1404;
+  --dial:#2e2219; --dial2:#3a2b20; --dialLine:#57432f; --dialTick:#8c745e; --dialTxt:#f1e3cf; --dialDim:#b49c84; --rose:rgba(241,227,207,.10);
+  --glow:rgba(255,147,48,.28); --glowG:rgba(76,195,138,.35); --okBg:rgba(242,166,78,.09); --okLine:rgba(242,166,78,.3);
+  --badBg:rgba(229,96,79,.08); --badLine:rgba(229,96,79,.5); --shadow:rgba(0,0,0,.45); --scrim:rgba(0,0,0,.6); --bar:rgba(34,26,20,.95);
+  --ui:"IBM Plex Sans Arabic",-apple-system,"SF Arabic","Geeza Pro",system-ui,sans-serif;
+  --num:-apple-system,"SF Pro Rounded","SF Pro Display",system-ui,sans-serif;
+  color-scheme:dark;
+}
+/* light: the icon's sand beige with a coffee-brown dial */
+:root[data-theme="light"]{
+  --bg:#f1e4d1; --bg2:#f8efe2; --panel:#fffaf3; --panel2:#f4e8d7; --line:#e4d3bc; --fg:#3a2a20; --dim:#86705e;
+  --arrow:#f5841f; --arrow2:#d4610b; --good:#2f9a68; --good2:#237a52; --ok:#b8640a; --bad:#c4473a; --onArrow:#2e1605;
+  --dial:#4a3228; --dial2:#5a3e31; --dialLine:#6e5242; --dialTick:#c9b29b; --dialTxt:#f6eadb; --dialDim:#cdb59c; --rose:rgba(246,234,219,.13);
+  --glow:rgba(213,97,11,.28); --glowG:rgba(47,154,104,.3); --okBg:rgba(245,132,31,.1); --okLine:rgba(213,97,11,.32);
+  --badBg:rgba(196,71,58,.07); --badLine:rgba(196,71,58,.45); --shadow:rgba(74,50,40,.18); --scrim:rgba(58,42,32,.35); --bar:rgba(255,250,243,.96);
+  color-scheme:light;
+}
+/* red: night mode, keeps your eyes used to the dark */
+:root[data-theme="red"]{
+  --bg:#0b0202; --bg2:#140404; --panel:#170505; --panel2:#200808; --line:#3a0f0c; --fg:#ff6a55; --dim:#a8392c;
+  --arrow:#ff3b2a; --arrow2:#b8231a; --good:#ff8c6b; --good2:#d9583f; --ok:#ff7a4a; --bad:#ff2b1c; --onArrow:#1a0000;
+  --glow:rgba(255,59,42,.25); --glowG:rgba(255,140,107,.3); --okBg:rgba(255,90,60,.08); --okLine:rgba(255,90,60,.3);
+  --badBg:rgba(255,43,28,.08); --badLine:rgba(255,43,28,.5); --shadow:rgba(0,0,0,.6); --scrim:rgba(0,0,0,.7); --bar:rgba(23,5,5,.95);
+  --dial:#170505; --dial2:#200808; --dialLine:#3a0f0c; --dialTick:#7a2219; --dialTxt:#ff6a55; --dialDim:#a8392c; --rose:rgba(255,106,85,.08);
+  color-scheme:dark;
+}
+:root[data-theme="red"] img{filter:grayscale(1) sepia(1) hue-rotate(-50deg) saturate(5) brightness(.75)}
+/* battery saver: no motion, no glow */
+.eco *,.eco *::before,.eco *::after{transition:none!important;animation:none!important}
+.eco #arrow,.eco .tabbar button.on svg,.eco #start img{filter:none!important}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+html{background:var(--panel)}
+body{background:radial-gradient(120% 70% at 50% 38%,var(--bg2),var(--bg) 70%);background-color:var(--bg);color:var(--fg);font-family:var(--ui);
+  padding:env(safe-area-inset-top) max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));
+  display:flex;flex-direction:column;overflow:hidden;user-select:none;-webkit-user-select:none}
+svg{display:block}
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* top status */
+.top{display:flex;align-items:center;gap:6px;padding:8px 0 0}
+.tcol{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.chips{display:flex;gap:5px;min-width:0}
+.chips .chip{padding:4px 8px;gap:5px;min-width:0;flex:0 1 auto}
+.chips .chip b{font-size:12px}.chips .chip .acc{font-size:11px}
+.chips .bars{height:12px}.chips .bars i{width:3px}.chips .bars i:nth-child(4){height:12px}.chips .bars i:nth-child(3){height:9px}.chips .bars i:nth-child(2){height:6px}.chips .bars i:nth-child(1){height:4px}
+.hshort{margin-inline-start:auto;font-size:12px;font-weight:700;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ptitle:not(:empty)~.hshort{display:none}
+.moonw{flex:none;display:flex;background:transparent;border:0;padding:0;margin:-4px -4px -10px 0;color:var(--fg);box-shadow:none}
+.moonw svg{width:58px;height:58px;filter:drop-shadow(0 3px 10px var(--shadow))}
+.moon-dlg{text-align:center}.moonbig{width:120px;height:120px;margin:4px auto 6px;display:block;filter:drop-shadow(0 6px 18px var(--shadow))}
+.moon-dlg h3{margin:4px 0 2px}.mdh{color:var(--dim);margin-bottom:12px}
+.sunwarn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-top:8px!important;padding-bottom:8px!important;background:var(--okBg);border:1px solid var(--okLine);color:var(--ok);border-radius:14px;padding:8px 12px;font-size:13.5px;font-weight:600;text-align:center}
+.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tool{flex-direction:column;gap:3px;padding:7px 2px;font-size:11.5px;border-radius:14px;position:relative}
+.tool .ti{font-size:20px;line-height:1}
+.tool.sos{border-color:var(--badLine);color:var(--bad);background:var(--badBg)}
+.rec{position:absolute;top:6px;inset-inline-end:8px;width:8px;height:8px;border-radius:50%;background:var(--bad);animation:pulse 1.4s infinite}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cats button{padding:6px 10px;border-radius:999px;font-size:13px;background:var(--bg)}
+.cats button.on{background:var(--arrow);border-color:var(--arrow);color:var(--onArrow);font-weight:700}
+.catf{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.catf::-webkit-scrollbar{display:none}
+.catf:empty{display:none}
+.catf button{flex:none;padding:6px 12px;border-radius:999px;font-size:13px}
+.catf button.on{background:var(--arrow);border-color:var(--arrow);color:var(--onArrow);font-weight:700}
+.pathc{width:100%;aspect-ratio:1.25;background:var(--bg);border:1px solid var(--line);border-radius:16px;display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:12px 0 6px;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.stats>div{text-align:center;padding:8px 4px;display:flex;flex-direction:column;gap:2px}
+.stats>div+div{border-inline-start:1px solid var(--line)}
+.stats span{color:var(--dim);font-size:11.5px}.stats b{font-family:var(--num);font-size:17px;direction:ltr}
+.sos-dlg{text-align:center}
+.sosbig{font-family:var(--num);font-size:clamp(26px,8.5vw,36px);font-weight:800;direction:ltr;line-height:1.25;user-select:text;-webkit-user-select:text;margin:6px 0}
+.sosdms{font-family:var(--num);direction:ltr;color:var(--dim);font-size:15px}
+.sosmeta{color:var(--dim);font-size:13px;margin:8px 0 14px}
+.calls{display:flex;gap:8px;margin:12px 0 8px}
+.call{flex:1;text-align:center;user-select:text;-webkit-user-select:text;text-decoration:none;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 6px;font-weight:700;font-family:var(--num)}
+.pray{width:100%;max-width:440px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.pnext{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.pnext b{font-family:var(--num);color:var(--arrow);font-size:18px}
+.pgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.pgrid div{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 2px;text-align:center;font-size:11.5px;color:var(--dim)}
+.pgrid b{display:block;font-family:var(--num);color:var(--fg);font-size:13px;margin-top:2px}
+.pgrid .now{border-color:var(--arrow);background:var(--okBg)}.pgrid .now b{color:var(--arrow)}
+.qibla .dial{width:min(66vw,32vh)}
+.chip{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 10px;white-space:nowrap}
+.bars{display:flex;gap:2px;align-items:flex-end;height:14px}
+.bars i{width:4px;border-radius:2px;background:var(--line);transition:background .3s}
+.bars i:nth-child(1){height:5px}.bars i:nth-child(2){height:8px}.bars i:nth-child(3){height:11px}.bars i:nth-child(4){height:14px}
+.chip b{font-size:13px;font-weight:600}
+.chip .acc{color:var(--dim);font-size:12px;font-family:var(--num);font-variant-numeric:tabular-nums;direction:ltr}
+.subrow{display:flex;align-items:center;gap:8px}
+.ptitle{margin-inline-start:auto;font-size:14px;font-weight:700;color:var(--dim)}
+.avgbox{margin-top:8px;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.5;border:1px solid}
+.avgbox b{display:block;font-size:14px}
+.sub{color:var(--dim);font-size:12px;min-height:16px;font-variant-numeric:tabular-nums;padding-inline-start:4px}
+.sub .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-inline-end:5px;vertical-align:1px}
+
+/* pages */
+main{flex:1;min-height:0;display:flex;flex-direction:column;padding-bottom:calc(58px + env(safe-area-inset-bottom))}
+.page{flex:1;min-height:0}
+.scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:8px 0 24px;display:flex;flex-direction:column;gap:12px}
+.scroll>*{flex-shrink:0}
+.stage{display:flex;flex-direction:column;align-items:center;justify-content:safe center;gap:12px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+.stage>*{flex-shrink:0}
+
+/* dial */
+.dial{position:relative;width:min(78vw,40vh);aspect-ratio:1;max-width:100%;overflow:hidden;border-radius:50%}
+#bezel{position:absolute;inset:0;transition:transform .25s ease-out}
+#bezel svg{width:100%;height:100%}
+.tick{stroke:var(--dialLine)}.tick.maj{stroke:var(--dialTick)}
+.card{fill:var(--dialDim);font:700 13px var(--num)}
+.card.n{fill:var(--arrow)}
+.face{fill:var(--dial);stroke:var(--dialLine)}
+.rose{fill:var(--rose)}
+.dial{box-shadow:0 14px 40px var(--shadow),0 0 0 6px var(--panel2)}
+#arrow{position:absolute;inset:20%;transition:transform .25s ease-out;filter:drop-shadow(0 6px 14px var(--glow))}
+#arrow svg{width:100%;height:100%}
+#arrow .a1{fill:var(--arrow)}#arrow .a2{fill:var(--arrow2)}#arrow .hub{fill:var(--dial2);stroke:var(--dialTxt);stroke-width:2.5}
+.aligned #arrow .a1{fill:var(--good)}.aligned #arrow .a2{fill:var(--good2)}
+.aligned #arrow{filter:drop-shadow(0 6px 16px var(--glowG))}
+#kaaba{position:absolute;top:3%;left:50%;width:9%;transform:translateX(-50%);display:none}
+.qibla #kaaba{display:block}
+.flag{position:absolute;inset:20%;border-radius:50%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--good);background:var(--dial2);font-size:24px;font-weight:700}
+.flag svg{width:44%;height:auto}
+.arrived #arrow{opacity:0}
+.arrived .flag{display:flex;animation:pop .35s ease-out}
+.arrived .face{stroke:var(--good)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.navhead{font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px}
+.dist{font-family:var(--num);font-size:clamp(56px,17vw,86px);font-weight:700;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-.02em}
+.dist{transition:font-size .3s}
+.dist.near{font-size:clamp(76px,24vw,118px);color:var(--arrow)}
+.altd{color:var(--dim);font-size:14px;text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.altd b{color:var(--fg);font-family:var(--num)}
+.dist small{font-family:var(--ui);font-size:.36em;font-weight:600;color:var(--dim);margin-inline-start:6px;letter-spacing:0}
+.meta{color:var(--dim);font-size:14px;text-align:center;min-height:20px}
+.meta b{color:var(--fg);font-weight:600}
+.warn{font-size:13px;text-align:center}
+.warn:not(:empty){color:var(--ok);background:var(--okBg);border:1px solid var(--okLine);border-radius:12px;padding:8px 12px;max-width:420px;line-height:1.5}
+
+/* home idle */
+.here{width:100%;max-width:440px;display:flex;flex-direction:column;gap:8px}
+.info{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:10px 12px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+.info .wxb{margin-inline-start:auto;font-weight:500;flex:none;white-space:nowrap}.info .wxb b{font-family:var(--num)}
+.srow{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:0 4px;font-size:13px}
+.srow b{font-family:var(--num);font-weight:700}.srow .tl{font-size:12px}
+.info .r{display:flex;align-items:center;gap:8px;min-width:0;padding:0 4px}
+.info .r span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.info .place{font-weight:600}.info .place svg{color:var(--arrow);flex:none}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:9px 12px}
+.tile .ic{font-size:22px;line-height:1}
+.tile .tl{color:var(--dim);font-size:11.5px}
+.tile b{font-family:var(--num);font-size:16px;font-weight:700}
+.info .wx b{font-family:var(--num);font-weight:600}
+.info .dimtxt,.dimtxt{color:var(--dim);font-size:12px}
+/* seasons & stars */
+.season{display:flex;flex-direction:column;align-items:stretch;gap:8px;text-align:start;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:11px 12px;font:inherit;color:var(--fg);width:100%}
+.season:active{transform:scale(.99)}
+.shead{display:flex;align-items:center;gap:12px}
+.sem{font-size:26px;line-height:1;width:42px;height:42px;border-radius:14px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.sname{flex:1;min-width:0}.sname b{font-size:19px;font-weight:800;display:block;line-height:1.25}
+.tl{color:var(--dim);font-size:11.5px}
+.sleft{text-align:center;flex:none}.sleft b{display:block;font-family:var(--num);font-size:24px;font-weight:800;color:var(--arrow);line-height:1}
+.sleft span{color:var(--dim);font-size:11px}
+.bar{height:6px;border-radius:99px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--arrow2),var(--arrow));border-radius:99px}
+[dir=rtl] .bar i{background:linear-gradient(270deg,var(--arrow2),var(--arrow))}
+.srange{color:var(--dim);font-size:12px;font-variant-numeric:tabular-nums}
+.schips{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.schip{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:6px 8px;min-width:0}
+.schip>span{font-size:16px}.schip>div{min-width:0}
+.schip b{display:block;font-size:13px;line-height:1.3}
+.schip small{display:block;color:var(--dim);font-size:11px}
+.stemp{font-size:12.5px;color:var(--dim)}.stemp b{color:var(--fg);font-family:var(--num)}
+.snext{font-size:12.5px;border-top:1px dashed var(--line);padding-top:7px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.snext b{font-weight:700}
+.snext .soon{background:var(--arrow);color:var(--onArrow);font-size:11px;font-weight:700;border-radius:99px;padding:2px 8px}
+.yr .seg{margin-bottom:10px}
+.yrlist{display:flex;flex-direction:column;gap:6px;max-height:55vh;overflow:auto}
+.yrow{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.yrow .e{font-size:18px}.yrow .n{flex:1;min-width:0;font-weight:600}.yrow .n small{display:block;color:var(--dim);font-weight:400;font-size:11.5px}
+.yrow .dd{color:var(--dim);font-size:12px;text-align:end;font-variant-numeric:tabular-nums}
+.yrow.now{border-color:var(--arrow);background:var(--okBg)}.yrow.now .n{color:var(--arrow)}
+
+/* location: the hero card, in the icon's coffee brown */
+.loc{background:linear-gradient(160deg,var(--dial2),var(--dial));color:var(--dialTxt);border-radius:18px;padding:9px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;box-shadow:0 12px 30px var(--shadow)}
+.loc .lbl{color:var(--dialDim);font-size:13px;display:flex;align-items:center;gap:8px}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--arrow);box-shadow:0 0 0 0 var(--glow);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.coords{direction:ltr;font-family:var(--num);font-size:clamp(18px,5.4vw,23px);font-weight:700;font-variant-numeric:tabular-nums;text-align:center;line-height:1.25;user-select:text;-webkit-user-select:text;letter-spacing:-.01em}
+.mini{width:100%;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--dialLine);padding-top:5px}
+.mini>div{text-align:center;display:flex;flex-direction:column;gap:1px}
+.mini>div+div{border-inline-start:1px solid var(--dialLine)}
+.mini span{color:var(--dialDim);font-size:11px}
+.mini b{font-family:var(--num);font-size:14.5px;font-weight:700;direction:ltr}
+.loc .pill{padding:5px 14px;font-size:13px;background:rgba(255,255,255,.08);border-color:var(--dialLine);color:var(--dialTxt)}
+.pill{padding:8px 16px;font-size:14px;border-radius:999px}
+.big{width:100%;padding:12px;font-size:16px;border-radius:16px;box-shadow:0 8px 20px var(--glow)}
+.startrow{display:flex;gap:8px}.startrow .big{flex:1}
+.startrow .sq{width:56px;flex:none;padding:0;border-radius:16px;color:var(--bad)}
+.startrow .sq.sure{background:var(--bad);color:#fff;border-color:var(--bad)}
+#startDist{font-family:var(--num);font-weight:600;opacity:.85}
+
+/* controls */
+button,input,textarea{font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+button{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+button:active{transform:scale(.98)}
+button.primary{background:var(--arrow);color:var(--onArrow);border-color:var(--arrow);font-weight:700}
+button.danger{background:var(--badBg);border-color:var(--badLine);color:var(--bad);font-weight:700}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--arrow);outline-offset:2px}
+.row{display:flex;gap:8px}.row>*{flex:1}
+#cancel{width:100%;max-width:440px}
+
+/* favourites */
+.list{display:flex;flex-direction:column;gap:8px}
+.item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.item .txt{flex:1;min-width:0}
+.item b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px}
+.item small{color:var(--dim);display:block;font-size:12.5px;font-family:var(--num);direction:ltr;text-align:start;unicode-bidi:plaintext}
+.item .at{color:var(--dim);font-size:11.5px;margin-top:2px;font-family:var(--num);font-variant-numeric:tabular-nums}
+.item .acts{display:flex;gap:6px}
+.item .nd{color:var(--arrow);font-size:12.5px;margin-top:3px;font-family:var(--num);font-weight:600}
+.item .more{width:40px;padding:8px 0;font-weight:700;letter-spacing:1px}
+.pd .k{color:var(--dim);font-size:12px;margin-top:10px}
+.pd .v{font-family:var(--num);font-size:15px;direction:ltr;text-align:start;unicode-bidi:plaintext;user-select:text;-webkit-user-select:text}
+.pd .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.lblrow{display:flex;align-items:center;justify-content:space-between;margin:12px 0 6px}
+.lblrow label{margin:0!important}
+.lblrow button{padding:5px 12px;font-size:13px;border-radius:999px}
+.item button{padding:8px 11px;font-size:13px;border-radius:10px}
+.item button.del{color:var(--bad)}
+.item button.del.sure{background:var(--bad);color:#fff;border-color:var(--bad)}
+.empty{text-align:center;color:var(--dim);padding:28px 12px;line-height:1.7;background:var(--panel);border:1px dashed var(--line);border-radius:16px}
+.sect{font-size:12px;color:var(--dim);padding:4px 4px 0}
+
+/* settings */
+.group{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.set{display:flex;flex-direction:column;gap:8px;padding:14px}
+.set+.set,.link+.link,.set+.link,.link+.set{border-top:1px solid var(--line)}
+.sl{font-size:14px;font-weight:600}
+.sh{font-size:12px;color:var(--dim);line-height:1.5}
+.seg{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:transparent;padding:9px 4px;font-size:14px;color:var(--dim);border-radius:9px;font-family:var(--num)}
+.seg button.on{background:var(--arrow);color:var(--onArrow);font-weight:700}
+.seg button:focus-visible{outline:none}
+.link{display:flex;align-items:center;gap:12px;width:100%;padding:14px;border:0;border-radius:0;background:transparent;justify-content:flex-start;font-size:15px;text-align:start}
+.link svg{color:var(--arrow);flex:none}
+.link .v{margin-inline-start:auto;color:var(--dim);font-family:var(--num);font-size:14px;direction:ltr}
+.link .chev{margin-inline-start:auto;width:8px;height:8px;border:solid var(--dim);border-width:0 2px 2px 0;transform:rotate(135deg)}
+[dir=ltr] .link .chev{transform:rotate(-45deg)}
+
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:4;display:flex;background:var(--panel);border-top:1px solid var(--line);box-shadow:0 120px 0 var(--panel);
+  padding:3px max(8px,env(safe-area-inset-right)) calc(2px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.tabbar button{flex:1;flex-direction:column;gap:2px;border:0;background:transparent;padding:4px 2px;font-size:10.5px;color:var(--dim);border-radius:12px}
+.tabbar button svg{width:21px;height:21px}
+.tabbar button.on{color:var(--arrow);font-weight:700}
+.tabbar button.on svg{filter:drop-shadow(0 2px 6px var(--glow))}
+
+/* dialogs */
+dialog{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:20px;width:min(92vw,440px);padding:20px;max-height:85vh;overflow:auto}
+dialog::backdrop{background:var(--scrim);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+dialog h3{margin:0 0 14px;font-size:18px}
+dialog label{display:block;font-size:13px;color:var(--dim);margin:12px 0 6px}
+dialog input,dialog textarea{width:100%;background:var(--bg)}
+dialog .row{margin-top:16px}
+.auto{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;color:var(--dim);font-family:var(--num);font-variant-numeric:tabular-nums}
+.auto span{font-family:var(--ui);font-size:12px;opacity:.8}
+.about{text-align:center}
+.about img{border-radius:18px;box-shadow:0 10px 28px var(--shadow),0 0 0 1px var(--line);margin:4px auto 10px;display:block}
+.about .name{font-size:24px;font-weight:700}
+.about .name span{font-size:15px;color:var(--dim);font-weight:500;margin-inline-start:4px}
+.about .tag{color:var(--dim);font-size:14px;margin-top:2px}
+.about p{line-height:1.75;font-size:14.5px;margin:14px 0 0}
+.about .credit{margin-top:16px;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:14px}
+.about .credit .by{color:var(--dim);font-size:12px}
+.about .credit b{display:block;color:var(--arrow);font-size:18px;margin:2px 0}
+.about .vpill{display:inline-block;direction:ltr;font-size:11px;color:var(--arrow);border:1px solid var(--okLine);border-radius:999px;padding:2px 10px;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line);padding:9px 16px;border-radius:999px;font-size:14px;z-index:9;box-shadow:0 8px 24px var(--shadow);white-space:nowrap}
+
+/* start */
+#start{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;z-index:5}
+#start h1{margin:0;font-size:34px}
+.logo{display:block;margin:0 auto;height:44px;aspect-ratio:1023/376;background:var(--fg);-webkit-mask:url(logo.png) center/contain no-repeat;mask:url(logo.png) center/contain no-repeat}
+.about .logo{height:34px;margin-top:2px}
+#start p{color:var(--dim);max-width:30ch;line-height:1.7;margin:0}
+#start button{min-width:160px}
+#start img{border-radius:26px;box-shadow:0 0 0 1px var(--line);filter:drop-shadow(0 10px 24px var(--glow))}
+/* install wall: shown in the browser only, cannot be dismissed */
+#install{position:fixed;inset:0;z-index:8;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:calc(24px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
+#install .wrap{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+#install .hd{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+#install .hd img{border-radius:22px;box-shadow:0 0 0 1px var(--line),0 10px 24px var(--shadow)}
+#install h2{margin:6px 0 0;font-size:24px;line-height:1.35}
+#install .why{color:var(--dim);font-size:14.5px;line-height:1.7}
+#install .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
+#install .step{display:flex;align-items:center;gap:12px;font-size:16px;line-height:1.5}
+#install .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--arrow);color:var(--onArrow);font-weight:700;display:grid;place-items:center;font-family:var(--num)}
+#install .ico{flex:none;width:34px;height:34px;border-radius:9px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;color:#0a84ff}
+#install .step b{font-weight:700}
+#install .en{direction:ltr;text-align:left}
+#install .note{font-size:13px;line-height:1.6;color:var(--ok);background:var(--okBg);border:1px solid var(--okLine);border-radius:12px;padding:10px 12px}
+#install .lang{font-size:12px;color:var(--dim);letter-spacing:.04em;text-transform:uppercase}
+#install .point{text-align:center;font-size:30px;animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){#install .point{animation:none}}
+@media (prefers-reduced-motion:reduce){#arrow,#bezel{transition:none}.arrived .flag{animation:none}}
+
+/* ===== 6.0 look: night-sky header, warm cards, navy location card ===== */
+:root[data-theme="light"]{
+  --bg:#f2ece5; --bg2:#f6f1eb; --panel:#fdfbf8; --panel2:#f6ece0; --line:#ebe1d5; --fg:#1d2433; --dim:#7a7e8b;
+  --dial:#1e2839; --dial2:#2a3650; --dialLine:#3b4864; --dialTick:#98a2b8; --dialTxt:#f2f4f8; --dialDim:#aeb6c9; --rose:rgba(242,244,248,.1);
+  --shadow:rgba(30,40,57,.13); --scrim:rgba(20,26,40,.4); --bar:rgba(250,247,241,.97);
+  --sky1:#0e1c33; --sky2:#1f2e4b; --sky3:#3b4159;
+}
+:root[data-theme="dark"],:root:not([data-theme]){
+  --bg:#0c1220; --bg2:#121a2c; --panel:#151d30; --panel2:#1b2439; --line:#28324c; --fg:#eef1f7; --dim:#8f99b0;
+  --dial:#1b2438; --dial2:#26314b; --dialLine:#38445f; --dialTick:#8e98b0; --dialTxt:#eef1f7; --dialDim:#a4adc2; --rose:rgba(238,241,247,.09);
+  --shadow:rgba(0,0,0,.45); --bar:rgba(21,29,48,.96);
+  --sky1:#050a15; --sky2:#0e182c; --sky3:#1b243b;
+}
+:root[data-theme="red"]{--sky1:#0b0202;--sky2:#160505;--sky3:#220808}
+:root[data-theme="red"] .sky,:root[data-theme="red"] .moonw,:root[data-theme="red"] .moonbig,:root[data-theme="red"] .lrose,:root[data-theme="red"] .mosq,:root[data-theme="red"] .sunwarn::after{filter:grayscale(1) sepia(1) hue-rotate(-50deg) saturate(4) brightness(.6)}
+body{background:var(--bg)}
+html{background:var(--bg)}
+.head{position:relative;z-index:1;padding-bottom:4px}
+.sky{position:absolute;z-index:-1;pointer-events:none;overflow:hidden;
+  top:calc(-1*env(safe-area-inset-top));left:calc(-1*max(16px,env(safe-area-inset-left)));right:calc(-1*max(16px,env(safe-area-inset-right)));bottom:-20px;
+  background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 52%,var(--sky3) 68%,#141b2e 76%,color-mix(in srgb,var(--sky3) 55%,var(--bg)) 90%,var(--bg) 100%)}
+.stars{position:absolute;inset:0 0 40% 0;opacity:.85;background-image:
+  radial-gradient(1.2px 1.2px at 8% 22%,#fff 70%,transparent),radial-gradient(1px 1px at 18% 64%,#fff 70%,transparent),radial-gradient(1.4px 1.4px at 31% 30%,#fff 70%,transparent),
+  radial-gradient(1px 1px at 40% 12%,#fff 70%,transparent),radial-gradient(1px 1px at 47% 52%,#dfe7ff 70%,transparent),radial-gradient(1.3px 1.3px at 52% 8%,#fff 70%,transparent),
+  radial-gradient(1px 1px at 66% 70%,#fff 70%,transparent),radial-gradient(1px 1px at 72% 10%,#fff 70%,transparent),radial-gradient(1.2px 1.2px at 83% 42%,#fff 70%,transparent),
+  radial-gradient(1px 1px at 92% 18%,#fff 70%,transparent),radial-gradient(1px 1px at 96% 62%,#dfe7ff 70%,transparent),radial-gradient(1px 1px at 3% 80%,#fff 70%,transparent),
+  radial-gradient(.9px .9px at 25% 8%,#fff 70%,transparent),radial-gradient(.9px .9px at 53% 80%,#fff 70%,transparent),radial-gradient(.9px .9px at 78% 58%,#fff 70%,transparent)}
+.mtn{position:absolute;left:0;right:0;bottom:30%;height:44px;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 60%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%232b3552%22 d=%22M0 38 L30 28 L55 34 L85 18 L115 30 L140 24 L170 34 L205 14 L240 30 L270 22 L300 32 L335 16 L370 28 L400 22 V60 H0Z%22/%3E%3Cpath fill=%22%230e1527%22 d=%22M0 46 L40 36 L70 42 L105 30 L140 42 L180 34 L215 44 L250 32 L290 42 L320 36 L360 44 L400 34 V60 H0Z%22/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
+.top,.chips{--fg:#f4f6fb;--dim:#b4bccf;--line:rgba(255,255,255,.2);--good:#55d89d;--ok:#ffb45f;--bad:#ff8574;color:var(--fg)}
+.top{display:flex;align-items:center;gap:10px;padding:6px 0 2px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.bmark{width:42px;height:42px;flex:none;border-radius:50%;border:2.5px solid var(--arrow);color:var(--arrow);display:grid;place-items:center;box-shadow:0 0 18px rgba(245,132,31,.35)}
+.bmark svg{width:21px;height:21px;transform:translate(-1px,1px)}
+.btxt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.logo.hl{height:30px;margin:0;background:#fff;-webkit-mask-position:right center;mask-position:right center}
+[dir=ltr] .logo.hl{-webkit-mask-position:left center;mask-position:left center}
+.ptitle{margin:0;font-size:13.5px;font-weight:500;color:var(--dim);white-space:nowrap}
+.moonw{margin:-4px auto -6px 0;margin-inline-start:auto;margin-inline-end:0}
+.moonw svg{width:66px;height:66px;filter:drop-shadow(0 0 14px rgba(255,236,190,.35))}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px}
+.chips .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:6px 10px;justify-content:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);overflow:hidden}
+.chips .chip b{font-size:12.5px;overflow:hidden;text-overflow:ellipsis}.chips .chip .acc{color:var(--dim)}
+.subrow{margin-top:8px;color:#f4f6fb}
+.hpill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.88);color:#1d2433;border-radius:10px;padding:4px 10px;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+:root[data-theme="dark"] .hpill,:root[data-theme="red"] .hpill{background:rgba(255,255,255,.1);color:var(--fg);border:1px solid rgba(255,255,255,.16)}
+.subrow .sub{margin-inline-start:auto;color:rgba(244,246,251,.85)}
+.hshort{display:inline}
+/* sunset banner */
+.sunwarn{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;text-align:start;white-space:normal;padding:8px 10px!important;border-radius:16px;
+  background:linear-gradient(90deg,#fde6bd,#fcefd6);border:1px solid #f6d6a3;color:#2a2116;box-shadow:0 6px 18px rgba(220,140,40,.14)}
+.sunwarn::after{content:'';position:absolute;inset-inline-end:0;top:0;bottom:0;width:44%;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 160 80%22%3E%3Cdefs%3E%3ClinearGradient id=%22s%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffe3a3%22/%3E%3Cstop offset=%221%22 stop-color=%22%23ffab4a%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%23ffd9a0%22 stop-opacity=%220%22/%3E%3Cstop offset=%221%22 stop-color=%22%23ffc98a%22 stop-opacity=%22.7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22160%22 height=%2280%22 fill=%22url(%23g)%22/%3E%3Ccircle cx=%2262%22 cy=%2256%22 r=%2220%22 fill=%22url(%23s)%22/%3E%3Cpath fill=%22%23f8a55a%22 d=%22M0 64 C30 54 60 58 90 62 S140 54 160 58 V80 H0Z%22/%3E%3Cpath fill=%22%23ec8a3e%22 d=%22M0 72 C40 64 80 70 110 68 S150 66 160 70 V80 H0Z%22/%3E%3C/svg%3E") right bottom/cover no-repeat;pointer-events:none}
+[dir=rtl] .sunwarn::after{transform:scaleX(-1)}
+.sunwarn::after{-webkit-mask-image:linear-gradient(90deg,transparent,#000 55%);mask-image:linear-gradient(90deg,transparent,#000 55%)}
+.sunwarn .swi{width:38px;height:38px;flex:none;border-radius:12px;background:#ffd88f;display:grid;place-items:center;font-size:20px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+.sunwarn .swt{position:relative;z-index:1;min-width:0}
+.sunwarn .swt b{display:block;font-size:15.5px;font-weight:800}
+.sunwarn .swt small{display:block;font-size:12.5px;color:#7b6550;font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .sunwarn{background:linear-gradient(90deg,#3a2a1a,#2a2016);border-color:#5a3f22;color:#ffe2b8}
+:root[data-theme="dark"] .sunwarn .swt small{color:#d0aa7e}
+:root[data-theme="red"] .sunwarn{background:var(--okBg);border-color:var(--okLine);color:var(--ok)}
+:root[data-theme="red"] .sunwarn .swt small{color:var(--dim)}
+/* merged place + season card */
+.mcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 22px var(--shadow);cursor:pointer;text-align:start}
+.mcard:active{transform:scale(.99)}
+.mtop{display:flex;gap:8px;align-items:stretch}
+.mcard .info{flex:1;min-width:0;background:none;border:0;border-radius:0;padding:0;gap:6px}
+.mcard .info .r{padding:0}
+.mcard .srow{padding:0;gap:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.mrange{display:flex;align-items:center;gap:6px;color:var(--dim);font-size:12px;font-variant-numeric:tabular-nums}
+.mrange svg{flex:none;opacity:.8}
+.mseason{position:relative;flex:none;width:31%;min-width:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-inline-start:6px}
+.mosq{position:absolute;inset-inline-start:-6px;top:-4px;width:58px;height:48px;opacity:.9;pointer-events:none}
+.mseason .tl{position:relative;font-size:11px}
+.mseason #msName{position:relative;font-size:19px;font-weight:800;line-height:1.2}
+.mseason .mleft{font-family:var(--num);font-size:26px;font-weight:800;color:var(--arrow);line-height:1.05}
+.mseason #msLeftLbl{font-size:11px}
+.mcard .bar{height:6px;background:var(--panel2);border:0}
+.mcard .schip{background:var(--panel2);border-color:transparent;padding:6px 8px}
+.mcard .snext{border-top:0;background:var(--panel2);border-radius:11px;padding:6px 10px;justify-content:center}
+:root[data-theme="dark"] .mosq{opacity:.25}
+/* location card */
+.loc{position:relative;overflow:hidden;background:var(--dial);background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 100%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%23ffffff%22 fill-opacity=%22.045%22 d=%22M0 60 L50 40 L90 52 L140 26 L190 48 L230 36 L280 54 L330 30 L400 50 V100 H0Z%22/%3E%3Cpath fill=%22%23ffffff%22 fill-opacity=%22.04%22 d=%22M0 78 L60 62 L110 72 L170 56 L230 70 L290 60 L350 72 L400 64 V100 H0Z%22/%3E%3C/svg%3E"),linear-gradient(160deg,var(--dial2),var(--dial));background-size:100% 100%,auto;background-repeat:no-repeat;border-radius:20px;padding:9px 12px 10px}
+.lrow{display:flex;align-items:center;gap:6px;width:100%}
+.lcol{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.lrose{flex:none;width:68px;height:68px}
+.lrose svg{width:100%;height:100%}
+#locRose{transition:transform .25s ease-out}
+.loc .mini{border-top:1px solid var(--dialLine)}
+/* start button */
+.big{position:relative;overflow:hidden;background:linear-gradient(90deg,#f08b2c,#feae47);border:0;color:#fff;font-weight:800;font-size:17px;text-shadow:0 1px 2px rgba(120,50,0,.25);box-shadow:0 10px 22px rgba(240,139,44,.3)}
+[dir=rtl] .big{background:linear-gradient(270deg,#f08b2c,#feae47)}
+.big::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 60%22 preserveAspectRatio=%22none%22%3E%3Cpath fill=%22%23b9480a%22 fill-opacity=%22.28%22 d=%22M0 60 V44 L40 34 L75 42 L120 24 L160 40 L200 30 L240 42 L270 34 L300 40 V60Z%22/%3E%3Cpath fill=%22%238f3405%22 fill-opacity=%22.25%22 d=%22M0 60 V52 L50 44 L100 52 L150 42 L210 52 L260 46 L300 52 V60Z%22/%3E%3C/svg%3E") bottom/100% 100% no-repeat;pointer-events:none}
+.big>*{position:relative}
+.big .chev{position:absolute;inset-inline-end:16px;top:50%;width:10px;height:10px;border-top:2.5px solid #fff;border-inline-end:2.5px solid #fff;transform:translateY(-50%) rotate(45deg)}
+[dir=rtl] .big .chev{transform:translateY(-50%) rotate(-135deg) scaleY(-1)}
+:root[data-theme="red"] .big{background:var(--arrow);color:var(--onArrow);text-shadow:none}
+/* tools */
+.tool{background:var(--panel);border-color:var(--line);box-shadow:0 6px 16px var(--shadow);padding:8px 2px;font-weight:500}
+.tool .ti{font-size:22px}
+.tool.sos{background:linear-gradient(180deg,#fff1ef,#ffe6e2);border-color:#f7cfc8}
+:root[data-theme="dark"] .tool.sos,:root[data-theme="red"] .tool.sos{background:var(--badBg);border-color:var(--badLine)}
+/* tab bar */
+.tabbar{border-top:0;border-radius:22px 22px 0 0;box-shadow:0 -6px 24px var(--shadow),0 120px 0 var(--panel)}
+.tabbar button.on::after{content:'';display:block;width:32px;height:3px;border-radius:3px;background:var(--arrow);margin-top:1px}
+.tabbar button:not(.on)::after{content:'';display:block;height:3px;margin-top:1px}
+
+/* 6.0 fit: one normal iPhone screen, no scrolling */
+main{position:relative;z-index:2}
+.top{padding:8px 0 0}
+.bmark{width:36px;height:36px;border-width:2.2px}.bmark svg{width:18px;height:18px}
+.logo.hl{height:26px}
+.ptitle{font-size:12.5px}
+.moonw{margin-top:-2px;margin-bottom:-4px}.moonw svg{width:56px;height:56px}
+.chips{margin-top:4px}.chips .chip{padding:5px 9px}
+.subrow{margin-top:6px}.hpill{padding:3px 9px;font-size:12px}
+.here{gap:7px}
+.sunwarn{padding:6px 10px!important}.sunwarn .swi{width:32px;height:32px;font-size:17px;border-radius:10px}.sunwarn .swt b{font-size:14.5px}.sunwarn .swt small{font-size:12px}
+.mcard{padding:9px 11px;gap:7px}
+.mcard .schip{padding:5px 7px}.mcard .schip small{white-space:nowrap;font-size:10.5px}.mcard .schip b{font-size:12.5px}
+.mcard .snext{padding:5px 8px;font-size:12px}
+.mosq{inset-inline-start:auto;inset-inline-end:-8px;top:auto;bottom:-6px;width:64px;height:54px;opacity:.75}
+.mseason .mleft{font-size:24px}.mseason #msName{font-size:18px}
+.loc{padding:7px 12px 9px;gap:3px}.loc .lbl{font-size:12px}
+.lrose{width:60px;height:60px}.lcol{gap:5px}
+button.big{color:#fff;padding:11px}
+.tool{padding:7px 2px}.tool .ti{font-size:20px}
+
+/* 6.1: one colour behind the status bar and the home bar.
+   The app screen sits on the night sky up top; the start / install screens are one flat colour. */
+html{background:var(--bg)}
+/* iOS tints the status-bar strip from the body's background colour, so in the app that colour is the night sky;
+   the page itself is painted as an image on top, and the tab bar uses the same sky colour. */
+html.app{background:var(--sky1)}
+html.app body{background-color:var(--sky1);background-image:linear-gradient(var(--bg),var(--bg))}
+/* iOS paints the strip under the tab bar in that same sky colour, so the tab bar wears it too:
+   night sky on top, night sky at the bottom. */
+.tabbar{background:var(--sky1);box-shadow:0 -6px 24px var(--shadow),0 120px 0 var(--sky1);--dim:#9ba4ba;color:#9ba4ba}
+.tabbar button{color:#9ba4ba}
+.tabbar button.on{color:var(--arrow)}
+/* iOS 26 Home Screen apps can report a viewport that is short by the status-bar height,
+   leaving a strip under the tab bar; it takes the body colour, which the tab bar now shares. */
+
+/* 6.3 polish */
+.info .place{font-weight:500}
+.info .place span{white-space:normal;overflow:visible;line-height:1.35}
+.mcard .srow{border-bottom:0;padding-bottom:0}
+.wrow{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:12.5px;color:var(--fg)}
+.wrow:not(:has(> :not([hidden]))){display:none}
+.wrow .wxb{margin:0;font-weight:500}.wrow b{font-family:var(--num);font-weight:600}
+.mrange{border-top:1px solid var(--line);padding-top:6px}
+.mosq{opacity:.45}
+:root[data-theme="dark"] .mosq{opacity:.18}
+.qibla .dial{width:min(62vw,27vh)}
+.qibla .dist{font-size:clamp(44px,13vw,64px)}
+
+/* update banner: the new version is already saved on the phone, so it works offline too */
+.upd{position:fixed;left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));bottom:calc(84px + env(safe-area-inset-bottom));z-index:9;display:flex;align-items:center;gap:8px;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 8px 8px 12px;box-shadow:0 10px 28px var(--shadow);font-size:13.5px;font-weight:600}
+.upd>span{flex:1;min-width:0}
+.upd button{padding:8px 12px;font-size:13px;border-radius:12px;flex:none}
+
+.about .tag{color:var(--fg);font-weight:600}
+.about .tag2{color:var(--dim);font-size:13.5px;margin-top:2px}
+.about p+p{margin-top:8px}
+.about .mail{color:var(--arrow);text-decoration:none;user-select:text;-webkit-user-select:text}
+.about .aend{color:var(--dim);font-size:13px;margin-top:10px}
+
+/* WAMD ARC credit: the brand's own dark card in every theme */
+.wamdc{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:16px;padding:18px 14px 14px;border-radius:16px;background:#111317;color:#F3F3F1;text-decoration:none;
+  background-image:radial-gradient(120% 90% at 50% 0%,#1d2029,#111317 70%);border:1px solid #23262e}
+.wamdc .wamd{width:min(210px,62%);height:auto;display:block}
+.wamdc span{font-size:12px;letter-spacing:.18em;color:#8A8F98;font-family:var(--num)}
+:root[data-theme="red"] .wamdc{filter:grayscale(1) sepia(1) hue-rotate(-50deg) saturate(4) brightness(.7)}
+</style>
+</head>
+<body>
+
+<div id="start">
+  <img src="icon.png" alt="" width="112" height="112">
+  <h1 class="logo" role="img" aria-label="سهم"></h1>
+  <p data-t="startText"></p>
+  <button class="primary" id="go" data-t="start"></button>
+</div>
+
+<header class="head">
+<div class="sky" aria-hidden="true"><i class="stars"></i><i class="mtn"></i></div>
+<div class="top">
+  <div class="brand">
+    <span class="bmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M19.5 4.5 4.5 10.6l6.6 2.3 2.3 6.6z"/></svg></span>
+    <div class="btxt"><i class="logo hl" role="img" aria-label="سهم"></i><span class="ptitle" id="ptitle"></span></div>
+  </div>
+  <button class="moonw" id="moonBtn" type="button" aria-label="moon"><svg viewBox="0 0 40 40" id="moonSvg"></svg></button>
+</div>
+  <div class="chips">
+  <div class="chip">
+    <div class="bars" id="bars"><i></i><i></i><i></i><i></i></div>
+    <b id="gpsLabel"></b>
+    <span class="acc" id="acc"></span>
+  </div>
+  <div class="chip">
+    <div class="bars" id="cbars"><i></i><i></i><i></i><i></i></div>
+    <b id="cLabel"></b>
+    <span class="acc" id="cacc"></span>
+  </div>
+  </div>
+  <div class="subrow"><span class="hpill"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span id="hijriShort"></span></span><div class="sub" id="fixInfo"></div></div>
+</header>
+
+<main>
+  <!-- Home + Qibla share this stage -->
+  <section class="page stage" id="stage">
+    <div class="here" id="here">
+      <div class="sunwarn" id="sunWarn" hidden></div>
+      <div class="mcard" id="seasonCard" role="button" tabindex="0">
+      <div class="mtop">
+      <div class="info">
+        <div class="r place"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span id="placeName">--</span></div>
+        <div class="srow"><span>🌅 <span class="tl" data-t="sunrise"></span> <b id="sunR">--</b></span><span>🌇 <span class="tl" data-t="sunset"></span> <b id="sunS">--</b></span></div>
+        <div class="wrow"><span class="wxb" id="wxRow" hidden><span id="wxTxt"></span></span><span id="windTxt" hidden></span></div>
+        <div class="mrange"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span id="msRange"></span></div>
+      </div>
+      <div class="mseason"><svg class="mosq" viewBox="0 0 80 64" aria-hidden="true"><defs><linearGradient id="mqg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4cfb3"/><stop offset="1" stop-color="#efe2d0" stop-opacity=".15"/></linearGradient></defs><g fill="url(#mqg)"><path d="M10 64V24l3-7 3 7v40zM64 64V24l3-7 3 7v40z"/><path d="M12.3 16h1.4v-5h-1.4zM66.3 16h1.4v-5h-1.4z"/><path d="M20 64V44h40v20z"/><path d="M22.5 44c0-10 7.5-16.5 17.5-20.5C50 27.5 57.5 34 57.5 44z"/><path d="M39.3 23.5v-6h1.4v6z"/><circle cx="40" cy="16" r="1.7"/><path d="M8.5 26h9v2h-9zM62.5 26h9v2h-9z"/></g><path d="M35 64V55a5 5 0 0 1 10 0v9z" fill="#fff" fill-opacity=".35"/></svg><span id="msEmoji" hidden></span><div class="tl" data-t="msNow"></div><b id="msName">--</b><b class="mleft" id="msLeft">--</b><span class="tl" id="msLeftLbl"></span></div>
+      </div>
+        <div class="bar"><i id="msBar"></i></div>
+        <div class="schips">
+          <div class="schip"><span id="fsEmoji">🍂</span><div><div class="tl" data-t="faslNow"></div><b id="fsName">--</b><small id="fsLeft"></small></div></div>
+          <div class="schip"><span>⭐</span><div><div class="tl" data-t="taliNow"></div><b id="tlName">--</b><small id="tlLeft"></small></div></div>
+          <div class="schip"><span>🌡️</span><div><div class="tl" data-t="tempLbl"></div><b id="tlTemp">--</b><small id="tlAvg"></small></div></div>
+        </div>
+        <div class="snext" id="msNext"></div>
+      </div>
+      <div class="loc">
+        <div class="lbl"><span class="pulse"></span><span data-t="yourLoc"></span></div>
+        <div class="coords" id="coords">--</div>
+        <div class="lrow"><div class="lcol">
+        <div class="mini">
+          <div><span data-t="accuracy"></span><b id="hAcc">--</b></div>
+          <div><span data-t="altitude"></span><b id="hAlt">--</b></div>
+          <div><span data-t="speed"></span><b id="hSpd">--</b></div>
+        </div>
+        <button class="pill" id="copyHere"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span data-t="copyCoords"></span></button>
+        </div>
+        <div class="lrose" aria-hidden="true"><svg viewBox="0 0 80 80" id="locRose"><circle cx="40" cy="40" r="27" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/><g stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M40 9v6M40 65v6M9 40h6M65 40h6"/></g><g fill="rgba(255,255,255,.7)" font-size="8.5" font-weight="700" text-anchor="middle" font-family="-apple-system,system-ui,sans-serif"><text x="40" y="7">N</text><text x="76.5" y="43">E</text><text x="40" y="79.5">S</text><text x="3.5" y="43">W</text></g><path d="M40 19 46 40H34z" fill="#f5841f"/><path d="M40 61 34 40h12z" fill="#e9edf5"/><circle cx="40" cy="40" r="3.2" fill="#1e2839" stroke="#e9edf5" stroke-width="1.4"/></svg></div>
+        </div>
+      </div>
+      <button class="primary big" id="setStart"><span data-t="setStart"></span><i class="chev"></i></button>
+      <div class="startrow" id="startBox" hidden>
+        <button class="primary big" id="goStart"><span data-t="goStart"></span> <span id="startDist"></span></button>
+        <button class="sq" id="resetStart" aria-label="remove"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="tools">
+        <button class="tool saveHere"><span class="ti">📍</span><span data-t="tSave"></span></button>
+        <button class="tool addCoord"><span class="ti">➕</span><span data-t="tAdd"></span></button>
+        <button class="tool" id="toolTrack"><span class="ti">🧭</span><span data-t="tTrack"></span><i class="rec" id="recDot" hidden></i></button>
+        <button class="tool" id="toolArea"><span class="ti">📐</span><span data-t="tArea"></span></button>
+        <button class="tool sos" id="toolSos"><span class="ti">🆘</span><span data-t="tSos"></span></button>
+      </div>
+    </div>
+
+    <div class="navhead" id="navhead" hidden></div>
+    <div class="dial" id="dial" hidden>
+      <div id="bezel"><svg viewBox="0 0 200 200" id="bezelSvg"></svg></div>
+      <div id="arrow"><svg viewBox="0 0 100 100"><path class="a2" d="M50 4 L86 92 L50 72 Z"/><path class="a1" d="M50 4 L14 92 L50 72 Z"/><circle class="hub" cx="50" cy="50" r="5"/></svg></div>
+      <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-t="arrived"></span></div>
+    </div>
+    <div class="dist" id="dist" hidden>--</div>
+    <div class="meta" id="meta" hidden></div>
+    <div class="altd" id="altd" hidden></div>
+    <div class="pray" id="prayCard" hidden>
+      <div class="pnext"><span id="pNextName">--</span><b id="pNextIn">--</b></div>
+      <div class="pgrid" id="pGrid"></div>
+      <div class="sh" data-t="prayNote"></div>
+    </div>
+    <div class="warn" id="warn"></div>
+    <button class="danger" id="cancel" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-t="cancelNav"></span></button>
+  </section>
+
+  <!-- Favourites -->
+  <section class="page scroll" id="pFav" hidden>
+    <div class="row">
+      <button class="saveHere primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span data-t="saveHere"></span></button>
+      <button class="addCoord"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-t="addCoord"></span></button>
+    </div>
+    <div class="row"><button id="backup" data-t="backup"></button><button id="restore" data-t="restore"></button></div>
+    <div class="catf" id="catFilter"></div>
+    <div class="seg" id="sortSeg"><button data-s="near" data-t="sortNear"></button><button data-s="new" data-t="sortNew"></button></div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <!-- Settings -->
+  <section class="page scroll" id="pSet" hidden>
+    <div class="group">
+      <div class="set">
+        <div class="sl" data-t="arriveLbl"></div>
+        <div class="seg" data-k="arrive"><button data-v="2"></button><button data-v="3"></button><button data-v="5"></button><button data-v="10"></button></div>
+        <div class="sh" data-t="arriveHint"></div>
+      </div>
+      <div class="set">
+        <div class="sl" data-t="fmtLbl"></div>
+        <div class="seg" data-k="fmt"><button data-v="dec" dir="ltr">24.886000</button><button data-v="dms" dir="ltr">24°53′09.6″N</button></div>
+        <div class="sh" data-t="fmtHint"></div>
+      </div>
+      <div class="set">
+        <div class="sl" data-t="themeLbl"></div>
+        <div class="seg" data-k="theme"><button data-v="light" data-t="light"></button><button data-v="dark" data-t="dark"></button><button data-v="red" data-t="red"></button></div>
+        <div class="sh" data-t="redHint"></div>
+      </div>
+      <div class="set">
+        <div class="sl" data-t="ecoLbl"></div>
+        <div class="seg" data-k="eco"><button data-v="on" data-t="on"></button><button data-v="off" data-t="off"></button></div>
+        <div class="sh" data-t="ecoHint"></div>
+      </div>
+      <div class="set">
+        <div class="sl" data-t="langLbl"></div>
+        <div class="seg" data-k="lang"><button data-v="ar">العربية</button><button data-v="en">English</button></div>
+      </div>
+    </div>
+    <div class="group">
+      <button class="link" id="share"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span data-t="share"></span><i class="chev"></i></button>
+      <button class="link" id="aboutBtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span data-t="about"></span><i class="chev"></i></button>
+      <div class="link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg><span data-t="version"></span><span class="v">Ver 7.0</span></div>
+    </div>
+  </section>
+</main>
+
+<nav class="tabbar" id="tabbar">
+  <button data-tab="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span data-t="tabSet"></span></button>
+  <button data-tab="qibla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 7.5L12 4l8 3.5v9L12 20l-8-3.5z"/><path d="M4 7.5L12 11l8-3.5M12 11v9"/><path d="M4 10.5l8 3.5 8-3.5" stroke-width="1.4"/></svg><span data-t="tabQibla"></span></button>
+  <button data-tab="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg><span data-t="tabFav"></span></button>
+  <button data-tab="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8.5a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg><span data-t="tabHome"></span></button>
+</nav>
+
+<dialog id="dlgAdd">
+  <h3 data-t="addTitle"></h3>
+  <label for="fName" data-t="name"></label>
+  <input id="fName">
+  <div class="lblrow"><label for="fCoord" data-t="coordsLbl"></label><button id="fPaste" data-t="paste"></button></div>
+  <input id="fCoord" dir="ltr" placeholder="24.8860, 46.6484" inputmode="text">
+  <div class="avgbox" id="fAvg" hidden></div>
+  <div class="sub ltr" id="fPrev" style="text-align:left;margin-top:6px;color:var(--good)"></div>
+  <div class="sub" data-t="accepts"></div>
+  <label data-t="catLbl"></label>
+  <div class="cats" id="fCats"></div>
+  <label data-t="dateTime"></label>
+  <div class="auto"><b id="fAt" style="font-weight:500">--</b><span data-t="auto"></span></div>
+  <div class="warn" id="fErr" style="margin-top:8px"></div>
+  <div class="row"><button class="primary" id="fOk" data-t="save"></button><button id="fCancel" data-t="cancel"></button></div>
+</dialog>
+
+<dialog id="dlgPlace" class="pd">
+  <h3 data-t="details"></h3>
+  <label for="pName" data-t="name"></label>
+  <input id="pName">
+  <div class="k" data-t="coordsK"></div><div class="v" id="pCoords"></div>
+  <div class="k" data-t="dateTime"></div><div class="v" id="pAt"></div>
+  <div class="k" data-t="altitude"></div><div class="v" id="pAlt"></div>
+  <div class="k" data-t="catLbl"></div><div class="cats" id="pCats"></div>
+  <div class="grid2">
+    <button class="primary" id="pGo" data-t="go"></button>
+    <button id="pShare" data-t="sharePlace"></button>
+    <button id="pCopy" data-t="copy"></button>
+    <button class="danger" id="pDel" data-t="del"></button>
+  </div>
+  <div class="row"><button class="primary" id="pSave" data-t="save"></button><button id="pClose" data-t="close"></button></div>
+</dialog>
+
+<dialog id="dlgSeasons" class="yr">
+  <h3 data-t="yearTitle"></h3>
+  <div class="seg" id="yrSeg"><button data-y="m" data-t="yrMawasim"></button><button data-y="t" data-t="yrTawali"></button></div>
+  <div class="yrlist" id="yrList"></div>
+  <div class="sh" data-t="yrSrc" style="margin-top:10px"></div>
+  <div class="row"><button id="yrClose" data-t="close"></button></div>
+</dialog>
+
+<dialog id="dlgTrack" class="tool-dlg">
+  <h3 data-t="trTitle"></h3>
+  <canvas id="trCanvas" class="pathc"></canvas>
+  <div class="stats"><div><span data-t="stDist"></span><b id="trDist">0</b></div><div><span data-t="stTime"></span><b id="trTime">0:00</b></div><div><span data-t="stPts"></span><b id="trPts">0</b></div></div>
+  <div class="sh" id="trHint"></div>
+  <div class="row"><button class="primary" id="trToggle"></button><button id="trBack" data-t="trBack"></button></div>
+  <div class="row" style="margin-top:8px"><button class="danger" id="trClear" data-t="trClear"></button><button id="trClose" data-t="close"></button></div>
+</dialog>
+
+<dialog id="dlgArea" class="tool-dlg">
+  <h3 data-t="arTitle"></h3>
+  <canvas id="arCanvas" class="pathc"></canvas>
+  <div class="stats"><div><span data-t="stArea"></span><b id="arArea">0</b></div><div><span data-t="stPeri"></span><b id="arPeri">0</b></div><div><span data-t="stPts"></span><b id="arPts">0</b></div></div>
+  <div class="sh" data-t="arHint"></div>
+  <div class="row"><button class="primary" id="arToggle"></button><button id="arCorner" data-t="arCorner"></button></div>
+  <div class="row" style="margin-top:8px"><button class="danger" id="arClear" data-t="trClear"></button><button id="arClose" data-t="close"></button></div>
+</dialog>
+
+<dialog id="dlgSos" class="sos-dlg">
+  <h3 data-t="sosTitle"></h3>
+  <div class="sosbig" id="sosCoords">--</div>
+  <div class="sosdms" id="sosDms"></div>
+  <div class="sosmeta" id="sosMeta"></div>
+  <button class="danger big" id="sosShare" data-t="sosShare"></button>
+  <div class="row"><button id="sosCopy" data-t="copyCoords"></button></div>
+  <div class="calls"><span class="call">📞 911</span><span class="call">🚑 997</span><span class="call">🚒 998</span></div>
+  <div class="sh" data-t="sosNote"></div>
+  <div class="row"><button id="sosClose" data-t="close"></button></div>
+</dialog>
+
+<dialog id="dlgMoon" class="moon-dlg">
+  <svg viewBox="0 0 40 40" id="moonBig" class="moonbig"></svg>
+  <h3 id="mdPhase">--</h3>
+  <div class="mdh" id="mdHijri"></div>
+  <div class="stats"><div><span data-t="mdLit"></span><b id="mdLit">--</b></div><div><span data-t="mdRise"></span><b id="mdRise">--</b></div><div><span data-t="mdSet"></span><b id="mdSet">--</b></div></div>
+  <div class="sh" data-t="mdNote"></div>
+  <div class="row"><button id="mdClose" data-t="close"></button></div>
+</dialog>
+
+<dialog id="dlgRestore">
+  <h3 data-t="restoreTitle"></h3>
+  <div class="sub" data-t="restoreHint"></div>
+  <textarea id="rText" dir="auto" rows="7" style="margin-top:10px"></textarea>
+  <div class="warn" id="rErr" style="margin-top:8px"></div>
+  <div class="row"><button class="primary" id="rOk" data-t="restoreBtn"></button><button id="rCancel" data-t="cancel"></button></div>
+</dialog>
+
+<dialog id="dlgAbout" class="about">
+  <img src="icon.png" alt="" width="76" height="76">
+  <div class="logo" role="img" aria-label="سهم"></div>
+  <div class="name"><span>Sahm</span></div>
+  <div class="tag" data-t="tagline"></div>
+  <div class="tag2" data-t="aboutSub"></div>
+  <p data-t="blurb"></p>
+  <p data-t="blurb2"></p>
+  <a class="wamdc" href="https://wamdarc.com" target="_blank" rel="noopener" dir="ltr"><svg class="wamd" viewBox="-4 137.1 560.7 221.9" role="img" aria-label="WAMD ARC"><defs><linearGradient id="wag" x1="0" y1="0" x2="352" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity=".3"/><stop offset=".5" stop-color="currentColor" stop-opacity=".85"/><stop offset="1" stop-color="currentColor"/></linearGradient></defs><g transform="translate(129.9 152.9) scale(0.62)"><path d="M 6 176 Q 100 26 352 22 L 352 36 Q 112 46 6 176 Z" fill="url(#wag)"/><path d="M 378 -19 Q 387 20 426 29 Q 387 38 378 77 Q 369 38 330 29 Q 369 20 378 -19 Z" fill="#FF5A1F"/></g><path d="M29.31 355L20.90 355L2.51 300L10.61 300L25.46 344.71L40.94 300L48.16 300L63.33 344.94L78.49 300L85.96 300L67.57 355L59.32 355L44.31 311.08L29.31 355ZM109.06 355L100.96 355L125.87 300L133.65 300L158.64 355L150.39 355L144.34 341.25L115.11 341.25L109.06 355ZM117.86 334.96L141.59 334.96L129.72 308.01L117.86 334.96ZM186.92 355L179.38 355L179.38 300L185.82 300L208.76 338.66L231.39 300L237.84 300L237.91 355L230.37 355L230.29 314.93L210.41 348.32L206.80 348.32L186.92 315.16L186.92 355ZM290.16 355L266.99 355L266.99 300L290.16 300Q298.96 300 305.68 303.46Q312.40 306.91 316.13 313.12Q319.86 319.33 319.86 327.50L319.86 327.50Q319.86 335.67 316.13 341.88Q312.40 348.09 305.68 351.54Q298.96 355 290.16 355L290.16 355ZM274.84 306.84L274.84 348.16L289.69 348.16Q296.53 348.16 301.52 345.57Q306.51 342.98 309.26 338.30Q312.01 333.63 312.01 327.50L312.01 327.50Q312.01 321.29 309.26 316.66Q306.51 312.02 301.52 309.43Q296.53 306.84 289.69 306.84L289.69 306.84L274.84 306.84ZM364.02 355L359.70 355L385 300L389.01 300L414.31 355L409.99 355L402.91 339.52L371.01 339.52L364.02 355ZM372.59 336.14L401.42 336.14L386.96 304.40L372.59 336.14ZM440.86 355L436.86 355L436.86 300L456.58 300Q463.49 300 468.44 302.20Q473.39 304.40 476.06 308.52Q478.74 312.65 478.74 318.54L478.74 318.54Q478.74 324.28 476.06 328.40Q473.39 332.53 468.44 334.73L468.44 334.73Q467.19 335.36 465.85 335.75L465.85 335.75L479.60 355L475.04 355L461.92 336.61Q459.41 337.01 456.58 337.01L456.58 337.01L440.86 337.01L440.86 355ZM440.86 303.61L440.86 333.47L456.58 333.47Q465.46 333.47 470.05 329.54Q474.65 325.61 474.65 318.54L474.65 318.54Q474.65 311.39 470.05 307.50Q465.46 303.61 456.58 303.61L456.58 303.61L440.86 303.61ZM529.26 355.39L529.26 355.39Q523.13 355.39 517.90 353.31Q512.68 351.23 508.83 347.46Q504.98 343.69 502.86 338.62Q500.74 333.55 500.74 327.50L500.74 327.50Q500.74 321.45 502.86 316.38Q504.98 311.31 508.87 307.54Q512.76 303.77 517.94 301.69Q523.13 299.61 529.26 299.61L529.26 299.61Q535.07 299.61 540.14 301.49Q545.21 303.38 548.82 307.23L548.82 307.23L546.31 309.82Q542.77 306.36 538.49 304.83Q534.21 303.30 529.41 303.30L529.41 303.30Q524.15 303.30 519.63 305.11Q515.11 306.91 511.77 310.21Q508.44 313.51 506.59 317.91Q504.74 322.31 504.74 327.50L504.74 327.50Q504.74 332.69 506.59 337.09Q508.44 341.49 511.77 344.79Q515.11 348.09 519.63 349.89Q524.15 351.70 529.41 351.70L529.41 351.70Q534.21 351.70 538.49 350.17Q542.77 348.64 546.31 345.10L546.31 345.10L548.82 347.69Q545.21 351.54 540.14 353.47Q535.07 355.39 529.26 355.39Z" fill="currentColor"/></svg><span>wamdarc.com</span></a>
+  <div class="vpill"><span data-t="verLbl"></span> 7.0</div>
+  <div class="aend" data-t="aboutEnd"></div>
+  <div class="row"><button id="aClose" data-t="close"></button></div>
+</dialog>
+
+<div id="install" hidden>
+  <div class="wrap">
+    <div class="hd">
+      <img src="icon.png" alt="" width="84" height="84">
+      <h2>أضف سهم إلى الشاشة الرئيسية</h2>
+      <div class="why">سهم يشتغل كتطبيق من الشاشة الرئيسية: بدون إنترنت، بشاشة كاملة، وأماكنك تنحفظ فيه.</div>
+    </div>
+    <div class="card" id="stepsAr"></div>
+    <div class="card en">
+      <div class="lang">English</div>
+      <div style="font-weight:700;font-size:18px">Add Sahm to your Home Screen</div>
+      <div class="why" style="margin-top:-6px">Sahm runs as an app from your Home Screen: offline, full screen, and your places are kept there.</div>
+      <div id="stepsEn" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div>
+    <div class="note" id="instNote" hidden></div>
+    <button id="instBackup" hidden style="flex-direction:column;gap:2px">📤 نسخة احتياطية لأماكنك<span style="font-size:13px;color:var(--dim)" dir="ltr">Back up your places</span></button>
+    <button class="primary" id="instNow" hidden style="font-size:17px;padding:16px">⬇️ ثبّت سهم الآن · Install Sahm</button>
+    <div class="point" id="instPoint">⬇️</div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div class="upd" id="upd" hidden><span>✨ <span data-t="updReady"></span></span><button class="primary" id="updNow" data-t="updNow"></button><button id="updLater" data-t="updLater"></button></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const $$=s=>document.querySelectorAll(s);
+const R=6371000, rad=d=>d*Math.PI/180, deg=r=>r*180/Math.PI;
+const KAABA={lat:21.42252,lon:39.82621};
+let pos=null, heading=null, compassOK=false, places=[], cur=null, smooth=null, smoothB=null, tab='home';
+let arrived=false; // arrival flag
+
+/* ---------- words (Arabic / English) ---------- */
+const L={
+ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فقط. يعتمد على GPS والبوصلة، بدون خرائط وبدون إنترنت.',start:'ابدأ',
+ tabSet:'الإعدادات',heroTag:'موقعك .. اتجاهك',tabQibla:'القبلة',tabFav:'مواقعي المفضلة',tabHome:'الرئيسية',
+ gWait:'بانتظار GPS…',gStop:'GPS متوقف',gEx:'GPS ممتاز',gGood:'GPS جيد',gMid:'GPS متوسط',gWeak:'GPS ضعيف',gPerm:'لا يوجد إذن للموقع',gNone:'لا توجد إشارة GPS',
+ live:'تحديث مباشر',ago:n=>'آخر تحديث قبل '+n+' ث',cOff:'البوصلة مقفلة',cOn:'البوصلة تعمل',cCal:'بوصلة تحتاج معايرة',cEx:'بوصلة ممتازة',cGood:'بوصلة جيدة',cMid:'بوصلة متوسطة',cWeak:'بوصلة ضعيفة',
+ yourLoc:'موقعك الحالي',copyCoords:'نسخ الإحداثيات',accuracy:'الدقة',altitude:'الارتفاع',speed:'السرعة',
+ saveHere:'احفظ موقعي',addCoord:'أضف إحداثيات',cancelNav:'إلغاء التوجيه',arrived:'وصلت',
+ wWeakMove:'الإشارة ضعيفة، تحرك لمكان مكشوف',wApprox:'الإشارة ضعيفة، المسافة تقريبية',wStop:'توقفت قراءات GPS',sRed:'انتظر قبل حفظ الموقع',sOrange:'قريب… انتظر ثواني',sComp:'الـGPS جاهز، بس البوصلة ضعيفة',sGreen:'احفظ موقعك الآن',sInfo:(n,a)=>'متوسط '+n+' قراءة · دقة GPS <bdi dir="ltr">±'+a+'</bdi> م',
+ wComp:'البوصلة غير دقيقة هنا: ابتعد عن الحديد والأجهزة وحرّك الجوال على شكل 8',wMove:'بدون بوصلة: الاتجاه من حركتك',wNorth:'البوصلة غير مفعلة، السهم بالنسبة للشمال',
+ dirs:['شمال','شمال شرق','شرق','جنوب شرق','جنوب','جنوب غرب','غرب','شمال غرب'],m:'م',km:'كم',
+ navTo:'التوجه إلى',qiblaHead:'اتجاه القبلة',kaaba:'الكعبة المشرفة',
+ empty:'ما عندك أماكن محفوظة.<br>احفظ موقعك أو أضف إحداثيات.',go:'توجّه',copy:'نسخ',del:'حذف',sure:'تأكيد؟',
+ backupSect:'النسخ الاحتياطي',backup:'📤 نسخة احتياطية',restore:'📥 استرجاع',restoreBtn:'استرجاع',
+ addTitle:'أضف مكاناً',name:'الاسم',namePh:'مثلاً: البيت',coordsLbl:'الإحداثيات أو رابط خرائط',accepts:'يقبل: عشري، N/E، درجات ودقائق وثواني، روابط قوقل وآبل ماب',
+ dateTime:'التاريخ والوقت',auto:'تلقائي',save:'حفظ',cancel:'إلغاء',
+ errShort:'هذا رابط مختصر وما فيه إحداثيات. افتحه في سفاري وانسخ الرابط الكامل من شريط العنوان، أو اضغط على الدبوس في قوقل ماب وانسخ الإحداثيات.',
+ errBad:'ما قدرت أقرأ الإحداثيات. اكتبها مثل 24.8860, 46.6484',
+ restoreTitle:'استرجاع الأماكن',restoreHint:'الصق النسخة الاحتياطية هنا. كل سطر مكان، والأماكن الموجودة ما تتكرر.',
+ restoreErr:'ما لقيت أماكن في النص. تأكد إنك لصقت النسخة الاحتياطية كاملة.',restored:(a,s)=>'تم استرجاع '+a+' مكان'+(s?' · '+s+' موجود مسبقاً':''),
+ copied:'تم النسخ',canceled:'تم إلغاء التوجيه',waitGps:'بانتظار GPS',noPlaces:'ما فيه أماكن محفوظة',place:'مكان',fromLink:'من رابط',backupTitle:'سهم — أماكني',
+ arriveLbl:'مسافة «وصلت»',arriveHint:'10 م مناسبة لو تدور على سيارة أو خيمة.',fmtLbl:'صيغة الإحداثيات',fmtHint:'للعرض والنسخ. النسخة الاحتياطية تبقى عشرية دائماً.',
+ themeLbl:'نمط المظهر',light:'فاتح',dark:'مظلم',langLbl:'اللغة',share:'مشاركة التطبيق',about:'حول التطبيق',version:'نسخة التطبيق',
+ shareText:'🏹 سهم | Sahm\nوجهتك بسهم واحد.\nاحفظ موقعك، أو أدخل الإحداثيات، واتبع السهم حتى تصل. بدون خرائط، وبدون إنترنت.\n📍 وجهة واضحة. طريق أبسط.\nجرّبه:',linkCopied:'تم نسخ رابط التطبيق',
+ tagline:'وجهتك بسهم واحد.',aboutSub:'فكرة بسيطة. وصول مباشر.',
+ blurb:'يمنحك سهم طريقة مختلفة للوصول إلى الأماكن؛ احفظ موقعًا تريد العودة إليه، أو أدخل إحداثيات وجهتك، واتبع اتجاه السهم واعرف المسافة المتبقية حتى تصل.',
+ blurb2:'لا تحتاج إلى خرائط أو اتصال بالإنترنت لتحديد اتجاه وجهتك. يعتمد سهم على GPS والبوصلة في جهازك، وتبقى مواقعك المحفوظة على جهازك.',verLbl:'الإصدار',aboutEnd:'سهم — وجهتك، على طريقتك.',
+ by:'فكرة وتطوير',author:'bsshfi@gmail.com',close:'إغلاق',am:'ص',pm:'م',
+ sunrise:'الشروق',sunset:'الغروب',near:(c,d,dir)=>'قرب '+c+' · '+d+' '+dir+'ها',inCity:c=>'في '+c+' (تقريبي)',approx:'تقريبي بدون إنترنت',
+ wx:{0:'☀️ صافي',1:'🌤️ صافي غالباً',2:'⛅ غائم جزئياً',3:'☁️ غائم',45:'🌫️ ضباب',48:'🌫️ ضباب',51:'🌦️ رذاذ',61:'🌧️ مطر',71:'❄️ ثلج',80:'🌧️ زخات',95:'⛈️ عاصفة رعدية'},
+ wind:'رياح',kmh:'كم/س',agoMin:n=>'قبل '+n+' د',
+ setStart:'📍 ثبّت نقطة الانطلاق',goStart:'↩️ رجّعني',startName:'نقطة الانطلاق',startSet:'تم تثبيت نقطة الانطلاق',startWeak:'الإشارة ضعيفة، انتظر شوي وثبّتها',startReset:'اضغط مرة ثانية لحذف نقطة الانطلاق',startCleared:'تم حذف نقطة الانطلاق',
+ altUp:n=>'⬆️ الهدف أعلى منك بـ <b>'+n+'</b> م',altDown:n=>'⬇️ الهدف أدنى منك بـ <b>'+n+'</b> م',altSame:'↔️ نفس ارتفاعك تقريباً',altNote:' (تقريبي)',
+ sortNear:'الأقرب مني',sortNew:'الأحدث',details:'تفاصيل المكان',coordsK:'الإحداثيات',sharePlace:'مشاركة',renamed:'تم حفظ الاسم',
+ shareMsg:(n,c)=>'📍 '+n+'\n'+c+'\nأُرسل من تطبيق سهم: انسخ الإحداثيات والصقها في «أضف إحداثيات»',
+ paste:'📋 لصق',pasteFail:'اضغط مطولاً على الخانة واختر لصق',
+ red:'أحمر',redHint:'الأحمر للّيل: ما يعمي عيونك في الظلام ويريّح البطارية.',ecoLbl:'توفير البطارية',on:'تشغيل',off:'إيقاف',
+ ecoHint:'يسمح للشاشة تنطفي، ويخفف تحديث البوصلة، ويوقف الحركات. الـGPS يبقى بدقته الكاملة.',
+ msNow:'الموسم الحالي',updReady:'نسخة جديدة من سهم جاهزة',updNow:'حدّث',updLater:'لاحقاً',
+ tSave:'احفظ موقعي',tAdd:'إحداثيات',tTrack:'المسار',tArea:'المساحة',tSos:'طوارئ',catLbl:'التصنيف',catAll:'الكل',
+ trTitle:'🧭 مسار الرجوع',trStart:'▶︎ سجّل مساري',trResume:'▶︎ كمّل التسجيل',trStop:'⏸ أوقف',trBack:'↩️ رجّعني بنفس الطريق',trClear:'🗑 امسح',
+ trEmpty:'ابدأ التسجيل وامشِ، ويظهر مسارك هنا',trHintOn:'يسجّل نقطة كل 10 م من قراءة الـGPS مباشرة. خلّ التطبيق مفتوح والشاشة شغالة.',
+ trHintOff:'سجّل وأنت رايح، وبعدين «رجّعني بنفس الطريق» يوجهك نقطة نقطة للبداية.',trailName:'المسار',
+ stDist:'المسافة',stTime:'الوقت',stPts:'النقاط',stArea:'المساحة',stPeri:'المحيط',hr:'س',min:'د',m2:'م²',ha:'هكتار',
+ arTitle:'📐 قياس المساحة',arStart:'▶︎ ابدأ وامشِ حولها',arCorner:'📍 أضف ركن',arEmpty:'امشِ حول المكان، أو قف عند كل ركن واضغط «أضف ركن»',
+ arHint:'للدقة: قف عند كل ركن واضغط «أضف ركن» (يحسب متوسط آخر القراءات). المساحة تقريبية حسب دقة الـGPS.',cornerAdded:'تمت إضافة الركن',
+ sosTitle:'🆘 الطوارئ',sosShare:'📤 أرسل موقعي',sosMeta:(a,al,t,age)=>'دقة ±'+a+' م · ارتفاع '+al+' م · آخر قراءة '+t+' (قبل '+age+' ث)',
+ sosMsg:(c,a,t)=>'🆘 أحتاج مساعدة\nموقعي الحالي:\n'+c+'\nدقة الموقع: ±'+a+' م · '+t+'\nhttps://maps.google.com/?q='+c.replace(' ',''),
+ sosNote:'«أرسل موقعي» يفتح المشاركة: اختر الرسائل عشان توصل SMS حتى بدون إنترنت.',
+ mdLit:'الإضاءة',mdRise:'طلوع القمر',mdSet:'غروب القمر',mdNote:'الطور والإضاءة وأوقات القمر محسوبة في الجوال بدون إنترنت، والأوقات تقريبية بدقائق.',
+ prNext:n=>'باقي على '+n,pr_fajr:'الفجر',pr_sunrise:'الشروق',pr_dhuhr:'الظهر',pr_asr:'العصر',pr_maghrib:'المغرب',pr_isha:'العشاء',
+ prayNote:'أوقات الصلاة بطريقة أم القرى، محسوبة من موقعك بدون إنترنت.',
+ sunWarn:m=>'باقي '+m+' د على الغروب',sunStart:d=>'الانطلاق '+d,sunNav:m=>'🌇 الغروب بعد '+m+' د',
+ eta:t=>'⏱️ توصل بعد '+t,faslNow:'الفصل',taliNow:'الطالع',tempLbl:'الحرارة',avgT:c=>'المتوسط '+c+'°',dayLeft:'يوم باقي',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
+ lastDay:'آخر يوم',range:(a,b,d,L)=>a+' – '+b+' · اليوم '+d+' من '+L,
+ next:(e,n,d,dt)=>'⏭️ يدخل '+e+' <b>'+n+'</b> '+(d===1?'بكرة':'بعد '+d+' '+(d===2?'يومين':d<=10?'أيام':'يوم'))+' · '+dt,soon:'قرّب',
+ temp:(n,a,b,c)=>'🌡️ معدل الحرارة في '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (المتوسط '+c+'°)',
+ yearTitle:'المواسم والطوالع',yrMawasim:'المواسم (الدارجة)',yrTawali:'الطوالع',days:n=>n+' يوم',
+ yrSrc:'المواسم والطوالع ومعدلات الحرارة من «دليل الطوالع والنجوم» للأستاذ الدكتور عبدالله المسند. كل التواريخ محفوظة في التطبيق وتشتغل بدون إنترنت.',
+ months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']},
+en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow. GPS and compass only, no maps, no internet.',start:'Start',
+ tabSet:'Settings',heroTag:'Your spot. Your way.',tabQibla:'Qibla',tabFav:'Favorites',tabHome:'Home',
+ gWait:'Waiting for GPS…',gStop:'GPS stopped',gEx:'GPS excellent',gGood:'GPS good',gMid:'GPS fair',gWeak:'GPS weak',gPerm:'No location permission',gNone:'No GPS signal',
+ live:'Live',ago:n=>'Updated '+n+' s ago',cOff:'Compass off',cOn:'Compass on',cCal:'Calibrate compass',cEx:'Compass excellent',cGood:'Compass good',cMid:'Compass fair',cWeak:'Compass weak',
+ yourLoc:'Your location',copyCoords:'Copy coordinates',accuracy:'Accuracy',altitude:'Altitude',speed:'Speed',
+ saveHere:'Save my location',addCoord:'Add coordinates',cancelNav:'Stop guiding',arrived:'Arrived',
+ wWeakMove:'Weak signal. Move somewhere open.',wApprox:'Weak signal. Distance is approximate.',wStop:'GPS readings stopped',sRed:'Wait before saving',sOrange:'Almost… wait a few seconds',sComp:'GPS is ready, but the compass is weak',sGreen:'Save your location now',sInfo:(n,a)=>'Average of '+n+' reading'+(n===1?'':'s')+' · GPS <bdi>±'+a+' m</bdi>',
+ wComp:'Compass is off here. Move away from metal and electronics and wave the phone in a figure 8.',wMove:'No compass: direction comes from your movement',wNorth:'Compass off: arrow is relative to north',
+ dirs:['N','NE','E','SE','S','SW','W','NW'],m:'m',km:'km',
+ navTo:'Guiding to',qiblaHead:'Qibla direction',kaaba:'The Kaaba',
+ empty:'No saved places yet.<br>Save your location or add coordinates.',go:'Go',copy:'Copy',del:'Delete',sure:'Sure?',
+ backupSect:'Backup',backup:'📤 Back up',restore:'📥 Restore',restoreBtn:'Restore',
+ addTitle:'Add a place',name:'Name',namePh:'e.g. Home',coordsLbl:'Coordinates or maps link',accepts:'Accepts decimal, N/E, degrees-minutes-seconds, Google and Apple Maps links',
+ dateTime:'Date and time',auto:'Automatic',save:'Save',cancel:'Cancel',
+ errShort:'This is a short link with no coordinates. Open it in Safari and copy the full link from the address bar, or tap the pin in Google Maps and copy the coordinates.',
+ errBad:'Couldn\'t read the coordinates. Write them like 24.8860, 46.6484',
+ restoreTitle:'Restore places',restoreHint:'Paste your backup here. One place per line; places you already have aren\'t duplicated.',
+ restoreErr:'No places found in the text. Make sure you pasted the whole backup.',restored:(a,s)=>'Restored '+a+' place'+(a===1?'':'s')+(s?' · '+s+' already saved':''),
+ copied:'Copied',canceled:'Guiding stopped',waitGps:'Waiting for GPS',noPlaces:'No saved places',place:'Place',fromLink:'From link',backupTitle:'Sahm — my places',
+ arriveLbl:'"Arrived" distance',arriveHint:'10 m works well when looking for a car or a tent.',fmtLbl:'Coordinate format',fmtHint:'For display and copying. Backups always stay decimal.',
+ themeLbl:'Appearance',light:'Light',dark:'Dark',langLbl:'Language',share:'Share the app',about:'About',version:'App version',
+ shareText:'🏹 Sahm | سهم\nYour destination, one arrow.\nSave your spot or enter coordinates, then follow the arrow until you arrive. No maps, no internet.\n📍 A clear destination. A simpler way.\nTry it:',linkCopied:'App link copied',
+ tagline:'Your destination, one arrow.',aboutSub:'A simple idea. A direct way there.',
+ blurb:'Sahm gives you a different way to reach places: save a spot you want to come back to, or enter your destination’s coordinates, then follow the arrow and watch the distance left until you arrive.',
+ blurb2:'You don’t need maps or an internet connection to find your way. Sahm uses your phone’s GPS and compass, and your saved places stay on your device.',verLbl:'Version',aboutEnd:'Sahm — your destination, your way.',
+ by:'Idea & development',author:'bsshfi@gmail.com',close:'Close',am:'AM',pm:'PM',
+ sunrise:'Sunrise',sunset:'Sunset',near:(c,d,dir)=>d+' '+dir+' of '+c,inCity:c=>'In '+c+' (approx.)',approx:'Approximate, offline',
+ wx:{0:'☀️ Clear',1:'🌤️ Mostly clear',2:'⛅ Partly cloudy',3:'☁️ Cloudy',45:'🌫️ Fog',48:'🌫️ Fog',51:'🌦️ Drizzle',61:'🌧️ Rain',71:'❄️ Snow',80:'🌧️ Showers',95:'⛈️ Thunderstorm'},
+ wind:'Wind',kmh:'km/h',agoMin:n=>n+' min ago',
+ setStart:'📍 Pin starting point',goStart:'↩️ Take me back',startName:'Starting point',startSet:'Starting point pinned',startWeak:'Weak signal. Wait a moment, then pin it.',startReset:'Tap again to remove the starting point',startCleared:'Starting point removed',
+ altUp:n=>'⬆️ Target is <b>'+n+'</b> m above you',altDown:n=>'⬇️ Target is <b>'+n+'</b> m below you',altSame:'↔️ About your altitude',altNote:' (approx.)',
+ sortNear:'Nearest',sortNew:'Newest',details:'Place details',coordsK:'Coordinates',sharePlace:'Share',renamed:'Name saved',
+ shareMsg:(n,c)=>'📍 '+n+'\n'+c+'\nSent from Sahm: copy the coordinates and paste them into “Add coordinates”',
+ paste:'📋 Paste',pasteFail:'Long-press the field and choose Paste',
+ red:'Red',redHint:'Red is for night: it keeps your eyes used to the dark and is easy on the battery.',ecoLbl:'Battery saver',on:'On',off:'Off',
+ ecoHint:'Lets the screen turn off, updates the compass less often and stops animations. GPS keeps its full accuracy.',
+ msNow:'Current season',updReady:'A new version of Sahm is ready',updNow:'Update',updLater:'Later',
+ tSave:'Save spot',tAdd:'Coords',tTrack:'Trail',tArea:'Area',tSos:'SOS',catLbl:'Category',catAll:'All',
+ trTitle:'🧭 Trail back',trStart:'▶︎ Record my trail',trResume:'▶︎ Keep recording',trStop:'⏸ Pause',trBack:'↩️ Take me back the same way',trClear:'🗑 Clear',
+ trEmpty:'Start recording and walk; your trail appears here',trHintOn:'Records a point every 10 m straight from the GPS. Keep the app open with the screen on.',
+ trHintOff:'Record on the way out, then “Take me back” guides you point by point to the start.',trailName:'Trail',
+ stDist:'Distance',stTime:'Time',stPts:'Points',stArea:'Area',stPeri:'Perimeter',hr:'h',min:'min',m2:'m²',ha:'ha',
+ arTitle:'📐 Measure area',arStart:'▶︎ Start and walk around',arCorner:'📍 Add corner',arEmpty:'Walk around the place, or stand at each corner and tap “Add corner”',
+ arHint:'For accuracy: stand at each corner and tap “Add corner” (it averages the latest readings). The area is as accurate as the GPS.',cornerAdded:'Corner added',
+ sosTitle:'🆘 Emergency',sosShare:'📤 Send my location',sosMeta:(a,al,t,age)=>'±'+a+' m · altitude '+al+' m · last reading '+t+' ('+age+' s ago)',
+ sosMsg:(c,a,t)=>'🆘 I need help\nMy current location:\n'+c+'\nLocation accuracy: ±'+a+' m · '+t+'\nhttps://maps.google.com/?q='+c.replace(' ',''),
+ sosNote:'“Send my location” opens sharing: choose Messages so it goes as SMS even without internet.',
+ mdLit:'Illuminated',mdRise:'Moonrise',mdSet:'Moonset',mdNote:'Phase, light and moon times are worked out on the phone with no internet; times are approximate to a few minutes.',
+ prNext:n=>n+' in',pr_fajr:'Fajr',pr_sunrise:'Sunrise',pr_dhuhr:'Dhuhr',pr_asr:'Asr',pr_maghrib:'Maghrib',pr_isha:'Isha',
+ prayNote:'Umm al-Qura prayer times, worked out from your location with no internet.',
+ sunWarn:m=>m+' min to sunset',sunStart:d=>'start '+d+' away',sunNav:m=>'🌇 sunset in '+m+' min',
+ eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
+ lastDay:'Last day',range:(a,b,d,L)=>a+' – '+b+' · day '+d+' of '+L,
+ next:(e,n,d,dt)=>'⏭️ '+e+' <b>'+n+'</b> starts '+(d===1?'tomorrow':'in '+d+' days')+' · '+dt,soon:'Soon',
+ temp:(n,a,b,c)=>'🌡️ Typical temperature in '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (avg '+c+'°)',
+ yearTitle:'Seasons and stars',yrMawasim:'Seasons',yrTawali:'Stars',days:n=>n+' days',
+ yrSrc:'Seasons, stars and temperatures from “Guide to the Rising Stars” by Prof. Abdullah Al-Misnid. All dates are built into the app and work offline.',
+ months:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']}};
+
+/* ---------- settings store ---------- */
+const cfg={arrive:2,fmt:'dec',theme:'light',lang:'ar',eco:'off',sort:'near'};
+try{Object.assign(cfg,JSON.parse(localStorage.getItem('sahm.set')||'{}'))}catch(e){}
+delete cfg.sound;delete cfg.undefined;if(!['near','new'].includes(cfg.sort))cfg.sort='near';
+function saveCfg(){try{localStorage.setItem('sahm.set',JSON.stringify(cfg))}catch(e){}}
+const T=k=>(L[cfg.lang]||L.ar)[k];
+function applyTheme(){const th=['light','dark','red'].includes(cfg.theme)?cfg.theme:'dark';document.documentElement.dataset.theme=th;edgeColor();
+  edgeColor();
+  document.documentElement.classList.toggle('eco',cfg.eco==='on')}
+function applyLang(){const en=cfg.lang==='en';document.documentElement.lang=en?'en':'ar';document.documentElement.dir=en?'ltr':'rtl';
+  $$('[data-t]').forEach(el=>{const v=T(el.dataset.t);if(typeof v==='string')el.innerHTML=v});
+  $('fName').placeholder=T('namePh');
+  $$('.seg[data-k=arrive] button').forEach(b=>b.textContent=b.dataset.v+' '+T('m'));
+  drawBezel();setTitle();}
+
+/* ---------- compass bezel ---------- */
+function drawBezel(){const s=$('bezelSvg');let h='<circle class="face" cx="100" cy="100" r="96" stroke-width="1.5"/>';
+  const star=(n,R1,R2,off)=>{let pts=[];for(let i=0;i<n*2;i++){const a=rad(off+i*180/n),r=i%2?R2:R1;pts.push((100+r*Math.sin(a)).toFixed(1)+','+(100-r*Math.cos(a)).toFixed(1))}return '<polygon class="rose" points="'+pts.join(' ')+'"/>'};
+  h+=star(4,78,14,0)+star(4,52,12,45);
+  for(let i=0;i<72;i++){const a=i*5,maj=a%30===0,r1=maj?82:86,r2=92,x=t=>100+t*Math.sin(rad(a)),y=t=>100-t*Math.cos(rad(a));
+    h+='<line class="tick'+(maj?' maj':'')+'" x1="'+x(r1)+'" y1="'+y(r1)+'" x2="'+x(r2)+'" y2="'+y(r2)+'" stroke-width="'+(maj?2:1)+'" stroke-linecap="round"/>'}
+  const lab=cfg.lang==='en'?['N','E','S','W']:['ش','ق','ج','غ'];
+  [0,90,180,270].forEach((a,i)=>{const x=100+70*Math.sin(rad(a)),y=100-70*Math.cos(rad(a))+4;
+    h+='<text class="card'+(i?'':' n')+'" x="'+x+'" y="'+y+'" text-anchor="middle" transform="rotate('+a+' '+x+' '+(y-4)+')">'+lab[i]+'</text>'});
+  s.innerHTML=h}
+
+/* ---------- coordinate display ---------- */
+function dms(v,p,n){const h=v<0?n:p;v=Math.abs(v);let d=Math.floor(v),m=Math.floor((v-d)*60),s=((v-d)*60-m)*60;
+  s=Math.round(s*10)/10;if(s>=60){s=0;m++}if(m>=60){m=0;d++}
+  return d+'°'+String(m).padStart(2,'0')+'′'+s.toFixed(1).padStart(4,'0')+'″'+h}
+const fmtLat=v=>cfg.fmt==='dms'?dms(v,'N','S'):v.toFixed(6);
+const fmtLon=v=>cfg.fmt==='dms'?dms(v,'E','W'):v.toFixed(6);
+const fmtLL=(a,b)=>cfg.fmt==='dms'?fmtLat(a)+' '+fmtLon(b):fmtLat(a)+', '+fmtLon(b);
+
+/* ---------- storage ---------- */
+function load(){try{places=JSON.parse(localStorage.getItem('sahm.places')||'[]');cur=localStorage.getItem('sahm.cur')||null}catch(e){places=[]}}
+function save(){try{localStorage.setItem('sahm.places',JSON.stringify(places));localStorage.setItem('sahm.cur',cur||'')}catch(e){}}
+
+/* ---------- geo math ---------- */
+function distance(a,b){const dLat=rad(b.lat-a.lat),dLon=rad(b.lon-a.lon);
+  const h=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function bearing(a,b){const y=Math.sin(rad(b.lon-a.lon))*Math.cos(rad(b.lat));
+  const x=Math.cos(rad(a.lat))*Math.sin(rad(b.lat))-Math.sin(rad(a.lat))*Math.cos(rad(b.lat))*Math.cos(rad(b.lon-a.lon));
+  return (deg(Math.atan2(y,x))+360)%360}
+const dirName=b=>T('dirs')[Math.round(b/45)%8];
+function fmtDist(m){return m<1000?{v:Math.round(m),u:T('m')}:{v:(m/1000).toFixed(m<10000?2:m<100000?1:0),u:T('km')}}
+/* Accepts: 24.886, 46.648 | N 24.886 E 46.648 | 24.886N 46.648E | 24°53'09.6"N 46°38'54.2"E
+   | N 24 53.160 E 046 38.904 | شمال 24.886 شرق 46.648 | Google / Apple Maps links */
+function okLL(lat,lon){lat=+lat;lon=+lon;return isFinite(lat)&&isFinite(lon)&&Math.abs(lat)<=90&&Math.abs(lon)<=180&&!(lat===0&&lon===0)?{lat,lon}:null}
+function parseCoord(s){
+  if(!s)return null;
+  s=s.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/٫/g,'.').replace(/،/g,',').trim();
+  try{s=decodeURIComponent(s)}catch(e){}
+  const pin=s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);if(pin)return okLL(pin[1],pin[2]);
+  const pair=s.match(/(-?\d{1,2}\.\d{3,})\s*,\s*\+?\s*(-?\d{1,3}\.\d{3,})/);if(pair){const c=okLL(pair[1],pair[2]);if(c)return c}
+  if(/https?:|www\.|maps\.|goo\.gl/i.test(s)){
+    let m=s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);                       // Google place pin
+    if(!m)m=s.match(/[?&](?:q|ll|sll|query|destination|daddr|center|coordinate)=\s*(-?\d+\.\d+)\s*,\s*\+?\s*(-?\d+\.\d+)/i);
+    if(!m)m=s.match(/\/(?:search|place|dir\/[^/]*)\/\s*(-?\d+\.\d+)\s*,\s*\+?\s*(-?\d+\.\d+)/);
+    if(!m)m=s.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);                          // map centre
+    return m?okLL(m[1],m[2]):null;
+  }
+  let t=s.replace(/شمال/g,' N ').replace(/جنوب/g,' S ').replace(/شرق/g,' E ').replace(/غرب/g,' W ')
+         .toUpperCase().replace(/[°º˚′’'″”"]/g,' ').replace(/[;,]/g,' ');
+  const tok=t.match(/(?<![A-Z])[NSEW](?![A-Z])|-?\d+(?:\.\d+)?/g)||[];
+  const letters=tok.filter(x=>/[NSEW]/.test(x));
+  const toDeg=a=>{const n=a.map(Number);const sg=n[0]<0?-1:1;return sg*(Math.abs(n[0])+(n[1]||0)/60+(n[2]||0)/3600)};
+  let groups=[];
+  if(letters.length===2){
+    const prefix=/[NSEW]/.test(tok[0]);let g=null;
+    tok.forEach(x=>{if(/[NSEW]/.test(x)){if(prefix){g={h:x,n:[]};groups.push(g)}else{if(g){g.h=x;g=null}}}
+      else{if(prefix){g&&g.n.push(x)}else{if(!g){g={n:[]};groups.push(g)}g.n.push(x)}}});
+  }else if(letters.length===0){
+    const n=tok;if(![2,4,6].includes(n.length))return null;const h=n.length/2;groups=[{n:n.slice(0,h)},{n:n.slice(h)}];
+  }else return null;
+  if(groups.length!==2||groups.some(g=>!g.n.length||g.n.length>3))return null;
+  let lat=null,lon=null;
+  groups.forEach((g,i)=>{let v=toDeg(g.n);if(g.h==='S'||g.h==='W')v=-Math.abs(v);
+    if(g.h==='N'||g.h==='S')lat=v;else if(g.h==='E'||g.h==='W')lon=v;else if(i===0)lat=v;else lon=v});
+  return lat==null||lon==null?null:okLL(lat,lon);
+}
+
+/* ---------- GPS ---------- */
+let gpsErr=null;
+function gpsQuality(acc,stale){
+  if(acc==null)return{n:0,t:gpsErr?T(gpsErr):T('gWait'),c:gpsErr?'var(--bad)':'var(--dim)'};
+  if(stale)return{n:1,t:T('gStop'),c:'var(--bad)'};
+  if(acc<=6)return{n:4,t:T('gEx'),c:'var(--good)'};
+  if(acc<=15)return{n:3,t:T('gGood'),c:'var(--good)'};
+  if(acc<=40)return{n:2,t:T('gMid'),c:'var(--ok)'};
+  return{n:1,t:T('gWeak'),c:'var(--bad)'}}
+/* Use each GPS fix as it comes, no smoothing: smoothing made the position lag a few metres behind you.
+   While "Save my location" is open, fixes are collected and averaged (better ones count more). */
+let avgBuf=null, recent=[];
+function onPos(p){
+  const c=p.coords, now=p.timestamp||Date.now();gpsErr=null;
+  pos={lat:c.latitude,lon:c.longitude,acc:c.accuracy,alt:c.altitude,speed:c.speed,course:c.heading,t:now};
+  recent.push(pos);while(recent.length&&now-recent[0].t>10000)recent.shift();
+  trackFix(pos);areaFix(pos);
+  if(avgBuf&&c.accuracy<=40){avgBuf.push(pos);showAvg()}
+  render();
+}
+function avgFix(b){let w=0,la=0,lo=0,best=Infinity,al=0,an=0;b.forEach(f=>{const k=1/(f.acc*f.acc);w+=k;la+=f.lat*k;lo+=f.lon*k;best=Math.min(best,f.acc);if(f.alt!=null){al+=f.alt;an++}});
+  return{lat:la/w,lon:lo/w,n:b.length,acc:best,alt:an?Math.round(al/an):null}}
+function showAvg(){if(!avgBuf||!avgBuf.length||avgBuf.edited)return;const a=avgFix(avgBuf.slice(-30));
+  $('fCoord').value=a.lat.toFixed(6)+', '+a.lon.toFixed(6);preview();
+  // red: weak GPS or too few readings · orange: close · green: GPS and compass both good
+  // GPS is ready when enough readings back up the accuracy: 5 at ±6 m, 10 at ±10 m, or 20 at ±15 m
+  const now=pos?pos.acc:99, cq=compassQ(), n=a.n;
+  const gpsOK=(n>=5&&now<=6)||(n>=10&&now<=10)||(n>=20&&now<=15);
+  const lvl=gpsOK&&cq.n>=3?'g':gpsOK?'c':(n>=2&&now<=20)?'o':'r';
+  const col={g:'var(--good)',c:'var(--ok)',o:'var(--ok)',r:'var(--bad)'}[lvl], ic={g:'🟢',c:'🟠',o:'🟠',r:'🔴'}[lvl];
+  const box=$('fAvg');box.style.color=col;box.style.borderColor=col;box.style.background='color-mix(in srgb, '+col+' 10%, transparent)';
+  box.innerHTML='<b>'+ic+' '+T({g:'sGreen',c:'sComp',o:'sOrange',r:'sRed'}[lvl])+'</b>'+T('sInfo')(a.n,Math.round(now));box.hidden=false}
+function onErr(e){gpsErr=e.code===1?'gPerm':'gNone';render()}
+
+/* ---------- compass ---------- */
+let compAcc=null, compAccT=0, drift=null, driftT=0; // compass accuracy (°) from iOS, and gap between compass and walking direction
+function compassBad(){const now=Date.now();
+  if(drift!=null&&now-driftT>8000)drift=null;
+  if(compAcc!=null&&now-compAccT>3000)compAcc=null;
+  return compassQ().n<=1}
+/* compass quality from iOS heading accuracy (degrees): ≤10 excellent, ≤20 good, ≤30 fair, more = weak.
+   A big gap between the compass and your walking direction also counts as weak. */
+function compassQ(){
+  if(!compassOK)return{n:0,t:T('cOff'),c:'var(--bad)'};
+  if(drift!=null&&Date.now()-driftT<=8000&&drift>40)return{n:1,t:T('cWeak'),c:'var(--bad)'};
+  if(compAcc!=null&&Date.now()-compAccT>3000)compAcc=null;
+  if(compAcc==null)return{n:3,t:T('cOn'),c:'var(--good)'};
+  if(compAcc<0)return{n:1,t:T('cCal'),c:'var(--bad)'};
+  if(compAcc<=10)return{n:4,t:T('cEx'),c:'var(--good)'};
+  if(compAcc<=20)return{n:3,t:T('cGood'),c:'var(--good)'};
+  if(compAcc<=30)return{n:2,t:T('cMid'),c:'var(--ok)'};
+  return{n:1,t:T('cWeak'),c:'var(--bad)'}}
+function onOrient(e){let h=null;
+  if(e.webkitCompassAccuracy!=null){compAcc=e.webkitCompassAccuracy;compAccT=Date.now()}
+  if(e.webkitCompassHeading!=null)h=e.webkitCompassHeading;
+  else if(e.absolute&&e.alpha!=null)h=(360-e.alpha)%360;
+  if(h==null)return;compassOK=true;
+  const so=(screen.orientation&&screen.orientation.angle)||window.orientation||0;
+  heading=(h+so+360)%360;
+  const lr=document.getElementById('locRose');if(lr)lr.style.transform='rotate('+(-heading)+'deg)';
+  if(cfg.eco==='on'){const n=Date.now();if(n-(onOrient.t||0)<250)return;onOrient.t=n}
+  render()}
+
+/* ---------- render ---------- */
+const turn=(c,t)=>c==null?t:c+((t-c+540)%360)-180; // shortest way round
+function target(){if(tab==='qibla')return{name:T('kaaba'),lat:KAABA.lat,lon:KAABA.lon,qibla:true};
+  if(tab==='home'){if(cur==='__start'&&startPt)return Object.assign({name:T('startName')},startPt);
+    if(cur==='__trail'&&trk.pts.length){trailIdx=Math.min(trailIdx,trk.pts.length-1);const q=trk.pts[trailIdx];
+      return{name:T('trailName')+' · '+(trailIdx+1)+'/'+trk.pts.length,lat:q.lat,lon:q.lon,alt:q.alt,trail:true}}
+    return places.find(p=>p.id===cur)||null}return null}
+function render(){
+  const age=pos?(Date.now()-pos.t)/1000:null, stale=age!=null&&age>10;
+  const q=gpsQuality(pos&&pos.acc,stale);
+  [...$('bars').children].forEach((b,i)=>b.style.background=i<q.n?q.c:'var(--line)');
+  $('gpsLabel').textContent=q.t;$('gpsLabel').style.color=q.c;
+  $('acc').textContent=pos?'±'+Math.round(pos.acc)+' m':'';
+  if(compassOK&&pos&&pos.speed>1.5&&pos.course!=null&&!isNaN(pos.course)&&!stale){
+    const g=Math.abs(((heading-pos.course+540)%360)-180);drift=drift==null?g:drift*.6+g*.4;driftT=Date.now()}
+  const bad=compassOK&&compassBad();
+  const cq=compassQ();
+  [...$('cbars').children].forEach((b,i)=>b.style.background=i<cq.n?cq.c:'var(--line)');
+  $('cLabel').textContent=cq.t;$('cLabel').style.color=cq.c;
+  $('cacc').textContent=compassOK&&compAcc!=null&&compAcc>=0?'±'+Math.round(compAcc)+'°':'';
+  $('fixInfo').innerHTML=pos?'<span class="dot" style="background:'+(stale?'var(--bad)':'var(--good)')+'"></span>'+(age<2?T('live'):T('ago')(Math.round(age))):'';
+  showAvg();
+  if(tab==='fav'){favTick();return}
+  if(tab!=='home'&&tab!=='qibla')return;
+
+  let t=target();if(t&&t.trail&&pos){trailStep();t=target()}
+  const nav=!!t;$('prayCard').hidden=!(t&&t.qibla);if(t&&t.qibla)paintPray();
+  $('here').hidden=nav;['dial','dist','meta','navhead'].forEach(id=>$(id).hidden=!nav);if(!nav)$('altd').hidden=true;$('cancel').hidden=!(nav&&!t.qibla);
+  $('stage').classList.toggle('qibla',!!(t&&t.qibla));
+  if(!nav){
+    $('stage').classList.remove('arrived','aligned');$('warn').textContent=pos&&pos.acc>40?T('wWeakMove'):'';
+    if(!pos){$('coords').textContent='--';return}
+    $('coords').textContent=fmtLL(pos.lat,pos.lon);
+    $('hAcc').textContent='±'+Math.round(pos.acc)+' m';
+    $('hAlt').textContent=pos.alt!=null?Math.round(pos.alt)+' m':'--';
+    $('hSpd').textContent=pos.speed!=null&&pos.speed>=0?(pos.speed*3.6).toFixed(1)+' km/h':'--';
+    if(startPt){const f=fmtDist(distance(pos,startPt));$('startDist').textContent='· '+f.v+' '+f.u}
+    infoTick();paintSunWarn();
+    return;
+  }
+  $('navhead').textContent=t.qibla?T('qiblaHead'):T('navTo');
+  const name=document.createElement('b');name.textContent=t.name;
+  if(!pos){$('dist').textContent='--';$('meta').replaceChildren(name);return}
+  const d=distance(pos,t),b=bearing(pos,t),f=fmtDist(d);
+  $('dist').innerHTML=f.v+'<small>'+f.u+'</small>';
+  $('meta').replaceChildren(name,' · '+dirName(b)+' '+Math.round(b)+'°');
+  $('dist').classList.toggle('near',!t.qibla&&d<50);
+  const line=[];
+  if(!t.qibla){const e=etaOf(cur+'|'+(t.trail?'trail':''),t.trail?d+pathLen(trk.pts.slice(0,trailIdx+1)):d);if(e!=null)line.push('<span>'+T('eta')(fmtDur(e))+'</span>')}
+  if(!t.qibla&&t.alt!=null&&pos.alt!=null){const df=Math.round(t.alt-pos.alt);
+    line.push('<span>'+(Math.abs(df)<3?T('altSame'):df>0?T('altUp')(df):T('altDown')(-df))+'</span>')}
+  const sl=sunLeft();if(sl!=null&&!t.qibla)line.push('<span>'+T('sunNav')(sl)+'</span>');
+  $('altd').innerHTML=line.join('');$('altd').hidden=!line.length;
+  let h=heading,warn='';
+  if(!compassOK){if(pos.course!=null&&!isNaN(pos.course)&&pos.speed>1){h=pos.course;warn=T('wMove')}else{h=0;warn=T('wNorth')}}
+  if(bad)warn=T('wComp');
+  if(pos.acc>40&&!t.qibla)warn=T('wApprox');
+  if(stale)warn=T('wStop');
+  $('warn').textContent=warn;
+  const rel=(b-h+360)%360;
+  smooth=turn(smooth,rel);smoothB=turn(smoothB,(360-h)%360);
+  $('arrow').style.transform='rotate('+smooth+'deg)';
+  $('bezel').style.transform='rotate('+smoothB+'deg)';
+  $('stage').classList.toggle('aligned',!bad&&(rel<(t.qibla?5:12)||rel>(t.qibla?355:348)));
+  if(t.qibla){arrived=false}else{const ar=cfg.arrive,leave=ar+Math.max(1,ar*0.3);if(arrived?d>leave:d<=ar)arrived=!arrived}
+  $('stage').classList.toggle('arrived',arrived);
+}
+setInterval(render,1000);
+
+/* ---------- sunrise / sunset (computed on the phone, no internet) ---------- */
+function sunTimes(date,lat,lon){ // NOAA formula; returns Date objects or null (polar day/night)
+  const J=Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())/864e5+2440587.5, n=Math.round(J+0.5-2451545+0.0008-lon/360); // this day's solar noon
+  const Js=n-lon/360, M=(357.5291+0.98560028*Js)%360, C=1.9148*Math.sin(rad(M))+0.02*Math.sin(rad(2*M))+0.0003*Math.sin(rad(3*M));
+  const Lm=(M+C+180+102.9372)%360, Jt=2451545+Js+0.0053*Math.sin(rad(M))-0.0069*Math.sin(rad(2*Lm));
+  const dec=Math.asin(Math.sin(rad(Lm))*Math.sin(rad(23.44)));
+  const cw=(Math.sin(rad(-0.833))-Math.sin(rad(lat))*Math.sin(dec))/(Math.cos(rad(lat))*Math.cos(dec));if(cw<-1||cw>1)return null;
+  const w=deg(Math.acos(cw)), toD=j=>new Date((j-2440587.5)*864e5);return{rise:toD(Jt-w/360),set:toD(Jt+w/360)}}
+const hm=d=>{let h=d.getHours();const ap=h<12?T('am'):T('pm');h=h%12||12;return h+':'+pad(d.getMinutes())+' '+ap};
+
+/* ---------- where am I: nearest city offline, area name + weather when online ---------- */
+const CITIES=[['الرياض','Riyadh',24.7136,46.6753],['جدة','Jeddah',21.4858,39.1925],['مكة المكرمة','Makkah',21.3891,39.8579],['المدينة المنورة','Madinah',24.5247,39.5692],
+['الدمام','Dammam',26.4207,50.0888],['الخبر','Khobar',26.2172,50.1971],['الجبيل','Jubail',27.0046,49.646],['الأحساء','Al Ahsa',25.3833,49.586],['القطيف','Qatif',26.5196,50.0115],
+['رأس تنورة','Ras Tanura',26.6435,50.1593],['الطائف','Taif',21.2703,40.4158],['تبوك','Tabuk',28.3835,36.5662],['بريدة','Buraidah',26.326,43.975],['عنيزة','Unaizah',26.084,43.994],
+['حائل','Hail',27.5114,41.7208],['خميس مشيط','Khamis Mushait',18.306,42.729],['أبها','Abha',18.2164,42.5053],['نجران','Najran',17.493,44.1277],['جازان','Jazan',16.8892,42.5511],
+['الباحة','Al Baha',20.0129,41.4677],['سكاكا','Sakaka',29.9697,40.2064],['عرعر','Arar',30.9753,41.0381],['الخرج','Al Kharj',24.1556,47.3346],['ينبع','Yanbu',24.0895,38.0618],
+['حفر الباطن','Hafar Al Batin',28.4328,45.9708],['المجمعة','Al Majmaah',25.9039,45.3456],['القريات','Al Qurayyat',31.3318,37.3428],['وادي الدواسر','Wadi Ad-Dawasir',20.4607,44.7816],
+['بيشة','Bisha',20.0005,42.6052],['العلا','AlUla',26.6085,37.9232],['رفحاء','Rafha',29.6202,43.4948],['شقراء','Shaqra',25.2482,45.2528],['الزلفي','Az Zulfi',26.2994,44.8154],
+['الدوادمي','Ad Dawadimi',24.5077,44.3924],['عفيف','Afif',23.9065,42.9172],['الليث','Al Lith',20.15,40.2667],['رابغ','Rabigh',22.7986,39.0349],['حقل','Haql',29.289,34.937],
+['ضباء','Duba',27.351,35.69],['أملج','Umluj',25.0213,37.2685],['طريف','Turaif',31.6725,38.6637],['شرورة','Sharurah',17.4667,47.1167],['الوجه','Al Wajh',26.2455,36.4525],
+['حوطة بني تميم','Hotat Bani Tamim',23.492,46.761],['الأفلاج','Al Aflaj',22.2833,46.7333],['القويعية','Al Quwayiyah',24.0737,45.2806],['تيماء','Tayma',27.6297,38.5446],
+['الرس','Ar Rass',25.8694,43.4973],['المذنب','Al Mithnab',25.8601,44.2223],['الغاط','Al Ghat',26.0272,44.9628],['ثادق','Thadiq',25.2853,45.8689],['رماح','Rumah',25.5716,47.1609],
+['الكويت','Kuwait City',29.3759,47.9774],['المنامة','Manama',26.2285,50.586],['الدوحة','Doha',25.2854,51.531],['أبوظبي','Abu Dhabi',24.4539,54.3773],['دبي','Dubai',25.2048,55.2708],
+['مسقط','Muscat',23.588,58.3829],['عمّان','Amman',31.9454,35.9284],['صنعاء','Sanaa',15.3694,44.191]];
+function nearestCity(p){let best=null,bd=1e12;CITIES.forEach(c=>{const d=distance(p,{lat:c[2],lon:c[3]});if(d<bd){bd=d;best=c}});
+  const name=cfg.lang==='en'?best[1]:best[0];if(bd<8000)return T('inCity')(name);
+  const f=fmtDist(bd);return T('near')(name,f.v+' '+f.u,dirName(bearing({lat:best[2],lon:best[3]},p)))}
+let net={};try{net=JSON.parse(localStorage.getItem('sahm.net')||'{}')}catch(e){}
+function saveNet(){try{localStorage.setItem('sahm.net',JSON.stringify(net))}catch(e){}}
+async function getJSON(url){const ac=new AbortController(),to=setTimeout(()=>ac.abort(),6000);
+  try{const r=await fetch(url,{signal:ac.signal,cache:'no-store'});if(!r.ok)throw 0;return await r.json()}finally{clearTimeout(to)}}
+let netBusy=false;
+async function netFetch(){if(netBusy||!pos||!navigator.onLine)return;
+  const moved=k=>!net[k]||distance(pos,net[k])>1500, old=k=>!net[k]||Date.now()-net[k].t>30*60e3;
+  const lang=cfg.lang==='en'?'en':'ar', needPlace=moved('place')||old('place')||net.place.lang!==lang, needWx=moved('wx')||old('wx');
+  if(!needPlace&&!needWx)return;netBusy=true;
+  const la=pos.lat.toFixed(4),lo=pos.lon.toFixed(4);
+  try{if(needPlace){const j=await getJSON('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+la+'&longitude='+lo+'&localityLanguage='+lang);
+      const parts=[j.locality,j.city,j.principalSubdivision].filter((x,i,a)=>x&&a.indexOf(x)===i).slice(0,2);
+      if(parts.length){net.place={txt:parts.join('، '.replace('، ',lang==='en'?', ':'، ')),lat:pos.lat,lon:pos.lon,t:Date.now(),lang};saveNet()}}}catch(e){}
+  try{if(needWx){const j=await getJSON('https://api.open-meteo.com/v1/forecast?latitude='+la+'&longitude='+lo+'&current=temperature_2m,wind_speed_10m,weather_code&wind_speed_unit=kmh&timezone=auto');
+      if(j.current){net.wx={temp:Math.round(j.current.temperature_2m),wind:Math.round(j.current.wind_speed_10m),code:j.current.weather_code,lat:pos.lat,lon:pos.lon,t:Date.now()};saveNet()}}}catch(e){}
+  netBusy=false;infoTick(true)}
+function wxName(c){const W=T('wx');const k=[95,80,71,61,51,48,45,3,2,1,0].find(x=>c>=x);return W[k]||''}
+function infoTick(force){if(!pos)return;const now=Date.now();if(!force&&now-(infoTick.t||0)<5000)return;infoTick.t=now;
+  const st=sunTimes(new Date(),pos.lat,pos.lon);$('sunR').textContent=st?hm(st.rise):'--';$('sunS').textContent=st?hm(st.set):'--';
+  const near=distance(pos,net.place||{lat:0,lon:0})<3000&&net.place&&net.place.lang===(cfg.lang==='en'?'en':'ar');
+  $('placeName').textContent=near?net.place.txt:nearestCity(pos)+(navigator.onLine?'':' · '+T('approx'));
+  const w=net.wx, fresh=w&&now-w.t<6*3600e3&&distance(pos,w)<20000;
+  if(fresh){const ago=Math.round((now-w.t)/60e3);
+    $('wxTxt').innerHTML=wxName(w.code)+' <b>'+w.temp+'°</b>'+(ago>=15?' <span class="dimtxt">('+T('agoMin')(ago)+')</span>':'');$('wxRow').hidden=false;
+    $('windTxt').innerHTML='💨 <b>'+w.wind+'</b> '+T('kmh');$('windTxt').hidden=false}
+  else{$('wxRow').hidden=true;$('windTxt').hidden=true}
+  if(cfg.eco!=='on'||!w)netFetch()}
+addEventListener('online',()=>infoTick(true));
+
+/* ---------- seasons (الدارجة) and rising stars (الطوالع) — built in, no internet ----------
+   From «دليل الطوالع والنجوم» (أ.د عبدالله المسند): 28 stars, 13 days each (الجبهة 14) = 365.
+   Two typos in the printed table are corrected here: الهنعة starts 16 July (not June) and الذراع 29 July (not June);
+   the chain proves it (الهقعة 3 Jul + 13 = 16 Jul, + 13 = 29 Jul, + 13 = 11 Aug = النثرة).
+   Each row: Arabic, English, start month, start day, min °, max °, average °. */
+const TAWALI=[['الإكليل','Al-Iklil',12,7,9,23,15.8],['القلب','Al-Qalb',12,20,7.2,21,14.0],['الشولة','Ash-Shawlah',1,2,6.5,20,13.2],['النعائم','An-Na‘aim',1,15,7,20,13.6],
+['البلدة','Al-Baldah',1,28,6.5,21,13.6],['سعد الذابح','Sa‘d adh-Dhabih',2,10,8.1,20,14.2],['سعد بلع','Sa‘d Bula‘',2,23,9.7,23,16.5],
+['سعد السعود','Sa‘d as-Su‘ud',3,8,12.7,27,19.6],['سعد الأخبية','Sa‘d al-Akhbiyah',3,21,13.3,26,19.4],['المقدم','Al-Muqaddam',4,3,15.9,30,23.1],['المؤخر','Al-Mu’akhkhar',4,16,18,32,25.1],
+['الرشا','Ar-Risha',4,29,20.4,36,28.0],['الشرطين','Ash-Sharatain',5,12,22.7,38,30.5],['البطين','Al-Butain',5,25,22.8,40,31.4],
+['الثريا','Ath-Thurayya',6,7,23.3,41,32.0],['الدبران','Ad-Dabaran',6,20,22.2,36,29.1],['الهقعة','Al-Haq‘ah',7,3,22.5,39,31.0],['الهنعة','Al-Han‘ah',7,16,24.5,43,33.5],
+['الذراع','Adh-Dhira‘',7,29,24,43,33.3],['النثرة','An-Nathrah',8,11,22.9,42,32.4],['الطرف','At-Tarf',8,24,22.5,42,32.0],
+['الجبهة','Al-Jabhah',9,6,22.4,41,31.5],['الزبرة','Az-Zubrah',9,20,20.4,38,29.4],['الصرفة','As-Sarfah',10,3,18.6,36,27.4],['العواء','Al-‘Awwa’',10,16,17.4,34,25.6],
+['السماك','As-Simak',10,29,15.1,30,22.6],['الغفر','Al-Ghafr',11,11,12.1,26,19.2],['الزبانا','Az-Zubana',11,24,11.1,25,18.0]];
+// the 12 seasons as people call them (الدارجة): 39+26+39+26+26+39+13+26+13+13+53+52 = 365
+const MAWASIM=[['المربعانية','Al-Murabba‘aniyah',12,7],['الشبط','Ash-Shabat',1,15],['العقارب','Al-‘Aqarib',2,10],['الحميمين','Al-Hamimain',3,21],['الذراعين','Adh-Dhira‘ain',4,16],
+['الثريا','Ath-Thurayya',5,12],['التويبع','At-Tuwaiyi‘',6,20],['الجوزاء','Al-Jawza’',7,3],['المرزم','Al-Mirzam',7,29],['الكليبين','Al-Kulaibain',8,11],['سهيل','Suhail',8,24],['الوسم','Al-Wasm',10,16]];
+// the four quarters of the table, for the emoji
+const FUSUL=[['الشتاء','Winter','❄️',12,7],['الربيع','Spring','🌸',3,8],['الصيف','Summer','☀️',6,7],['الخريف','Autumn','🍂',9,6]];
+const day0=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+const dDiff=(a,b)=>Math.round((day0(b)-day0(a))/864e5);
+// find the period (from a cyclic list of [.., month, day] starts) that contains a date
+function cyc(list,mi,date){const t=day0(date),y=t.getFullYear(),c=[];
+  [y-1,y,y+1].forEach(Y=>list.forEach((r,i)=>c.push({i,s:new Date(Y,r[mi]-1,r[mi+1])})));c.sort((a,b)=>a.s-b.s);
+  let k=0;for(let j=0;j<c.length;j++)if(c[j].s<=t)k=j;const cur=c[k],nx=c[k+1];
+  return{i:cur.i,start:cur.s,next:nx.s,nextI:nx.i,len:dDiff(cur.s,nx.s),day:dDiff(cur.s,t)+1,left:dDiff(t,nx.s)}}
+const nm=r=>cfg.lang==='en'?r[1]:r[0];
+const fmtD=d=>cfg.lang==='en'?T('months')[d.getMonth()]+' '+d.getDate():d.getDate()+' '+T('months')[d.getMonth()];
+const fasl=d=>FUSUL[cyc(FUSUL,3,d).i];
+function seasonTick(){const now=new Date();
+  const m=cyc(MAWASIM,2,now), t=cyc(TAWALI,2,now), f=fasl(now);
+  $('msEmoji').textContent=f[2];$('msName').textContent=nm(MAWASIM[m.i]);
+  $('msLeft').textContent=m.left;$('msLeftLbl').textContent=T('dayLeft');
+  $('msBar').style.width=Math.round(m.day/m.len*100)+'%';
+  const last=new Date(m.next);last.setDate(last.getDate()-1);
+  $('msRange').textContent=T('range')(fmtD(m.start),fmtD(last),m.day,m.len);
+  const fq=cyc(FUSUL,3,now);$('fsEmoji').textContent=f[2];$('fsName').textContent=nm(f);$('fsLeft').textContent=fq.left===1?T('lastDay'):T('daysLeft')(fq.left);
+  $('tlName').textContent=nm(TAWALI[t.i]);$('tlLeft').textContent=t.left===1?T('lastDay'):T('daysLeft')(t.left);
+  const tr=TAWALI[t.i];$('tlTemp').innerHTML='<bdi dir="ltr">'+Math.round(tr[4])+'° – '+tr[5]+'°</bdi>';$('tlAvg').textContent=T('avgT')(tr[6]);
+  const nf=fasl(m.next);
+  $('msNext').innerHTML=T('next')(nf[2],nm(MAWASIM[m.nextI]),m.left,fmtD(m.next))+(m.left<=7?' <span class="soon">'+T('soon')+'</span>':'');
+  seasonTick.day=now.getDate()}
+setInterval(()=>{if(new Date().getDate()!==seasonTick.day)seasonTick()},60e3);
+// the year at a glance
+let yrTab='m';
+function fillYear(){const now=new Date(),L=$('yrList');L.innerHTML='';
+  $$('#yrSeg button').forEach(b=>b.classList.toggle('on',b.dataset.y===yrTab));
+  const list=yrTab==='m'?MAWASIM:TAWALI, cur=cyc(list,2,now).i;
+  list.forEach((r,i)=>{const p=cyc(list,2,new Date(now.getFullYear(),r[2]-1,r[3])), last=new Date(p.next);last.setDate(last.getDate()-1);
+    const sub=yrTab==='t'?nm(MAWASIM[cyc(MAWASIM,2,p.start).i])+' · 🌡️ \u2066'+Math.round(r[4])+'° – '+r[5]+'°\u2069':T('days')(p.len);
+    const row=document.createElement('div');row.className='yrow'+(i===cur?' now':'');
+    row.innerHTML='<span class="e"></span><div class="n"><span></span><small></small></div><div class="dd"></div>';
+    row.querySelector('.e').textContent=fasl(p.start)[2];row.querySelector('.n span').textContent=nm(r);
+    row.querySelector('small').textContent=sub;row.querySelector('.dd').textContent=fmtD(p.start)+' – '+fmtD(last);
+    L.appendChild(row);if(i===cur)setTimeout(()=>row.scrollIntoView({block:'center'}),50)})}
+$('seasonCard').onclick=()=>{fillYear();$('dlgSeasons').showModal()};$('seasonCard').onkeydown=e=>{if(e.key==='Enter')$('seasonCard').click()};
+$$('#yrSeg button').forEach(b=>b.onclick=()=>{yrTab=b.dataset.y;fillYear()});
+$('yrClose').onclick=()=>$('dlgSeasons').close();
+
+/* ---------- prayer times, Hijri date and the moon — all computed on the phone ----------
+   Prayer times: Umm al-Qura method — Fajr at 18.5° below the horizon, Asr when a shadow equals its object
+   plus the noon shadow (standard), Maghrib at sunset, Isha 90 min after Maghrib (120 min in Ramadan).
+   Moon: positions and rise/set after the published SunCalc formulas (V. Agafonkin, BSD-2). */
+const AST=(()=>{const PI=Math.PI,R=PI/180,sin=Math.sin,cos=Math.cos,tan=Math.tan,asin=Math.asin,acos=Math.acos,atan=Math.atan2;
+  const dayMs=864e5,J1970=2440588,J2000=2451545,E=R*23.4397;
+  const toDays=d=>d.valueOf()/dayMs-0.5+J1970-J2000;
+  const ra=(l,b)=>atan(sin(l)*cos(E)-tan(b)*sin(E),cos(l)), dec=(l,b)=>asin(sin(b)*cos(E)+cos(b)*sin(E)*sin(l));
+  const alt=(H,phi,d)=>asin(sin(phi)*sin(d)+cos(phi)*cos(d)*cos(H));
+  const sid=(d,lw)=>R*(280.16+360.9856235*d)-lw;
+  const refr=h=>{if(h<0)h=0;return 0.0002967/tan(h+0.00312536/(h+0.08901179))};
+  function sunC(d){const M=R*(357.5291+0.98560028*d),C=R*(1.9148*sin(M)+0.02*sin(2*M)+0.0003*sin(3*M)),L=M+C+R*102.9372+PI;return{dec:dec(L,0),ra:ra(L,0)}}
+  function moonC(d){const L=R*(218.316+13.176396*d),M=R*(134.963+13.064993*d),F=R*(93.272+13.229350*d),l=L+R*6.289*sin(M),b=R*5.128*sin(F);
+    return{ra:ra(l,b),dec:dec(l,b),dist:385001-20905*cos(M)}}
+  function moonAlt(date,lat,lon){const lw=R*-lon,phi=R*lat,d=toDays(date),c=moonC(d),H=sid(d,lw)-c.ra;let h=alt(H,phi,c.dec);return h+refr(h)}
+  function illum(date){const d=toDays(date),s=sunC(d),m=moonC(d),sd=149598000;
+    const phi=acos(sin(s.dec)*sin(m.dec)+cos(s.dec)*cos(m.dec)*cos(s.ra-m.ra)),inc=atan(sd*sin(phi),m.dist-sd*cos(phi));
+    const ang=atan(cos(s.dec)*sin(s.ra-m.ra),sin(s.dec)*cos(m.dec)-cos(s.dec)*sin(m.dec)*cos(s.ra-m.ra));
+    return{fraction:(1+cos(inc))/2,phase:0.5+0.5*inc*(ang<0?-1:1)/PI}}
+  // moon rise / set during the local calendar day of `date`
+  function moonTimes(date,lat,lon){const t=new Date(date);t.setHours(0,0,0,0);const later=h=>new Date(t.valueOf()+h*36e5),hc=0.133*R;
+    let h0=moonAlt(t,lat,lon)-hc,rise,set,ye;
+    for(let i=1;i<=24;i+=2){const h1=moonAlt(later(i),lat,lon)-hc,h2=moonAlt(later(i+1),lat,lon)-hc;
+      const a=(h0+h2)/2-h1,b=(h2-h0)/2,xe=-b/(2*a);ye=(a*xe+b)*xe+h1;const D=b*b-4*a*h1;let roots=0,x1=0,x2=0;
+      if(D>=0){const dx=Math.sqrt(D)/(Math.abs(a)*2);x1=xe-dx;x2=xe+dx;if(Math.abs(x1)<=1)roots++;if(Math.abs(x2)<=1)roots++;if(x1<-1)x1=x2}
+      if(roots===1){if(h0<0)rise=i+x1;else set=i+x1}else if(roots===2){rise=i+(ye<0?x2:x1);set=i+(ye<0?x1:x2)}
+      if(rise&&set)break;h0=h2}
+    return{rise:rise?later(rise):null,set:set?later(set):null}}
+  // ---- prayer times ----
+  const fixA=a=>a-360*Math.floor(a/360), fixH=h=>h-24*Math.floor(h/24);
+  function sunPos(jd){const D=jd-2451545,g=R*fixA(357.529+0.98560028*D),q=fixA(280.459+0.98564736*D),L=R*fixA(q+1.915*sin(g)+0.020*sin(2*g)),e=R*(23.439-0.00000036*D);
+    const RA=atan(cos(e)*sin(L),cos(L))/R/15;return{decl:asin(sin(e)*sin(L)),eqt:q/15-fixH(RA)}}
+  function prayers(date,lat,lon,ramadan){
+    const Y=date.getFullYear(),Mo=date.getMonth(),Dd=date.getDate(),jd0=Date.UTC(Y,Mo,Dd)/dayMs+2440587.5-lon/(15*24),phi=R*lat;
+    const mid=t=>fixH(12-sunPos(jd0+t/24).eqt);
+    const ang=(a,t,ccw)=>{const p=sunPos(jd0+t/24),z=mid(t),v=acos((-sin(R*a)-sin(p.decl)*sin(phi))/(cos(p.decl)*cos(phi)))/R/15;return z+(ccw?-v:v)};
+    const asr=t=>{const p=sunPos(jd0+t/24),a=-Math.atan(1/(1+tan(Math.abs(phi-p.decl))))/R;return ang(a,t)};
+    let tm={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18};
+    for(let k=0;k<2;k++)tm={fajr:ang(18.5,tm.fajr,true),sunrise:ang(0.833,tm.sunrise,true),dhuhr:mid(tm.dhuhr),asr:asr(tm.asr),maghrib:ang(0.833,tm.maghrib)};
+    tm.isha=tm.maghrib+(ramadan?2:1.5);
+    const base=Date.UTC(Y,Mo,Dd)-lon/15*36e5, out={};   // hours above are local mean solar time at the longitude
+    for(const k in tm){if(!isFinite(tm[k]))return null;const ms=Date.UTC(Y,Mo,Dd)+(tm[k]-lon/15)*36e5;out[k]=new Date(Math.round(ms/6e4)*6e4)}
+    return out}
+  return{illum,moonTimes,prayers}})();
+// Hijri date (Umm al-Qura) from the phone's own calendar
+function hijri(date,lang){const loc=lang==='en'?'en-u-ca-islamic-umalqura-nu-latn':'ar-SA-u-ca-islamic-umalqura-nu-latn';
+  try{const f=new Intl.DateTimeFormat(loc,{day:'numeric',month:'long',year:'numeric'});const p=f.formatToParts(date),g=t=>(p.find(x=>x.type===t)||{}).value;
+    const mNum=+new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{month:'numeric'}).format(date);
+    return{day:g('day'),month:g('month'),year:(g('year')||'').replace(/\D/g,''),m:mNum}}catch(e){return null}}
+
+/* ---------- place categories ---------- */
+const CATS=[['pin','📍','عام','General'],['home','🏠','بيت','Home'],['car','🚙','سيارة','Car'],['camp','⛺','مخيم','Camp'],
+  ['well','💧','بئر','Well'],['tree','🌳','شجرة','Tree'],['mount','⛰️','جبل','Mountain'],['fuel','⛽','محطة','Station']];
+const catOf=id=>CATS.find(c=>c[0]===id)||CATS[0];
+const catName=c=>cfg.lang==='en'?c[3]:c[2];
+function buildCats(el,sel,onPick){el.innerHTML='';CATS.forEach(c=>{const b=document.createElement('button');b.type='button';
+  b.textContent=c[1]+' '+catName(c);b.classList.toggle('on',c[0]===sel);b.onclick=()=>{el.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');onPick(c[0])};el.appendChild(b)})}
+let catFilt='all';
+function fillCatFilter(){const used=[...new Set(places.map(p=>p.cat||'pin'))],el=$('catFilter');el.innerHTML='';
+  if(used.length<2){catFilt='all';return}
+  const mk=(id,txt)=>{const b=document.createElement('button');b.textContent=txt;b.classList.toggle('on',catFilt===id);b.onclick=()=>{catFilt=id;fillList()};el.appendChild(b)};
+  mk('all',T('catAll'));CATS.filter(c=>used.includes(c[0])).forEach(c=>mk(c[0],c[1]+' '+catName(c)));
+  if(catFilt!=='all'&&!used.includes(catFilt))catFilt='all'}
+
+/* ---------- drawing a path on a blank canvas (north up, no map) ---------- */
+function drawPath(cv,pts,o){const dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w)return;
+  cv.width=w*dpr;cv.height=h*dpr;const g=cv.getContext('2d');g.scale(dpr,dpr);g.clearRect(0,0,w,h);
+  const css=getComputedStyle(document.documentElement),col=k=>css.getPropertyValue(k).trim();
+  const all=pts.concat(o.cur?[o.cur]:[]);
+  g.fillStyle=col('--dim');g.font='12px '+css.getPropertyValue('--ui');g.textAlign='center';
+  if(!all.length){g.fillText(o.empty||'',w/2,h/2);return}
+  const lat0=all[0].lat,lon0=all[0].lon,k=Math.cos(rad(lat0));
+  const P=p=>({x:(p.lon-lon0)*111320*k,y:(p.lat-lat0)*110540});
+  const xy=all.map(P);let x0=Math.min(...xy.map(p=>p.x)),x1=Math.max(...xy.map(p=>p.x)),y0=Math.min(...xy.map(p=>p.y)),y1=Math.max(...xy.map(p=>p.y));
+  const span=Math.max(x1-x0,y1-y0,30),pad=26,sc=Math.min((w-2*pad)/span,(h-2*pad)/span),cx=(x0+x1)/2,cy=(y0+y1)/2;
+  const S=p=>{const q=P(p);return[w/2+(q.x-cx)*sc,h/2-(q.y-cy)*sc]};
+  // scale bar
+  const nice=[5,10,20,50,100,200,500,1000,2000,5000,10000,20000].find(v=>v*sc>=w*0.18)||20000;
+  g.strokeStyle=col('--dim');g.lineWidth=2;g.beginPath();g.moveTo(14,h-14);g.lineTo(14+nice*sc,h-14);g.stroke();
+  g.textAlign='left';g.fillText(nice>=1000?(nice/1000)+' '+T('km'):nice+' '+T('m'),14,h-20);
+  g.textAlign='right';g.fillStyle=col('--arrow');g.font='700 13px '+css.getPropertyValue('--num');g.fillText('N ↑',w-12,20);
+  if(pts.length){g.strokeStyle=col('--arrow');g.lineWidth=3.5;g.lineJoin='round';g.lineCap='round';g.beginPath();
+    pts.forEach((p,i)=>{const [x,y]=S(p);i?g.lineTo(x,y):g.moveTo(x,y)});if(o.closed&&pts.length>2)g.closePath();g.stroke();
+    if(o.closed&&pts.length>2){g.fillStyle=col('--okBg');g.fill()}
+    const [sx,sy]=S(pts[0]);g.fillStyle=col('--good');g.beginPath();g.arc(sx,sy,6,0,7);g.fill()}
+  if(o.cur){const [x,y]=S(o.cur);g.fillStyle=col('--dial');g.beginPath();g.arc(x,y,7,0,7);g.fill();g.strokeStyle=col('--panel');g.lineWidth=2.5;g.stroke()}
+  if(o.mark!=null&&pts[o.mark]){const [x,y]=S(pts[o.mark]);g.strokeStyle=col('--bad');g.lineWidth=2.5;g.beginPath();g.arc(x,y,9,0,7);g.stroke()}}
+const fmtDur=ms=>{const m=Math.floor(ms/6e4),h=Math.floor(m/60);return h?h+':'+pad(m%60)+' '+T('hr'):m+' '+T('min')};
+function pathLen(pts,closed){let L=0;for(let i=1;i<pts.length;i++)L+=distance(pts[i-1],pts[i]);if(closed&&pts.length>2)L+=distance(pts[pts.length-1],pts[0]);return L}
+
+/* ---------- breadcrumb trail: a raw GPS point every 10 m (no smoothing), and walking it back ---------- */
+let trk={on:false,pts:[],t0:0,t1:0};try{Object.assign(trk,JSON.parse(localStorage.getItem('sahm.track')||'{}'))}catch(e){}
+let trailIdx=0;
+function saveTrk(){try{localStorage.setItem('sahm.track',JSON.stringify(trk))}catch(e){}}
+function trackFix(p){if(!trk.on||p.acc>25)return;const last=trk.pts[trk.pts.length-1];
+  if(!last||distance(last,p)>=10){trk.pts.push({lat:p.lat,lon:p.lon,alt:p.alt!=null?Math.round(p.alt):null,t:p.t});trk.t1=p.t;
+    if(trk.pts.length>8000)trk.pts.shift();saveTrk();if($('dlgTrack').open)paintTrack()}}
+function paintTrack(){$('recDot').hidden=!trk.on;
+  if(!$('dlgTrack').open)return;
+  drawPath($('trCanvas'),trk.pts,{cur:pos,empty:T('trEmpty'),mark:cur==='__trail'?trailIdx:null});
+  const L=pathLen(trk.pts),f=fmtDist(L);$('trDist').textContent=f.v+' '+f.u;
+  $('trTime').textContent=trk.t0?fmtDur((trk.on?Date.now():trk.t1||trk.t0)-trk.t0):'--';$('trPts').textContent=trk.pts.length;
+  $('trToggle').textContent=trk.on?T('trStop'):T(trk.pts.length?'trResume':'trStart');
+  $('trBack').disabled=trk.pts.length<2;$('trHint').textContent=T(trk.on?'trHintOn':'trHintOff')}
+$('toolTrack').onclick=()=>{$('dlgTrack').showModal();paintTrack()};
+$('trClose').onclick=()=>$('dlgTrack').close();
+$('trToggle').onclick=()=>{trk.on=!trk.on;if(trk.on&&!trk.pts.length)trk.t0=Date.now();if(trk.on&&pos)trackFix(pos);saveTrk();paintTrack();wakeOn()};
+$('trClear').onclick=()=>{const b=$('trClear');if(!b.classList.contains('sure')){b.classList.add('sure');b.textContent=T('sure');setTimeout(()=>{b.classList.remove('sure');b.textContent=T('trClear')},3000);return}
+  trk={on:false,pts:[],t0:0,t1:0};saveTrk();if(cur==='__trail'){cur=null;save()}b.classList.remove('sure');b.textContent=T('trClear');paintTrack()};
+// walk it back: start at the recorded point nearest to you and count down to the first one
+$('trBack').onclick=()=>{if(trk.pts.length<2)return;let best=trk.pts.length-1;
+  if(pos){let bd=1e12;trk.pts.forEach((p,i)=>{const d=distance(pos,p);if(d<bd){bd=d;best=i}})}
+  trailIdx=best;$('dlgTrack').close();navigateTo('__trail')};
+function trailStep(){if(!pos)return;const thr=Math.max(10,cfg.arrive);
+  while(trailIdx>0&&distance(pos,trk.pts[trailIdx])<=thr)trailIdx--}
+
+/* ---------- area: walk around it (a raw point every 3 m), or stand at each corner and tap ---------- */
+let area={on:false,pts:[]};
+function areaFix(p){if(!area.on||p.acc>15)return;const last=area.pts[area.pts.length-1];
+  if(!last||distance(last,p)>=3){area.pts.push({lat:p.lat,lon:p.lon});if($('dlgArea').open)paintArea()}}
+function polyArea(pts){if(pts.length<3)return 0;const lat0=pts[0].lat,k=Math.cos(rad(lat0));
+  const q=pts.map(p=>[(p.lon-pts[0].lon)*111320*k,(p.lat-lat0)*110540]);let A=0;
+  for(let i=0;i<q.length;i++){const [x1,y1]=q[i],[x2,y2]=q[(i+1)%q.length];A+=x1*y2-x2*y1}return Math.abs(A)/2}
+function paintArea(){if(!$('dlgArea').open)return;drawPath($('arCanvas'),area.pts,{cur:pos,closed:true,empty:T('arEmpty')});
+  const A=polyArea(area.pts),P=pathLen(area.pts,true),f=fmtDist(P);
+  $('arArea').textContent=A>=1e4?(A/1e4).toFixed(2)+' '+T('ha'):Math.round(A).toLocaleString('en')+' '+T('m2');
+  $('arPeri').textContent=f.v+' '+f.u;$('arPts').textContent=area.pts.length;
+  $('arToggle').textContent=area.on?T('trStop'):T(area.pts.length?'trResume':'arStart')}
+$('toolArea').onclick=()=>{$('dlgArea').showModal();paintArea()};
+$('arClose').onclick=()=>$('dlgArea').close();
+$('arToggle').onclick=()=>{area.on=!area.on;if(area.on&&pos)areaFix(pos);paintArea()};
+$('arCorner').onclick=()=>{const b=recent.filter(f=>f.acc<=20);if(!b.length){toast(T('waitGps'));return}const a=avgFix(b);area.pts.push({lat:a.lat,lon:a.lon});paintArea();toast(T('cornerAdded'))};
+$('arClear').onclick=()=>{area={on:false,pts:[]};paintArea()};
+
+/* ---------- SOS ---------- */
+function sosText(){return T('sosMsg')(pos.lat.toFixed(6)+', '+pos.lon.toFixed(6),Math.round(pos.acc),hm(new Date(pos.t)))}
+function paintSos(){if(!$('dlgSos').open)return;
+  if(!pos){$('sosCoords').textContent='--';$('sosDms').textContent='';$('sosMeta').textContent=T('waitGps');return}
+  $('sosCoords').innerHTML=pos.lat.toFixed(6)+'<br>'+pos.lon.toFixed(6);$('sosDms').textContent=dms(pos.lat,'N','S')+'  '+dms(pos.lon,'E','W');
+  const age=Math.round((Date.now()-pos.t)/1000);
+  $('sosMeta').textContent=T('sosMeta')(Math.round(pos.acc),pos.alt!=null?Math.round(pos.alt):'--',hm(new Date(pos.t)),age)}
+$('toolSos').onclick=()=>{$('dlgSos').showModal();paintSos()};
+$('sosClose').onclick=()=>$('dlgSos').close();
+$('sosCopy').onclick=()=>{if(pos)copy(pos.lat.toFixed(6)+', '+pos.lon.toFixed(6))};
+$('sosShare').onclick=async()=>{if(!pos){toast(T('waitGps'));return}const text=sosText();
+  if(navigator.share){try{await navigator.share({text});return}catch(e){if(e.name==='AbortError')return}}copy(text)};
+
+/* ---------- the moon (drawn to its real phase) + Hijri date ---------- */
+function moonPath(phase,r){ // phase 0 new → 0.5 full → 1 new; lit side on the right while waxing
+  const c=Math.cos(2*Math.PI*phase),rx=Math.abs(c)*r,wax=phase<0.5,top='20 '+(20-r),bot='20 '+(20+r);
+  if(wax)return 'M'+top+' A'+r+' '+r+' 0 0 1 '+bot+' A'+rx+' '+r+' 0 0 '+(c>0?0:1)+' '+top+'Z';
+  return 'M'+top+' A'+r+' '+r+' 0 0 0 '+bot+' A'+rx+' '+r+' 0 0 '+(c>0?1:0)+' '+top+'Z'}
+function moonSVG(phase){const id='mm'+(moonSVG.n=(moonSVG.n||0)+1);
+  return '<defs><mask id="'+id+'"><rect width="40" height="40" fill="#fff"/><path d="'+moonPath(phase,17.4)+'" fill="#000"/></mask></defs>'+
+  '<image href="moon.png" x="2.6" y="2.6" width="34.8" height="34.8"/><circle cx="20" cy="20" r="17.6" fill="#0a0f1e" fill-opacity=".86" mask="url(#'+id+')"/>'}
+const PHASES=[['محاق','New moon'],['هلال','Waxing crescent'],['تربيع أول','First quarter'],['أحدب متزايد','Waxing gibbous'],['بدر','Full moon'],['أحدب متناقص','Waning gibbous'],['تربيع ثاني','Last quarter'],['هلال متناقص','Waning crescent']];
+const phaseName=p=>{const i=Math.floor((p*8+0.5)%8);return PHASES[i][cfg.lang==='en'?1:0]};
+function moonTick(){const now=new Date(),il=AST.illum(now),hj=hijri(now,cfg.lang);
+  // redraw once a day (rebuilding it every 5 s made the photo blink)
+  const mk=now.toDateString();if(moonTick.mk!==mk){moonTick.mk=mk;$('moonSvg').innerHTML=moonSVG(il.phase)}$('hijriShort').textContent=hj?hj.day+' '+hj.month+' ('+hj.m+') '+hj.year:'';
+  moonTick.hj=hj;moonTick.il=il}
+$('moonBtn').onclick=()=>{moonTick();const il=moonTick.il,hj=moonTick.hj,now=new Date();
+  $('moonBig').innerHTML=moonSVG(il.phase);$('mdPhase').textContent=phaseName(il.phase);
+  $('mdHijri').textContent=hj?hj.day+' '+hj.month+' '+hj.year+(cfg.lang==='en'?' AH':' هـ'):'';
+  $('mdLit').textContent=Math.round(il.fraction*100)+'%';
+  if(pos){const mt=AST.moonTimes(now,pos.lat,pos.lon);$('mdRise').textContent=mt.rise?hm(mt.rise):'--';$('mdSet').textContent=mt.set?hm(mt.set):'--'}
+  else{$('mdRise').textContent='--';$('mdSet').textContent='--'}
+  $('dlgMoon').showModal()};
+$('mdClose').onclick=()=>$('dlgMoon').close();
+
+/* ---------- prayer times (Umm al-Qura) on the Qibla page ---------- */
+const PR=['fajr','sunrise','dhuhr','asr','maghrib','isha'];
+function prayToday(d){if(!pos)return null;const hj=hijri(d,'en');return AST.prayers(d,pos.lat,pos.lon,hj&&hj.m===9)}
+function paintPray(){if(!pos){$('pNextName').textContent=T('waitGps');$('pNextIn').textContent='';$('pGrid').innerHTML='';return}
+  const now=new Date(),key=now.toDateString()+pos.lat.toFixed(2)+pos.lon.toFixed(2);
+  if(paintPray.key!==key){paintPray.key=key;paintPray.t=prayToday(now);const tm=new Date(now);tm.setDate(tm.getDate()+1);paintPray.tom=prayToday(tm)}
+  const t=paintPray.t;if(!t)return;
+  let nx=PR.find(k=>k!=='sunrise'&&t[k]>now),when=nx?t[nx]:paintPray.tom&&paintPray.tom.fajr;if(!nx)nx='fajr';
+  const left=Math.max(0,when-now),h=Math.floor(left/36e5),m=Math.floor(left%36e5/6e4),s=Math.floor(left%6e4/1e3);
+  $('pNextName').textContent=T('prNext')(T('pr_'+nx));$('pNextIn').textContent=(h?h+':'+pad(m):m)+':'+pad(s);
+  $('pGrid').innerHTML=PR.map(k=>'<div class="'+(k===nx&&t[k]>now?'now':'')+'">'+T('pr_'+k)+'<b>'+hm(t[k]).replace(/ (ص|م|AM|PM)$/,'')+'</b></div>').join('')}
+
+/* ---------- time to arrive, from how fast the distance is actually shrinking ---------- */
+let etaH=[],etaKey='';
+function etaOf(key,d){if(key!==etaKey){etaKey=key;etaH=[]}
+  if(pos&&(!etaH.length||etaH[etaH.length-1].t!==pos.t)){etaH.push({t:pos.t,d});while(etaH.length&&pos.t-etaH[0].t>90e3)etaH.shift()}
+  const old=etaH.find(x=>pos.t-x.t>=15e3);if(!old)return null;const v=(old.d-d)/((pos.t-old.t)/1000);
+  return v>0.3?d/v*1000:null}
+
+/* ---------- sunset reminder ---------- */
+function sunLeft(){if(!pos)return null;const st=sunTimes(new Date(),pos.lat,pos.lon);if(!st)return null;const m=(st.set-Date.now())/6e4;return m>0&&m<=60?Math.ceil(m):null}
+function paintSunWarn(){const m=sunLeft(),el=$('sunWarn');if(m==null){el.hidden=true;return}
+  let sub='';if(startPt&&pos){const f=fmtDist(distance(pos,startPt));sub=T('sunStart')(f.v+' '+f.u)}
+  el.innerHTML='<span class="swi">🌙</span><div class="swt"><b></b>'+(sub?'<small></small>':'')+'</div>';
+  el.querySelector('b').textContent=T('sunWarn')(m);if(sub)el.querySelector('small').textContent=sub;el.hidden=false}
+setInterval(()=>{moonTick();paintSos();if($('dlgTrack').open)paintTrack()},5000);
+
+/* ---------- tabs ---------- */
+function setTitle(){$('ptitle').textContent=tab==='home'?T('heroTag'):T({set:'tabSet',qibla:'tabQibla',fav:'tabFav'}[tab])}
+function go(name){tab=name;smooth=null;smoothB=null;arrived=false;
+  $$('#tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===name));
+  $('stage').hidden=!(name==='home'||name==='qibla');$('pFav').hidden=name!=='fav';$('pSet').hidden=name!=='set';
+  if(name==='fav')fillList();if(name==='set')paintSet();
+  setTitle();render()}
+$$('#tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+
+/* ---------- places ---------- */
+function toast(s){const t=$('toast');t.textContent=s;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,1700)}
+function copy(s){if(navigator.clipboard)navigator.clipboard.writeText(s).then(()=>toast(T('copied'))).catch(()=>toast(s));else toast(s)}
+/* date & time saved with each place, as local "YYYY-MM-DD HH:MM" (empty for places saved before 1.7) */
+const pad=n=>String(n).padStart(2,'0');
+function stamp(d=new Date()){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
+function showAt(at){const m=at&&at.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/);if(!m)return '';
+  let h=+m[4];const ap=h<12?T('am'):T('pm');h=h%12||12;return m[3]+'/'+m[2]+'/'+m[1]+' · '+h+':'+m[5]+' '+ap}
+function navigateTo(id){cur=id||null;save();go('home')}
+function addPlace(name,c,at,alt,cat){const p={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:name||T('place'),lat:c.lat,lon:c.lon,at:at===undefined?stamp():at};if(alt!=null)p.alt=alt;if(cat&&cat!=='pin')p.cat=cat;places.push(p);save();return p}
+function preview(){const c=parseCoord($('fCoord').value);$('fErr').textContent='';$('fPrev').textContent=c?'✓ '+c.lat.toFixed(6)+', '+c.lon.toFixed(6):''}
+$('fCoord').oninput=()=>{preview();nameFromMsg($('fCoord').value)};
+function nameFromMsg(v){const m=v&&v.match(/📍\s*(.+?)(?=\s*[\r\n]|\s*-?\d{1,3}\.\d{3}|$)/);if(m&&!$('fName').value.trim())$('fName').value=m[1].trim()}
+$('fPaste').onclick=async()=>{try{const v=await navigator.clipboard.readText();if(!v)throw 0;$('fCoord').value=v.trim();if(avgBuf){avgBuf.edited=true;$('fAvg').hidden=true}preview();nameFromMsg(v)}catch(e){toast(T('pasteFail'));$('fCoord').focus()}};
+function openAdd(prefill,fix){avgBuf=fix?[fix]:null;$('fAvg').hidden=true;$('fName').value='';$('fCoord').value=prefill||'';preview();if(fix)showAvg();openAdd.at=stamp();$('fAt').textContent=showAt(openAdd.at);openAdd.cat='pin';buildCats($('fCats'),'pin',c=>openAdd.cat=c);$('dlgAdd').showModal()}
+$$('.addCoord').forEach(b=>b.onclick=()=>openAdd(''));
+$$('.saveHere').forEach(b=>b.onclick=()=>{if(!pos){toast(T('waitGps'));return}openAdd('',pos)});
+$('fOk').onclick=()=>{const v=$('fCoord').value,c=parseCoord(v);
+  if(!c){$('fErr').textContent=/goo\.gl|maps\.app/i.test(v)?T('errShort'):T('errBad');return}
+  const alt=avgBuf&&!avgBuf.edited&&avgBuf.length?avgFix(avgBuf.slice(-30)).alt:null;
+  addPlace($('fName').value.trim(),c,openAdd.at,alt,openAdd.cat);$('dlgAdd').close();
+  if(tab==='fav')fillList();else go('fav')};
+$('fCancel').onclick=()=>$('dlgAdd').close();
+$('dlgAdd').addEventListener('close',()=>{avgBuf=null});
+$('fCoord').addEventListener('input',()=>{if(avgBuf){avgBuf.edited=true;$('fAvg').hidden=true}});
+$('cancel').onclick=()=>{const wasStart=cur==='__start';cur=null;save();arrived=false;smooth=null;if(wasStart)clearStart();render();toast(T(wasStart?'startCleared':'canceled'))};
+$('copyHere').onclick=()=>{if(pos)copy(fmtLL(pos.lat,pos.lon))};
+function sortedPlaces(){const a=places.slice();
+  if(cfg.sort==='near'&&pos)a.sort((x,y)=>distance(pos,x)-distance(pos,y));
+  else{a.reverse();a.sort((x,y)=>(y.at||'').localeCompare(x.at||''))} // newest date first; places without a date go last
+  return a}
+function ndText(p){if(!pos)return '';const f=fmtDist(distance(pos,p));return f.v+' '+f.u+' · '+dirName(bearing(pos,p))}
+function fillList(){const Ls=$('list');Ls.innerHTML='';fillList.t=Date.now();
+  $$('#sortSeg button').forEach(b=>b.classList.toggle('on',b.dataset.s===cfg.sort));
+  fillCatFilter();
+  if(!places.length){Ls.innerHTML='<div class="empty">'+T('empty')+'</div>';return}
+  sortedPlaces().filter(p=>catFilt==='all'||(p.cat||'pin')===catFilt).forEach(p=>{const it=document.createElement('div');it.className='item';it.dataset.id=p.id;
+    it.innerHTML='<div class="txt"><b></b><small></small><div class="at"></div><div class="nd"></div></div><div class="acts"><button class="primary" data-a="go"></button><button class="more" data-a="more">⋯</button></div>';
+    it.querySelector('b').textContent=catOf(p.cat)[1]+' '+p.name;it.querySelector('small').textContent=fmtLL(p.lat,p.lon);it.querySelector('.at').textContent=showAt(p.at);
+    it.querySelector('.nd').textContent=ndText(p);
+    const bGo=it.querySelector('[data-a=go]');bGo.textContent=T('go');bGo.onclick=()=>navigateTo(p.id);
+    it.querySelector('[data-a=more]').onclick=()=>openPlace(p);
+    it.querySelector('.txt').onclick=()=>openPlace(p);
+    Ls.appendChild(it)})}
+// live distances; re-sort every 15 s while nothing is open
+function favTick(){$$('#list .item').forEach(it=>{const p=places.find(x=>x.id===it.dataset.id);if(p)it.querySelector('.nd').textContent=ndText(p)});
+  if(cfg.sort==='near'&&Date.now()-(fillList.t||0)>15000&&!document.querySelector('dialog[open]'))fillList()}
+$$('#sortSeg button').forEach(b=>b.onclick=()=>{cfg.sort=b.dataset.s;saveCfg();fillList()});
+let curP=null;
+function openPlace(p){curP=p;$('pName').value=p.name;$('pCoords').textContent=fmtLL(p.lat,p.lon);$('pAt').textContent=showAt(p.at)||'--';
+  $('pAlt').textContent=p.alt!=null?p.alt+' m':'--';openPlace.cat=p.cat||'pin';buildCats($('pCats'),openPlace.cat,c=>openPlace.cat=c);const d=$('pDel');d.classList.remove('sure');d.textContent=T('del');$('dlgPlace').showModal()}
+$('pClose').onclick=()=>$('dlgPlace').close();
+$('pSave').onclick=()=>{const n=$('pName').value.trim();if(curP){if(n)curP.name=n;if(openPlace.cat==='pin')delete curP.cat;else curP.cat=openPlace.cat;save();toast(T('renamed'))}$('dlgPlace').close();fillList()};
+$('pGo').onclick=()=>{$('dlgPlace').close();navigateTo(curP.id)};
+$('pCopy').onclick=()=>copy(fmtLL(curP.lat,curP.lon));
+$('pShare').onclick=()=>sharePlace(curP);
+$('pDel').onclick=()=>{const d=$('pDel');if(!d.classList.contains('sure')){d.classList.add('sure');d.textContent=T('sure');
+    setTimeout(()=>{d.classList.remove('sure');d.textContent=T('del')},3000);return}
+  places=places.filter(x=>x.id!==curP.id);if(cur===curP.id)cur=null;save();$('dlgPlace').close();fillList()};
+/* share a place as plain text: works by SMS with no internet, and pastes straight into "Add coordinates" */
+async function sharePlace(p){const text=T('shareMsg')(p.name,p.lat.toFixed(6)+', '+p.lon.toFixed(6));
+  if(navigator.share){try{await navigator.share({text});return}catch(e){if(e.name==='AbortError')return}}
+  copy(text)}
+
+/* ---------- starting point ("take me back") ---------- */
+let startPt=null;try{startPt=JSON.parse(localStorage.getItem('sahm.start')||'null')}catch(e){}
+function paintStart(){$('setStart').hidden=!!startPt;$('startBox').hidden=!startPt}
+$('setStart').onclick=()=>{const b=recent.filter(f=>f.acc<=40);
+  if(!pos||!b.length){toast(pos?T('startWeak'):T('waitGps'));return}
+  const a=avgFix(b);startPt={lat:a.lat,lon:a.lon,alt:a.alt,at:stamp()};
+  try{localStorage.setItem('sahm.start',JSON.stringify(startPt))}catch(e){}paintStart();render();toast(T('startSet'))};
+$('goStart').onclick=()=>navigateTo('__start');
+function clearStart(){startPt=null;try{localStorage.removeItem('sahm.start')}catch(e){}paintStart()}
+$('resetStart').onclick=()=>{const b=$('resetStart');if(!b.classList.contains('sure')){b.classList.add('sure');toast(T('startReset'));setTimeout(()=>b.classList.remove('sure'),3000);return}
+  b.classList.remove('sure');clearStart();toast(T('startCleared'))};
+
+/* ---------- backup / restore: plain text, one place per line ---------- */
+function backupText(){return T('backupTitle')+'\n'+places.map(p=>p.name+': '+p.lat.toFixed(6)+', '+p.lon.toFixed(6)+(p.at?' | '+p.at:'')+(p.alt!=null?' | '+p.alt+'m':'')+(p.cat?' | '+catOf(p.cat)[1]:'')).join('\n')}
+$('backup').onclick=async()=>{
+  if(!places.length){toast(T('noPlaces'));return}
+  const text=backupText();
+  if(navigator.share){try{await navigator.share({title:T('backupTitle'),text});return}catch(e){if(e.name==='AbortError')return}}
+  copy(text)};
+$('restore').onclick=()=>{$('rText').value='';$('rErr').textContent='';$('dlgRestore').showModal()};
+$('rCancel').onclick=()=>$('dlgRestore').close();
+$('rOk').onclick=()=>{
+  let added=0,skipped=0;
+  $('rText').value.split(/\r?\n/).forEach((line,i)=>{
+    line=line.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/،/g,',').trim();
+    // "name: lat, lon" (old backups) or "name: lat, lon | YYYY-MM-DD HH:MM" (1.7+)
+    let cat=null;const cm=line.match(/\s*\|\s*(\S+)\s*$/);if(cm){const c0=CATS.find(c=>c[1]===cm[1]||c[1].replace('\ufe0f','')===cm[1].replace('\ufe0f',''));if(c0){cat=c0[0];line=line.slice(0,cm.index)}}
+    let alt=null;const am=line.match(/\s*\|\s*(-?\d+)\s*m\s*$/i);if(am){alt=+am[1];line=line.slice(0,am.index)}
+    let at='';const dm=line.match(/\s*\|\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2})\s*$/);
+    if(dm){at=dm[1];line=line.slice(0,dm.index)}
+    const m=line.match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*$/);if(!m)return;
+    const c=okLL(m[1],m[2]);if(!c)return;
+    const name=line.slice(0,m.index).replace(/[\s:|\-–—]+$/,'').trim()||T('place');
+    if(places.some(p=>Math.abs(p.lat-c.lat)<1e-6&&Math.abs(p.lon-c.lon)<1e-6)){skipped++;return}
+    const np={id:Date.now().toString(36)+i,name,lat:c.lat,lon:c.lon,at};if(alt!=null)np.alt=alt;if(cat&&cat!=='pin')np.cat=cat;places.push(np);added++;
+  });
+  if(!added&&!skipped){$('rErr').textContent=T('restoreErr');return}
+  save();fillList();$('dlgRestore').close();toast(T('restored')(added,skipped))};
+
+/* ---------- settings ---------- */
+function paintSet(){$$('.seg[data-k]').forEach(s=>{const k=s.dataset.k;s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',String(cfg[k])===b.dataset.v))})}
+$$('.seg[data-k] button').forEach(b=>b.onclick=()=>{
+  const k=b.parentNode.dataset.k,v=b.dataset.v;cfg[k]=k==='arrive'?+v:v;saveCfg();
+  if(k==='theme'||k==='eco')applyTheme();
+  if(k==='lang'){applyLang();infoTick(true);seasonTick();moonTick();paintPray.key=''}
+  if(k==='eco')wakeOn();
+  paintSet();render()});
+$('share').onclick=async()=>{const url=location.origin+location.pathname.replace(/index\.html$/,''),text=T('shareText')+'\n'+url;
+  if(navigator.share){try{await navigator.share({title:T('appName'),text});return}catch(e){if(e.name==='AbortError')return}}
+  if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>toast(T('linkCopied'))).catch(()=>toast(url));else toast(url)};
+$('aboutBtn').onclick=()=>$('dlgAbout').showModal();
+$('aClose').onclick=()=>$('dlgAbout').close();
+
+/* ---------- start (iOS needs a tap to grant compass) ---------- */
+let wl=null;
+async function wakeOn(){try{if(cfg.eco==='on'){if(wl){await wl.release();wl=null}return}if(!wl||wl.released)wl=await navigator.wakeLock.request('screen')}catch(e){}}
+function edgeColor(){const app=document.documentElement.classList.contains('app'),c=getComputedStyle(app?document.body:document.documentElement).backgroundColor,m=document.querySelector('meta[name=theme-color]');if(m&&c)m.content=c}
+function fixGap(){
+  const tb=document.querySelector('.tabbar');if(tb&&tb.offsetHeight)document.documentElement.style.setProperty('--tbh',tb.offsetHeight+'px')}
+async function start(){
+  $('start').hidden=true;document.documentElement.classList.add('app');fixGap();edgeColor();
+  if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function'){
+    try{const r=await DeviceOrientationEvent.requestPermission();if(r==='granted')addEventListener('deviceorientation',onOrient)}catch(e){}
+  }else{addEventListener('deviceorientationabsolute',onOrient);addEventListener('deviceorientation',onOrient)}
+  if('geolocation' in navigator)navigator.geolocation.watchPosition(onPos,onErr,{enableHighAccuracy:true,maximumAge:0,timeout:30000});
+  else onErr({code:2});
+  wakeOn();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')wakeOn()});
+}
+/* ---------- browser vs Home Screen app ---------- */
+const UA=navigator.userAgent;
+const isIOS=/iPhone|iPad|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isApp=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;
+const inSafari=isIOS&&/Safari/.test(UA)&&!/CriOS|FxiOS|EdgiOS|OPiOS|GSA|FBAN|FBAV|Instagram|Line|WhatsApp|Snapchat/i.test(UA);
+const inChromeIOS=isIOS&&/CriOS|EdgiOS/.test(UA)&&/Safari/.test(UA); // Chrome and Edge on iPhone can add to the Home Screen (iOS 16.4+)
+let installEvt=null; // Android Chrome: lets us show a one-tap Install button
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;const b=$('instNow');if(b)b.hidden=false});
+const devBypass=/[?&]browser\b/.test(location.search); // open the link with ?browser to test in a normal browser
+function showInstall(){
+  const SH=`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>`,PL=`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg>`,DT=`<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>`;
+  const st=(n,ic,t)=>'<div class="step"><span class="num">'+n+'</span>'+(ic?'<span class="ico">'+ic+'</span>':'')+'<span>'+t+'</span></div>';
+  let ar,en;
+  if(inChromeIOS){
+    ar=st(1,SH,'اضغط زر <b>المشاركة</b> فوق جنب شريط العنوان')+st(2,PL,'اختر <b>إضافة إلى الشاشة الرئيسية</b> ثم <b>إضافة</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','افتح <b>سهم</b> من الشاشة الرئيسية');
+    en=st(1,SH,'Tap <b>Share</b> at the top, next to the address bar')+st(2,PL,'Choose <b>Add to Home Screen</b>, then <b>Add</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>Sahm</b> from your Home Screen');
+  }else if(isIOS&&!inSafari){
+    ar=st(1,'','افتح هذا الرابط في <b>سفاري</b>. التطبيق اللي أنت فيه ما يسمح بالإضافة للشاشة الرئيسية.')+st(2,SH,'في سفاري اضغط زر <b>المشاركة</b>')+st(3,PL,'اختر <b>إضافة إلى الشاشة الرئيسية</b>');
+    en=st(1,'','Open this link in <b>Safari</b>. The app you’re in can’t add to the Home Screen.')+st(2,SH,'In Safari, tap <b>Share</b>')+st(3,PL,'Choose <b>Add to Home Screen</b>');
+  }else if(isIOS){
+    ar=st(1,SH,'اضغط زر <b>المشاركة</b> تحت في سفاري')+st(2,PL,'اختر <b>إضافة إلى الشاشة الرئيسية</b> ثم <b>إضافة</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','افتح <b>سهم</b> من الشاشة الرئيسية');
+    en=st(1,SH,'Tap <b>Share</b> at the bottom of Safari')+st(2,PL,'Choose <b>Add to Home Screen</b>, then <b>Add</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>Sahm</b> from your Home Screen');
+  }else{
+    ar=st(1,DT,'افتح قائمة المتصفح <b>⋮</b>')+st(2,PL,'اختر <b>تثبيت التطبيق</b> أو <b>إضافة إلى الشاشة الرئيسية</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','افتح <b>سهم</b> من الشاشة الرئيسية');
+    en=st(1,DT,'Open the browser menu <b>⋮</b>')+st(2,PL,'Choose <b>Install app</b> or <b>Add to Home Screen</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>Sahm</b> from your Home Screen');
+  }
+  $('stepsAr').innerHTML=ar;$('stepsEn').innerHTML=en;
+  $('instPoint').hidden=!(isIOS&&inSafari);
+  $('instNow').hidden=!installEvt;
+  if(places.length&&isIOS){
+    $('instNote').hidden=false;$('instBackup').hidden=false;
+    $('instNote').innerHTML='عندك '+places.length+' مكان محفوظ في المتصفح. التطبيق على الشاشة الرئيسية له تخزين منفصل، فخذ نسخة احتياطية الحين واسترجعها داخل التطبيق.<div class="en" style="margin-top:6px">You have '+places.length+' saved place'+(places.length===1?'':'s')+' in the browser. The Home Screen app has separate storage, so back them up now and restore them inside the app.</div>';
+    $('instBackup').onclick=()=>$('backup').click();
+  }
+  $('install').hidden=false;
+}
+$('instNow').onclick=async()=>{if(!installEvt)return;installEvt.prompt();try{await installEvt.userChoice}catch(e){}installEvt=null;$('instNow').hidden=true};
+$('go').onclick=()=>{if(!isApp&&!devBypass){showInstall();return}start()};
+
+load();fixGap();addEventListener('resize',fixGap);applyTheme();applyLang();paintStart();seasonTick();moonTick();paintTrack();
+const hh=decodeURIComponent(location.hash.slice(1));const hc=hh&&parseCoord(hh);
+if(hc){let p=places.find(x=>Math.abs(x.lat-hc.lat)<1e-6&&Math.abs(x.lon-hc.lon)<1e-6);if(!p)p=addPlace(T('fromLink'),hc);cur=p.id;save()}
+go('home');
+/* ---------- updates while the app stays open ----------
+   With internet, the phone checks for a new version every 30 min and whenever you come back to the app.
+   A new version downloads in the background and is saved complete before anything changes, so it also opens
+   with no internet. Then a small banner offers «حدّث»; nothing is forced. If you ignore it, the update is
+   applied by itself the next time you come back to the app while it's idle (not guiding, recording or measuring). */
+let updReady=false;
+function busy(){return !!cur||(typeof trk!=='undefined'&&trk.on)||(typeof area!=='undefined'&&area.on)||!!document.querySelector('dialog[open]')}
+function applyUpdate(){location.reload()}
+if('serviceWorker' in navigator){
+  const had=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    const check=()=>{if(navigator.onLine)reg.update().catch(()=>{})};
+    setInterval(check,30*60e3);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible')return;
+      if(updReady&&!busy()){applyUpdate();return}check()});
+  }).catch(()=>{});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!had||updReady)return;updReady=true;$('upd').hidden=false});
+}
+$('updNow').onclick=applyUpdate;
+$('updLater').onclick=()=>{$('upd').hidden=true};
+</script>
+</body>
+</html>
