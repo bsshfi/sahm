@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>سهم</title>
+<title>سهم | Sahm</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="سهم">
+<meta name="apple-mobile-web-app-title" content="سهم | Sahm">
 <meta name="theme-color" content="#f2ece5">
 <script>/* pick the saved theme before the first paint, so the edges never flash another colour */
 try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||matchMedia('(display-mode: standalone)').matches)&&!/[?&]browser\b/.test(location.search)){location.replace('https://sahm.wamdarc.com/'+location.hash)}}catch(e){}
@@ -259,6 +259,19 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 .item button.del.sure{background:var(--bad);color:#fff;border-color:var(--bad)}
 .empty{text-align:center;color:var(--dim);padding:28px 12px;line-height:1.7;background:var(--panel);border:1px dashed var(--line);border-radius:16px}
 .sect{font-size:12px;color:var(--dim);padding:4px 4px 0}
+/* notification rows (iOS-style switches) */
+.nt{padding:0}
+.nrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;min-height:54px}
+.nrow+.nrow{border-top:1px solid var(--line)}
+.nl{font-size:15px;font-weight:600;display:flex;flex-direction:column;gap:2px;text-align:start}
+.nl b{font-weight:600}
+.nl small{font-size:12px;color:var(--dim);font-weight:400;line-height:1.5}
+.nthint{padding:6px 6px 0}
+.switch{position:relative;width:50px;height:30px;border-radius:30px;background:var(--line);border:0;padding:0;flex:none;cursor:pointer;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:inset-inline-start .2s}
+.switch[aria-checked="true"]{background:var(--arrow)}
+.switch[aria-checked="true"]::after{inset-inline-start:23px}
+@media (prefers-reduced-motion:reduce){.switch,.switch::after{transition:none}}
 
 /* settings */
 .group{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
@@ -667,26 +680,17 @@ html.igap main{padding-bottom:62px}
         <div class="seg" data-k="lang"><button data-v="ar">العربية</button><button data-v="en">English</button></div>
       </div>
     </div>
-    <div class="group" id="ntfGroup">
-      <div class="set">
-        <div class="sl" data-t="ntfLbl"></div>
-        <div class="seg" id="ntfSeg"><button data-v="on" data-t="on"></button><button data-v="off" data-t="off"></button></div>
-        <div class="sh" id="ntfHint"></div>
-      </div>
-      <div class="set" id="ntfBk">
-        <div class="sl" data-t="ntfBackupLbl"></div>
-        <div class="seg" data-k="ntfBackup"><button data-v="on" data-t="on"></button><button data-v="off" data-t="off"></button></div>
-        <div class="sh" data-t="ntfBackupHint"></div>
-      </div>
-      <div class="set" id="ntfNw">
-        <div class="sl" data-t="ntfNewsLbl"></div>
-        <div class="seg" data-k="ntfNews"><button data-v="on" data-t="on"></button><button data-v="off" data-t="off"></button></div>
-      </div>
+    <div class="sect" data-t="ntfLbl"></div>
+    <div class="group nt" id="ntfGroup">
+      <div class="nrow"><span class="nl" data-t="ntfOnLbl"></span><button class="switch" id="ntfSw" role="switch" aria-checked="false"></button></div>
+      <div class="nrow" id="ntfBk"><span class="nl"><b data-t="ntfBackupLbl"></b><small data-t="ntfBackupHint"></small></span><button class="switch" data-n="ntfBackup" role="switch"></button></div>
+      <div class="nrow" id="ntfSs"><span class="nl"><b data-t="ntfSeasonsLbl"></b><small data-t="ntfSeasonsHint"></small></span><button class="switch" data-n="ntfSeasons" role="switch"></button></div>
     </div>
+    <div class="sh nthint" id="ntfHint"></div>
     <div class="group">
       <button class="link" id="share"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span data-t="share"></span><i class="chev"></i></button>
       <button class="link" id="aboutBtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span data-t="about"></span><i class="chev"></i></button>
-      <div class="link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg><span data-t="version"></span><span class="v">Ver 2.3</span></div>
+      <div class="link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg><span data-t="version"></span><span class="v">Ver 2.5</span></div>
     </div>
   </section>
 </main>
@@ -811,7 +815,7 @@ html.igap main{padding-bottom:62px}
   <p data-t="blurb"></p>
   <p data-t="blurb2"></p>
   <a class="wamdc" href="https://wamdarc.com" target="_blank" rel="noopener" dir="ltr"><svg class="wamd" viewBox="-4 137.1 560.7 221.9" role="img" aria-label="WAMD ARC"><defs><linearGradient id="wag" x1="0" y1="0" x2="352" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity=".3"/><stop offset=".5" stop-color="currentColor" stop-opacity=".85"/><stop offset="1" stop-color="currentColor"/></linearGradient></defs><g transform="translate(129.9 152.9) scale(0.62)"><path d="M 6 176 Q 100 26 352 22 L 352 36 Q 112 46 6 176 Z" fill="url(#wag)"/><path d="M 378 -19 Q 387 20 426 29 Q 387 38 378 77 Q 369 38 330 29 Q 369 20 378 -19 Z" fill="#FF5A1F"/></g><path d="M29.31 355L20.90 355L2.51 300L10.61 300L25.46 344.71L40.94 300L48.16 300L63.33 344.94L78.49 300L85.96 300L67.57 355L59.32 355L44.31 311.08L29.31 355ZM109.06 355L100.96 355L125.87 300L133.65 300L158.64 355L150.39 355L144.34 341.25L115.11 341.25L109.06 355ZM117.86 334.96L141.59 334.96L129.72 308.01L117.86 334.96ZM186.92 355L179.38 355L179.38 300L185.82 300L208.76 338.66L231.39 300L237.84 300L237.91 355L230.37 355L230.29 314.93L210.41 348.32L206.80 348.32L186.92 315.16L186.92 355ZM290.16 355L266.99 355L266.99 300L290.16 300Q298.96 300 305.68 303.46Q312.40 306.91 316.13 313.12Q319.86 319.33 319.86 327.50L319.86 327.50Q319.86 335.67 316.13 341.88Q312.40 348.09 305.68 351.54Q298.96 355 290.16 355L290.16 355ZM274.84 306.84L274.84 348.16L289.69 348.16Q296.53 348.16 301.52 345.57Q306.51 342.98 309.26 338.30Q312.01 333.63 312.01 327.50L312.01 327.50Q312.01 321.29 309.26 316.66Q306.51 312.02 301.52 309.43Q296.53 306.84 289.69 306.84L289.69 306.84L274.84 306.84ZM364.02 355L359.70 355L385 300L389.01 300L414.31 355L409.99 355L402.91 339.52L371.01 339.52L364.02 355ZM372.59 336.14L401.42 336.14L386.96 304.40L372.59 336.14ZM440.86 355L436.86 355L436.86 300L456.58 300Q463.49 300 468.44 302.20Q473.39 304.40 476.06 308.52Q478.74 312.65 478.74 318.54L478.74 318.54Q478.74 324.28 476.06 328.40Q473.39 332.53 468.44 334.73L468.44 334.73Q467.19 335.36 465.85 335.75L465.85 335.75L479.60 355L475.04 355L461.92 336.61Q459.41 337.01 456.58 337.01L456.58 337.01L440.86 337.01L440.86 355ZM440.86 303.61L440.86 333.47L456.58 333.47Q465.46 333.47 470.05 329.54Q474.65 325.61 474.65 318.54L474.65 318.54Q474.65 311.39 470.05 307.50Q465.46 303.61 456.58 303.61L456.58 303.61L440.86 303.61ZM529.26 355.39L529.26 355.39Q523.13 355.39 517.90 353.31Q512.68 351.23 508.83 347.46Q504.98 343.69 502.86 338.62Q500.74 333.55 500.74 327.50L500.74 327.50Q500.74 321.45 502.86 316.38Q504.98 311.31 508.87 307.54Q512.76 303.77 517.94 301.69Q523.13 299.61 529.26 299.61L529.26 299.61Q535.07 299.61 540.14 301.49Q545.21 303.38 548.82 307.23L548.82 307.23L546.31 309.82Q542.77 306.36 538.49 304.83Q534.21 303.30 529.41 303.30L529.41 303.30Q524.15 303.30 519.63 305.11Q515.11 306.91 511.77 310.21Q508.44 313.51 506.59 317.91Q504.74 322.31 504.74 327.50L504.74 327.50Q504.74 332.69 506.59 337.09Q508.44 341.49 511.77 344.79Q515.11 348.09 519.63 349.89Q524.15 351.70 529.41 351.70L529.41 351.70Q534.21 351.70 538.49 350.17Q542.77 348.64 546.31 345.10L546.31 345.10L548.82 347.69Q545.21 351.54 540.14 353.47Q535.07 355.39 529.26 355.39Z" fill="currentColor"/></svg><span>wamdarc.com</span></a>
-  <div class="vpill"><span data-t="verLbl"></span> 2.3</div>
+  <div class="vpill"><span data-t="verLbl"></span> 2.5</div>
   <div class="aend" data-t="aboutEnd"></div>
   <div class="row"><button id="aClose" data-t="close"></button></div>
 </dialog>
@@ -870,7 +874,7 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  restoreErr:'ما لقيت أماكن في النص. تأكد إنك لصقت النسخة الاحتياطية كاملة.',restored:(a,s)=>'تم استرجاع '+a+' مكان'+(s?' · '+s+' موجود مسبقاً':''),
  copied:'تم النسخ',canceled:'تم إلغاء التوجيه',waitGps:'بانتظار GPS',noPlaces:'ما فيه أماكن محفوظة',place:'مكان',fromLink:'من رابط',backupTitle:'سهم — أماكني',
  arriveLbl:'مسافة «وصلت»',arriveHint:'10 م مناسبة لو تدور على سيارة أو خيمة.',fmtLbl:'صيغة الإحداثيات',fmtHint:'للعرض والنسخ. النسخة الاحتياطية تبقى عشرية دائماً.',
- themeLbl:'نمط المظهر',light:'فاتح',dark:'مظلم',langLbl:'اللغة',share:'مشاركة التطبيق',about:'حول التطبيق',version:'نسخة التطبيق',ntfLbl:'الإشعارات',ntfBackupLbl:'تذكير بالنسخة الاحتياطية',ntfBackupHint:'تذكير شهري بحفظ نسخة من أماكنك المفضلة.',ntfNewsLbl:'الأخبار والتحديثات والمعايدات',ntfOnHint:'الإشعارات مفعّلة.',ntfOffHint:'فعّلها ليصلك تذكير بالنسخة الاحتياطية وأخبار التحديثات.',ntfNeedApp:'أضف سهم إلى الشاشة الرئيسية وافتحه من أيقونته لتفعيل الإشعارات.',ntfUnsup:'هذا الجهاز لا يدعم الإشعارات.',ntfBlocked:'الإشعارات مرفوضة. فعّلها من إعدادات الجوال ← الإشعارات ← سهم.',ntfDone:'تم تفعيل الإشعارات',ntfOffT:'أُوقفت الإشعارات',ntfDeny:'لم يُسمح بالإشعارات',ntfFail:'تعذّر الاتصال بخادم الإشعارات',ntfAskT:'فعّل إشعارات سهم',ntfAskS:'نذكّرك بحفظ نسخة احتياطية من أماكنك حتى لا تضيع، ونبلغك بالتحديثات الجديدة.',ntfAllow:'السماح بالإشعارات',ntfLater:'لاحقاً',
+ themeLbl:'نمط المظهر',light:'فاتح',dark:'مظلم',langLbl:'اللغة',share:'مشاركة التطبيق',about:'حول التطبيق',version:'نسخة التطبيق',ntfLbl:'الإشعارات',ntfOnLbl:'تفعيل الإشعارات',ntfSeasonsLbl:'دخول المواسم والطوالع',ntfSeasonsHint:'الساعة 8 صباحاً يوم دخول كل طالع، مع الحرارة المعتادة.',ntfBackupLbl:'تذكير بالنسخة الاحتياطية',ntfBackupHint:'كل شهر الساعة 8:45 مساءً، إذا عندك أماكن محفوظة.',ntfOnHint:'الإشعارات بنغمة جوالك الافتراضية.',ntfOffHint:'فعّلها ليصلك تذكير بالنسخة الاحتياطية ودخول المواسم.',ntfNeedApp:'أضف سهم إلى الشاشة الرئيسية وافتحه من أيقونته لتفعيل الإشعارات.',ntfUnsup:'هذا الجهاز لا يدعم الإشعارات.',ntfBlocked:'الإشعارات مرفوضة. فعّلها من إعدادات الجوال ← الإشعارات ← سهم.',ntfDone:'تم تفعيل الإشعارات',ntfOffT:'أُوقفت الإشعارات',ntfDeny:'لم يُسمح بالإشعارات',ntfFail:'تعذّر الاتصال بخادم الإشعارات',ntfAskT:'فعّل إشعارات سهم',ntfAskS:'نذكّرك بحفظ نسخة احتياطية من أماكنك حتى لا تضيع، ونبلغك بدخول المواسم والطوالع.',ntfAllow:'السماح بالإشعارات',ntfLater:'لاحقاً',
  shareText:'🏹 سهم | Sahm\nوجهتك بسهم واحد.\nاحفظ موقعك، أو أدخل الإحداثيات، واتبع السهم حتى تصل. بدون خرائط، وبدون إنترنت.\n📍 وجهة واضحة. طريق أبسط.\nجرّبه:',linkCopied:'تم نسخ رابط التطبيق',
  tagline:'وجهتك بسهم واحد.',aboutSub:'فكرة بسيطة. وصول مباشر.',
  blurb:'يمنحك سهم طريقة مختلفة للوصول إلى الأماكن؛ احفظ موقعًا تريد العودة إليه، أو أدخل إحداثيات وجهتك، واتبع اتجاه السهم واعرف المسافة المتبقية حتى تصل.',
@@ -931,7 +935,7 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  restoreErr:'No places found in the text. Make sure you pasted the whole backup.',restored:(a,s)=>'Restored '+a+' place'+(a===1?'':'s')+(s?' · '+s+' already saved':''),
  copied:'Copied',canceled:'Guiding stopped',waitGps:'Waiting for GPS',noPlaces:'No saved places',place:'Place',fromLink:'From link',backupTitle:'Sahm — my places',
  arriveLbl:'"Arrived" distance',arriveHint:'10 m works well when looking for a car or a tent.',fmtLbl:'Coordinate format',fmtHint:'For display and copying. Backups always stay decimal.',
- themeLbl:'Appearance',light:'Light',dark:'Dark',langLbl:'Language',share:'Share the app',about:'About',version:'App version',ntfLbl:'Notifications',ntfBackupLbl:'Backup reminder',ntfBackupHint:'A monthly reminder to save a copy of your places.',ntfNewsLbl:'News, updates and greetings',ntfOnHint:'Notifications are on.',ntfOffHint:'Turn on to get backup reminders and update news.',ntfNeedApp:'Add Sahm to your Home Screen and open it from its icon to turn on notifications.',ntfUnsup:'This device does not support notifications.',ntfBlocked:'Notifications are blocked. Allow them in Settings, Notifications, Sahm.',ntfDone:'Notifications are on',ntfOffT:'Notifications turned off',ntfDeny:'Notifications were not allowed',ntfFail:'Could not reach the notification server',ntfAskT:'Turn on Sahm notifications',ntfAskS:'We will remind you to back up your places so they are never lost, and tell you about new updates.',ntfAllow:'Allow notifications',ntfLater:'Later',
+ themeLbl:'Appearance',light:'Light',dark:'Dark',langLbl:'Language',share:'Share the app',about:'About',version:'App version',ntfLbl:'Notifications',ntfOnLbl:'Turn on notifications',ntfSeasonsLbl:'Seasons and stars',ntfSeasonsHint:'8 AM on the day each star rises, with typical temperatures.',ntfBackupLbl:'Backup reminder',ntfBackupHint:'Monthly at 8:45 PM, when you have saved places.',ntfOnHint:'Notifications use your phone’s default sound.',ntfOffHint:'Turn on to get backup reminders and season alerts.',ntfNeedApp:'Add Sahm to your Home Screen and open it from its icon to turn on notifications.',ntfUnsup:'This device does not support notifications.',ntfBlocked:'Notifications are blocked. Allow them in Settings, Notifications, Sahm.',ntfDone:'Notifications are on',ntfOffT:'Notifications turned off',ntfDeny:'Notifications were not allowed',ntfFail:'Could not reach the notification server',ntfAskT:'Turn on Sahm notifications',ntfAskS:'We will remind you to back up your places so they are never lost, and tell you when each season begins.',ntfAllow:'Allow notifications',ntfLater:'Later',
  shareText:'🏹 Sahm | سهم\nYour destination, one arrow.\nSave your spot or enter coordinates, then follow the arrow until you arrive. No maps, no internet.\n📍 A clear destination. A simpler way.\nTry it:',linkCopied:'App link copied',
  tagline:'Your destination, one arrow.',aboutSub:'A simple idea. A direct way there.',
  blurb:'Sahm gives you a different way to reach places: save a spot you want to come back to, or enter your destination’s coordinates, then follow the arrow and watch the distance left until you arrive.',
@@ -974,9 +978,10 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  months:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']}};
 
 /* ---------- settings store ---------- */
-const cfg={arrive:2,fmt:'dec',theme:'light',lang:'ar',eco:'off',sort:'near',ntfOn:false,ntfNews:'on',ntfBackup:'on',lastBackup:null,since:null};
+const cfg={arrive:2,fmt:'dec',theme:'light',lang:'ar',eco:'off',sort:'near',ntfOn:false,ntfBackup:'on',ntfSeasons:'on',lastBackup:null,since:null};
 try{Object.assign(cfg,JSON.parse(localStorage.getItem('sahm.set')||'{}'))}catch(e){}
-delete cfg.sound;delete cfg.undefined;if(!['near','new'].includes(cfg.sort))cfg.sort='near';
+delete cfg.sound;delete cfg.undefined;delete cfg.ntfNews;
+if(cfg.ntfSeasonsV!==1){cfg.ntfSeasons='on';cfg.ntfSeasonsV=1} // seasons alert is on by default from 2.5if(!['near','new'].includes(cfg.sort))cfg.sort='near';
 if(!cfg.since)cfg.since=Date.now();
 function saveCfg(){try{localStorage.setItem('sahm.set',JSON.stringify(cfg))}catch(e){}pushSync()}
 const T=k=>(L[cfg.lang]||L.ar)[k];
@@ -1628,20 +1633,22 @@ $('aClose').onclick=()=>$('dlgAbout').close();
 
 /* ---------- notifications (shared wamd-push.js, same server as Falaq and Khuta) ---------- */
 var P=window.WamdPush; // var (not const): settings code may run before this line
-const sahmCfg=()=>({tz:P.tz(),lang:cfg.lang,prefs:{news:cfg.ntfNews!=='off',backup:cfg.ntfBackup!=='off'},count:places.length,lastBackup:cfg.lastBackup,since:cfg.since});
+const sahmCfg=()=>({tz:P.tz(),lang:cfg.lang,prefs:{backup:cfg.ntfBackup!=='off',seasons:cfg.ntfSeasons==='on'},count:places.length,lastBackup:cfg.lastBackup,since:cfg.since});
 function pushSync(){try{if(!cfg.ntfOn||!P||P.status()!=='granted')return;P.sync('sahm',sahmCfg)}catch(e){}}
 function paintNtf(){if(!P)return;const st=P.status(),on=cfg.ntfOn&&st==='granted';
-  $$('#ntfSeg button').forEach(b=>b.classList.toggle('on',(b.dataset.v==='on')===on));
-  $('ntfBk').hidden=$('ntfNw').hidden=!on;
+  $('ntfSw').setAttribute('aria-checked',on);
+  $('ntfBk').hidden=$('ntfSs').hidden=!on;
+  $$('#ntfGroup .switch[data-n]').forEach(b=>b.setAttribute('aria-checked',cfg[b.dataset.n]==='on'));
   $('ntfHint').textContent=T(st==='needInstall'?'ntfNeedApp':st==='unsupported'?'ntfUnsup':st==='blocked'?'ntfBlocked':on?'ntfOnHint':'ntfOffHint')}
+$$('#ntfGroup .switch[data-n]').forEach(b=>b.onclick=()=>{const k=b.dataset.n;cfg[k]=cfg[k]==='on'?'off':'on';saveCfg();paintNtf()});
 function ntfEnable(){const ask=P.request(); // must run inside the tap
   return ask.then(r=>{if(r!=='granted'){toast(T('ntfDeny'));return}
     return P.subscribe('sahm',sahmCfg(),true).then(()=>{cfg.ntfOn=true;saveCfg();toast(T('ntfDone'))})})
   .catch(()=>toast(T('ntfFail'))).then(paintNtf)}
-$$('#ntfSeg button').forEach(b=>b.onclick=()=>{const st=P.status();
+$('ntfSw').onclick=()=>{const st=P.status();
   if(st==='needInstall'||st==='unsupported'||st==='blocked'){toast(T(st==='needInstall'?'ntfNeedApp':st==='unsupported'?'ntfUnsup':'ntfBlocked'));return}
-  if(b.dataset.v==='on'){if(!(cfg.ntfOn&&st==='granted'))ntfEnable()}
-  else if(cfg.ntfOn){cfg.ntfOn=false;saveCfg();P.unsubscribe();toast(T('ntfOffT'));paintNtf()}});
+  if(!(cfg.ntfOn&&st==='granted'))ntfEnable();
+  else{cfg.ntfOn=false;saveCfg();P.unsubscribe();toast(T('ntfOffT'));paintNtf()}};
 function maybeAskNtf(){if(!P||!isApp||cfg.ntfOn||!P.shouldAsk(cfg))return;
   setTimeout(()=>{if(document.querySelector('dialog[open]'))return;$('dlgNtf').showModal()},1600)}
 $('ntfAllow').onclick=()=>{P.markAsked(cfg);saveCfg();$('dlgNtf').close();ntfEnable()};
