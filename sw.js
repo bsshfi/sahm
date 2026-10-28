@@ -1,8 +1,8 @@
 // Network first so updates arrive, but give up after 2.5 s and open the saved copy
 // (so a weak signal never leaves you waiting). No network at all → saved copy immediately.
 // Only the app's own files go through here; place-name and weather requests are left alone.
-const C='sahm-2.2';
-const FILES=['./','index.html','manifest.json','icon.png','icon-180.png','logo.png','moon.png','plex-ar-400.woff2','plex-ar-700.woff2','plex-la-400.woff2','plex-la-700.woff2'];
+const C='sahm-2.3';
+const FILES=['./','index.html','manifest.json','wamd-push.js','icon.png','icon-180.png','logo.png','moon.png','plex-ar-400.woff2','plex-ar-700.woff2','plex-la-400.woff2','plex-la-700.woff2'];
 const WAIT=2500;
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(FILES)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))));self.clients.claim()});
@@ -18,3 +18,10 @@ self.addEventListener('fetch',e=>{
     return Promise.race([net.catch(()=>cached),timeout]); // late network reply still refreshes the cache
   })());
 });
+
+/* Notifications (backup reminders, updates, greetings) — shown with the phone's default sound */
+self.addEventListener('push',e=>{let d={};try{d=e.data?e.data.json():{}}catch(x){d={body:e.data?e.data.text():''}}
+  const ar=d.lang!=='en';
+  e.waitUntil(self.registration.showNotification(d.title||(ar?'سهم':'Sahm'),{body:d.body||'',tag:d.tag||'sahm',lang:ar?'ar':'en',dir:ar?'rtl':'ltr',icon:'icon-180.png',badge:'icon-180.png',data:{url:'./'}}))});
+self.addEventListener('notificationclick',e=>{e.notification.close();
+  e.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(l=>{for(const c of l)if('focus' in c)return c.focus();return self.clients.openWindow('./')}))});
