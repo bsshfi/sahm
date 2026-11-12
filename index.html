@@ -13,7 +13,7 @@ try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||ma
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.1">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.2">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -658,6 +658,45 @@ dialog{background:rgba(253,251,248,.94);border-radius:28px;border:1px solid rgba
 .stage{padding-bottom:6px}
 html.app main,main{padding-bottom:calc(env(safe-area-inset-bottom) + 86px)}
 html.igap main{padding-bottom:88px}
+
+/* ===== 3.2 ===== */
+.gcomp{cursor:pointer}
+.starbtn{position:absolute;bottom:4%;inset-inline-start:2%;z-index:2;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:15px;
+  background:var(--panel);border:1px solid var(--line);box-shadow:0 4px 12px var(--gsh);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.wlayer{position:absolute;inset:0;width:100%;height:100%}
+.qline{font-size:12.5px;color:var(--dim);text-align:center;margin-top:3px;min-height:18px;line-height:1.4;padding:0 6px}
+.qline.warn{color:var(--bad);font-weight:600}
+.qline.inl{margin:0 0 10px;padding:8px 10px;border-radius:12px;background:var(--badBg);color:var(--bad);font-weight:600}
+.nightb{flex:none;font-weight:600}
+.camprow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ptbtn{display:flex;align-items:center;gap:10px;justify-content:flex-start;padding:9px 12px;border-radius:18px;text-align:start;
+  background:linear-gradient(270deg,#f08b2c,#feae47);color:#fff;border:0;box-shadow:0 8px 18px rgba(240,139,44,.28);min-width:0}
+[dir=ltr] .ptbtn{background:linear-gradient(90deg,#f08b2c,#feae47)}
+.ptbtn.pinned{background:var(--panel);color:var(--fg);border:1px solid var(--line);box-shadow:0 6px 16px var(--gsh);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.ptbtn .pe{font-size:22px;line-height:1;flex:none}
+.ptbtn .pt{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.ptbtn b{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptbtn small{font-family:var(--num);font-size:13px;color:var(--arrow);font-weight:700;direction:ltr;text-align:start}
+.ptbtn small:empty{display:none}
+:root[data-theme="red"] .ptbtn{background:var(--arrow);color:var(--onArrow)}
+:root[data-theme="red"] .ptbtn.pinned{background:var(--panel);color:var(--fg)}
+.pt-dlg,.star-dlg{text-align:center}
+.ptacts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.ptacts button{width:100%;padding:12px;font-size:15px;border-radius:14px}
+.ptacts .danger.sure{background:var(--bad);color:#fff}
+.lkic{font-size:34px}.lkc{font-family:var(--num);font-size:15px;color:var(--dim);margin-top:2px}
+.lkweb{margin-top:12px;padding:10px;border-radius:12px;background:var(--panel2)}
+.slist{display:flex;flex-direction:column;gap:8px;text-align:start}
+.srow2{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;background:var(--panel2);opacity:.72}
+.srow2.up{opacity:1}
+.srow2 .se{font-size:22px;width:28px;text-align:center;flex:none}
+.srow2 .sx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.srow2 b{font-size:14.5px}.srow2 small{font-size:11.5px;color:var(--dim)}
+.srow2 .sd{color:var(--fg);font-family:var(--ui)}
+.srow2 button{padding:8px 12px;font-size:13px;border-radius:12px;flex:none}
+/* winter: cooler sky and sand */
+:root.winter[data-theme="light"]{--sky1:#6b93bd;--sky2:#b2c7da;--haze:#dfe4ea;--sand:#eef0f0;--sand2:#e8ebec;--r1:#c2ccd6;--r2:#d2d6da;--r3:#dde1e4;--r4:#e6e9eb}
+:root.winter[data-theme="dark"]{--sky1:#0a1424;--sky2:#172640;--haze:#22304a}
 </style>
 </head>
 <body>
@@ -702,8 +741,9 @@ html.igap main{padding-bottom:88px}
       <div class="upd" id="moveBar" hidden><span>📦 <span data-t="mvBar"></span></span><button class="primary" id="mvMore" data-t="mvMore"></button><button id="mvHide" aria-label="close">✕</button></div>
       <div class="sunwarn" id="sunWarn" hidden></div>
       <div class="hcomp">
-        <div class="gcomp"><i class="gtip"></i><div class="grose" id="homeRose"><svg viewBox="0 0 200 200" id="homeRoseSvg"></svg></div><div class="ginner"></div><div class="gneedle"><svg viewBox="0 0 100 100"><path d="M50 6 L72 70 L50 58Z" fill="#e0670c"/><path d="M50 6 L28 70 L50 58Z" fill="#ff9a3c"/><path d="M28 70 L50 58 L72 70 L50 64Z" fill="#fff"/></svg></div></div>
+        <div class="gcomp" id="homeComp" role="button" tabindex="0"><span class="starbtn" aria-hidden="true">✨</span><i class="gtip"></i><div class="grose" id="homeRose"><svg viewBox="0 0 200 200" id="homeRoseSvg"></svg><svg viewBox="0 0 200 200" class="wlayer" id="windLayer"></svg></div><div class="ginner"></div><div class="gneedle"><svg viewBox="0 0 100 100"><path d="M50 6 L72 70 L50 58Z" fill="#e0670c"/><path d="M50 6 L28 70 L50 58Z" fill="#ff9a3c"/><path d="M28 70 L50 58 L72 70 L50 64Z" fill="#fff"/></svg></div></div>
         <div class="hdir"><b id="hdName">--</b><span id="hdDeg"></span></div>
+        <div class="qline" id="qline" hidden></div>
       </div>
       <div class="gstats gl">
         <div><small data-t="accuracy"></small><b id="hAcc">--</b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
@@ -712,12 +752,16 @@ html.igap main{padding-bottom:88px}
         <b id="hSpd" hidden></b>
       </div>
       <div class="gstrip gl" id="seasonCard" role="button" tabindex="0">
-        <div class="r"><span class="place">📍 <b id="placeName">--</b></span><span class="wxb" id="wxRow" hidden><span id="wxTxt"></span></span></div>
+        <div class="r"><span class="place">📍 <b id="placeName">--</b></span><span class="wxb" id="wxRow" hidden><span id="wxTxt"></span></span><span class="nightb" id="nightTxt" hidden></span></div>
         <div class="r2"><span>🌅 <b class="n" id="sunR">--</b></span><span>🌇 <b class="n" id="sunS">--</b></span><i class="sep"></i><span id="msEmoji">🍂</span><b id="msName">--</b><span class="lft"><b class="n" id="msLeft">--</b> <span id="msLeftLbl"></span></span><span class="bar" hidden><i id="msBar"></i></span><i class="sep"></i><span>⭐ <b id="tlName">--</b></span></div>
         <div hidden><span id="windTxt"></span><span id="msRange"></span><span id="fsEmoji"></span><b id="fsName"></b><small id="fsLeft"></small><small id="tlLeft"></small><b id="tlTemp"></b><small id="tlAvg"></small><div id="msNext"></div></div>
       </div>
-      <button class="primary big" id="setStart"><span data-t="setStart"></span><i class="chev"></i></button>
-      <div class="startrow" id="startBox" hidden>
+      <div class="camprow">
+        <button class="ptbtn" id="campBtn" type="button"><span class="pe">⛺</span><span class="pt"><b id="campLbl"></b><small id="campDist"></small></span></button>
+        <button class="ptbtn" id="carBtn" type="button"><span class="pe">🚙</span><span class="pt"><b id="carLbl"></b><small id="carDist"></small></span></button>
+      </div>
+      <div hidden><button id="setStart"></button></div>
+      <div class="startrow" id="startBox" hidden style="display:none!important">
         <button class="primary big" id="goStart"><span data-t="goStart"></span> <span id="startDist"></span></button>
         <button class="sq" id="resetStart" aria-label="remove"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </div>
@@ -784,6 +828,15 @@ html.igap main{padding-bottom:88px}
         <div class="sh" data-t="ecoHint"></div>
       </div>
       <div class="set">
+        <div class="sl" data-t="ntfLbl"></div>
+        <div class="seg" id="ntfSeg"><button data-v="on" data-t="on"></button><button data-v="off" data-t="off"></button></div>
+        <div class="sh" id="ntfNote"></div>
+      </div>
+      <div class="set">
+        <div class="sl" data-t="northLbl"></div>
+        <div class="sh" data-t="northHint"></div>
+      </div>
+      <div class="set">
         <div class="sl" data-t="langLbl"></div>
         <div class="seg" data-k="lang"><button data-v="ar">العربية</button><button data-v="en">English</button></div>
       </div>
@@ -791,7 +844,7 @@ html.igap main{padding-bottom:88px}
     <div class="group">
       <button class="link" id="share"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span data-t="share"></span><i class="chev"></i></button>
       <button class="link" id="aboutBtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span data-t="about"></span><i class="chev"></i></button>
-      <div class="link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg><span data-t="version"></span><span class="v">Ver 3.1</span></div>
+      <div class="link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg><span data-t="version"></span><span class="v">Ver 3.2</span></div>
     </div>
   </section>
 </main>
@@ -872,6 +925,37 @@ html.igap main{padding-bottom:88px}
   <p class="mvnote" data-t="mvNote"></p>
   <div class="row"><button id="mvClose" data-t="close"></button></div>
 </dialog>
+<dialog id="dlgStars" class="star-dlg">
+  <h3 data-t="stTitle"></h3>
+  <div class="qline inl" id="stWarn" hidden></div>
+  <div class="slist" id="starList"></div>
+  <div class="sh" data-t="stNote"></div>
+  <div class="row"><button id="stClose" data-t="close"></button></div>
+</dialog>
+<dialog id="dlgPt" class="pt-dlg">
+  <h3 id="ptTitle"></h3>
+  <div class="sh" id="ptSub"></div>
+  <div class="ptacts">
+    <button class="primary" id="ptGo"></button>
+    <button id="ptShare" data-t="ptShare"></button>
+    <button id="ptHere" data-t="ptHere"></button>
+    <button class="danger" id="ptDel" data-t="ptDel"></button>
+  </div>
+  <div class="row"><button id="ptClose" data-t="close"></button></div>
+</dialog>
+<dialog id="dlgLink" class="pt-dlg">
+  <div class="lkic">📍</div>
+  <div class="sh" data-t="lkGot"></div>
+  <h3 id="lkName"></h3>
+  <div class="lkc" id="lkCoord" dir="ltr"></div>
+  <div class="sh" id="lkDist"></div>
+  <div class="ptacts">
+    <button class="primary" id="lkGo" data-t="lkGo"></button>
+    <button id="lkSave" data-t="lkSave"></button>
+  </div>
+  <div class="sh lkweb" id="lkWeb" data-t="lkWeb" hidden></div>
+  <div class="row"><button id="lkClose" data-t="close"></button></div>
+</dialog>
 <dialog id="dlgSos" class="sos-dlg">
   <h3 data-t="sosTitle"></h3>
   <div class="sosbig" id="sosCoords">--</div>
@@ -910,7 +994,7 @@ html.igap main{padding-bottom:88px}
   <p data-t="blurb"></p>
   <p data-t="blurb2"></p>
   <a class="wamdc" href="https://wamdarc.com" target="_blank" rel="noopener" dir="ltr"><svg class="wamd" viewBox="-4 137.1 560.7 221.9" role="img" aria-label="WAMD ARC"><defs><linearGradient id="wag" x1="0" y1="0" x2="352" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity=".3"/><stop offset=".5" stop-color="currentColor" stop-opacity=".85"/><stop offset="1" stop-color="currentColor"/></linearGradient></defs><g transform="translate(129.9 152.9) scale(0.62)"><path d="M 6 176 Q 100 26 352 22 L 352 36 Q 112 46 6 176 Z" fill="url(#wag)"/><path d="M 378 -19 Q 387 20 426 29 Q 387 38 378 77 Q 369 38 330 29 Q 369 20 378 -19 Z" fill="#FF5A1F"/></g><path d="M29.31 355L20.90 355L2.51 300L10.61 300L25.46 344.71L40.94 300L48.16 300L63.33 344.94L78.49 300L85.96 300L67.57 355L59.32 355L44.31 311.08L29.31 355ZM109.06 355L100.96 355L125.87 300L133.65 300L158.64 355L150.39 355L144.34 341.25L115.11 341.25L109.06 355ZM117.86 334.96L141.59 334.96L129.72 308.01L117.86 334.96ZM186.92 355L179.38 355L179.38 300L185.82 300L208.76 338.66L231.39 300L237.84 300L237.91 355L230.37 355L230.29 314.93L210.41 348.32L206.80 348.32L186.92 315.16L186.92 355ZM290.16 355L266.99 355L266.99 300L290.16 300Q298.96 300 305.68 303.46Q312.40 306.91 316.13 313.12Q319.86 319.33 319.86 327.50L319.86 327.50Q319.86 335.67 316.13 341.88Q312.40 348.09 305.68 351.54Q298.96 355 290.16 355L290.16 355ZM274.84 306.84L274.84 348.16L289.69 348.16Q296.53 348.16 301.52 345.57Q306.51 342.98 309.26 338.30Q312.01 333.63 312.01 327.50L312.01 327.50Q312.01 321.29 309.26 316.66Q306.51 312.02 301.52 309.43Q296.53 306.84 289.69 306.84L289.69 306.84L274.84 306.84ZM364.02 355L359.70 355L385 300L389.01 300L414.31 355L409.99 355L402.91 339.52L371.01 339.52L364.02 355ZM372.59 336.14L401.42 336.14L386.96 304.40L372.59 336.14ZM440.86 355L436.86 355L436.86 300L456.58 300Q463.49 300 468.44 302.20Q473.39 304.40 476.06 308.52Q478.74 312.65 478.74 318.54L478.74 318.54Q478.74 324.28 476.06 328.40Q473.39 332.53 468.44 334.73L468.44 334.73Q467.19 335.36 465.85 335.75L465.85 335.75L479.60 355L475.04 355L461.92 336.61Q459.41 337.01 456.58 337.01L456.58 337.01L440.86 337.01L440.86 355ZM440.86 303.61L440.86 333.47L456.58 333.47Q465.46 333.47 470.05 329.54Q474.65 325.61 474.65 318.54L474.65 318.54Q474.65 311.39 470.05 307.50Q465.46 303.61 456.58 303.61L456.58 303.61L440.86 303.61ZM529.26 355.39L529.26 355.39Q523.13 355.39 517.90 353.31Q512.68 351.23 508.83 347.46Q504.98 343.69 502.86 338.62Q500.74 333.55 500.74 327.50L500.74 327.50Q500.74 321.45 502.86 316.38Q504.98 311.31 508.87 307.54Q512.76 303.77 517.94 301.69Q523.13 299.61 529.26 299.61L529.26 299.61Q535.07 299.61 540.14 301.49Q545.21 303.38 548.82 307.23L548.82 307.23L546.31 309.82Q542.77 306.36 538.49 304.83Q534.21 303.30 529.41 303.30L529.41 303.30Q524.15 303.30 519.63 305.11Q515.11 306.91 511.77 310.21Q508.44 313.51 506.59 317.91Q504.74 322.31 504.74 327.50L504.74 327.50Q504.74 332.69 506.59 337.09Q508.44 341.49 511.77 344.79Q515.11 348.09 519.63 349.89Q524.15 351.70 529.41 351.70L529.41 351.70Q534.21 351.70 538.49 350.17Q542.77 348.64 546.31 345.10L546.31 345.10L548.82 347.69Q545.21 351.54 540.14 353.47Q535.07 355.39 529.26 355.39Z" fill="currentColor"/></svg><span>wamdarc.com</span></a>
-  <div class="vpill"><span data-t="verLbl"></span> 3.1</div>
+  <div class="vpill"><span data-t="verLbl"></span> 3.2</div>
   <div class="aend" data-t="aboutEnd"></div>
   <div class="row"><button id="aClose" data-t="close"></button></div>
 </dialog>
@@ -955,7 +1039,7 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  yourLoc:'موقعك الحالي',coordsTap:'الإحداثيات · اضغط للنسخ',copyCoords:'نسخ الإحداثيات',accuracy:'الدقة',altitude:'الارتفاع',speed:'السرعة',
  saveHere:'احفظ موقعي',addCoord:'أضف إحداثيات',cancelNav:'إلغاء التوجيه',arrived:'وصلت',
  wWeakMove:'الإشارة ضعيفة، تحرك لمكان مكشوف',wApprox:'الإشارة ضعيفة، المسافة تقريبية',wStop:'توقفت قراءات GPS',sRed:'انتظر قبل حفظ الموقع',sOrange:'قريب… انتظر ثواني',sComp:'الـGPS جاهز، بس البوصلة ضعيفة',sGreen:'احفظ موقعك الآن',sInfo:(n,a)=>'متوسط '+n+' قراءة · دقة GPS <bdi dir="ltr">±'+a+'</bdi> م',
- wComp:'البوصلة غير دقيقة هنا: ابتعد عن الحديد والأجهزة وحرّك الجوال على شكل 8',wMove:'بدون بوصلة: الاتجاه من حركتك',wNorth:'البوصلة غير مفعلة، السهم بالنسبة للشمال',
+ wComp:'البوصلة ضعيفة هنا: لف الجوال على شكل 8 وأبعده عن الحديد والسيارة',wMove:'بدون بوصلة: الاتجاه من حركتك',wNorth:'البوصلة غير مفعلة، السهم بالنسبة للشمال',
  dirs:['شمال','شمال شرق','شرق','جنوب شرق','جنوب','جنوب غرب','غرب','شمال غرب'],m:'م',km:'كم',
  navTo:'التوجه إلى',qiblaHead:'اتجاه القبلة',kaaba:'الكعبة المشرفة',
  empty:'ما عندك أماكن محفوظة.<br>احفظ موقعك أو أضف إحداثيات.',go:'توجّه',copy:'نسخ',del:'حذف',sure:'تأكيد؟',
@@ -979,12 +1063,30 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  wind:'رياح',kmh:'كم/س',agoMin:n=>'قبل '+n+' د',
  setStart:'📍 ثبّت نقطة الانطلاق',goStart:'↩️ رجّعني',startName:'نقطة الانطلاق',startSet:'تم تثبيت نقطة الانطلاق',startWeak:'الإشارة ضعيفة، انتظر شوي وثبّتها',startReset:'اضغط مرة ثانية لحذف نقطة الانطلاق',startCleared:'تم حذف نقطة الانطلاق',
  altUp:n=>'⬆️ الهدف أعلى منك بـ <b>'+n+'</b> م',altDown:n=>'⬇️ الهدف أدنى منك بـ <b>'+n+'</b> م',altSame:'↔️ نفس ارتفاعك تقريباً',altNote:' (تقريبي)',
- sortNear:'الأقرب مني',sortNew:'الأحدث',details:'تفاصيل المكان',coordsK:'الإحداثيات',sharePlace:'مشاركة',renamed:'تم حفظ الاسم',
+ sortNear:'الأقرب مني',sortNew:'الأحدث',details:'تفاصيل المكان',coordsK:'الإحداثيات',sharePlace:'مشاركة',shareLink:(n,c,u)=>'📍 '+n+'\n'+c+'\nافتح الرابط وسهم يوجهك له:\n'+u,renamed:'تم حفظ الاسم',
  shareMsg:(n,c)=>'📍 '+n+'\n'+c+'\nأُرسل من تطبيق سهم: انسخ الإحداثيات والصقها في «أضف إحداثيات»',
  paste:'📋 لصق',pasteFail:'اضغط مطولاً على الخانة واختر لصق',
  red:'أحمر',redHint:'الأحمر للّيل: ما يعمي عيونك في الظلام ويريّح البطارية.',ecoLbl:'توفير البطارية',on:'تشغيل',off:'إيقاف',
  ecoHint:'يسمح للشاشة تنطفي، ويخفف تحديث البوصلة، ويوقف الحركات. الـGPS يبقى بدقته الكاملة.',
- msNow:'الموسم الحالي',mvBar:'سهم صار له عنوان جديد',mvMore:'التفاصيل',mvTitle:'📦 سهم انتقل لعنوان جديد',
+ msNow:'الموسم الحالي',
+ campLbl:'ثبّت المخيم',carLbl:'ثبّت السيارة',campName:'المخيم',carName:'السيارة',ptSaved:a=>'تم التثبيت بدقة ±'+a+' م',
+ ptWeak:a=>'الـGPS ضعيف الآن ('+(a?'±'+a+' م':'بانتظار الإشارة')+'). اطلع لمكان مكشوف وانتظر لين يصير أقل من ±25 م',
+ ptGo:n=>'↩️ رجّعني لـ'+n,ptShare:'📤 أرسل الموقع للربع',ptHere:'📍 حدّثه لمكاني الحالي',ptDel:'🗑 احذف',ptDelSure:'اضغط مرة ثانية للحذف',ptDeleted:'تم الحذف',
+ ptInvite:(n,u)=>'⛺ '+n+'\nحياكم في الكشتة! افتح الرابط وسهم يوجهك لين توصل، حتى بدون إنترنت:\n'+u,
+ lkGot:'وصلك مكان',lkGo:'↩️ وجّهني له',lkSave:'⭐ احفظه في مواقعي',lkSaved:'تم الحفظ في مواقعي',lkAway:d=>'يبعد عنك '+d,
+ lkWeb:'تقدر تستخدم سهم هنا في المتصفح. ولتحفظ أماكنك وتشتغل بدون إنترنت: أضفه للشاشة الرئيسية من زر المشاركة.',linkName:'مكان من رابط',
+ qComp:a=>'🧭 البوصلة ضعيفة'+(a?' ±'+a+'°':'')+': لف الجوال على شكل 8',
+ qGps:a=>'📡 الـGPS ±'+a+' م: اطلع لمكان مكشوف وانتظر شوي',
+ windFrom:['شمالية','شمالية شرقية','شرقية','جنوبية شرقية','جنوبية','جنوبية غربية','غربية','شمالية غربية'],
+ windLine:(d,s)=>'💨 ريح '+d+' · '+s+' كم/س',windCalm:'💨 الريح هادية',
+ night:(t,h)=>'🌙 الليلة '+t+'° الساعة '+h,
+ stTitle:'✨ دليل النجوم',stHead:'وجّه نظرك إلى',stUp:a=>'فوق الأفق '+a+'° · ارفع نظرك بهذا الاتجاه',stRise:h=>'تحت الأفق · يطلع الساعة '+h,stNever:'ما يطلع من مكانك اليوم',
+ stDay:'الشمس طالعة الحين، فيبان بعد الغروب',stGo:'وجّهني',stAlt:a=>'ارتفاعه '+a+'°',stBelow:'تحت الأفق',stRiseShort:h=>'يطلع '+h,
+ stNote:'المواقع محسوبة في الجوال بدون إنترنت. الجدي يدلك على الشمال الحقيقي، وارتفاعه يساوي خط العرض اللي أنت فيه.',
+ stInfo:{jadi:'ثابت في الشمال طول الليل',suhail:'يطلع من الجنوب في الشتاء',thurayya:'عنقود نجوم صغير لامع',shira:'ألمع نجم في السماء',jawza:'ثلاث نجوم في خط واحد'},
+ ntfLbl:'الإشعارات',ntfOnN:'تشتغل: تنبيه قبل الغروب بنص ساعة إذا ثبّت المخيم أو السيارة، ودخول المواسم، وتذكير بالنسخة الاحتياطية.',
+ ntfOffN:'متوقفة.',ntfInstall:'أضف سهم للشاشة الرئيسية عشان تشتغل الإشعارات.',ntfBlocked:'الإشعارات مقفلة لسهم من إعدادات الجوال.',ntfFail:'ما قدرت أفعّل الإشعارات. جرّب لاحقاً مع إنترنت.',
+ northLbl:'الشمال الحقيقي',northHint:'البوصلة في الجوال تقيس الشمال المغناطيسي، وسهم يصححه تلقائياً للشمال الحقيقي حسب مكانك (في الرياض حوالي 3°)، فتصير القبلة والأسهم أدق.',mvBar:'سهم صار له عنوان جديد',mvMore:'التفاصيل',mvTitle:'📦 سهم انتقل لعنوان جديد',
  mvIntro:'العنوان الجديد sahm.wamdarc.com. هذا التطبيق يبقى شغال، بس التحديثات الجاية بتنزل على الجديد. انقل أماكنك بثلاث خطوات:',
  mvS1:'انسخ أماكنك من هنا',mvCopy:n=>'📋 انسخ أماكني ('+n+')',mvS2:'افتح العنوان الجديد في سفاري وأضفه للشاشة الرئيسية',
  mvS3:'افتح سهم الجديد ← مواقعي المفضلة ← 📥 استرجاع ← الصق',mvNote:'بعد ما تتأكد إن أماكنك انتقلت، تقدر تحذف سهم القديم من الشاشة الرئيسية.',updReady:'نسخة جديدة من سهم جاهزة',updNow:'حدّث',updLater:'لاحقاً',
@@ -1040,12 +1142,30 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  wind:'Wind',kmh:'km/h',agoMin:n=>n+' min ago',
  setStart:'📍 Pin starting point',goStart:'↩️ Take me back',startName:'Starting point',startSet:'Starting point pinned',startWeak:'Weak signal. Wait a moment, then pin it.',startReset:'Tap again to remove the starting point',startCleared:'Starting point removed',
  altUp:n=>'⬆️ Target is <b>'+n+'</b> m above you',altDown:n=>'⬇️ Target is <b>'+n+'</b> m below you',altSame:'↔️ About your altitude',altNote:' (approx.)',
- sortNear:'Nearest',sortNew:'Newest',details:'Place details',coordsK:'Coordinates',sharePlace:'Share',renamed:'Name saved',
+ sortNear:'Nearest',sortNew:'Newest',details:'Place details',coordsK:'Coordinates',sharePlace:'Share',shareLink:(n,c,u)=>'📍 '+n+'\n'+c+'\nOpen the link and Sahm guides you there:\n'+u,renamed:'Name saved',
  shareMsg:(n,c)=>'📍 '+n+'\n'+c+'\nSent from Sahm: copy the coordinates and paste them into “Add coordinates”',
  paste:'📋 Paste',pasteFail:'Long-press the field and choose Paste',
  red:'Red',redHint:'Red is for night: it keeps your eyes used to the dark and is easy on the battery.',ecoLbl:'Battery saver',on:'On',off:'Off',
  ecoHint:'Lets the screen turn off, updates the compass less often and stops animations. GPS keeps its full accuracy.',
- msNow:'Current season',mvBar:'Sahm has a new address',mvMore:'Details',mvTitle:'📦 Sahm has moved',
+ msNow:'Current season',
+ campLbl:'Pin camp',carLbl:'Pin car',campName:'Camp',carName:'Car',ptSaved:a=>'Pinned to ±'+a+' m',
+ ptWeak:a=>'GPS is weak right now ('+(a?'±'+a+' m':'waiting for signal')+'). Move to open sky and wait until it is under ±25 m',
+ ptGo:n=>'↩️ Take me to the '+n.toLowerCase(),ptShare:'📤 Send the location to friends',ptHere:'📍 Move it to where I am',ptDel:'🗑 Remove',ptDelSure:'Tap again to remove',ptDeleted:'Removed',
+ ptInvite:(n,u)=>'⛺ '+n+'\nJoin us! Open the link and Sahm guides you there, even without internet:\n'+u,
+ lkGot:'Someone sent you a place',lkGo:'↩️ Guide me there',lkSave:'⭐ Save to my places',lkSaved:'Saved to your places',lkAway:d=>d+' from you',
+ lkWeb:'You can use Sahm right here in the browser. To keep your places and work offline, add it to your Home Screen from the Share button.',linkName:'Shared place',
+ qComp:a=>'🧭 Compass weak'+(a?' ±'+a+'°':'')+': wave the phone in a figure 8',
+ qGps:a=>'📡 GPS ±'+a+' m: move to open sky and wait a moment',
+ windFrom:['north','north-east','east','south-east','south','south-west','west','north-west'],
+ windLine:(d,s)=>'💨 Wind from the '+d+' · '+s+' km/h',windCalm:'💨 Calm',
+ night:(t,h)=>'🌙 Tonight '+t+'° at '+h,
+ stTitle:'✨ Star guide',stHead:'Look towards',stUp:a=>a+'° above the horizon · look up this way',stRise:h=>'Below the horizon · rises at '+h,stNever:'Does not rise here today',
+ stDay:'The sun is up; look after sunset',stGo:'Guide me',stAlt:a=>a+'° up',stBelow:'Below horizon',stRiseShort:h=>'Rises '+h,
+ stNote:'Positions are worked out on the phone with no internet. Al-Jadi marks true north, and its height equals your latitude.',
+ stInfo:{jadi:'Fixed in the north all night',suhail:'Rises in the south in winter',thurayya:'A small bright star cluster',shira:'The brightest star in the sky',jawza:'Three stars in a row'},
+ ntfLbl:'Notifications',ntfOnN:'On: a reminder 30 minutes before sunset when your camp or car is pinned, new seasons, and backup reminders.',
+ ntfOffN:'Off.',ntfInstall:'Add Sahm to your Home Screen to get notifications.',ntfBlocked:'Notifications are blocked for Sahm in your phone settings.',ntfFail:'Could not turn notifications on. Try again later with internet.',
+ northLbl:'True north',northHint:'Phone compasses measure magnetic north. Sahm corrects it to true north for where you are (about 3° in Riyadh), so the Qibla and arrows are more accurate.',mvBar:'Sahm has a new address',mvMore:'Details',mvTitle:'📦 Sahm has moved',
  mvIntro:'The new address is sahm.wamdarc.com. This app keeps working, but future updates go to the new one. Move your places in three steps:',
  mvS1:'Copy your places from here',mvCopy:n=>'📋 Copy my places ('+n+')',mvS2:'Open the new address in Safari and add it to your Home Screen',
  mvS3:'Open the new Sahm → Favorites → 📥 Restore → paste',mvNote:'Once your places are there, you can delete the old Sahm from your Home Screen.',updReady:'A new version of Sahm is ready',updNow:'Update',updLater:'Later',
@@ -1107,7 +1227,7 @@ const fmtLL=(a,b)=>cfg.fmt==='dms'?fmtLat(a)+' '+fmtLon(b):fmtLat(a)+', '+fmtLon
 
 /* ---------- storage ---------- */
 function load(){try{places=JSON.parse(localStorage.getItem('sahm.places')||'[]');cur=localStorage.getItem('sahm.cur')||null}catch(e){places=[]}}
-function save(){try{localStorage.setItem('sahm.places',JSON.stringify(places));localStorage.setItem('sahm.cur',cur||'')}catch(e){}}
+function save(){setTimeout(pushSync,0);try{localStorage.setItem('sahm.places',JSON.stringify(places));localStorage.setItem('sahm.cur',cur||'')}catch(e){}}
 
 /* ---------- geo math ---------- */
 function distance(a,b){const dLat=rad(b.lat-a.lat),dLon=rad(b.lon-a.lon);
@@ -1211,9 +1331,9 @@ function onOrient(e){let h=null;
   else if(e.absolute&&e.alpha!=null)h=(360-e.alpha)%360;
   if(h==null)return;compassOK=true;
   const so=(screen.orientation&&screen.orientation.angle)||window.orientation||0;
-  heading=(h+so+360)%360;
+  heading=(h+so+decl()+360)%360;   // magnetic → true north
   const hr=document.getElementById('homeRose');if(hr){hr.style.transform='rotate('+(-heading)+'deg)';   // raw heading, nothing smoothed
-    const hd=Math.round(heading)%360;if(hd!==onOrient.hd){onOrient.hd=hd;$('hdName').textContent=T('dirs')[Math.round(hd/45)%8];$('hdDeg').textContent=hd+'°'}}
+    const hd=Math.round(heading)%360;if(hd!==onOrient.hd){paintQ();onOrient.hd=hd;$('hdName').textContent=T('dirs')[Math.round(hd/45)%8];$('hdDeg').textContent=hd+'°'}}
   if(cfg.eco==='on'){const n=Date.now();if(n-(onOrient.t||0)<250)return;onOrient.t=n}
   render()}
 
@@ -1223,6 +1343,9 @@ function target(){if(tab==='qibla')return{name:T('kaaba'),lat:KAABA.lat,lon:KAAB
   if(tab==='home'){if(cur==='__start'&&startPt)return Object.assign({name:T('startName')},startPt);
     if(cur==='__trail'&&trk.pts.length){trailIdx=Math.min(trailIdx,trk.pts.length-1);const q=trk.pts[trailIdx];
       return{name:T('trailName')+' · '+(trailIdx+1)+'/'+trk.pts.length,lat:q.lat,lon:q.lon,alt:q.alt,trail:true}}
+    if(cur==='__camp'&&campPt)return Object.assign({name:T('campName')},campPt);
+    if(cur==='__link'&&linkPt)return Object.assign({},linkPt,{name:linkPt.name||T('linkName')});
+    if(cur&&cur.startsWith('__star:')){const st=STARS.find(x=>x[0]===cur.slice(7));if(st)return{name:cfg.lang==='en'?st[2]:st[1],star:true,s:st}}
     return places.find(p=>p.id===cur)||null}return null}
 function render(){
   const age=pos?(Date.now()-pos.t)/1000:null, stale=age!=null&&age>10;
@@ -1254,13 +1377,20 @@ function render(){
     $('hAlt').textContent=pos.alt!=null?Math.round(pos.alt)+' m':'--';
     $('hSpd').textContent=pos.speed!=null&&pos.speed>=0?(pos.speed*3.6).toFixed(1)+' km/h':'--';
     if(startPt){const f=fmtDist(distance(pos,startPt));$('startDist').textContent='· '+f.v+' '+f.u}
-    infoTick();paintSunWarn();
+    infoTick();paintSunWarn();paintPts();paintWind();paintNight();paintQ();
     return;
   }
-  $('navhead').textContent=t.qibla?T('qiblaHead'):T('navTo');
+  $('navhead').textContent=t.qibla?T('qiblaHead'):t.star?T('stHead'):T('navTo');
   const name=document.createElement('b');name.textContent=t.name;
   if(!pos){$('dist').textContent='--';$('meta').replaceChildren(name);return}
-  const d=distance(pos,t),b=bearing(pos,t),f=fmtDist(d);
+  let d,b;
+  if(t.star){const aa=starAltAz(t.s,new Date(),pos.lat,pos.lon);b=aa.az;d=Infinity;
+    $('dist').innerHTML=Math.round(aa.alt)+'<small>°</small>';$('dist').classList.remove('near');
+    $('meta').replaceChildren(name,' · '+dirName(b)+' '+Math.round(b)+'°');
+    const rs=aa.alt<0?starRise(t.s,pos.lat,pos.lon):null;
+    $('altd').innerHTML='<span>'+(aa.alt>=0?T('stUp')(Math.round(aa.alt)):rs?T('stRise')(hm(rs)):T('stNever'))+'</span>';$('altd').hidden=false;
+  }else{
+  d=distance(pos,t);b=bearing(pos,t);const f=fmtDist(d);
   $('dist').innerHTML=f.v+'<small>'+f.u+'</small>';
   $('meta').replaceChildren(name,' · '+dirName(b)+' '+Math.round(b)+'°');
   $('dist').classList.toggle('near',!t.qibla&&d<50);
@@ -1270,18 +1400,19 @@ function render(){
     line.push('<span>'+(Math.abs(df)<3?T('altSame'):df>0?T('altUp')(df):T('altDown')(-df))+'</span>')}
   const sl=sunLeft();if(sl!=null&&!t.qibla)line.push('<span>'+T('sunNav')(sl)+'</span>');
   $('altd').innerHTML=line.join('');$('altd').hidden=!line.length;
+  }
   let h=heading,warn='';
   if(!compassOK){if(pos.course!=null&&!isNaN(pos.course)&&pos.speed>1){h=pos.course;warn=T('wMove')}else{h=0;warn=T('wNorth')}}
   if(bad)warn=T('wComp');
-  if(pos.acc>40&&!t.qibla)warn=T('wApprox');
+  if(pos.acc>25&&!t.qibla&&!t.star)warn=T('wApprox');
   if(stale)warn=T('wStop');
   $('warn').textContent=warn;
   const rel=(b-h+360)%360;
   smooth=turn(smooth,rel);smoothB=turn(smoothB,(360-h)%360);
   $('arrow').style.transform='rotate('+smooth+'deg)';
   $('bezel').style.transform='rotate('+smoothB+'deg)';
-  $('stage').classList.toggle('aligned',!bad&&(rel<(t.qibla?5:12)||rel>(t.qibla?355:348)));
-  if(t.qibla){arrived=false}else{const ar=cfg.arrive,leave=ar+Math.max(1,ar*0.3);if(arrived?d>leave:d<=ar)arrived=!arrived}
+  $('stage').classList.toggle('aligned',!bad&&(rel<(t.qibla||t.star?5:12)||rel>(t.qibla||t.star?355:348)));
+  if(t.qibla||t.star){arrived=false}else{const ar=cfg.arrive,leave=ar+Math.max(1,ar*0.3);if(arrived?d>leave:d<=ar)arrived=!arrived}
   $('stage').classList.toggle('arrived',arrived);
 }
 setInterval(render,1000);
@@ -1326,8 +1457,14 @@ async function netFetch(){if(netBusy||!pos||!navigator.onLine)return;
   try{if(needPlace){const j=await getJSON('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+la+'&longitude='+lo+'&localityLanguage='+lang);
       const parts=[j.locality,j.city,j.principalSubdivision].filter((x,i,a)=>x&&a.indexOf(x)===i).slice(0,2);
       if(parts.length){net.place={txt:parts.join('، '.replace('، ',lang==='en'?', ':'، ')),lat:pos.lat,lon:pos.lon,t:Date.now(),lang};saveNet()}}}catch(e){}
-  try{if(needWx){const j=await getJSON('https://api.open-meteo.com/v1/forecast?latitude='+la+'&longitude='+lo+'&current=temperature_2m,wind_speed_10m,weather_code&wind_speed_unit=kmh&timezone=auto');
-      if(j.current){net.wx={temp:Math.round(j.current.temperature_2m),wind:Math.round(j.current.wind_speed_10m),code:j.current.weather_code,lat:pos.lat,lon:pos.lon,t:Date.now()};saveNet()}}}catch(e){}
+  try{if(needWx){const j=await getJSON('https://api.open-meteo.com/v1/forecast?latitude='+la+'&longitude='+lo+'&current=temperature_2m,wind_speed_10m,wind_direction_10m,weather_code&hourly=temperature_2m&forecast_days=2&wind_speed_unit=kmh&timezone=auto');
+      if(j.current){net.wx={temp:Math.round(j.current.temperature_2m),wind:Math.round(j.current.wind_speed_10m),dir:j.current.wind_direction_10m,code:j.current.weather_code,lat:pos.lat,lon:pos.lon,t:Date.now()};
+        // tonight's low: the coming night (6 pm to 9 am local at that spot)
+        try{const off=(j.utc_offset_seconds||0)*1e3,now=Date.now();let started=false,mn=null,at=0,end=0;
+          j.hourly.time.forEach((ts,i)=>{const ep=Date.parse(ts+':00Z')-off;if(ep<now-36e5||ep>now+30*36e5)return;const h=new Date(ep+off).getUTCHours(),nt=h>=18||h<9;
+            if(nt){started=true;const v=j.hourly.temperature_2m[i];if(mn==null||v<mn){mn=v;at=ep}end=ep+36e5}else if(started)started=null});
+          if(mn!=null)net.night={min:Math.round(mn),at,end,lat:pos.lat,lon:pos.lon,t:now}}catch(e){}
+        saveNet()}}}catch(e){}
   netBusy=false;infoTick(true)}
 function wxName(c){const W=T('wx');const k=[95,80,71,61,51,48,45,3,2,1,0].find(x=>c>=x);return W[k]||''}
 function infoTick(force){if(!pos)return;const now=Date.now();if(!force&&now-(infoTick.t||0)<5000)return;infoTick.t=now;
@@ -1592,11 +1729,128 @@ function etaOf(key,d){if(key!==etaKey){etaKey=key;etaH=[]}
 /* ---------- sunset reminder ---------- */
 function sunLeft(){if(!pos)return null;const st=sunTimes(new Date(),pos.lat,pos.lon);if(!st)return null;const m=(st.set-Date.now())/6e4;return m>0&&m<=60?Math.ceil(m):null}
 function paintSunWarn(){const m=sunLeft(),el=$('sunWarn');if(m==null){el.hidden=true;return}
-  let sub='';if(startPt&&pos){const f=fmtDist(distance(pos,startPt));sub=T('sunStart')(f.v+' '+f.u)}
+  let sub='';const bp=[[campPt,'campName'],[startPt,'carName']].filter(x=>x[0]&&pos).sort((a,b)=>distance(pos,a[0])-distance(pos,b[0]))[0];
+  if(bp){const f=fmtDist(distance(pos,bp[0]));sub=T(bp[1])+' '+f.v+' '+f.u}
   el.innerHTML='<span class="swi">🌙</span><div class="swt"><b></b>'+(sub?'<small></small>':'')+'</div>';
   el.querySelector('b').textContent=T('sunWarn')(m);if(sub)el.querySelector('small').textContent=sub;el.hidden=false}
 setInterval(()=>{moonTick();paintSos();if($('dlgTrack').open)paintTrack()},5000);
 
+const DECW='128.3,122.1,116.1,110.5,105.1,99.9,95,90.2,85.6,81.2,76.9,72.6,68.5,64.4,60.4,56.5,52.6,48.7,44.8,41,37.2,33.5,29.7,26,22.2,18.5,14.8,11,7.3,3.5,-0.3,-4.1,-8,-11.9,-15.9,-19.9,-24,-28.1,-32.3,-36.6,-40.9,-45.3,-49.8,-54.3,-58.9,-63.5,-68.2,-72.9,-77.8,-82.7,-87.7,-92.8,-98,-103.3,-108.7,-114.4,-120.2,-126.2,-132.4,-138.8,-145.5,-152.4,-159.5,-166.8,-174.2,178.3,170.7,163.2,155.8,148.5,141.5,134.8,128.3;109.6,103.6,98.1,93.1,88.5,84.2,80.2,76.4,72.7,69.2,65.7,62.4,59,55.7,52.4,49.1,45.8,42.5,39.1,35.8,32.4,29.1,25.7,22.4,19.1,15.8,12.5,9.3,6,2.7,-0.6,-4,-7.4,-10.9,-14.5,-18.2,-22,-25.9,-29.9,-34,-38.1,-42.4,-46.6,-51,-55.3,-59.7,-64.2,-68.7,-73.2,-77.8,-82.4,-87.1,-92,-96.9,-102.1,-107.5,-113.1,-119.2,-125.6,-132.6,-140.2,-148.5,-157.6,-167.3,-177.7,171.6,160.9,150.6,140.8,131.8,123.6,116.2,109.6;85.9,81.6,77.9,74.5,71.3,68.5,65.8,63.2,60.7,58.3,55.9,53.4,51,48.4,45.8,43.1,40.3,37.4,34.5,31.4,28.3,25.2,22.1,19,16,12.9,10,7.1,4.2,1.3,-1.6,-4.5,-7.6,-10.7,-13.9,-17.4,-20.9,-24.6,-28.5,-32.4,-36.5,-40.6,-44.8,-49,-53.2,-57.3,-61.5,-65.6,-69.7,-73.8,-77.9,-82,-86.1,-90.3,-94.7,-99.3,-104.2,-109.5,-115.4,-122.2,-130.3,-140.2,-152.7,-168.4,173.2,154.1,136.9,123,112.1,103.5,96.5,90.8,85.9;64.3,62.2,60.3,58.4,56.7,55.1,53.5,52,50.6,49.1,47.6,46,44.4,42.6,40.6,38.4,36.1,33.5,30.8,27.9,25,21.9,18.8,15.8,12.8,9.9,7.1,4.4,1.8,-0.7,-3.1,-5.6,-8.2,-11,-13.9,-17.1,-20.4,-24,-27.7,-31.6,-35.6,-39.7,-43.8,-47.8,-51.8,-55.7,-59.5,-63.2,-66.8,-70.2,-73.6,-76.8,-79.9,-83,-86.1,-89.1,-92.2,-95.4,-98.8,-102.6,-107.3,-114,-127.3,-173.3,112.6,91.8,83.4,78.4,74.6,71.6,68.9,66.5,64.3;49,48.3,47.4,46.6,45.7,44.8,44,43.2,42.4,41.6,40.8,40,38.9,37.8,36.4,34.7,32.7,30.5,27.9,25.1,22.2,19,15.8,12.6,9.5,6.5,3.8,1.2,-1.1,-3.3,-5.3,-7.4,-9.5,-11.8,-14.4,-17.2,-20.3,-23.8,-27.4,-31.3,-35.3,-39.3,-43.3,-47.2,-50.9,-54.5,-57.9,-61,-64,-66.6,-69.1,-71.2,-73.1,-74.7,-75.9,-76.6,-76.8,-76.1,-74.1,-69.9,-61.5,-45,-16.9,12.6,30.9,40.5,45.5,48.1,49.4,49.9,49.9,49.6,49;38.9,38.8,38.5,38.1,37.7,37.2,36.7,36.3,35.9,35.5,35.2,34.8,34.3,33.6,32.7,31.4,29.8,27.9,25.5,22.7,19.7,16.3,12.9,9.4,6,2.9,0,-2.5,-4.7,-6.5,-8.2,-9.8,-11.4,-13.2,-15.2,-17.7,-20.5,-23.8,-27.4,-31.2,-35.1,-39,-42.9,-46.6,-50.1,-53.3,-56.1,-58.7,-60.9,-62.6,-64,-65,-65.4,-65.2,-64.3,-62.5,-59.4,-54.8,-48.1,-38.8,-27,-13.6,-0.5,10.8,19.5,25.9,30.5,33.7,36,37.4,38.3,38.8,38.9;32,32.1,32.1,32,31.7,31.4,31.1,30.9,30.6,30.5,30.3,30.2,30,29.7,29.2,28.3,27.1,25.4,23.1,20.4,17.2,13.7,9.9,6.1,2.3,-1.1,-4.1,-6.7,-8.8,-10.4,-11.7,-12.8,-13.8,-15,-16.5,-18.5,-20.9,-23.9,-27.3,-30.9,-34.8,-38.6,-42.3,-45.7,-48.8,-51.6,-53.9,-55.7,-57.1,-57.9,-58.2,-57.8,-56.8,-54.9,-52.1,-48.2,-43.1,-36.8,-29.3,-21.1,-12.6,-4.4,3.1,9.6,15,19.5,23.1,25.9,28.1,29.7,30.8,31.6,32;26.9,27.2,27.3,27.3,27.2,27,26.8,26.5,26.4,26.2,26.2,26.2,26.1,26,25.8,25.2,24.2,22.7,20.7,17.9,14.6,10.9,6.8,2.6,-1.5,-5.2,-8.4,-11,-13,-14.5,-15.5,-16.2,-16.8,-17.4,-18.2,-19.5,-21.4,-23.9,-26.9,-30.4,-34,-37.6,-41,-44.1,-46.8,-49,-50.7,-51.8,-52.3,-52.2,-51.4,-49.9,-47.6,-44.4,-40.4,-35.5,-30,-24,-17.8,-11.7,-5.9,-0.6,4.2,8.5,12.3,15.7,18.5,20.9,22.9,24.4,25.6,26.4,26.9;23,23.3,23.5,23.6,23.5,23.4,23.2,23,22.8,22.7,22.6,22.6,22.6,22.5,22.4,22,21.3,19.9,18,15.3,11.9,7.9,3.5,-1,-5.3,-9.2,-12.5,-15,-16.9,-18.2,-19,-19.5,-19.8,-19.9,-20.2,-20.7,-21.8,-23.5,-26,-29,-32.2,-35.5,-38.5,-41.2,-43.4,-45.1,-46.1,-46.6,-46.3,-45.4,-43.7,-41.3,-38.2,-34.4,-30.1,-25.2,-20.2,-15.3,-10.6,-6.4,-2.5,1.1,4.4,7.5,10.3,13,15.3,17.4,19.1,20.5,21.6,22.5,23;19.9,20.2,20.4,20.5,20.5,20.4,20.3,20.1,19.9,19.7,19.5,19.4,19.4,19.3,19.2,18.9,18.3,17.1,15.2,12.5,9,4.9,0.3,-4.4,-8.8,-12.7,-15.9,-18.3,-20,-21.2,-21.9,-22.3,-22.3,-22.2,-21.8,-21.6,-21.6,-22.4,-23.9,-26.1,-28.8,-31.6,-34.2,-36.5,-38.3,-39.5,-40.1,-40,-39.2,-37.7,-35.5,-32.8,-29.5,-25.7,-21.6,-17.3,-13.2,-9.4,-6.1,-3.1,-0.5,1.9,4.3,6.5,8.8,10.9,12.9,14.7,16.2,17.5,18.6,19.3,19.9;17.3,17.6,17.8,17.9,17.9,17.9,17.8,17.7,17.5,17.2,17,16.8,16.6,16.5,16.4,16.1,15.5,14.3,12.5,9.7,6.2,2,-2.7,-7.4,-11.7,-15.5,-18.5,-20.7,-22.2,-23.2,-23.7,-24,-23.8,-23.3,-22.5,-21.4,-20.4,-20,-20.3,-21.5,-23.3,-25.5,-27.7,-29.7,-31.3,-32.4,-32.8,-32.5,-31.5,-29.9,-27.7,-25,-21.9,-18.6,-15,-11.5,-8.3,-5.5,-3.1,-1.2,0.6,2.2,3.9,5.7,7.5,9.3,11,12.6,14,15.2,16.1,16.8,17.3;15.2,15.5,15.6,15.7,15.7,15.8,15.7,15.6,15.4,15.1,14.8,14.6,14.3,14.1,14,13.6,13,11.9,10,7.2,3.6,-0.7,-5.3,-9.9,-14,-17.6,-20.3,-22.2,-23.4,-24.1,-24.4,-24.4,-23.9,-23,-21.6,-19.8,-17.9,-16.3,-15.5,-15.5,-16.4,-18,-19.9,-21.7,-23.4,-24.5,-25.1,-24.9,-24.1,-22.7,-20.8,-18.5,-15.9,-13.1,-10.2,-7.4,-4.9,-2.8,-1.2,0,1.1,2.2,3.4,4.8,6.4,7.9,9.5,10.9,12.2,13.3,14.2,14.8,15.2;13.6,13.7,13.8,13.8,13.9,13.9,13.9,13.8,13.6,13.3,13,12.7,12.4,12.2,12,11.6,11,9.7,7.8,5,1.3,-2.9,-7.4,-11.7,-15.7,-18.9,-21.3,-22.8,-23.7,-24.1,-24,-23.5,-22.5,-21.1,-19.2,-16.9,-14.5,-12.3,-10.7,-9.9,-9.9,-10.8,-12.3,-14,-15.8,-17.1,-18,-18.1,-17.7,-16.7,-15.2,-13.5,-11.4,-9.2,-6.8,-4.6,-2.6,-1.1,-0,0.7,1.3,2,2.9,4.1,5.4,6.9,8.3,9.6,10.8,11.8,12.6,13.2,13.6;12.2,12.3,12.3,12.3,12.3,12.3,12.3,12.2,12.1,11.8,11.5,11.2,10.9,10.7,10.4,10,9.3,8,5.9,3.1,-0.5,-4.7,-9,-13,-16.6,-19.5,-21.6,-22.8,-23.3,-23.2,-22.5,-21.5,-20,-18.1,-15.9,-13.4,-11,-8.7,-6.8,-5.5,-5,-5.3,-6.4,-7.9,-9.6,-11.1,-12.1,-12.6,-12.5,-12,-11,-9.7,-8.2,-6.4,-4.5,-2.7,-1.2,-0.1,0.6,0.9,1.2,1.6,2.3,3.3,4.6,5.9,7.3,8.5,9.7,10.7,11.5,12,12.2;11.3,11.3,11.2,11.1,11,11,11,10.9,10.8,10.6,10.3,10,9.7,9.5,9.2,8.7,7.9,6.5,4.4,1.5,-2,-6,-10.1,-13.8,-17.1,-19.6,-21.3,-22.2,-22.3,-21.6,-20.5,-18.9,-17,-14.9,-12.6,-10.2,-7.9,-5.8,-4,-2.6,-1.8,-1.7,-2.4,-3.6,-5.1,-6.6,-7.8,-8.4,-8.6,-8.4,-7.8,-7,-5.9,-4.5,-3,-1.6,-0.4,0.4,0.8,0.9,0.9,1.1,1.6,2.5,3.8,5.1,6.4,7.7,8.8,9.8,10.6,11,11.3;10.5,10.5,10.3,10.2,10.1,10,10,10,9.9,9.7,9.4,9.1,8.8,8.6,8.2,7.7,6.8,5.4,3.2,0.3,-3.2,-7,-10.8,-14.3,-17.2,-19.4,-20.7,-21.2,-20.8,-19.8,-18.2,-16.2,-14.1,-11.8,-9.6,-7.5,-5.5,-3.7,-2.1,-0.8,0.1,0.4,0.1,-0.8,-2.1,-3.4,-4.6,-5.4,-5.7,-5.8,-5.5,-5,-4.2,-3.2,-2.1,-0.9,-0,0.5,0.7,0.6,0.4,0.4,0.9,1.8,2.9,4.3,5.6,6.9,8.1,9.1,9.9,10.3,10.5;10,10,9.8,9.5,9.4,9.3,9.3,9.3,9.2,9.1,8.9,8.6,8.3,8,7.6,7,6,4.4,2.1,-0.8,-4.2,-7.8,-11.3,-14.4,-17,-18.8,-19.8,-19.9,-19.2,-17.8,-16,-13.8,-11.5,-9.3,-7.2,-5.4,-3.7,-2.2,-0.9,0.4,1.3,1.8,1.7,1,-0.1,-1.3,-2.4,-3.2,-3.6,-3.8,-3.8,-3.5,-3,-2.4,-1.5,-0.7,0,0.4,0.3,0.1,-0.2,-0.3,0.1,0.9,2.1,3.4,4.8,6.1,7.3,8.4,9.3,9.8,10;9.6,9.6,9.4,9.2,9,8.9,9,9,9,8.9,8.6,8.4,8,7.7,7.2,6.4,5.3,3.5,1.2,-1.7,-5,-8.3,-11.6,-14.4,-16.7,-18.1,-18.8,-18.6,-17.6,-16,-14,-11.7,-9.5,-7.3,-5.4,-3.7,-2.3,-1.1,0.1,1.1,2,2.6,2.6,2.1,1.2,0.2,-0.8,-1.6,-2.1,-2.3,-2.4,-2.4,-2.2,-1.7,-1.2,-0.6,-0.1,0,-0.2,-0.6,-1,-1.1,-0.8,-0.1,1.1,2.4,3.8,5.2,6.5,7.7,8.7,9.3,9.6;9.2,9.2,9.1,9,8.8,8.8,8.9,9,9,9,8.8,8.5,8.1,7.7,7,6.1,4.7,2.8,0.4,-2.5,-5.7,-8.9,-11.8,-14.3,-16.2,-17.4,-17.7,-17.2,-16,-14.3,-12.3,-10.1,-7.8,-5.8,-4,-2.5,-1.2,-0.2,0.8,1.7,2.5,3.1,3.2,2.8,2.1,1.2,0.3,-0.4,-0.9,-1.2,-1.4,-1.5,-1.4,-1.3,-0.9,-0.6,-0.4,-0.5,-0.8,-1.3,-1.8,-2.1,-1.8,-1.2,-0.1,1.2,2.7,4.1,5.6,6.9,8,8.7,9.2;8.6,8.9,9,8.9,8.9,9,9.1,9.3,9.4,9.4,9.2,8.9,8.5,7.9,7.1,6,4.4,2.3,-0.3,-3.3,-6.3,-9.3,-12,-14.2,-15.8,-16.6,-16.6,-15.9,-14.6,-12.9,-10.9,-8.7,-6.6,-4.6,-2.9,-1.5,-0.4,0.5,1.4,2.2,2.9,3.5,3.6,3.4,2.8,2,1.2,0.5,0,-0.3,-0.5,-0.7,-0.8,-0.8,-0.7,-0.7,-0.7,-1,-1.5,-2.1,-2.8,-3.1,-3,-2.4,-1.4,-0.1,1.3,2.8,4.4,5.8,7.1,8,8.6;8,8.5,8.8,8.9,9.1,9.3,9.6,9.9,10.1,10.1,10,9.6,9.1,8.4,7.4,6,4.2,1.8,-0.9,-3.9,-6.9,-9.8,-12.2,-14.1,-15.3,-15.8,-15.6,-14.7,-13.3,-11.7,-9.7,-7.7,-5.7,-3.8,-2.1,-0.8,0.3,1.1,1.9,2.6,3.3,3.8,4,3.8,3.3,2.6,1.9,1.3,0.9,0.6,0.3,0,-0.2,-0.4,-0.5,-0.7,-1,-1.5,-2.2,-3,-3.8,-4.2,-4.2,-3.8,-2.9,-1.6,-0.2,1.4,3,4.5,6,7.1,8;7.1,7.9,8.5,8.9,9.3,9.7,10.2,10.6,10.9,11,10.9,10.5,9.9,9.1,7.8,6.2,4.1,1.6,-1.3,-4.4,-7.5,-10.2,-12.5,-14.1,-15,-15.2,-14.8,-13.8,-12.4,-10.7,-8.9,-7,-5,-3.2,-1.6,-0.2,0.8,1.7,2.4,3.1,3.7,4.1,4.3,4.3,3.9,3.3,2.7,2.2,1.8,1.5,1.2,0.9,0.5,0.1,-0.2,-0.7,-1.3,-2,-3,-4,-4.9,-5.4,-5.6,-5.2,-4.4,-3.3,-1.9,-0.3,1.4,3.1,4.6,6,7.1;6.1,7.2,8.1,8.9,9.6,10.2,10.8,11.4,11.8,12,11.9,11.5,10.8,9.8,8.4,6.6,4.2,1.4,-1.7,-4.9,-8,-10.7,-12.8,-14.2,-14.9,-14.9,-14.2,-13.2,-11.8,-10.1,-8.4,-6.5,-4.6,-2.8,-1.2,0.1,1.2,2.1,2.8,3.5,4.1,4.5,4.8,4.8,4.5,4.1,3.7,3.3,2.9,2.6,2.2,1.8,1.3,0.8,0.1,-0.6,-1.5,-2.6,-3.8,-5,-6,-6.7,-7,-6.8,-6.1,-5,-3.6,-2,-0.3,1.5,3.2,4.7,6.1;5,6.4,7.6,8.7,9.8,10.7,11.5,12.2,12.7,13,12.9,12.5,11.8,10.7,9.1,7,4.4,1.3,-2,-5.4,-8.5,-11.2,-13.2,-14.5,-15,-14.8,-14.1,-13,-11.5,-9.9,-8.1,-6.3,-4.5,-2.7,-1,0.4,1.5,2.5,3.2,3.9,4.5,5,5.3,5.4,5.4,5.1,4.9,4.6,4.3,3.9,3.5,3,2.3,1.5,0.6,-0.5,-1.8,-3.2,-4.6,-6,-7.3,-8.1,-8.5,-8.3,-7.7,-6.7,-5.3,-3.7,-2,-0.1,1.7,3.4,5;3.9,5.5,7.1,8.6,9.9,11.1,12.2,13,13.6,14,13.9,13.6,12.8,11.5,9.8,7.5,4.6,1.3,-2.3,-5.9,-9.2,-11.9,-13.8,-15,-15.4,-15.2,-14.4,-13.2,-11.7,-10.1,-8.3,-6.4,-4.6,-2.8,-1.1,0.4,1.7,2.7,3.6,4.4,5,5.6,6,6.3,6.5,6.5,6.4,6.2,6,5.6,5.1,4.4,3.5,2.4,1.1,-0.3,-2,-3.8,-5.5,-7.2,-8.6,-9.5,-10,-9.9,-9.3,-8.3,-6.9,-5.3,-3.6,-1.7,0.2,2.1,3.9;2.8,4.8,6.6,8.3,10,11.4,12.7,13.7,14.5,14.9,15,14.6,13.8,12.4,10.5,7.9,4.8,1.2,-2.7,-6.5,-10,-12.8,-14.7,-15.9,-16.3,-16,-15.1,-13.9,-12.4,-10.7,-8.9,-6.9,-5,-3.1,-1.4,0.2,1.7,2.9,3.9,4.8,5.7,6.4,7,7.5,7.9,8.2,8.3,8.3,8.1,7.8,7.2,6.3,5.1,3.6,1.9,-0.1,-2.2,-4.4,-6.5,-8.4,-9.9,-11,-11.4,-11.4,-10.8,-9.8,-8.4,-6.8,-5,-3.1,-1.1,0.9,2.8;1.9,4.1,6.1,8.1,10,11.7,13.2,14.4,15.3,15.9,16,15.7,14.8,13.4,11.2,8.4,4.9,0.9,-3.4,-7.5,-11.1,-14,-16.1,-17.2,-17.6,-17.2,-16.4,-15.1,-13.5,-11.8,-9.8,-7.8,-5.8,-3.8,-1.9,-0.2,1.5,2.9,4.2,5.4,6.5,7.5,8.4,9.2,9.9,10.4,10.8,10.9,10.8,10.4,9.7,8.5,7,5.1,2.8,0.3,-2.4,-5,-7.5,-9.7,-11.3,-12.4,-12.9,-12.8,-12.2,-11.1,-9.8,-8.1,-6.3,-4.3,-2.3,-0.2,1.9;1.2,3.4,5.7,7.8,9.9,11.8,13.5,15,16.1,16.8,17.1,16.8,15.9,14.3,12,8.8,4.9,0.4,-4.4,-8.9,-12.8,-15.9,-18,-19.1,-19.5,-19.1,-18.2,-16.8,-15.2,-13.3,-11.3,-9.2,-7,-4.8,-2.8,-0.8,1.1,2.9,4.5,6,7.5,8.8,10.1,11.3,12.3,13.2,13.8,14.1,14.1,13.7,12.9,11.5,9.5,7.1,4.2,1,-2.3,-5.5,-8.5,-10.9,-12.7,-13.9,-14.3,-14.2,-13.5,-12.4,-11,-9.3,-7.5,-5.4,-3.3,-1.1,1.2;0.4,2.8,5.2,7.5,9.7,11.8,13.7,15.4,16.7,17.6,18,17.8,16.9,15.2,12.6,9,4.5,-0.7,-6,-11,-15.3,-18.5,-20.6,-21.8,-22,-21.6,-20.6,-19.1,-17.3,-15.3,-13.1,-10.8,-8.5,-6.1,-3.8,-1.5,0.7,2.9,4.9,6.9,8.8,10.5,12.2,13.8,15.2,16.4,17.4,18,18.2,17.8,16.9,15.3,13,9.9,6.3,2.3,-1.8,-5.8,-9.3,-12.1,-14.1,-15.3,-15.8,-15.6,-14.9,-13.8,-12.3,-10.5,-8.6,-6.5,-4.3,-1.9,0.4;-0.5,2,4.5,7,9.4,11.6,13.7,15.5,17,18,18.6,18.5,17.6,15.8,12.8,8.6,3.3,-2.7,-8.8,-14.4,-18.9,-22.2,-24.3,-25.2,-25.3,-24.7,-23.5,-21.8,-19.9,-17.6,-15.2,-12.7,-10.1,-7.5,-4.8,-2.2,0.4,3,5.5,7.9,10.3,12.6,14.8,16.8,18.7,20.3,21.6,22.5,23,22.9,22,20.4,17.8,14.2,9.8,4.8,-0.5,-5.4,-9.7,-13.1,-15.4,-16.8,-17.4,-17.2,-16.5,-15.3,-13.7,-11.9,-9.9,-7.7,-5.3,-2.9,-0.5;-1.7,0.9,3.5,6,8.5,10.9,13,15,16.6,17.7,18.3,18.2,17.2,15,11.5,6.5,0.2,-6.7,-13.6,-19.5,-24.1,-27.1,-28.9,-29.5,-29.2,-28.2,-26.7,-24.7,-22.5,-20,-17.3,-14.5,-11.6,-8.6,-5.6,-2.6,0.4,3.4,6.4,9.3,12.2,15,17.6,20.1,22.5,24.6,26.4,27.9,28.8,29.2,28.8,27.4,24.9,21.1,15.9,9.7,2.9,-3.6,-9.2,-13.5,-16.6,-18.3,-19.1,-19.1,-18.4,-17.1,-15.6,-13.7,-11.5,-9.3,-6.8,-4.3,-1.7;-3.9,-1.2,1.4,4,6.5,8.9,11.1,12.9,14.4,15.5,15.8,15.3,13.7,10.7,6.2,0.1,-7.2,-14.8,-21.7,-27.1,-30.9,-33.1,-34,-33.9,-33.1,-31.6,-29.6,-27.3,-24.7,-21.8,-18.8,-15.7,-12.4,-9.1,-5.8,-2.4,1,4.4,7.8,11.2,14.5,17.7,20.9,23.9,26.8,29.5,31.9,34.1,35.8,37,37.5,37.1,35.5,32.3,27.3,20.3,11.6,2.4,-5.9,-12.4,-17,-19.8,-21.1,-21.4,-20.9,-19.7,-18.1,-16.2,-14,-11.7,-9.2,-6.6,-3.9;-8.6,-6,-3.5,-1,1.2,3.3,5,6.4,7.2,7.3,6.6,4.6,1.4,-3.4,-9.5,-16.4,-23.3,-29.3,-33.9,-37.1,-38.8,-39.3,-39,-37.8,-36.1,-34,-31.5,-28.7,-25.7,-22.5,-19.2,-15.7,-12.2,-8.5,-4.9,-1.1,2.6,6.3,10.1,13.9,17.6,21.3,24.9,28.5,31.9,35.3,38.5,41.5,44.3,46.8,48.9,50.3,51,50.6,48.5,44.1,36.3,24.6,10.4,-3.1,-13.2,-19.6,-23.1,-24.7,-24.8,-24.1,-22.7,-20.8,-18.7,-16.3,-13.8,-11.3,-8.6',DECA='3.2,3.2,3.2,3.2,3.1,3,2.9,2.8,2.7,2.6,2.4,2.3,2.1,1.9,1.7,1.6,1.4,1.2,1,0.8,0.6,0.5,0.3,0.1,-0,-0.2,-0.3,-0.4,-0.5,-0.6,-0.7,-0.8,-0.9,-1,-1.1,-1.1,-1.2;3.3,3.3,3.3,3.3,3.2,3.1,3.1,3,2.8,2.7,2.6,2.4,2.3,2.1,1.9,1.7,1.5,1.4,1.2,1,0.8,0.6,0.5,0.3,0.2,0,-0.1,-0.2,-0.3,-0.4,-0.5,-0.6,-0.7,-0.8,-0.9,-0.9,-1;3.4,3.4,3.4,3.4,3.3,3.2,3.2,3.1,3,2.8,2.7,2.5,2.4,2.2,2.1,1.9,1.7,1.5,1.3,1.2,1,0.8,0.7,0.5,0.4,0.2,0.1,-0,-0.1,-0.2,-0.3,-0.4,-0.5,-0.6,-0.7,-0.7,-0.8;3.5,3.5,3.5,3.4,3.4,3.3,3.3,3.2,3.1,3,2.8,2.7,2.5,2.4,2.2,2,1.8,1.7,1.5,1.3,1.2,1,0.8,0.7,0.5,0.4,0.3,0.2,0,-0.1,-0.2,-0.2,-0.3,-0.4,-0.5,-0.5,-0.6;3.5,3.5,3.5,3.5,3.5,3.4,3.4,3.3,3.2,3.1,2.9,2.8,2.6,2.5,2.3,2.2,2,1.8,1.7,1.5,1.3,1.2,1,0.9,0.7,0.6,0.5,0.3,0.2,0.1,0,-0.1,-0.1,-0.2,-0.3,-0.4,-0.4;3.6,3.6,3.6,3.6,3.6,3.5,3.5,3.4,3.3,3.2,3,2.9,2.8,2.6,2.5,2.3,2.1,2,1.8,1.6,1.5,1.3,1.2,1,0.9,0.8,0.6,0.5,0.4,0.3,0.2,0.1,0,-0,-0.1,-0.2,-0.2;3.7,3.7,3.7,3.7,3.7,3.6,3.5,3.5,3.4,3.3,3.1,3,2.9,2.7,2.6,2.4,2.3,2.1,1.9,1.8,1.6,1.5,1.3,1.2,1,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,0.1,0,-0.1;3.7,3.8,3.8,3.8,3.7,3.7,3.6,3.6,3.5,3.4,3.3,3.1,3,2.9,2.7,2.6,2.4,2.2,2.1,1.9,1.8,1.6,1.5,1.3,1.2,1.1,1,0.8,0.7,0.6,0.6,0.5,0.4,0.3,0.2,0.2,0.1;3.8,3.8,3.8,3.8,3.8,3.8,3.7,3.6,3.6,3.5,3.4,3.2,3.1,3,2.8,2.7,2.5,2.4,2.2,2.1,1.9,1.8,1.6,1.5,1.4,1.2,1.1,1,0.9,0.8,0.7,0.6,0.6,0.5,0.4,0.3,0.3;3.9,3.9,3.9,3.9,3.9,3.8,3.8,3.7,3.6,3.6,3.5,3.3,3.2,3.1,2.9,2.8,2.7,2.5,2.4,2.2,2.1,1.9,1.8,1.7,1.5,1.4,1.3,1.2,1.1,1,0.9,0.8,0.7,0.7,0.6,0.5,0.5;3.9,4,4,4,4,3.9,3.9,3.8,3.7,3.6,3.6,3.4,3.3,3.2,3.1,2.9,2.8,2.6,2.5,2.4,2.2,2.1,1.9,1.8,1.7,1.6,1.5,1.3,1.2,1.2,1.1,1,0.9,0.8,0.8,0.7,0.6;4,4,4.1,4,4,4,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3,2.9,2.8,2.6,2.5,2.4,2.2,2.1,2,1.8,1.7,1.6,1.5,1.4,1.3,1.2,1.2,1.1,1,0.9,0.9,0.8;4.1,4.1,4.1,4.1,4.1,4.1,4,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3,2.9,2.8,2.6,2.5,2.4,2.3,2.1,2,1.9,1.8,1.7,1.6,1.5,1.4,1.3,1.3,1.2,1.1,1.1,1;4.1,4.2,4.2,4.2,4.2,4.2,4.1,4.1,4,3.9,3.8,3.8,3.7,3.5,3.4,3.3,3.2,3,2.9,2.8,2.7,2.5,2.4,2.3,2.2,2.1,2,1.9,1.8,1.7,1.6,1.5,1.4,1.4,1.3,1.2,1.2;4.2,4.2,4.3,4.3,4.3,4.2,4.2,4.2,4.1,4,4,3.9,3.8,3.7,3.5,3.4,3.3,3.2,3.1,2.9,2.8,2.7,2.6,2.5,2.3,2.2,2.1,2,2,1.9,1.8,1.7,1.6,1.6,1.5,1.4,1.4;4.3,4.3,4.3,4.3,4.3,4.3,4.3,4.3,4.2,4.1,4.1,4,3.9,3.8,3.7,3.6,3.4,3.3,3.2,3.1,3,2.9,2.7,2.6,2.5,2.4,2.3,2.2,2.1,2.1,2,1.9,1.8,1.7,1.7,1.6,1.6;4.4,4.4,4.4,4.4,4.4,4.4,4.4,4.3,4.3,4.2,4.2,4.1,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.1,3,2.9,2.8,2.7,2.6,2.5,2.4,2.3,2.2,2.2,2.1,2,1.9,1.9,1.8,1.8;4.4,4.5,4.5,4.5,4.5,4.5,4.5,4.4,4.4,4.3,4.3,4.2,4.1,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3.1,3,2.9,2.8,2.7,2.6,2.5,2.4,2.4,2.3,2.2,2.2,2.1,2,2;4.5,4.6,4.6,4.6,4.6,4.6,4.6,4.5,4.5,4.5,4.4,4.3,4.3,4.2,4.1,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3.1,3,2.9,2.8,2.7,2.7,2.6,2.5,2.4,2.4,2.3,2.2,2.2;4.6,4.6,4.7,4.7,4.7,4.7,4.7,4.7,4.6,4.6,4.5,4.5,4.4,4.3,4.2,4.1,4.1,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.2,3.1,3,3,2.9,2.8,2.7,2.7,2.6,2.5,2.5,2.4;4.7,4.7,4.8,4.8,4.8,4.8,4.8,4.8,4.7,4.7,4.6,4.6,4.5,4.5,4.4,4.3,4.2,4.1,4,4,3.9,3.8,3.7,3.6,3.5,3.4,3.3,3.3,3.2,3.1,3,3,2.9,2.8,2.8,2.7,2.6;4.8,4.8,4.9,4.9,4.9,4.9,4.9,4.9,4.9,4.8,4.8,4.7,4.7,4.6,4.5,4.5,4.4,4.3,4.2,4.1,4.1,4,3.9,3.8,3.7,3.7,3.6,3.5,3.4,3.4,3.3,3.2,3.1,3.1,3,3,2.9;4.9,4.9,5,5,5,5,5,5,5,5,4.9,4.9,4.8,4.8,4.7,4.7,4.6,4.5,4.4,4.4,4.3,4.2,4.1,4,4,3.9,3.8,3.7,3.7,3.6,3.5,3.5,3.4,3.3,3.3,3.2,3.1;5,5,5.1,5.1,5.1,5.1,5.1,5.1,5.1,5.1,5.1,5,5,5,4.9,4.8,4.8,4.7,4.6,4.6,4.5,4.4,4.4,4.3,4.2,4.1,4.1,4,3.9,3.9,3.8,3.7,3.7,3.6,3.5,3.5,3.4;5.1,5.1,5.2,5.2,5.2,5.3,5.3,5.3,5.3,5.3,5.2,5.2,5.2,5.1,5.1,5,5,4.9,4.9,4.8,4.7,4.7,4.6,4.5,4.5,4.4,4.3,4.3,4.2,4.1,4.1,4,4,3.9,3.8,3.8,3.7;5.2,5.2,5.3,5.3,5.4,5.4,5.4,5.4,5.4,5.4,5.4,5.4,5.4,5.3,5.3,5.2,5.2,5.1,5.1,5,5,4.9,4.9,4.8,4.7,4.7,4.6,4.6,4.5,4.4,4.4,4.3,4.3,4.2,4.1,4.1,4;5.3,5.4,5.4,5.5,5.5,5.5,5.6,5.6,5.6,5.6,5.6,5.6,5.6,5.5,5.5,5.5,5.4,5.4,5.3,5.3,5.2,5.2,5.1,5.1,5,5,4.9,4.9,4.8,4.7,4.7,4.6,4.6,4.5,4.4,4.4,4.3;5.4,5.5,5.6,5.6,5.7,5.7,5.7,5.8,5.8,5.8,5.8,5.8,5.8,5.7,5.7,5.7,5.7,5.6,5.6,5.6,5.5,5.5,5.4,5.4,5.3,5.3,5.2,5.2,5.1,5.1,5,5,4.9,4.8,4.8,4.7,4.6;5.6,5.6,5.7,5.8,5.8,5.9,5.9,5.9,6,6,6,6,6,6,6,5.9,5.9,5.9,5.9,5.8,5.8,5.8,5.7,5.7,5.6,5.6,5.6,5.5,5.5,5.4,5.4,5.3,5.2,5.2,5.1,5,5;5.7,5.8,5.9,5.9,6,6,6.1,6.1,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.1,6.1,6.1,6.1,6,6,5.9,5.9,5.9,5.8,5.8,5.7,5.7,5.6,5.5,5.5,5.4,5.3;5.9,5.9,6,6.1,6.2,6.2,6.3,6.3,6.4,6.4,6.4,6.4,6.5,6.5,6.5,6.5,6.5,6.5,6.5,6.5,6.4,6.4,6.4,6.4,6.3,6.3,6.3,6.2,6.2,6.1,6.1,6,6,5.9,5.9,5.8,5.7;6,6.1,6.2,6.3,6.4,6.4,6.5,6.5,6.6,6.6,6.7,6.7,6.7,6.7,6.8,6.8,6.8,6.8,6.8,6.8,6.8,6.8,6.7,6.7,6.7,6.7,6.6,6.6,6.6,6.5,6.5,6.4,6.4,6.3,6.3,6.2,6.1;6.2,6.3,6.4,6.5,6.6,6.6,6.7,6.8,6.8,6.9,6.9,7,7,7,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7.1,7,7,7,6.9,6.9,6.8,6.8,6.7,6.7,6.6,6.5';
+/* ---------- star guide: الجدي (Polaris), سهيل, الثريا, الشعرى, الجوزاء — computed on the phone ----------
+   J2000 positions precessed to today (IAU 1976), then local altitude/azimuth. Good to about 0.1°. */
+const STARS=[['jadi','الجدي (النجم القطبي)','Al-Jadi (Polaris)',37.9545,89.2641,'⭐'],['suhail','سهيل','Suhail (Canopus)',95.9880,-52.6957,'🌟'],
+ ['thurayya','الثريا','Ath-Thurayya (Pleiades)',56.8712,24.1051,'✨'],['shira','الشعرى اليمانية','Sirius',101.2872,-16.7161,'💫'],['jawza','الجوزاء (حزام الجبار)','Al-Jawza (Orion’s Belt)',84.0533,-1.2019,'✦']];
+function starAltAz(s,date,lat,lon){const R=Math.PI/180,jd=date.valueOf()/864e5+2440587.5,T=(jd-2451545)/36525;
+  const ze=(2306.2181*T+0.30188*T*T)/3600*R,z=(2306.2181*T+1.09468*T*T)/3600*R,th=(2004.3109*T-0.42665*T*T)/3600*R;
+  const a0=s[3]*R,d0=s[4]*R,A=Math.cos(d0)*Math.sin(a0+ze),B=Math.cos(th)*Math.cos(d0)*Math.cos(a0+ze)-Math.sin(th)*Math.sin(d0),C=Math.sin(th)*Math.cos(d0)*Math.cos(a0+ze)+Math.cos(th)*Math.sin(d0);
+  const ra=Math.atan2(A,B)+z,dec=Math.asin(Math.max(-1,Math.min(1,C)));
+  const lst=((280.46061837+360.98564736629*(jd-2451545)+lon)%360+360)%360*R,H=lst-ra,ph=lat*R;
+  const alt=Math.asin(Math.sin(ph)*Math.sin(dec)+Math.cos(ph)*Math.cos(dec)*Math.cos(H));
+  let az=Math.atan2(-Math.cos(dec)*Math.sin(H),Math.sin(dec)*Math.cos(ph)-Math.cos(dec)*Math.cos(H)*Math.sin(ph))/R;
+  let a=alt/R;if(a>-1)a+=1.02/Math.tan((a+10.3/(a+5.11))*R)/60;   // refraction near the horizon
+  return{alt:a,az:(az+360)%360}}
+// next time the star climbs above 5° (null if it never does here)
+function starRise(s,lat,lon){const now=Date.now();for(let m=10;m<=24*60;m+=10){const t=new Date(now+m*6e4);if(starAltAz(s,t,lat,lon).alt>=5)return t}return null}
+
+/* true north: phone compasses report magnetic north, so add the local declination (WMM2025, grid accurate to ~0.1°) */
+function declAt(lat,lon){const pick=(str,la0,lo0,st)=>{const G=str.split(';').map(r=>r.split(',').map(Number)),i=(lat-la0)/st,j=(lon-lo0)/st,i0=Math.floor(i),j0=Math.floor(j);
+    const g=(a,b)=>G[Math.max(0,Math.min(G.length-1,a))][Math.max(0,Math.min(G[0].length-1,b))],fi=i-i0,fj=j-j0;
+    return g(i0,j0)*(1-fi)*(1-fj)+g(i0,j0+1)*(1-fi)*fj+g(i0+1,j0)*fi*(1-fj)+g(i0+1,j0+1)*fi*fj};
+  if(lat>=10&&lat<=42&&lon>=28&&lon<=64)return pick(DECA,10,28,1);
+  return pick(DECW,-80,-180,5)}
+let declCache={d:3.1,lat:24.7,lon:46.7};
+function decl(){const p=pos||startPt;if(p&&(Math.abs(p.lat-declCache.lat)>.2||Math.abs(p.lon-declCache.lon)>.2))declCache={d:declAt(p.lat,p.lon),lat:p.lat,lon:p.lon};return declCache.d}
+
+/* ---------- camp + car ---------- */
+let campPt=null;try{campPt=JSON.parse(localStorage.getItem('sahm.camp')||'null')}catch(e){}
+function saveCamp(){try{if(campPt)localStorage.setItem('sahm.camp',JSON.stringify(campPt));else localStorage.removeItem('sahm.camp')}catch(e){}}
+const PT={camp:{get:()=>campPt,set:v=>{campPt=v;saveCamp()},name:()=>T('campName'),lbl:'campLbl',em:'⛺',id:'__camp'},
+          car:{get:()=>startPt,set:v=>{startPt=v;try{if(v)localStorage.setItem('sahm.start',JSON.stringify(v));else localStorage.removeItem('sahm.start')}catch(e){}},name:()=>T('carName'),lbl:'carLbl',em:'🚙',id:'__start'}};
+function paintPts(){for(const k in PT){const p=PT[k].get(),b=$(k+'Btn');b.classList.toggle('pinned',!!p);
+    $(k+'Lbl').textContent=p?PT[k].name():T(PT[k].lbl);
+    let d='';if(p&&pos){const f=fmtDist(distance(pos,p));d=(pos.acc>25?'≈ ':'')+f.v+' '+f.u}
+    $(k+'Dist').textContent=d}}
+// pin with the GPS readings of the last 10 s that are ±25 m or better, averaged (better readings count more)
+function pinHere(k){const now=Date.now(),b=recent.filter(f=>f.acc<=25&&now-f.t<10000);
+  if(!b.length){toast(T('ptWeak')(pos?Math.round(pos.acc):0));return false}
+  const a=avgFix(b);PT[k].set({lat:a.lat,lon:a.lon,alt:a.alt,at:stamp(),t:Date.now()});paintPts();pushSync();toast(T('ptSaved')(Math.round(a.acc)));return true}
+let ptK=null;
+function openPt(k){ptK=k;const p=PT[k].get();
+  $('ptTitle').textContent=PT[k].em+' '+PT[k].name()+(pos?' · '+(()=>{const f=fmtDist(distance(pos,p));return f.v+' '+f.u})():'');
+  $('ptSub').textContent=fmtLL(p.lat,p.lon)+(p.at?' · '+showAt(p.at):'');$('ptGo').textContent=T('ptGo')(PT[k].name());
+  $('ptDel').classList.remove('sure');$('dlgPt').showModal()}
+['camp','car'].forEach(k=>$(k+'Btn').onclick=()=>{if(PT[k].get())openPt(k);else pinHere(k)});
+$('ptGo').onclick=()=>{$('dlgPt').close();navigateTo(PT[ptK].id)};
+$('ptHere').onclick=()=>{if(pinHere(ptK))$('dlgPt').close()};
+$('ptShare').onclick=async()=>{const p=PT[ptK].get(),u=linkOf(p.lat,p.lon,PT[ptK].name()),text=T('ptInvite')(PT[ptK].name(),u);
+  if(navigator.share){try{await navigator.share({text});return}catch(e){if(e.name==='AbortError')return}}copy(text)};
+$('ptDel').onclick=()=>{const b=$('ptDel');if(!b.classList.contains('sure')){b.classList.add('sure');toast(T('ptDelSure'));return}
+  if(cur===PT[ptK].id){cur=null;save()}PT[ptK].set(null);paintPts();pushSync();$('dlgPt').close();toast(T('ptDeleted'));render()};
+$('ptClose').onclick=()=>$('dlgPt').close();
+paintStart=function(){paintPts()};
+
+/* ---------- links that open a place in Sahm: sahm.wamdarc.com/#lat,lon~name ---------- */
+function linkOf(lat,lon,name){return 'https://sahm.wamdarc.com/#'+lat.toFixed(6)+','+lon.toFixed(6)+(name?'~'+encodeURIComponent(name):'')}
+function parseLink(str){if(!str)return null;let s=String(str);const i=s.indexOf('#');if(/sahm\.wamdarc\.com|bsshfi\.github\.io/.test(s)&&i>=0)s=s.slice(i+1);else if(i===0)s=s.slice(1);else if(/^https?:/.test(s))return null;
+  let name='';const t=s.indexOf('~');if(t>=0){try{name=decodeURIComponent(s.slice(t+1))}catch(e){name=s.slice(t+1)}s=s.slice(0,t)}
+  try{s=decodeURIComponent(s)}catch(e){}const m=s.match(/^\s*(-?\d{1,2}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)\s*$/);if(!m)return null;
+  const lat=+m[1],lon=+m[2];if(Math.abs(lat)>90||Math.abs(lon)>180)return null;return{lat,lon,name:name.slice(0,60)}}
+let linkPt=null;try{linkPt=JSON.parse(localStorage.getItem('sahm.link')||'null')}catch(e){}
+function showLink(L){$('lkName').textContent=L.name||T('linkName');$('lkCoord').textContent=L.lat.toFixed(6)+', '+L.lon.toFixed(6);
+  $('lkDist').textContent=pos?T('lkAway')((()=>{const f=fmtDist(distance(pos,L));return f.v+' '+f.u})()):'';$('lkWeb').hidden=isApp;$('dlgLink').showModal();showLink.L=L}
+$('lkGo').onclick=()=>{const L=showLink.L;linkPt=L;try{localStorage.setItem('sahm.link',JSON.stringify(L))}catch(e){}$('dlgLink').close();navigateTo('__link')};
+$('lkSave').onclick=()=>{const L=showLink.L;let p=places.find(x=>Math.abs(x.lat-L.lat)<1e-6&&Math.abs(x.lon-L.lon)<1e-6);if(!p)p=addPlace(L.name||T('linkName'),L);
+  $('dlgLink').close();toast(T('lkSaved'));navigateTo(p.id)};
+$('lkClose').onclick=()=>$('dlgLink').close();
+setInterval(()=>{if($('dlgLink').open&&pos&&showLink.L){const f=fmtDist(distance(pos,showLink.L));$('lkDist').textContent=T('lkAway')(f.v+' '+f.u)}},1000);
+
+/* ---------- star guide ---------- */
+function paintStars(){const L=$('starList');L.innerHTML='';const p=pos||startPt||{lat:24.7,lon:46.7},now=new Date();
+  const cq=compassQ();$('stWarn').hidden=!(compassOK&&cq.n<=2);if(!$('stWarn').hidden)$('stWarn').textContent=T('qComp')(compAcc>0?Math.round(compAcc):0);
+  const sun=sunTimes(now,p.lat,p.lon),day=sun&&now>sun.rise&&now<sun.set;
+  STARS.forEach(s=>{const a=starAltAz(s,now,p.lat,p.lon),up=a.alt>0,rs=up?null:starRise(s,p.lat,p.lon);
+    const row=document.createElement('div');row.className='srow2'+(up?' up':'');
+    row.innerHTML='<span class="se"></span><div class="sx"><b></b><small></small><small class="sd"></small></div><button class="primary"></button>';
+    row.querySelector('.se').textContent=s[5];row.querySelector('b').textContent=cfg.lang==='en'?s[2]:s[1];
+    row.querySelector('small').textContent=T('stInfo')[s[0]];
+    row.querySelector('.sd').textContent=dirName(a.az)+' '+Math.round(a.az)+'° · '+(up?T('stAlt')(Math.round(a.alt)):rs?T('stRiseShort')(hm(rs)):T('stNever'))+(up&&day?' · ☀️':'');
+    const b=row.querySelector('button');b.textContent=T('stGo');b.onclick=()=>{$('dlgStars').close();navigateTo('__star:'+s[0])};
+    L.appendChild(row)})}
+$('homeComp').onclick=()=>{paintStars();$('dlgStars').showModal()};
+$('stClose').onclick=()=>$('dlgStars').close();
+
+/* ---------- wind on the compass, tonight's low ---------- */
+function paintWind(){const w=net.wx,L=$('windLayer');if(!L)return;
+  const ok=w&&w.dir!=null&&pos&&Date.now()-w.t<6*3600e3&&distance(pos,w)<30000;
+  if(!ok){L.innerHTML='';paintWind.txt='';return}
+  const cq=compassQ(),dim=compassOK&&cq.n<=2;
+  L.innerHTML=w.wind<2?'':'<g transform="rotate('+w.dir+' 100 100)" opacity="'+(dim?.35:1)+'"><path d="M91 3 H109 V15 H116 L100 34 L84 15 H91Z" fill="#3d8fd6" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></g>';
+  paintWind.txt=w.wind<2?T('windCalm'):T('windLine')(T('windFrom')[Math.round(w.dir/45)%8],w.wind)}
+function paintNight(){const n=net.night,el=$('nightTxt');
+  if(!n||!pos||Date.now()>n.end||distance(pos,n)>30000){el.hidden=true;return}
+  el.textContent=T('night')(n.min,hm(new Date(n.at)));el.hidden=false}
+function paintQ(){const el=$('qline');if(!el)return;const cq=compassQ();let t='',warn=false;
+  if(compassOK&&cq.n<=2){t=T('qComp')(compAcc>0?Math.round(compAcc):0);warn=true}
+  else if(pos&&pos.acc>15){t=T('qGps')(Math.round(pos.acc));warn=true}
+  else t=paintWind.txt||'';
+  el.textContent=t;el.hidden=!t;el.classList.toggle('warn',warn)}
+
+/* ---------- notifications (WAMD ARC push server) ---------- */
+function sahmCfg(){const P=window.WamdPush;let lb=null,since=null;try{lb=+localStorage.getItem('sahm.lastBackup')||null;since=+localStorage.getItem('sahm.since')||null;if(!since){since=Date.now();localStorage.setItem('sahm.since',since)}}catch(e){}
+  const pts=[['camp',campPt],['car',startPt]].filter(x=>x[1]).map(([n,p])=>({n,lat:+p.lat.toFixed(3),lng:+p.lon.toFixed(3),t:p.t||Date.parse(String(p.at||'').replace(' ','T'))||Date.now()}));
+  return{lang:cfg.lang,tz:P?P.tz():'Asia/Riyadh',count:places.length,lastBackup:lb,since,prefs:{backup:true,seasons:true,sunset:true},pts}}
+function pushSync(){const P=window.WamdPush;if(P&&cfg.ntf!=='off')try{P.sync('sahm',sahmCfg)}catch(e){}}
+function paintNtf(){const P=window.WamdPush,st=P?P.status():'unsupported',on=st==='granted'&&cfg.ntf!=='off';
+  $$('#ntfSeg button').forEach(b=>b.classList.toggle('on',(b.dataset.v==='on')===on));
+  $('ntfNote').textContent=st==='needInstall'?T('ntfInstall'):st==='blocked'?T('ntfBlocked'):on?T('ntfOnN'):T('ntfOffN')}
+$$('#ntfSeg button').forEach(b=>b.onclick=()=>{const P=window.WamdPush;if(!P)return;
+  if(b.dataset.v==='off'){cfg.ntf='off';saveCfg();P.unsubscribe();paintNtf();return}
+  const st=P.status();if(st==='needInstall'||st==='blocked'||st==='unsupported'){toast($('ntfNote').textContent);return}
+  cfg.ntf='on';saveCfg();P.request().then(perm=>{if(perm!=='granted'){paintNtf();return}
+    return P.subscribe('sahm',sahmCfg(),true).then(()=>paintNtf())}).catch(()=>{toast(T('ntfFail'));paintNtf()})});
+
+/* winter look: from Al-Ghafr (11 Nov) to the end of Al-Aqarib (20 Mar) */
+(function(){const d=new Date(),md=(d.getMonth()+1)*100+d.getDate();document.documentElement.classList.toggle('winter',md>=1111||md<=320)})();
 /* ---------- tabs ---------- */
 function setTitle(){$('ptitle').textContent=tab==='home'?T('heroTag'):T({set:'tabSet',qibla:'tabQibla',fav:'tabFav'}[tab])}
 function go(name){tab=name;smooth=null;smoothB=null;arrived=false;
@@ -1616,14 +1870,14 @@ function showAt(at){const m=at&&at.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2
   let h=+m[4];const ap=h<12?T('am'):T('pm');h=h%12||12;return m[3]+'/'+m[2]+'/'+m[1]+' · '+h+':'+m[5]+' '+ap}
 function navigateTo(id){cur=id||null;save();go('home')}
 function addPlace(name,c,at,alt,cat){const p={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:name||T('place'),lat:c.lat,lon:c.lon,at:at===undefined?stamp():at};if(alt!=null)p.alt=alt;if(cat&&cat!=='pin')p.cat=cat;places.push(p);save();return p}
-function preview(){const c=parseCoord($('fCoord').value);$('fErr').textContent='';$('fPrev').textContent=c?'✓ '+c.lat.toFixed(6)+', '+c.lon.toFixed(6):''}
+function preview(){const lk=parseLink($('fCoord').value);if(lk&&lk.name&&!$('fName').value.trim())$('fName').value=lk.name;const c=lk||parseCoord($('fCoord').value);$('fErr').textContent='';$('fPrev').textContent=c?'✓ '+c.lat.toFixed(6)+', '+c.lon.toFixed(6):''}
 $('fCoord').oninput=()=>{preview();nameFromMsg($('fCoord').value)};
 function nameFromMsg(v){const m=v&&v.match(/📍\s*(.+?)(?=\s*[\r\n]|\s*-?\d{1,3}\.\d{3}|$)/);if(m&&!$('fName').value.trim())$('fName').value=m[1].trim()}
 $('fPaste').onclick=async()=>{try{const v=await navigator.clipboard.readText();if(!v)throw 0;$('fCoord').value=v.trim();if(avgBuf){avgBuf.edited=true;$('fAvg').hidden=true}preview();nameFromMsg(v)}catch(e){toast(T('pasteFail'));$('fCoord').focus()}};
 function openAdd(prefill,fix){avgBuf=fix?[fix]:null;$('fAvg').hidden=true;$('fName').value='';$('fCoord').value=prefill||'';preview();if(fix)showAvg();openAdd.at=stamp();$('fAt').textContent=showAt(openAdd.at);openAdd.cat='pin';buildCats($('fCats'),'pin',c=>openAdd.cat=c);$('dlgAdd').showModal()}
 $$('.addCoord').forEach(b=>b.onclick=()=>openAdd(''));
 $$('.saveHere').forEach(b=>b.onclick=()=>{if(!pos){toast(T('waitGps'));return}openAdd('',pos)});
-$('fOk').onclick=()=>{const v=$('fCoord').value,c=parseCoord(v);
+$('fOk').onclick=()=>{const v=$('fCoord').value,c=parseLink(v)||parseCoord(v);
   if(!c){$('fErr').textContent=/goo\.gl|maps\.app/i.test(v)?T('errShort'):T('errBad');return}
   const alt=avgBuf&&!avgBuf.edited&&avgBuf.length?avgFix(avgBuf.slice(-30)).alt:null;
   addPlace($('fName').value.trim(),c,openAdd.at,alt,openAdd.cat);$('dlgAdd').close();
@@ -1666,7 +1920,7 @@ $('pDel').onclick=()=>{const d=$('pDel');if(!d.classList.contains('sure')){d.cla
     setTimeout(()=>{d.classList.remove('sure');d.textContent=T('del')},3000);return}
   places=places.filter(x=>x.id!==curP.id);if(cur===curP.id)cur=null;save();$('dlgPlace').close();fillList()};
 /* share a place as plain text: works by SMS with no internet, and pastes straight into "Add coordinates" */
-async function sharePlace(p){const text=T('shareMsg')(p.name,p.lat.toFixed(6)+', '+p.lon.toFixed(6));
+async function sharePlace(p){const text=T('shareLink')(p.name,p.lat.toFixed(6)+', '+p.lon.toFixed(6),linkOf(p.lat,p.lon,p.name));
   if(navigator.share){try{await navigator.share({text});return}catch(e){if(e.name==='AbortError')return}}
   copy(text)}
 
@@ -1686,6 +1940,7 @@ $('resetStart').onclick=()=>{const b=$('resetStart');if(!b.classList.contains('s
 function backupText(){return T('backupTitle')+'\n'+places.map(p=>p.name+': '+p.lat.toFixed(6)+', '+p.lon.toFixed(6)+(p.at?' | '+p.at:'')+(p.alt!=null?' | '+p.alt+'m':'')+(p.cat?' | '+catOf(p.cat)[1]:'')).join('\n')}
 $('backup').onclick=async()=>{
   if(!places.length){toast(T('noPlaces'));return}
+  try{localStorage.setItem('sahm.lastBackup',Date.now())}catch(e){}pushSync();
   const text=backupText();
   if(navigator.share){try{await navigator.share({title:T('backupTitle'),text});return}catch(e){if(e.name==='AbortError')return}}
   copy(text)};
@@ -1710,7 +1965,7 @@ $('rOk').onclick=()=>{
   save();fillList();$('dlgRestore').close();toast(T('restored')(added,skipped))};
 
 /* ---------- settings ---------- */
-function paintSet(){$$('.seg[data-k]').forEach(s=>{const k=s.dataset.k;s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',String(cfg[k])===b.dataset.v))})}
+function paintSet(){paintNtf();$$('.seg[data-k]').forEach(s=>{const k=s.dataset.k;s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',String(cfg[k])===b.dataset.v))})}
 $$('.seg[data-k] button').forEach(b=>b.onclick=()=>{
   const k=b.parentNode.dataset.k,v=b.dataset.v;cfg[k]=k==='arrive'?+v:v;saveCfg();
   if(k==='theme'||k==='eco')applyTheme();
@@ -1739,7 +1994,7 @@ function fixGap(){let g=0;
 /* notifications (shared WAMD ARC push server): asked once, right after the first tap */
 function askNotify(){const P=window.WamdPush;if(!P)return;let st={};try{st=JSON.parse(localStorage.getItem('sahm.ntf')||'{}')}catch(e){}
   if(!P.shouldAsk(st))return;P.markAsked(st);try{localStorage.setItem('sahm.ntf',JSON.stringify(st))}catch(e){}
-  P.request().then(perm=>{if(perm==='granted')return P.subscribe('sahm',{lang:cfg.lang,tz:P.tz()},false)}).catch(()=>{})}
+  P.request().then(perm=>{if(perm==='granted'){cfg.ntf='on';saveCfg();return P.subscribe('sahm',sahmCfg(),false)}}).catch(()=>{})}
 function firstTap(fn){const go=()=>{document.removeEventListener('click',go,true);document.removeEventListener('touchend',go,true);fn();askNotify()};
   document.addEventListener('click',go,true);document.addEventListener('touchend',go,true)}
 async function start(){
@@ -1794,12 +2049,12 @@ function showInstall(){
 $('instNow').onclick=async()=>{if(!installEvt)return;installEvt.prompt();try{await installEvt.userChoice}catch(e){}installEvt=null;$('instNow').hidden=true};
 $('go').onclick=()=>{if(!isApp&&!devBypass){showInstall();return}start()};
 // open straight into the app (the browser still shows the «add to Home Screen» page)
-setTimeout(()=>{if(!isApp&&!devBypass)showInstall();else start()},0);
+setTimeout(()=>{if(!isApp&&!devBypass&&!window.__openLink)showInstall();else start()},0);
 
 load();addEventListener('resize',fixGap);addEventListener('orientationchange',()=>setTimeout(fixGap,300));
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(fixGap,200)});applyTheme();applyLang();paintStart();seasonTick();moonTick();paintTrack();
-const hh=decodeURIComponent(location.hash.slice(1));const hc=hh&&parseCoord(hh);
-if(hc){let p=places.find(x=>Math.abs(x.lat-hc.lat)<1e-6&&Math.abs(x.lon-hc.lon)<1e-6);if(!p)p=addPlace(T('fromLink'),hc);cur=p.id;save()}
+const hL=window.__openLink=parseLink(location.hash);if(hL){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}setTimeout(()=>showLink(hL),600)}
+addEventListener('hashchange',()=>{const L=parseLink(location.hash);if(L){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}showLink(L)}});
 go('home');
 /* ---------- moving from bsshfi.github.io to sahm.wamdarc.com ---------- */
 if(location.hostname==='bsshfi.github.io'){let hid=false;try{hid=sessionStorage.getItem('sahm.mvHide')==='1'}catch(e){}$('moveBar').hidden=hid}
