@@ -13,7 +13,7 @@ try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||ma
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.4">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.5">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -308,6 +308,39 @@ dialog .row{margin-top:16px}
 .auto{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;color:var(--dim);font-family:var(--num);font-variant-numeric:tabular-nums}
 .auto span{font-family:var(--ui);font-size:12px;opacity:.8}
 .about{text-align:center}
+/* bottom sheet for About and Privacy (same layout as Falaq and Khuta) */
+dialog.sheetd{margin:auto auto 0;width:100%;max-width:480px;max-height:88vh;border-radius:28px 28px 0 0;border-bottom:0;padding:10px 18px calc(env(safe-area-inset-bottom) + 22px);animation:shup .28s ease;text-align:start}
+@keyframes shup{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){dialog.sheetd{animation:none}}
+.sheetd .grip{width:40px;height:5px;border-radius:5px;background:var(--line);margin:0 auto 14px;outline:none}
+.sheetd .shbtn{display:flex;width:100%;margin-top:12px;padding:14px;border-radius:18px;font-size:15px;font-weight:600}
+.sheetd .shbtn:not(.primary){background:var(--panel2);border-color:transparent}
+.sheetd .shbtn.primary{box-shadow:0 10px 22px var(--glow)}
+.ab-hero{text-align:center;padding:4px 0 6px}
+.ab-hero img{width:84px;height:84px;border-radius:20px;box-shadow:0 10px 24px var(--shadow);display:block;margin:0 auto}
+.ab-hero h2{font-size:21px;margin:12px 0 2px}
+.ab-hero .v{font-family:var(--num);font-size:13px;color:var(--dim);direction:ltr}
+.ab-hero .ab-tag{font-size:15px;font-weight:700;color:var(--arrow);margin-top:6px}
+.ab-hero .ab-sub{font-size:13px;color:var(--dim);margin-top:2px}
+.ab-text p{font-size:14.5px;line-height:1.85;margin:10px 0}
+.ab-list{list-style:none;margin:6px 0 4px;padding:4px 14px;background:var(--panel2);border-radius:18px}
+.ab-list li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.ab-list li:last-child{border-bottom:0}
+.ab-list li>b{font-size:20px;line-height:1.3;flex:none}
+.ab-list li span b{display:block;font-size:14.5px}
+.ab-list li span i{display:block;font-style:normal;font-size:13px;color:var(--dim);line-height:1.6}
+.ab-by{text-align:center;font-size:13px;color:var(--dim);margin:16px 0 0}
+.sheetd .wamdf{display:flex;width:max-content;margin:8px auto 4px}
+.pv{margin-top:4px;font-size:14px;line-height:1.8;font-weight:400}
+.pv p,.pv li,.pv ul,.pv section{font-weight:400}.pv b,.pv h2{font-weight:700}
+.pv .card{background:var(--panel2);border-radius:18px;padding:4px 14px 12px;margin-top:12px}
+.pv .tldr{background:color-mix(in srgb,var(--good) 10%,transparent);border:1.5px solid color-mix(in srgb,var(--good) 40%,transparent)}
+.pv .tldr h2{color:var(--good)}
+.pv h2{font-size:16px;margin:14px 0 4px;display:flex;align-items:center;gap:8px;line-height:1.4}
+.pv p,.pv li{margin:6px 0}
+.pv ul{padding-inline-start:20px;margin:4px 0}
+.pv code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--bg);padding:1px 6px;border-radius:6px;direction:ltr;unicode-bidi:isolate}
+.pv a{color:var(--arrow)}
 .priv{text-align:start;font-size:14.5px;line-height:1.8;font-weight:400}
 .priv p,.priv li,.priv ul,.priv section{font-weight:400}.priv b,.priv h2,.priv h3{font-weight:700}
 .priv h2{font-size:15.5px;margin:14px 0 2px;display:flex;align-items:center;gap:6px}
@@ -523,9 +556,6 @@ html.app body{background-color:var(--sky1);background-image:linear-gradient(var(
 .about .aend{color:var(--dim);font-size:13px;margin-top:10px}
 
 /* WAMD ARC credit: same small logo as the settings footer */
-.byl{margin-top:18px;color:var(--dim);font-size:13px}
-.about .wamdf{display:flex;width:max-content;margin:8px auto 14px}
-.about .wamdf img{box-shadow:none;border-radius:0;margin:0}
 
 /* moving from the old address */
 .mvp{color:var(--dim);font-size:14px;line-height:1.7;margin:0 0 12px}
@@ -869,10 +899,10 @@ html.igap main{padding-bottom:88px}
     <div class="gh" data-t="gApp"></div>
     <div class="group">
       <button class="link" id="addHome"><i class="sic" style="background:linear-gradient(135deg,#FF9A3D,#D9620C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 9v6M9 12h6"/></svg></i><span data-t="addHome"></span><i class="chev"></i></button>
-      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.4</span><i class="chev"></i></button>
+      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.5</span><i class="chev"></i></button>
     </div>
     <div class="foot">
-      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.4</div>
+      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.5</div>
       <div class="ft" data-t="footTxt"></div>
       <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
     </div>
@@ -1015,25 +1045,9 @@ html.igap main{padding-bottom:88px}
   <div class="row"><button class="primary" id="rOk" data-t="restoreBtn"></button><button id="rCancel" data-t="cancel"></button></div>
 </dialog>
 
-<dialog id="dlgAbout" class="about">
-  <img src="icon.png" alt="" width="76" height="76">
-  <div class="logo" role="img" aria-label="سهم"></div>
-  <div class="name"><span>Sahm</span></div>
-  <div class="tag" data-t="tagline"></div>
-  <div class="tag2" data-t="aboutSub"></div>
-  <p data-t="blurb"></p>
-  <p data-t="blurb2"></p>
-  <div class="byl" data-t="byDev"></div>
-  <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
-  <div class="vpill"><span data-t="verLbl"></span> 3.4</div>
-  <div class="aend" data-t="aboutEnd"></div>
-  <div class="row"><button id="aClose" data-t="close"></button></div>
-</dialog>
-
-<dialog id="dlgPriv" class="priv">
-  <h3 data-t="privacy" tabindex="-1" autofocus style="outline:none"></h3>
-  <div id="privBody"></div>
-  <div class="row"><button id="pvClose" data-t="close"></button></div>
+<dialog id="dlgSheet" class="sheetd">
+  <div class="grip" tabindex="-1" autofocus></div>
+  <div id="shBody"></div>
 </dialog>
 
 <div id="install" hidden>
@@ -1095,7 +1109,7 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  tagline:'وجهتك بسهم واحد.',aboutSub:'فكرة بسيطة. وصول مباشر.',
  blurb:'يمنحك سهم طريقة مختلفة للوصول إلى الأماكن؛ احفظ موقعًا تريد العودة إليه، أو أدخل إحداثيات وجهتك، واتبع اتجاه السهم واعرف المسافة المتبقية حتى تصل.',
  blurb2:'لا تحتاج إلى خرائط أو اتصال بالإنترنت لتحديد اتجاه وجهتك. يعتمد سهم على GPS والبوصلة في جهازك، وتبقى مواقعك المحفوظة على جهازك.',verLbl:'الإصدار',aboutEnd:'سهم — وجهتك، على طريقتك.',
- by:'فكرة وتطوير',byDev:'من تطوير',author:'sahm@wamdarc.com',close:'إغلاق',am:'ص',pm:'م',
+ by:'فكرة وتطوير',byDev:'من تطوير',done:'تم',aboutF:[['🏹','السهم','يوجهك لمكان محفوظ أو أي إحداثيات، مع المسافة المتبقية'],['⛺','المخيم والسيارة','ثبّتها بضغطة وارجع لها، مع تنبيه قبل الغروب'],['🕋','القبلة','بوصلة على الشمال الحقيقي مع المسافة إلى الكعبة'],['✨','دليل النجوم','النجوم والكواكب الظاهرة الليلة واتجاه كل نجم'],['👣','المسار والمساحة','سجّل طريقك وارجع عليه، وقِس مساحة أي أرض'],['🆘','الطوارئ','أرسل موقعك برسالة واحدة، مع أرقام الطوارئ']],author:'sahm@wamdarc.com',close:'إغلاق',am:'ص',pm:'م',
  sunrise:'الشروق',sunset:'الغروب',near:(c,d,dir)=>'قرب '+c+' · '+d+' '+dir+'ها',inCity:c=>'في '+c+' (تقريبي)',approx:'تقريبي بدون إنترنت',
  wx:{0:'☀️ صافي',1:'🌤️ صافي غالباً',2:'⛅ غائم جزئياً',3:'☁️ غائم',45:'🌫️ ضباب',48:'🌫️ ضباب',51:'🌦️ رذاذ',61:'🌧️ مطر',71:'❄️ ثلج',80:'🌧️ زخات',95:'⛈️ عاصفة رعدية'},
  wind:'رياح',kmh:'كم/س',agoMin:n=>'قبل '+n+' د',
@@ -1174,7 +1188,7 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  tagline:'Your destination, one arrow.',aboutSub:'A simple idea. A direct way there.',
  blurb:'Sahm gives you a different way to reach places: save a spot you want to come back to, or enter your destination’s coordinates, then follow the arrow and watch the distance left until you arrive.',
  blurb2:'You don’t need maps or an internet connection to find your way. Sahm uses your phone’s GPS and compass, and your saved places stay on your device.',verLbl:'Version',aboutEnd:'Sahm — your destination, your way.',
- by:'Idea & development',byDev:'Developed by',author:'sahm@wamdarc.com',close:'Close',am:'AM',pm:'PM',
+ by:'Idea & development',byDev:'Developed by',done:'Done',aboutF:[['🏹','The arrow','Points to a saved place or any coordinates, with the distance left'],['⛺','Camp & car','Pin them in one tap and find your way back, with a reminder before sunset'],['🕋','Qibla','A true-north compass with the distance to the Kaaba'],['✨','Star guide','The stars and planets up tonight, and where each one is'],['👣','Track & area','Record your way and follow it back, and measure any plot of land'],['🆘','Emergency','Send your location in one message, with emergency numbers']],author:'sahm@wamdarc.com',close:'Close',am:'AM',pm:'PM',
  sunrise:'Sunrise',sunset:'Sunset',near:(c,d,dir)=>d+' '+dir+' of '+c,inCity:c=>'In '+c+' (approx.)',approx:'Approximate, offline',
  wx:{0:'☀️ Clear',1:'🌤️ Mostly clear',2:'⛅ Partly cloudy',3:'☁️ Cloudy',45:'🌫️ Fog',48:'🌫️ Fog',51:'🌦️ Drizzle',61:'🌧️ Rain',71:'❄️ Snow',80:'🌧️ Showers',95:'⛈️ Thunderstorm'},
  wind:'Wind',kmh:'km/h',agoMin:n=>n+' min ago',
@@ -2013,19 +2027,28 @@ $$('.seg[data-k] button').forEach(b=>b.onclick=()=>{
 $('share').onclick=async()=>{const url=location.origin+location.pathname.replace(/index\.html$/,''),text=T('shareText')+'\n'+url;
   if(navigator.share){try{await navigator.share({title:T('appName'),text});return}catch(e){if(e.name==='AbortError')return}}
   if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>toast(T('linkCopied'))).catch(()=>toast(url));else toast(url)};
-$('aboutBtn').onclick=()=>$('dlgAbout').showModal();
-$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.4')};
-$('privacy').onclick=async()=>{const b=$('privBody');
+function openSheet(html,after){const d=$('dlgSheet');$('shBody').innerHTML=html;if(after)after();d.showModal();d.querySelector('.grip').focus({preventScroll:true});d.scrollTop=0;requestAnimationFrame(()=>{d.scrollTop=0})}
+function closeSheet(){$('dlgSheet').close()}
+$('dlgSheet').addEventListener('click',e=>{if(e.target.id==='dlgSheet'){const r=e.target.getBoundingClientRect();if(e.clientY<r.top)closeSheet()}});
+const LOGO=()=>'<p class="ab-by">'+T('byDev')+'</p><a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>';
+const APPN=()=>cfg.lang==='en'?'Sahm | سهم':'سهم | Sahm';
+$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.5</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
+  '<div class="ab-text"><p>'+T('blurb')+'</p><p>'+T('blurb2')+'</p></div>'+
+  '<ul class="ab-list">'+T('aboutF').map(([e,t,d])=>'<li><b>'+e+'</b><span><b>'+t+'</b><i>'+d+'</i></span></li>').join('')+'</ul>'+LOGO()+
+  '<button class="shbtn primary" id="abShare">'+T('share')+'</button><button class="shbtn" id="abClose">'+T('close')+'</button>',
+  ()=>{$('abShare').onclick=()=>$('share').click();$('abClose').onclick=closeSheet});
+$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.5')};
+$('privacy').onclick=async()=>{let body='';
   try{const d=new DOMParser().parseFromString(await(await fetch('privacy.html')).text(),'text/html'),m=d.getElementById(cfg.lang==='en'?'en':'ar');
-    if(!m)throw 0;m.hidden=false;b.innerHTML='';b.appendChild(document.importNode(m,true));const dg=$('dlgPriv');dg.showModal();dg.querySelector('h3').focus({preventScroll:true});dg.scrollTop=0;requestAnimationFrame(()=>{dg.scrollTop=0})}
-  catch(e){toast(T('privFail'))}};
-$('pvClose').onclick=()=>$('dlgPriv').close();
+    if(m){m.querySelectorAll('script,style').forEach(x=>x.remove());body=m.innerHTML}}catch(e){}
+  if(!body){toast(T('privFail'));return}
+  openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+T('privacy')+'</h2><div class="v">'+APPN()+'</div></div><div class="pv">'+body+'</div><button class="shbtn primary" id="pvDone">'+T('done')+'</button>',
+    ()=>{document.querySelectorAll('.pv a[href^="http"]').forEach(x=>{x.target='_blank';x.rel='noopener'});$('pvDone').onclick=closeSheet})};
 $('addHome').onclick=()=>{if(isApp){toast(T('inHome'));return}showInstall();$('instClose').hidden=false};
 $('instClose').onclick=()=>{$('install').hidden=true;$('instClose').hidden=true};
 $('updCheck').onclick=()=>{if(updReady){applyUpdate();return}
   if(!navigator.onLine||!swReg){toast(T(navigator.onLine?'upLatest':'upOffline'));return}
   toast(T('upChecking'));swReg.update().then(()=>{toast(T(swReg.installing||swReg.waiting?'upFound':'upLatest'))}).catch(()=>toast(T('upOffline')))};
-$('aClose').onclick=()=>$('dlgAbout').close();
 
 /* ---------- start (iOS needs a tap to grant compass) ---------- */
 let wl=null;

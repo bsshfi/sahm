@@ -70,60 +70,31 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
     </section>
     <section class="card">
       <h2><span>👋</span>من نحن</h2>
-      <p>سهم Sahm تطبيق من تطوير <b>ومض آرك WAMD ARC</b> يوجهك لأي إحداثيات بسهم واحد، معتمداً على GPS والبوصلة في جوالك، بدون خرائط وبدون إنترنت. يعمل من المتصفح عبر الرابط <code>sahm.wamdarc.com</code> ويُضاف إلى الشاشة الرئيسية. تشرح هذه الصفحة ما يحدث لبياناتك عند استخدامه.</p>
+      <p>سهم Sahm من تطوير <b>ومض آرك WAMD ARC</b>، يوجهك لأي إحداثيات بسهم واحد باستخدام GPS والبوصلة في جوالك، ويعمل من <code>sahm.wamdarc.com</code> بعد إضافته للشاشة الرئيسية.</p>
 
-      <h2><span>📍</span>موقعك</h2>
-      <ul>
-        <li>يطلب التطبيق موقعك من الجوال (GPS) ليحسب اتجاه وجهتك والمسافة إليها.</li>
-        <li>الحساب كله يتم داخل جهازك، ولا يُرسل موقعك إلينا إلا في الحالات المذكورة أدناه.</li>
-      </ul>
+      <h2><span>📍</span>موقعك والبوصلة</h2>
+      <p>يُقرأ موقعك واتجاه الجوال لحظياً لتوجيه السهم والقبلة ودليل النجوم، والحساب كله داخل جهازك.</p>
 
-      <h2><span>🧭</span>البوصلة</h2>
-      <p>يقرأ التطبيق اتجاه الجوال من حساساته لحظياً لتوجيه السهم والقبلة ودليل النجوم، ولا يحفظ هذه القراءات ولا يرسلها.</p>
-
-      <h2><span>📱</span>البيانات المحفوظة على جهازك</h2>
-      <p>تُحفظ في ذاكرة المتصفح على جهازك فقط: أماكنك المحفوظة، ونقطة المخيم والسيارة، والمسار المسجّل، وإعداداتك (اللغة والمظهر والإشعارات)، وآخر اسم مكان وطقس جُلبا. لا نستطيع نحن الاطلاع عليها، وتُحذف بإزالة التطبيق أو مسح بيانات المتصفح. النسخة الاحتياطية تُنشأ على جهازك وأنت من يقرر أين تحفظها.</p>
+      <h2><span>📱</span>على جهازك فقط</h2>
+      <p>أماكنك، والمخيم والسيارة، والمسار، وإعداداتك. لا نطّلع عليها، وتُحذف بإزالة التطبيق أو مسح بيانات المتصفح.</p>
 
       <h2><span>🌤️</span>اسم المكان والطقس</h2>
-      <p>عند توفر الإنترنت، يرسل التطبيق إحداثيات موقعك (مقرّبة لنحو ١٠ أمتار) إلى خدمتين مجانيتين لا تتطلبان حساباً:</p>
-      <ul>
-        <li><b>BigDataCloud</b> لمعرفة اسم المدينة أو الحي.</li>
-        <li><b>Open-Meteo</b> لمعرفة الحرارة والريح وبرد الليلة.</li>
-      </ul>
-      <p>لا يُرسل معها اسمك ولا أي معرّف، ويُعاد الطلب فقط إذا تحركت مسافة كبيرة أو مر نصف ساعة. بدون إنترنت لا يُرسل شيء ويعمل السهم كالمعتاد.</p>
+      <p>عند توفر الإنترنت يُرسل موقعك مقرّباً لنحو ١٠ أمتار، بدون أي معرّف، إلى <b>BigDataCloud</b> لاسم المكان و<b>Open-Meteo</b> للطقس. بدون إنترنت لا يُرسل شيء.</p>
 
       <h2><span>🔔</span>الإشعارات (اختيارية)</h2>
-      <p>إذا فعّلت الإشعارات، يُرسل التطبيق إلى خادم الإشعارات الخاص بنا (على Cloudflare) ما يلزم لإرسالها في وقتها فقط:</p>
-      <ul>
-        <li>عنوان الاشتراك الذي يولّده متصفحك للإشعارات.</li>
-        <li>لغة التطبيق ومنطقتك الزمنية، وعدد أماكنك المحفوظة وتاريخ آخر نسخة احتياطية (للتذكير بها).</li>
-        <li>إذا ثبّتّ المخيم أو السيارة: موقعهما <b>مقرّباً لنحو ١٠٠ متر</b> ووقت التثبيت، لنحسب وقت الغروب وننبهك قبله.</li>
-      </ul>
-      <p><b>لا يُرسل</b> اسمك ولا أسماء أماكنك ولا إحداثياتها. عند إيقاف الإشعارات يُحذف اشتراكك من الخادم.</p>
+      <p>إذا فعّلتها يستقبل خادمنا (على Cloudflare): عنوان الاشتراك، واللغة والمنطقة الزمنية، وعدد أماكنك وتاريخ آخر نسخة احتياطية، وموقع المخيم والسيارة <b>مقرّباً لنحو ١٠٠ متر</b> لتنبيه الغروب. لا أسماء ولا إحداثيات أماكنك، ويُحذف كل ذلك عند إيقافها.</p>
 
-      <h2><span>🔗</span>مشاركة الأماكن</h2>
-      <p>عند مشاركة مكان أو إرسال رسالة الطوارئ، يُنشئ التطبيق رابطاً أو نصاً فيه الإحداثيات، ويرسله عبر التطبيق الذي تختاره أنت. لا يمر عبر خادمنا.</p>
+      <h2><span>🔗</span>المشاركة</h2>
+      <p>رابط المكان ورسالة الطوارئ تُرسل من جوالك مباشرة عبر التطبيق الذي تختاره، ولا تمر بخادمنا.</p>
 
-      <h2><span>📊</span>إحصائيات الاستخدام المجهولة</h2>
-      <p>لنعرف عدد مستخدمي تطبيقاتنا، يُرسل التطبيق عند فتحه: اسم التطبيق، ومعرّفاً عشوائياً يُولّد على جهازك، وهل التطبيق مثبّت على الشاشة الرئيسية، ونوع الجهاز، ورقم الإصدار، واللغة. لا نستخدم ملفات تعريف الارتباط (كوكيز)، ولا نرسل موقعك ضمن الإحصائيات.</p>
-
-      <h2><span>💬</span>رسائل داخل التطبيق</h2>
-      <p>قد يعرض التطبيق رسالة قصيرة من فريقنا، مثل خبر عن تحديث. لجلبها يطلب التطبيق الرسالة الحالية من خادمنا دون إرسال أي بيانات عنك.</p>
+      <h2><span>📊</span>إحصائيات مجهولة</h2>
+      <p>عند الفتح: اسم التطبيق، ومعرّف عشوائي، وهل هو مثبّت، ونوع الجهاز، والإصدار، واللغة. بدون كوكيز وبدون موقع.</p>
 
       <h2><span>🌐</span>الاستضافة</h2>
-      <p>يُستضاف التطبيق على <b>GitHub Pages</b>، وقد تسجّل GitHub عنوان IP الخاص بك ضمن سجلات الخادم المعتادة. الخطوط مضمّنة في التطبيق، ولا يُستخدم أي مزوّد خرائط.</p>
-
-      <h2><span>🧒</span>الأطفال</h2>
-      <p>التطبيق مناسب للعائلات، ولا يتطلب حساباً ولا يجمع بيانات شخصية من أي مستخدم، بمن فيهم الأطفال.</p>
+      <p>على <b>GitHub Pages</b>، وقد تسجّل GitHub عنوان IP ضمن سجلاتها المعتادة. الخطوط مضمّنة، ولا يوجد مزوّد خرائط.</p>
 
       <h2><span>🗑️</span>حذف بياناتك</h2>
-      <ul>
-        <li>أوقف الإشعارات من الإعدادات ليُحذف اشتراكك من خادمنا، أو احذف نقطة المخيم والسيارة لتُحذف منه.</li>
-        <li>احذف كل شيء بإزالة التطبيق من الشاشة الرئيسية أو بمسح بيانات الموقع من إعدادات المتصفح.</li>
-      </ul>
-
-      <h2><span>📝</span>التعديلات</h2>
-      <p>قد نحدّث هذه السياسة عند إضافة ميزات جديدة، وسيتغير تاريخ «آخر تحديث» أعلى الصفحة.</p>
+      <p>أوقف الإشعارات ليُحذف اشتراكك من خادمنا، وأزل التطبيق أو امسح بيانات الموقع ليُحذف كل شيء.</p>
 
       <h2><span>✉️</span>تواصل معنا</h2>
       <p>لأي سؤال عن خصوصيتك: <a href="mailto:sahm@wamdarc.com">sahm@wamdarc.com</a></p>
@@ -144,60 +115,31 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
     </section>
     <section class="card">
       <h2><span>👋</span>Who we are</h2>
-      <p>Sahm (سهم) is an app by <b>WAMD ARC</b> that guides you to any coordinates with a single arrow, using your phone’s GPS and compass, with no maps and no internet. It runs in the browser at <code>sahm.wamdarc.com</code> and is added to your Home Screen. This page explains what happens to your data when you use it.</p>
+      <p>Sahm is made by <b>WAMD ARC</b>. It points you to any coordinates with one arrow using your phone’s GPS and compass, and runs from <code>sahm.wamdarc.com</code> once added to your Home Screen.</p>
 
-      <h2><span>📍</span>Your location</h2>
-      <ul>
-        <li>The app asks for your phone’s location (GPS) to calculate the direction and distance to your destination.</li>
-        <li>All calculations run on your device, and your location is sent out only in the cases described below.</li>
-      </ul>
+      <h2><span>📍</span>Location and compass</h2>
+      <p>Your location and heading are read live to point the arrow, the qibla and the star guide, and every calculation stays on your device.</p>
 
-      <h2><span>🧭</span>Compass</h2>
-      <p>The app reads your phone’s orientation sensors live to point the arrow, the qibla and the star guide. These readings are never stored or sent.</p>
-
-      <h2><span>📱</span>Data stored on your device</h2>
-      <p>Stored in your browser on your device only: your saved places, your camp and car points, your recorded track, your settings (language, theme, notifications), and the last place name and weather fetched. We cannot see this data, and it is deleted when you remove the app or clear your browser data. Backups are created on your device and you decide where to keep them.</p>
+      <h2><span>📱</span>On your device only</h2>
+      <p>Your places, camp and car, track and settings. We can’t see them, and they’re deleted when you remove the app or clear browser data.</p>
 
       <h2><span>🌤️</span>Place name and weather</h2>
-      <p>With internet, the app sends your coordinates (rounded to about 10 meters) to two free services that need no account:</p>
-      <ul>
-        <li><b>BigDataCloud</b>, for the name of your city or district.</li>
-        <li><b>Open-Meteo</b>, for temperature, wind and tonight’s low.</li>
-      </ul>
-      <p>No name or identifier is sent with them, and the request is repeated only after you move a long way or half an hour passes. Without internet nothing is sent and the arrow works as usual.</p>
+      <p>With internet, your location rounded to about 10 m is sent, with no identifier, to <b>BigDataCloud</b> for the place name and <b>Open-Meteo</b> for the weather. Offline, nothing is sent.</p>
 
       <h2><span>🔔</span>Notifications (optional)</h2>
-      <p>If you turn on notifications, the app sends our notification server (on Cloudflare) only what is needed to deliver them on time:</p>
-      <ul>
-        <li>The push subscription address your browser creates.</li>
-        <li>Your app language and time zone, how many places you have saved and the date of your last backup (for backup reminders).</li>
-        <li>If you pin your camp or car: their location <b>rounded to about 100 meters</b> and the time you pinned them, to work out sunset and remind you before it.</li>
-      </ul>
-      <p>Your name, your place names and their coordinates are <b>never sent</b>. When you turn notifications off, your subscription is deleted from the server.</p>
+      <p>If you turn them on, our server (on Cloudflare) receives: the push address, language and time zone, your place count and last backup date, and your camp and car location <b>rounded to about 100 m</b> for the sunset reminder. No place names or coordinates, and it’s all deleted when you turn them off.</p>
 
-      <h2><span>🔗</span>Sharing places</h2>
-      <p>When you share a place or send the emergency message, the app creates a link or text with the coordinates and sends it through the app you choose. It does not pass through our server.</p>
+      <h2><span>🔗</span>Sharing</h2>
+      <p>Place links and the emergency message go straight from your phone through the app you choose, never through our server.</p>
 
-      <h2><span>📊</span>Anonymous usage statistics</h2>
-      <p>To know how many people use our apps, the app sends on opening: the app name, a random ID generated on your device, whether the app is installed on the Home Screen, the device type, the version number and the language. We do not use cookies, and your location is never part of these statistics.</p>
-
-      <h2><span>💬</span>In-app messages</h2>
-      <p>The app may show a short message from our team, such as news about an update. To fetch it, the app asks our server for the current message without sending any data about you.</p>
+      <h2><span>📊</span>Anonymous statistics</h2>
+      <p>On opening: app name, a random ID, whether it’s installed, device type, version and language. No cookies and no location.</p>
 
       <h2><span>🌐</span>Hosting</h2>
-      <p>The app is hosted on <b>GitHub Pages</b>; GitHub may log your IP address in its usual server logs. The fonts are bundled with the app, and no maps provider is used.</p>
-
-      <h2><span>🧒</span>Children</h2>
-      <p>The app is family friendly, needs no account, and collects no personal data from any user, including children.</p>
+      <p>On <b>GitHub Pages</b>; GitHub may log your IP address in its usual logs. Fonts are bundled, and there’s no maps provider.</p>
 
       <h2><span>🗑️</span>Deleting your data</h2>
-      <ul>
-        <li>Turn off notifications in Settings to delete your subscription from our server, or delete your camp and car points to remove them from it.</li>
-        <li>Delete everything by removing the app from your Home Screen or clearing the site’s data in your browser settings.</li>
-      </ul>
-
-      <h2><span>📝</span>Changes</h2>
-      <p>We may update this policy when we add features, and the “Last updated” date at the top will change.</p>
+      <p>Turn off notifications to delete your subscription from our server; remove the app or clear site data to delete everything.</p>
 
       <h2><span>✉️</span>Contact us</h2>
       <p>For any privacy question: <a href="mailto:sahm@wamdarc.com">sahm@wamdarc.com</a></p>
