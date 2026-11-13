@@ -13,7 +13,7 @@ try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||ma
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.5">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.6">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -745,6 +745,16 @@ html.igap main{padding-bottom:88px}
 /* winter: cooler sky and sand */
 :root.winter[data-theme="light"]{--sky1:#6b93bd;--sky2:#b2c7da;--haze:#dfe4ea;--sand:#eef0f0;--sand2:#e8ebec;--r1:#c2ccd6;--r2:#d2d6da;--r3:#dde1e4;--r4:#e6e9eb}
 :root.winter[data-theme="dark"]{--sky1:#0a1424;--sky2:#172640;--haze:#22304a}
+/* 3.6: the page itself scrolls (like Falaq and Khuta) instead of a fixed-height page with inner scrollers.
+   On iOS Home Screen apps a fixed-height page can be laid out shorter than the screen, which left an empty strip
+   under the tab bar; a normal scrolling page always reaches the bottom, so the tab bar sits at the real edge. */
+html,body{height:auto;min-height:100%}
+body{display:block;overflow:visible;min-height:100vh;overscroll-behavior-y:none}
+main,html.app main,html.igap main{display:block;flex:none;min-height:0;padding-bottom:calc(env(safe-area-inset-bottom) + 86px)}
+.page{flex:none;min-height:0}
+.scroll,.stage{overflow:visible}
+.stage{min-height:calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 86px - var(--headh,120px))}
+html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
 </style>
 </head>
 <body>
@@ -899,10 +909,10 @@ html.igap main{padding-bottom:88px}
     <div class="gh" data-t="gApp"></div>
     <div class="group">
       <button class="link" id="addHome"><i class="sic" style="background:linear-gradient(135deg,#FF9A3D,#D9620C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 9v6M9 12h6"/></svg></i><span data-t="addHome"></span><i class="chev"></i></button>
-      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.5</span><i class="chev"></i></button>
+      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.6</span><i class="chev"></i></button>
     </div>
     <div class="foot">
-      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.5</div>
+      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.6</div>
       <div class="ft" data-t="footTxt"></div>
       <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
     </div>
@@ -1909,6 +1919,7 @@ function go(name){tab=name;smooth=null;smoothB=null;arrived=false;
   $$('#tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===name));
   $('stage').hidden=!(name==='home'||name==='qibla');$('pFav').hidden=name!=='fav';$('pSet').hidden=name!=='set';
   if(name==='fav')fillList();if(name==='set')paintSet();
+  try{window.scrollTo(0,0)}catch(e){}
   setTitle();render()}
 $$('#tabbar button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
 
@@ -2032,12 +2043,12 @@ function closeSheet(){$('dlgSheet').close()}
 $('dlgSheet').addEventListener('click',e=>{if(e.target.id==='dlgSheet'){const r=e.target.getBoundingClientRect();if(e.clientY<r.top)closeSheet()}});
 const LOGO=()=>'<p class="ab-by">'+T('byDev')+'</p><a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>';
 const APPN=()=>cfg.lang==='en'?'Sahm | سهم':'سهم | Sahm';
-$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.5</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
+$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.6</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
   '<div class="ab-text"><p>'+T('blurb')+'</p><p>'+T('blurb2')+'</p></div>'+
   '<ul class="ab-list">'+T('aboutF').map(([e,t,d])=>'<li><b>'+e+'</b><span><b>'+t+'</b><i>'+d+'</i></span></li>').join('')+'</ul>'+LOGO()+
   '<button class="shbtn primary" id="abShare">'+T('share')+'</button><button class="shbtn" id="abClose">'+T('close')+'</button>',
   ()=>{$('abShare').onclick=()=>$('share').click();$('abClose').onclick=closeSheet});
-$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.5')};
+$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.6')};
 $('privacy').onclick=async()=>{let body='';
   try{const d=new DOMParser().parseFromString(await(await fetch('privacy.html')).text(),'text/html'),m=d.getElementById(cfg.lang==='en'?'en':'ar');
     if(m){m.querySelectorAll('script,style').forEach(x=>x.remove());body=m.innerHTML}}catch(e){}
@@ -2061,7 +2072,7 @@ function safeTop(){const d=document.createElement('div');d.style.cssText='positi
 function fixGap(){let g=0;
   if(isApp&&isIOS){const full=Math.max(screen.width,screen.height),short=Math.min(screen.width,screen.height),port=innerHeight>innerWidth;
     const diff=(port?full:short)-innerHeight,st=safeTop();if(port&&st>0&&diff>=20&&diff<=90&&Math.abs(diff-st)<=8)g=diff}
-  document.documentElement.classList.toggle('igap',g>0);
+  document.documentElement.classList.toggle('igap',false);const hd=document.querySelector('.head');if(hd)document.documentElement.style.setProperty('--headh',hd.offsetHeight+'px');
   const tb=document.querySelector('.tabbar');if(tb&&tb.offsetHeight)document.documentElement.style.setProperty('--tbh',tb.offsetHeight+'px')}
 /* notifications (shared WAMD ARC push server): asked once, right after the first tap */
 function askNotify(){const P=window.WamdPush;if(!P)return;let st={};try{st=JSON.parse(localStorage.getItem('sahm.ntf')||'{}')}catch(e){}
