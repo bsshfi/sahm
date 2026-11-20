@@ -13,7 +13,7 @@ try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||ma
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.9.1">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.9.2">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -805,6 +805,15 @@ html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
 .gdnote{padding:6px 8px 0;font-size:12.5px;color:var(--dim);line-height:1.6}
 .spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--sep);border-top-color:var(--arrow);animation:spin .8s linear infinite;margin-inline-start:auto}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* 3.9.2: Drive status card in Favorites */
+.favgd{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;text-align:start;justify-content:flex-start}
+.favgd .gdt{flex:1;min-width:0;display:flex;flex-direction:column}
+.favgd .gdt b{font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.favgd .gdt small{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.favgd .gdt small.ok{color:var(--good)}.favgd .gdt small.warn{color:var(--arrow)}
+.favgd .gact{flex:none;padding:7px 14px;border-radius:12px;font-size:13px;font-weight:700;background:var(--arrow);color:#fff;border:0}
+.favgd .gact.soft{background:var(--panel2);color:var(--fg);border:1px solid var(--line);font-weight:600}
+.favgd .spin{margin:0 8px}
 </style>
 </head>
 <body>
@@ -912,6 +921,7 @@ html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
       <button class="saveHere primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span data-t="saveHere"></span></button>
       <button class="addCoord"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-t="addCoord"></span></button>
     </div>
+    <button class="favgd" id="favGd" type="button"></button>
     <div class="row"><button id="backup" data-t="backup"></button><button id="restore" data-t="restore"></button></div>
     <div class="catf" id="catFilter"></div>
     <div class="seg" id="sortSeg"><button data-s="near" data-t="sortNear"></button><button data-s="new" data-t="sortNew"></button></div>
@@ -969,10 +979,10 @@ html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
     <div class="gh" data-t="gApp"></div>
     <div class="group">
       <button class="link" id="addHome"><i class="sic" style="background:linear-gradient(135deg,#FF9A3D,#D9620C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 9v6M9 12h6"/></svg></i><span data-t="addHome"></span><i class="chev"></i></button>
-      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.9.1</span><i class="chev"></i></button>
+      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.9.2</span><i class="chev"></i></button>
     </div>
     <div class="foot">
-      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.9.1</div>
+      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.9.2</div>
       <div class="ft" data-t="footTxt"></div>
       <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
     </div>
@@ -1228,8 +1238,8 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  prayNote:'أوقات الصلاة بطريقة أم القرى، محسوبة من موقعك بدون إنترنت.',
  sunWarn:m=>'باقي '+m+' د على الغروب',sunStart:d=>'الانطلاق '+d,sunNav:m=>'🌇 الغروب بعد '+m+' د',
  eta:t=>'⏱️ توصل بعد '+t,faslNow:'الفصل',taliNow:'الطالع',tempLbl:'الحرارة',avgT:c=>'المتوسط '+c+'°',dayLeft:'يوم باقي',tonight:'الليلة',
-fAll:'كل المواقع',fNew:'مجلد جديد',fNewQ:'اسم المجلد',fNameEx:'مثل: حفر الباطن',fRename:'تغيير الاسم',fDel:'حذف المجلد',fDelQ:'حذف المجلد؟',fDelNote:'المواقع اللي فيه ما تنحذف، ترجع لقائمة المواقع بدون مجلد.',fEmpty:'المجلد فاضي. افتح أي موقع واختر هذا المجلد، أو احفظ موقعك وأنت داخل المجلد.',fNone:'بدون مجلد',folderLbl:'المجلد',fCount:n=>n===0?'فاضي':n===1?'موقع واحد':n===2?'موقعين':n<=10?n+' مواقع':n+' موقع',fSaved:'تم إنشاء المجلد',fDeleted:'تم حذف المجلد',fExists:'فيه مجلد بنفس الاسم',ok:'حفظ',cancel:'إلغاء',
-gBackup:'النسخ الاحتياطي',gdRow:'النسخ إلى Google Drive',gdAskS:'نسخة احتياطية من مواقعك ومجلداتك في درايفك، تتحدث تلقائياً كل ما أضفت أو عدّلت.',gdF1:'مجلد خاص في درايفك',gdF1s:'سهم ينشئ مجلد «سهم Sahm» ويحفظ فيه النسخة',gdF2:'ما يشوف غير ملفاته',gdF2s:'لا يقدر يفتح أي ملف ثاني في درايفك',gdF3:'تبقى بياناتك على جوالك',gdF3s:'التطبيق يشتغل بدون إنترنت مثل ما هو',gdContinue:'متابعة مع Google',gdNow:'انسخ الآن',gdRestore:'استرجاع من درايف',gdOff:'إلغاء الربط',gdOffQ:'إلغاء ربط درايف؟',gdOffNote:'مواقعك تبقى على جوالك، والنسخة اللي في درايفك ما تنحذف.',gdOffT:'تم إلغاء الربط',gdSyncing:'جارٍ النسخ…',gdPending:'فيه تغييرات بانتظار النسخ',gdLast:a=>'آخر نسخة '+a,gdNever:'ما انسخ بعد',gdJust:'الآن',gdMin:m=>'قبل '+m+' د',gdHr:h=>'قبل '+h+' س',gdDone:'تم النسخ إلى درايف ✓',gdFail:'تعذّر الاتصال بدرايف',gdOffline:'درايف يحتاج إنترنت',gdDenied:'ما تم الربط',gdScope:'لازم تسمح لسهم بالوصول لملفاته في درايف',gdConnected:'تم ربط Google Drive ✓',gdNoRemote:'ما فيه نسخة في درايف بعد',gdPulled:n=>n?'رجعنا '+n+' من درايف ✓':'كل مواقعك موجودة، ما فيه جديد',gdOnNote:'تنسخ مواقعك ومجلداتك تلقائياً إلى مجلد «سهم Sahm» في درايفك.',gdOffNote2:'اربط درايف عشان تنحفظ نسخة تلقائية من مواقعك، أو استخدم النسخة اليدوية (نص) من «مواقعي».',manualBk:'نسخة احتياطية يدوية (نص)',manualRs:'استرجاع من نص',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
+fAll:'كل المواقع',fNew:'مجلد جديد',fNewQ:'اسم المجلد',fNameEx:'مثال: الرياض، حفر الباطن، أماكن كشتات',fRename:'تغيير الاسم',fDel:'حذف المجلد',fDelQ:'حذف المجلد؟',fDelNote:'المواقع اللي فيه ما تنحذف، ترجع لقائمة المواقع بدون مجلد.',fEmpty:'المجلد فاضي. افتح أي موقع واختر هذا المجلد، أو احفظ موقعك وأنت داخل المجلد.',fNone:'بدون مجلد',folderLbl:'المجلد',fCount:n=>n===0?'فاضي':n===1?'موقع واحد':n===2?'موقعين':n<=10?n+' مواقع':n+' موقع',fSaved:'تم إنشاء المجلد',fDeleted:'تم حذف المجلد',fExists:'فيه مجلد بنفس الاسم',ok:'حفظ',cancel:'إلغاء',
+gBackup:'النسخ الاحتياطي',gdOffShort:'غير مربوط · اربطه للنسخ التلقائي',gdOnShort:'مربوط',gdLink:'اربط',bkPick:'النسخ الاحتياطي',rsPick:'الاسترجاع',toDrive:'انسخ إلى درايف الآن',fromDrive:'من Google Drive',fromText:'من نص (نسخة يدوية)',textBk:'نسخة يدوية (نص)',linkDrive:'ربط Google Drive للنسخ التلقائي',gdRow:'النسخ إلى Google Drive',gdAskS:'نسخة احتياطية من مواقعك ومجلداتك في درايفك، تتحدث تلقائياً كل ما أضفت أو عدّلت.',gdF1:'مجلد خاص في درايفك',gdF1s:'سهم ينشئ مجلد «سهم Sahm» ويحفظ فيه النسخة',gdF2:'ما يشوف غير ملفاته',gdF2s:'لا يقدر يفتح أي ملف ثاني في درايفك',gdF3:'تبقى بياناتك على جوالك',gdF3s:'التطبيق يشتغل بدون إنترنت مثل ما هو',gdContinue:'متابعة مع Google',gdNow:'انسخ الآن',gdRestore:'استرجاع من درايف',gdOff:'إلغاء الربط',gdOffQ:'إلغاء ربط درايف؟',gdOffNote:'مواقعك تبقى على جوالك، والنسخة اللي في درايفك ما تنحذف.',gdOffT:'تم إلغاء الربط',gdSyncing:'جارٍ النسخ…',gdPending:'فيه تغييرات بانتظار النسخ',gdLast:a=>'آخر نسخة '+a,gdNever:'ما انسخ بعد',gdJust:'الآن',gdMin:m=>'قبل '+m+' د',gdHr:h=>'قبل '+h+' س',gdDone:'تم النسخ إلى درايف ✓',gdFail:'تعذّر الاتصال بدرايف',gdOffline:'درايف يحتاج إنترنت',gdDenied:'ما تم الربط',gdScope:'لازم تسمح لسهم بالوصول لملفاته في درايف',gdConnected:'تم ربط Google Drive ✓',gdNoRemote:'ما فيه نسخة في درايف بعد',gdPulled:n=>n?'رجعنا '+n+' من درايف ✓':'كل مواقعك موجودة، ما فيه جديد',gdOnNote:'تنسخ مواقعك ومجلداتك تلقائياً إلى مجلد «سهم Sahm» في درايفك.',gdOffNote2:'اربط درايف عشان تنحفظ نسخة تلقائية من مواقعك، أو استخدم النسخة اليدوية (نص) من «مواقعي».',manualBk:'نسخة احتياطية يدوية (نص)',manualRs:'استرجاع من نص',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
  lastDay:'آخر يوم',range:(a,b,d,L)=>a+' – '+b+' · اليوم '+d+' من '+L,
  next:(e,n,d,dt)=>'⏭️ يدخل '+e+' <b>'+n+'</b> '+(d===1?'بكرة':'بعد '+d+' '+(d===2?'يومين':d<=10?'أيام':'يوم'))+' · '+dt,soon:'قرّب',
  temp:(n,a,b,c)=>'🌡️ معدل الحرارة في '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (المتوسط '+c+'°)',
@@ -1309,8 +1319,8 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  prayNote:'Umm al-Qura prayer times, worked out from your location with no internet.',
  sunWarn:m=>m+' min to sunset',sunStart:d=>'start '+d+' away',sunNav:m=>'🌇 sunset in '+m+' min',
  eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',tonight:'Tonight',
-fAll:'All places',fNew:'New folder',fNewQ:'Folder name',fNameEx:'e.g. Hafar Al-Batin',fRename:'Rename',fDel:'Delete folder',fDelQ:'Delete folder?',fDelNote:'Its places aren’t deleted; they go back to the list without a folder.',fEmpty:'This folder is empty. Open any place and choose this folder, or save your spot while you’re inside it.',fNone:'No folder',folderLbl:'Folder',fCount:n=>n===0?'Empty':n===1?'1 place':n+' places',fSaved:'Folder created',fDeleted:'Folder deleted',fExists:'A folder with this name already exists',ok:'Save',cancel:'Cancel',
-gBackup:'Backup',gdRow:'Back up to Google Drive',gdAskS:'A backup of your places and folders in your Drive, updated automatically whenever you add or change something.',gdF1:'Its own folder in your Drive',gdF1s:'Sahm creates a “سهم Sahm” folder and keeps the backup there',gdF2:'Sees only its own files',gdF2s:'It can’t open any other file in your Drive',gdF3:'Your data stays on your phone',gdF3s:'The app keeps working offline as before',gdContinue:'Continue with Google',gdNow:'Back up now',gdRestore:'Restore from Drive',gdOff:'Disconnect',gdOffQ:'Disconnect Drive?',gdOffNote:'Your places stay on your phone, and the backup in your Drive isn’t deleted.',gdOffT:'Disconnected',gdSyncing:'Backing up…',gdPending:'Changes waiting to back up',gdLast:a=>'Last backup '+a,gdNever:'Not backed up yet',gdJust:'just now',gdMin:m=>m+' min ago',gdHr:h=>h+' h ago',gdDone:'Backed up to Drive ✓',gdFail:'Couldn’t reach Drive',gdOffline:'Drive needs internet',gdDenied:'Not connected',gdScope:'Allow Sahm to access its files in Drive',gdConnected:'Google Drive connected ✓',gdNoRemote:'No backup in Drive yet',gdPulled:n=>n?'Restored '+n+' from Drive ✓':'All your places are here, nothing new',gdOnNote:'Your places and folders back up automatically to the “سهم Sahm” folder in your Drive.',gdOffNote2:'Connect Drive for an automatic backup of your places, or use the manual text backup in Favorites.',manualBk:'Manual backup (text)',manualRs:'Restore from text',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
+fAll:'All places',fNew:'New folder',fNewQ:'Folder name',fNameEx:'e.g. Riyadh, Hafar Al-Batin, camping spots',fRename:'Rename',fDel:'Delete folder',fDelQ:'Delete folder?',fDelNote:'Its places aren’t deleted; they go back to the list without a folder.',fEmpty:'This folder is empty. Open any place and choose this folder, or save your spot while you’re inside it.',fNone:'No folder',folderLbl:'Folder',fCount:n=>n===0?'Empty':n===1?'1 place':n+' places',fSaved:'Folder created',fDeleted:'Folder deleted',fExists:'A folder with this name already exists',ok:'Save',cancel:'Cancel',
+gBackup:'Backup',gdOffShort:'Not connected · connect for automatic backup',gdOnShort:'Connected',gdLink:'Connect',bkPick:'Backup',rsPick:'Restore',toDrive:'Back up to Drive now',fromDrive:'From Google Drive',fromText:'From text (manual backup)',textBk:'Manual backup (text)',linkDrive:'Connect Google Drive for automatic backup',gdRow:'Back up to Google Drive',gdAskS:'A backup of your places and folders in your Drive, updated automatically whenever you add or change something.',gdF1:'Its own folder in your Drive',gdF1s:'Sahm creates a “سهم Sahm” folder and keeps the backup there',gdF2:'Sees only its own files',gdF2s:'It can’t open any other file in your Drive',gdF3:'Your data stays on your phone',gdF3s:'The app keeps working offline as before',gdContinue:'Continue with Google',gdNow:'Back up now',gdRestore:'Restore from Drive',gdOff:'Disconnect',gdOffQ:'Disconnect Drive?',gdOffNote:'Your places stay on your phone, and the backup in your Drive isn’t deleted.',gdOffT:'Disconnected',gdSyncing:'Backing up…',gdPending:'Changes waiting to back up',gdLast:a=>'Last backup '+a,gdNever:'Not backed up yet',gdJust:'just now',gdMin:m=>m+' min ago',gdHr:h=>h+' h ago',gdDone:'Backed up to Drive ✓',gdFail:'Couldn’t reach Drive',gdOffline:'Drive needs internet',gdDenied:'Not connected',gdScope:'Allow Sahm to access its files in Drive',gdConnected:'Google Drive connected ✓',gdNoRemote:'No backup in Drive yet',gdPulled:n=>n?'Restored '+n+' from Drive ✓':'All your places are here, nothing new',gdOnNote:'Your places and folders back up automatically to the “سهم Sahm” folder in your Drive.',gdOffNote2:'Connect Drive for an automatic backup of your places, or use the manual text backup in Favorites.',manualBk:'Manual backup (text)',manualRs:'Restore from text',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
  lastDay:'Last day',range:(a,b,d,L)=>a+' – '+b+' · day '+d+' of '+L,
  next:(e,n,d,dt)=>'⏭️ '+e+' <b>'+n+'</b> starts '+(d===1?'tomorrow':'in '+d+' days')+' · '+dt,soon:'Soon',
  temp:(n,a,b,c)=>'🌡️ Typical temperature in '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (avg '+c+'°)',
@@ -2020,7 +2030,7 @@ function sortedPlaces(){const a=places.slice();
   else{a.reverse();a.sort((x,y)=>(y.at||'').localeCompare(x.at||''))} // newest date first; places without a date go last
   return a}
 function ndText(p){if(!pos)return '';const f=fmtDist(distance(pos,p));return f.v+' '+f.u+' · '+dirName(bearing(pos,p))}
-function fillList(){const Ls=$('list');Ls.innerHTML='';fillList.t=Date.now();
+function fillList(){const Ls=$('list');Ls.innerHTML='';fillList.t=Date.now();try{paintFavGd()}catch(e){}
   $$('#sortSeg button').forEach(b=>b.classList.toggle('on',b.dataset.s===cfg.sort));
   if(openF&&!folders.some(f=>f.id===openF))openF=null;
   const fh=$('fHead');fh.hidden=!openF;if(openF)$('fTitle').textContent='📁 '+fName(openF);
@@ -2167,7 +2177,7 @@ async function gdFolder(){if(gdS.folder){try{const f=await gdJSON(GD.API+'/files
   if(!id)id=(await gdJSON(GD.API+'/files?fields=id',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'سهم Sahm',mimeType:'application/vnd.google-apps.folder',appProperties:{sahm:'root'}})})).id;
   gdS.folder=id;gdSave();return id}
 async function gdDataFile(folder){const r=await gdJSON(GD.API+'/files?spaces=drive&fields=files(id)&q='+encodeURIComponent("'"+folder+"' in parents and appProperties has { key='sahm' and value='data' } and trashed=false"));return r.files&&r.files[0]&&r.files[0].id}
-function gdSnapshot(){return JSON.stringify({app:'sahm',format:1,version:'3.9.1',exportedAt:new Date().toISOString(),places,folders,camp:campPt||null,car:startPt||null})}
+function gdSnapshot(){return JSON.stringify({app:'sahm',format:1,version:'3.9.2',exportedAt:new Date().toISOString(),places,folders,camp:campPt||null,car:startPt||null})}
 // add what the phone doesn't have yet (by id); never deletes or overwrites anything on the phone
 function gdMerge(d){if(!d||d.app!=='sahm')return 0;let n=0;
   (d.folders||[]).forEach(f=>{if(f&&f.id&&f.name&&!folders.some(x=>x.id===f.id)){folders.push({id:f.id,name:f.name});n++}});
@@ -2203,18 +2213,34 @@ function renderDrive(){const box=$('gdSet');if(!box)return;const on=gdOn(),dirty
   h+='<button class="link" id="mBk">'+SIC('#FEAE47,#F0761C','<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>')+'<span>'+T('manualBk')+'</span><i class="chev"></i></button>'+
     '<button class="link" id="mRs">'+SIC('#9D7BEA,#6A45C9','<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/>')+'<span>'+T('manualRs')+'</span><i class="chev"></i></button>';
   box.innerHTML=h;$('gdNote').textContent=on?T('gdOnNote'):T('gdOffNote2');
-  const c=$('gdConnect');if(c)c.onclick=()=>{if(!navigator.onLine){toast(T('gdOffline'));return}
+  gdRowsWire();
+  const c=$('gdConnect');if(c)c.onclick=gdConnectSheet;
+  paintFavGd();
+  $('mBk').onclick=manualBackup;$('mRs').onclick=manualRestore}
+function gdConnectSheet(){if(!navigator.onLine){toast(T('gdOffline'));return}
     openSheet('<div class="ab-hero"><div style="width:64px;margin:4px auto 0">'+GD_ICON.replace(/width="18" height="18"/,'width="64" height="64"')+'</div><h2>Google Drive</h2><div class="ab-sub" style="font-size:14px;line-height:1.7">'+T('gdAskS')+'</div></div>'+
       '<ul class="ab-list"><li><b>📁</b><span><b>'+T('gdF1')+'</b><i>'+T('gdF1s')+'</i></span></li><li><b>🔒</b><span><b>'+T('gdF2')+'</b><i>'+T('gdF2s')+'</i></span></li><li><b>📱</b><span><b>'+T('gdF3')+'</b><i>'+T('gdF3s')+'</i></span></li></ul>'+
       '<button class="shbtn primary" id="gdGo">'+T('gdContinue')+'</button><button class="shbtn" id="gdNo">'+T('cancel')+'</button>',
-      ()=>{$('gdGo').onclick=()=>{gdS={on:false,pending:true};gdSave();gdAuth(false)};$('gdNo').onclick=closeSheet})};
+      ()=>{$('gdGo').onclick=()=>{gdS={on:false,pending:true};gdSave();gdAuth(false)};$('gdNo').onclick=closeSheet})}
+function gdRowsWire(){
   const n=$('gdNow');if(n)n.onclick=()=>gdSync(true);
   const r=$('gdBack');if(r)r.onclick=()=>gdRestore(false);
   const o=$('gdOffB');if(o)o.onclick=()=>openSheet('<div class="ab-hero"><div style="width:56px;margin:4px auto 0">'+GD_ICON.replace(/width="18" height="18"/,'width="56" height="56"')+'</div><h2>'+T('gdOffQ')+'</h2><div class="ab-sub">'+T('gdOffNote')+'</div></div><button class="shbtn primary" id="gdYes" style="background:var(--bad);border-color:var(--bad)">'+T('gdOff')+'</button><button class="shbtn" id="gdNo2">'+T('cancel')+'</button>',
     ()=>{$('gdNo2').onclick=closeSheet;$('gdYes').onclick=()=>{const tk=gdToken();
       if(tk)fetch('https://oauth2.googleapis.com/revoke?token='+encodeURIComponent(tk),{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(()=>{});
       try{localStorage.removeItem(GD.TK);localStorage.removeItem(GD.DIRTY)}catch(e){}gdS={on:false};gdSave();closeSheet();renderDrive();toast(T('gdOffT'))}});
-  $('mBk').onclick=()=>$('backup').click();$('mRs').onclick=()=>$('restore').click()}
+}
+
+const manualBackup=$('backup').onclick,manualRestore=$('restore').onclick;
+function paintFavGd(){const el=$('favGd');if(!el)return;const on=gdOn(),dirty=gdDirty(),tk=gdToken(),warn=on&&((dirty&&!tk)||gdNeedTap);
+  const st=!on?T('gdOffShort'):gdBusy?T('gdSyncing'):warn?T('gdPending'):gdS.lastSync?T('gdLast')(gdAgo(gdS.lastSync)):T('gdNever');
+  el.innerHTML='<i class="sic gdi">'+GD_ICON+'</i><span class="gdt"><b>Google Drive</b><small class="'+(!on?'':warn?'warn':'ok')+'">'+(on&&!gdBusy&&!warn?'✓ ':'')+st+'</small></span>'+
+    (gdBusy?'<span class="spin"></span>':'<span class="gact'+(on?' soft':'')+'">'+(on?T('gdNow'):T('gdLink'))+'</span>');
+  el.onclick=()=>{if(gdBusy)return;if(on)gdSync(true);else gdConnectSheet()}}
+function pickSheet(title,emoji,opts){openSheet('<div class="ab-hero"><div style="font-size:40px">'+emoji+'</div><h2>'+title+'</h2></div>'+opts.map((o,i)=>'<button class="shbtn'+(i===0?' primary':'')+'" id="pk'+i+'">'+o[0]+'</button>').join('')+'<button class="shbtn" id="pkNo">'+T('cancel')+'</button>',
+  ()=>{opts.forEach((o,i)=>$('pk'+i).onclick=()=>{closeSheet();o[1]()});$('pkNo').onclick=closeSheet})}
+$('backup').onclick=()=>pickSheet(T('bkPick'),'📤',gdOn()?[[GD_ICON+' '+T('toDrive'),()=>gdSync(true)],['📄 '+T('textBk'),manualBackup]]:[[GD_ICON+' '+T('linkDrive'),gdConnectSheet],['📄 '+T('textBk'),manualBackup]]);
+$('restore').onclick=()=>pickSheet(T('rsPick'),'📥',gdOn()?[[GD_ICON+' '+T('fromDrive'),()=>gdRestore(false)],['📄 '+T('fromText'),manualRestore]]:[['📄 '+T('fromText'),manualRestore],[GD_ICON+' '+T('linkDrive'),gdConnectSheet]]);
 function gdBoot(){renderDrive();
   if(gdReturn){
     if(gdReturn.ok){const first=!gdOn(),wantRestore=gdS.restore;gdS.on=true;delete gdS.pending;delete gdS.restore;gdSave();
@@ -2247,12 +2273,12 @@ function closeSheet(){$('dlgSheet').close()}
 $('dlgSheet').addEventListener('click',e=>{if(e.target.id==='dlgSheet'){const r=e.target.getBoundingClientRect();if(e.clientY<r.top)closeSheet()}});
 const LOGO=()=>'<p class="ab-by">'+T('byDev')+'</p><a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>';
 const APPN=()=>cfg.lang==='en'?'Sahm | سهم':'سهم | Sahm';
-$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.9.1</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
+$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.9.2</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
   '<div class="ab-text"><p>'+T('blurb')+'</p><p>'+T('blurb2')+'</p></div>'+
   '<ul class="ab-list">'+T('aboutF').map(([e,t,d])=>'<li><b>'+e+'</b><span><b>'+t+'</b><i>'+d+'</i></span></li>').join('')+'</ul>'+LOGO()+
   '<button class="shbtn primary" id="abShare">'+T('share')+'</button><button class="shbtn" id="abClose">'+T('close')+'</button>',
   ()=>{$('abShare').onclick=()=>$('share').click();$('abClose').onclick=closeSheet});
-$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.9.1')};
+$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.9.2')};
 $('privacy').onclick=async()=>{let body='';
   try{const d=new DOMParser().parseFromString(await(await fetch('privacy.html')).text(),'text/html'),m=d.getElementById(cfg.lang==='en'?'en':'ar');
     if(m){m.querySelectorAll('script,style').forEach(x=>x.remove());body=m.innerHTML}}catch(e){}
