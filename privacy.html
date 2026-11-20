@@ -49,7 +49,7 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
     <a class="back" href="./" id="backTop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><span id="backTxt">سهم</span></a>
     <img src="icon-180.png" alt="" width="76" height="76">
     <h1 id="ttl">سياسة الخصوصية</h1>
-    <p class="sub" id="sub">سهم Sahm · آخر تحديث: ١٣ نوفمبر ٢٠٢٦</p>
+    <p class="sub" id="sub">سهم Sahm · آخر تحديث: ٢٠ نوفمبر ٢٠٢٦</p>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-l="ar" aria-pressed="true">العربية</button>
       <button type="button" data-l="en" aria-pressed="false">English</button>
@@ -61,7 +61,7 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
     <section class="card tldr">
       <h2><span>🔒</span>باختصار</h2>
       <ul>
-        <li>الاتجاه والمسافة تُحسب <b>على جهازك أنت</b>، وأماكنك المحفوظة لا تخرج منه.</li>
+        <li>الاتجاه والمسافة تُحسب <b>على جهازك أنت</b>، وأماكنك المحفوظة لا تخرج منه إلا إذا ربطت Google Drive بنفسك.</li>
         <li>لا تحتاج حساباً، ولا نعرض إعلانات، ولا نبيع أي بيانات.</li>
         <li>عند توفر الإنترنت يُطلب اسم المكان والطقس لموقعك من خدمتين مجانيتين، ويعمل التطبيق بدونهما.</li>
         <li>إذا فعّلت الإشعارات، نستقبل موقع المخيم والسيارة مقرّباً فقط، لنذكّرك قبل الغروب.</li>
@@ -80,6 +80,9 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
 
       <h2><span>🌤️</span>اسم المكان والطقس</h2>
       <p>عند توفر الإنترنت يُرسل موقعك مقرّباً لنحو ١٠ أمتار، بدون أي معرّف، إلى <b>BigDataCloud</b> لاسم المكان و<b>Open-Meteo</b> للطقس. بدون إنترنت لا يُرسل شيء.</p>
+
+      <h2><span>📁</span>Google Drive (اختياري)</h2>
+      <p>إذا ربطته من الإعدادات، يحفظ سهم نسخة من مواقعك ومجلداتك والمخيم والسيارة في مجلد «سهم Sahm» داخل <b>درايفك أنت</b>، وتنتقل من جوالك إلى قوقل مباشرة بدون ما تمر بخادمنا. صلاحيته <code>drive.file</code>: يشوف بس الملفات اللي أنشأها، ولا يقدر يفتح أي ملف ثاني. تقدر تلغي الربط من الإعدادات أو من حسابك في قوقل، والنسخة تبقى في درايفك لين تحذفها.</p>
 
       <h2><span>🔔</span>الإشعارات (اختيارية)</h2>
       <p>إذا فعّلتها يستقبل خادمنا (على Cloudflare): عنوان الاشتراك، واللغة والمنطقة الزمنية، وعدد أماكنك وتاريخ آخر نسخة احتياطية، وموقع المخيم والسيارة <b>مقرّباً لنحو ١٠٠ متر</b> لتنبيه الغروب. لا أسماء ولا إحداثيات أماكنك، ويُحذف كل ذلك عند إيقافها.</p>
@@ -106,7 +109,7 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
     <section class="card tldr">
       <h2><span>🔒</span>In short</h2>
       <ul>
-        <li>Direction and distance are calculated <b>on your own device</b>, and your saved places never leave it.</li>
+        <li>Direction and distance are calculated <b>on your own device</b>, and your saved places never leave it unless you connect Google Drive yourself.</li>
         <li>No account, no ads, and we never sell any data.</li>
         <li>With internet, the place name and weather for your location come from two free services; the app works without them.</li>
         <li>If you turn on notifications, we receive only a rounded camp and car location, to remind you before sunset.</li>
@@ -125,6 +128,9 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
 
       <h2><span>🌤️</span>Place name and weather</h2>
       <p>With internet, your location rounded to about 10 m is sent, with no identifier, to <b>BigDataCloud</b> for the place name and <b>Open-Meteo</b> for the weather. Offline, nothing is sent.</p>
+
+      <h2><span>📁</span>Google Drive (optional)</h2>
+      <p>If you connect it in Settings, Sahm keeps a copy of your places, folders, camp and car in a “سهم Sahm” folder in <b>your own Drive</b>. It goes straight from your phone to Google, never through our server. Its permission is <code>drive.file</code>: it sees only the files it created and can’t open anything else. You can disconnect in Settings or in your Google account, and the copy stays in your Drive until you delete it.</p>
 
       <h2><span>🔔</span>Notifications (optional)</h2>
       <p>If you turn them on, our server (on Cloudflare) receives: the push address, language and time zone, your place count and last backup date, and your camp and car location <b>rounded to about 100 m</b> for the sunset reminder. No place names or coordinates, and it’s all deleted when you turn them off.</p>
@@ -153,7 +159,7 @@ footer b{display:block;color:var(--text);font-size:15px;letter-spacing:.2em;dire
 </div>
 <script>
 (function () {
-  var T = { ar: ['سياسة الخصوصية', 'سهم Sahm · آخر تحديث: ١٣ نوفمبر ٢٠٢٦', 'سهم'], en: ['Privacy Policy', 'Sahm · Last updated: November 13, 2026', 'Sahm'] };
+  var T = { ar: ['سياسة الخصوصية', 'سهم Sahm · آخر تحديث: ٢٠ نوفمبر ٢٠٢٦', 'سهم'], en: ['Privacy Policy', 'Sahm · Last updated: November 20, 2026', 'Sahm'] };
   function set(l) {
     document.documentElement.lang = l; document.documentElement.dir = l === 'en' ? 'ltr' : 'rtl';
     document.getElementById('ar').hidden = l !== 'ar'; document.getElementById('en').hidden = l !== 'en';

@@ -13,7 +13,7 @@ try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||ma
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.8">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.9">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -775,6 +775,36 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
 :root[data-theme="dark"] .gc,:root[data-theme="red"] .gc{background:rgba(255,255,255,.05)}
 .gcomp{width:min(48vw,21vh,196px)}
 :root[lang="en"] .gc b{font-size:13px}
+/* 3.9: folders in Favorites, Google Drive backup */
+.frow{display:flex;align-items:center;gap:12px;width:100%;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;text-align:start;justify-content:flex-start;font-size:15px}
+.frow .fi{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:linear-gradient(135deg,#ffd27a,#f5a524);flex:none}
+.frow .ft{flex:1;min-width:0;display:flex;flex-direction:column}
+.frow .ft b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frow .ft small{font-size:12.5px;color:var(--dim)}
+.frow .chev{width:8px;height:8px;border:solid var(--dim);border-width:0 2px 2px 0;transform:rotate(135deg);flex:none}
+:root[dir="ltr"] .frow .chev,html[dir="ltr"] .frow .chev{transform:rotate(-45deg)}
+.frow.fadd{background:transparent;border-style:dashed;color:var(--arrow);font-weight:700;justify-content:center;padding:10px}
+.frow.fadd .fi{display:none}
+.fhead{display:flex;align-items:center;gap:8px;padding:2px 0}
+.fhead b{flex:1;min-width:0;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.fhead button{padding:7px 12px;border-radius:12px;font-size:13.5px;flex:none}
+.fback{display:flex;align-items:center;gap:6px}
+.fback .chev{width:7px;height:7px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(-45deg)}
+html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
+.fhead .more{width:42px;padding:7px 0;font-weight:700;letter-spacing:1px}
+.item .fl{display:inline-block;font-size:11.5px;color:var(--dim);margin-top:2px}
+.fsheet input{width:100%;margin:6px 0 4px;font-size:16px}
+.fsheet .ferr{color:var(--bad);font-size:13px;min-height:18px}
+.gdrow{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.gdrow .gdt{flex:1;min-width:0;display:flex;flex-direction:column}
+.gdrow .gdt b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gdrow .gdt small{font-size:12.5px;color:var(--dim)}.gdrow .gdt small.warn{color:var(--arrow)}
+.sic.gdi{background:#fff;border:1px solid var(--line)}
+.link.red{color:var(--bad)}
+.group>*+*{border-top:1px solid var(--sep)}
+.gdnote{padding:6px 8px 0;font-size:12.5px;color:var(--dim);line-height:1.6}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--sep);border-top-color:var(--arrow);animation:spin .8s linear infinite;margin-inline-start:auto}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -885,6 +915,7 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
     <div class="row"><button id="backup" data-t="backup"></button><button id="restore" data-t="restore"></button></div>
     <div class="catf" id="catFilter"></div>
     <div class="seg" id="sortSeg"><button data-s="near" data-t="sortNear"></button><button data-s="new" data-t="sortNew"></button></div>
+    <div class="fhead" id="fHead" hidden><button class="fback" id="fBack" type="button"><i class="chev"></i><span data-t="fAll"></span></button><b id="fTitle"></b><button class="more" id="fMenu" type="button">⋯</button></div>
     <div class="list" id="list"></div>
   </section>
 
@@ -925,6 +956,9 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
         <div class="seg" data-k="lang"><button data-v="ar">العربية</button><button data-v="en">English</button></div>
       </div>
     </div>
+    <div class="gh" data-t="gBackup"></div>
+    <div class="group" id="gdSet"></div>
+    <div class="sh gdnote" id="gdNote"></div>
     <div class="gh" data-t="appName"></div>
     <div class="group">
       <button class="link" id="aboutBtn"><i class="sic" style="background:linear-gradient(135deg,#7FA6C6,#4E7AA3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></i><span data-t="about"></span><i class="chev"></i></button>
@@ -935,10 +969,10 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
     <div class="gh" data-t="gApp"></div>
     <div class="group">
       <button class="link" id="addHome"><i class="sic" style="background:linear-gradient(135deg,#FF9A3D,#D9620C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 9v6M9 12h6"/></svg></i><span data-t="addHome"></span><i class="chev"></i></button>
-      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.8</span><i class="chev"></i></button>
+      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.9</span><i class="chev"></i></button>
     </div>
     <div class="foot">
-      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.8</div>
+      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.9</div>
       <div class="ft" data-t="footTxt"></div>
       <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
     </div>
@@ -977,6 +1011,7 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
   <div class="k" data-t="dateTime"></div><div class="v" id="pAt"></div>
   <div class="k" data-t="altitude"></div><div class="v" id="pAlt"></div>
   <div class="k" data-t="catLbl"></div><div class="cats" id="pCats"></div>
+  <div class="k" data-t="folderLbl"></div><div class="cats" id="pFolders"></div>
   <div class="grid2">
     <button class="primary" id="pGo" data-t="go"></button>
     <button id="pShare" data-t="sharePlace"></button>
@@ -1192,7 +1227,9 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  prNext:n=>'باقي على '+n,pr_fajr:'الفجر',pr_sunrise:'الشروق',pr_dhuhr:'الظهر',pr_asr:'العصر',pr_maghrib:'المغرب',pr_isha:'العشاء',
  prayNote:'أوقات الصلاة بطريقة أم القرى، محسوبة من موقعك بدون إنترنت.',
  sunWarn:m=>'باقي '+m+' د على الغروب',sunStart:d=>'الانطلاق '+d,sunNav:m=>'🌇 الغروب بعد '+m+' د',
- eta:t=>'⏱️ توصل بعد '+t,faslNow:'الفصل',taliNow:'الطالع',tempLbl:'الحرارة',avgT:c=>'المتوسط '+c+'°',dayLeft:'يوم باقي',tonight:'الليلة',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
+ eta:t=>'⏱️ توصل بعد '+t,faslNow:'الفصل',taliNow:'الطالع',tempLbl:'الحرارة',avgT:c=>'المتوسط '+c+'°',dayLeft:'يوم باقي',tonight:'الليلة',
+fAll:'كل المواقع',fNew:'مجلد جديد',fNewQ:'اسم المجلد',fNameEx:'مثل: حفر الباطن',fRename:'تغيير الاسم',fDel:'حذف المجلد',fDelQ:'حذف المجلد؟',fDelNote:'المواقع اللي فيه ما تنحذف، ترجع لقائمة المواقع بدون مجلد.',fEmpty:'المجلد فاضي. افتح أي موقع واختر هذا المجلد، أو احفظ موقعك وأنت داخل المجلد.',fNone:'بدون مجلد',folderLbl:'المجلد',fCount:n=>n===0?'فاضي':n===1?'موقع واحد':n===2?'موقعين':n<=10?n+' مواقع':n+' موقع',fSaved:'تم إنشاء المجلد',fDeleted:'تم حذف المجلد',fExists:'فيه مجلد بنفس الاسم',ok:'حفظ',cancel:'إلغاء',
+gBackup:'النسخ الاحتياطي',gdRow:'النسخ إلى Google Drive',gdAskS:'نسخة احتياطية من مواقعك ومجلداتك في درايفك، تتحدث تلقائياً كل ما أضفت أو عدّلت.',gdF1:'مجلد خاص في درايفك',gdF1s:'سهم ينشئ مجلد «سهم Sahm» ويحفظ فيه النسخة',gdF2:'ما يشوف غير ملفاته',gdF2s:'لا يقدر يفتح أي ملف ثاني في درايفك',gdF3:'تبقى بياناتك على جوالك',gdF3s:'التطبيق يشتغل بدون إنترنت مثل ما هو',gdContinue:'متابعة مع Google',gdNow:'انسخ الآن',gdRestore:'استرجاع من درايف',gdOff:'إلغاء الربط',gdOffQ:'إلغاء ربط درايف؟',gdOffNote:'مواقعك تبقى على جوالك، والنسخة اللي في درايفك ما تنحذف.',gdOffT:'تم إلغاء الربط',gdSyncing:'جارٍ النسخ…',gdPending:'فيه تغييرات بانتظار النسخ',gdLast:a=>'آخر نسخة '+a,gdNever:'ما انسخ بعد',gdJust:'الآن',gdMin:m=>'قبل '+m+' د',gdHr:h=>'قبل '+h+' س',gdDone:'تم النسخ إلى درايف ✓',gdFail:'تعذّر الاتصال بدرايف',gdOffline:'درايف يحتاج إنترنت',gdDenied:'ما تم الربط',gdScope:'لازم تسمح لسهم بالوصول لملفاته في درايف',gdConnected:'تم ربط Google Drive ✓',gdNoRemote:'ما فيه نسخة في درايف بعد',gdPulled:n=>n?'رجعنا '+n+' من درايف ✓':'كل مواقعك موجودة، ما فيه جديد',gdOnNote:'تنسخ مواقعك ومجلداتك تلقائياً إلى مجلد «سهم Sahm» في درايفك.',gdOffNote2:'اربط درايف عشان تنحفظ نسخة تلقائية من مواقعك، أو استخدم النسخة اليدوية (نص) من «مواقعي».',manualBk:'نسخة احتياطية يدوية (نص)',manualRs:'استرجاع من نص',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
  lastDay:'آخر يوم',range:(a,b,d,L)=>a+' – '+b+' · اليوم '+d+' من '+L,
  next:(e,n,d,dt)=>'⏭️ يدخل '+e+' <b>'+n+'</b> '+(d===1?'بكرة':'بعد '+d+' '+(d===2?'يومين':d<=10?'أيام':'يوم'))+' · '+dt,soon:'قرّب',
  temp:(n,a,b,c)=>'🌡️ معدل الحرارة في '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (المتوسط '+c+'°)',
@@ -1271,7 +1308,9 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  prNext:n=>n+' in',pr_fajr:'Fajr',pr_sunrise:'Sunrise',pr_dhuhr:'Dhuhr',pr_asr:'Asr',pr_maghrib:'Maghrib',pr_isha:'Isha',
  prayNote:'Umm al-Qura prayer times, worked out from your location with no internet.',
  sunWarn:m=>m+' min to sunset',sunStart:d=>'start '+d+' away',sunNav:m=>'🌇 sunset in '+m+' min',
- eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',tonight:'Tonight',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
+ eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',tonight:'Tonight',
+fAll:'All places',fNew:'New folder',fNewQ:'Folder name',fNameEx:'e.g. Hafar Al-Batin',fRename:'Rename',fDel:'Delete folder',fDelQ:'Delete folder?',fDelNote:'Its places aren’t deleted; they go back to the list without a folder.',fEmpty:'This folder is empty. Open any place and choose this folder, or save your spot while you’re inside it.',fNone:'No folder',folderLbl:'Folder',fCount:n=>n===0?'Empty':n===1?'1 place':n+' places',fSaved:'Folder created',fDeleted:'Folder deleted',fExists:'A folder with this name already exists',ok:'Save',cancel:'Cancel',
+gBackup:'Backup',gdRow:'Back up to Google Drive',gdAskS:'A backup of your places and folders in your Drive, updated automatically whenever you add or change something.',gdF1:'Its own folder in your Drive',gdF1s:'Sahm creates a “سهم Sahm” folder and keeps the backup there',gdF2:'Sees only its own files',gdF2s:'It can’t open any other file in your Drive',gdF3:'Your data stays on your phone',gdF3s:'The app keeps working offline as before',gdContinue:'Continue with Google',gdNow:'Back up now',gdRestore:'Restore from Drive',gdOff:'Disconnect',gdOffQ:'Disconnect Drive?',gdOffNote:'Your places stay on your phone, and the backup in your Drive isn’t deleted.',gdOffT:'Disconnected',gdSyncing:'Backing up…',gdPending:'Changes waiting to back up',gdLast:a=>'Last backup '+a,gdNever:'Not backed up yet',gdJust:'just now',gdMin:m=>m+' min ago',gdHr:h=>h+' h ago',gdDone:'Backed up to Drive ✓',gdFail:'Couldn’t reach Drive',gdOffline:'Drive needs internet',gdDenied:'Not connected',gdScope:'Allow Sahm to access its files in Drive',gdConnected:'Google Drive connected ✓',gdNoRemote:'No backup in Drive yet',gdPulled:n=>n?'Restored '+n+' from Drive ✓':'All your places are here, nothing new',gdOnNote:'Your places and folders back up automatically to the “سهم Sahm” folder in your Drive.',gdOffNote2:'Connect Drive for an automatic backup of your places, or use the manual text backup in Favorites.',manualBk:'Manual backup (text)',manualRs:'Restore from text',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
  lastDay:'Last day',range:(a,b,d,L)=>a+' – '+b+' · day '+d+' of '+L,
  next:(e,n,d,dt)=>'⏭️ '+e+' <b>'+n+'</b> starts '+(d===1?'tomorrow':'in '+d+' days')+' · '+dt,soon:'Soon',
  temp:(n,a,b,c)=>'🌡️ Typical temperature in '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (avg '+c+'°)',
@@ -1315,7 +1354,7 @@ const fmtLL=(a,b)=>cfg.fmt==='dms'?fmtLat(a)+' '+fmtLon(b):fmtLat(a)+', '+fmtLon
 
 /* ---------- storage ---------- */
 function load(){try{places=JSON.parse(localStorage.getItem('sahm.places')||'[]');cur=localStorage.getItem('sahm.cur')||null}catch(e){places=[]}}
-function save(){setTimeout(pushSync,0);try{localStorage.setItem('sahm.places',JSON.stringify(places));localStorage.setItem('sahm.cur',cur||'')}catch(e){}}
+function save(){setTimeout(pushSync,0);try{gdMark()}catch(e){}try{localStorage.setItem('sahm.places',JSON.stringify(places));localStorage.setItem('sahm.cur',cur||'')}catch(e){}}
 
 /* ---------- geo math ---------- */
 function distance(a,b){const dLat=rad(b.lat-a.lat),dLon=rad(b.lon-a.lon);
@@ -1851,9 +1890,9 @@ function decl(){const p=pos||startPt;if(p&&(Math.abs(p.lat-declCache.lat)>.2||Ma
 
 /* ---------- camp + car ---------- */
 let campPt=null;try{campPt=JSON.parse(localStorage.getItem('sahm.camp')||'null')}catch(e){}
-function saveCamp(){try{if(campPt)localStorage.setItem('sahm.camp',JSON.stringify(campPt));else localStorage.removeItem('sahm.camp')}catch(e){}}
+function saveCamp(){try{gdMark()}catch(e){}try{if(campPt)localStorage.setItem('sahm.camp',JSON.stringify(campPt));else localStorage.removeItem('sahm.camp')}catch(e){}}
 const PT={camp:{get:()=>campPt,set:v=>{campPt=v;saveCamp()},name:()=>T('campName'),lbl:'campLbl',em:'⛺',id:'__camp'},
-          car:{get:()=>startPt,set:v=>{startPt=v;try{if(v)localStorage.setItem('sahm.start',JSON.stringify(v));else localStorage.removeItem('sahm.start')}catch(e){}},name:()=>T('carName'),lbl:'carLbl',em:'🚙',id:'__start'}};
+          car:{get:()=>startPt,set:v=>{startPt=v;try{gdMark()}catch(e){}try{if(v)localStorage.setItem('sahm.start',JSON.stringify(v));else localStorage.removeItem('sahm.start')}catch(e){}},name:()=>T('carName'),lbl:'carLbl',em:'🚙',id:'__start'}};
 function paintPts(){for(const k in PT){const p=PT[k].get(),b=$(k+'Btn');b.classList.toggle('pinned',!!p);
     $(k+'Lbl').textContent=p?PT[k].name():T(PT[k].lbl);
     let d='';if(p&&pos){const f=fmtDist(distance(pos,p));d=(pos.acc>25?'≈ ':'')+f.v+' '+f.u}
@@ -1958,7 +1997,7 @@ function stamp(d=new Date()){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+
 function showAt(at){const m=at&&at.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/);if(!m)return '';
   let h=+m[4];const ap=h<12?T('am'):T('pm');h=h%12||12;return m[3]+'/'+m[2]+'/'+m[1]+' · '+h+':'+m[5]+' '+ap}
 function navigateTo(id){cur=id||null;save();go('home')}
-function addPlace(name,c,at,alt,cat){const p={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:name||T('place'),lat:c.lat,lon:c.lon,at:at===undefined?stamp():at};if(alt!=null)p.alt=alt;if(cat&&cat!=='pin')p.cat=cat;places.push(p);save();return p}
+function addPlace(name,c,at,alt,cat){const p={id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),name:name||T('place'),lat:c.lat,lon:c.lon,at:at===undefined?stamp():at};if(alt!=null)p.alt=alt;if(cat&&cat!=='pin')p.cat=cat;if(tab==='fav'&&openF&&folders.some(f=>f.id===openF))p.f=openF;places.push(p);save();return p}
 function preview(){const lk=parseLink($('fCoord').value);if(lk&&lk.name&&!$('fName').value.trim())$('fName').value=lk.name;const c=lk||parseCoord($('fCoord').value);$('fErr').textContent='';$('fPrev').textContent=c?'✓ '+c.lat.toFixed(6)+', '+c.lon.toFixed(6):''}
 $('fCoord').oninput=()=>{preview();nameFromMsg($('fCoord').value)};
 function nameFromMsg(v){const m=v&&v.match(/📍\s*(.+?)(?=\s*[\r\n]|\s*-?\d{1,3}\.\d{3}|$)/);if(m&&!$('fName').value.trim())$('fName').value=m[1].trim()}
@@ -1983,9 +2022,20 @@ function sortedPlaces(){const a=places.slice();
 function ndText(p){if(!pos)return '';const f=fmtDist(distance(pos,p));return f.v+' '+f.u+' · '+dirName(bearing(pos,p))}
 function fillList(){const Ls=$('list');Ls.innerHTML='';fillList.t=Date.now();
   $$('#sortSeg button').forEach(b=>b.classList.toggle('on',b.dataset.s===cfg.sort));
+  if(openF&&!folders.some(f=>f.id===openF))openF=null;
+  const fh=$('fHead');fh.hidden=!openF;if(openF)$('fTitle').textContent='📁 '+fName(openF);
   fillCatFilter();
-  if(!places.length){Ls.innerHTML='<div class="empty">'+T('empty')+'</div>';return}
-  sortedPlaces().filter(p=>catFilt==='all'||(p.cat||'pin')===catFilt).forEach(p=>{const it=document.createElement('div');it.className='item';it.dataset.id=p.id;
+  const ok=new Set(folders.map(f=>f.id)),inF=p=>p.f&&ok.has(p.f);
+  if(!openF){
+    folders.forEach(f=>{const n=places.filter(p=>p.f===f.id).length,r=document.createElement('button');r.type='button';r.className='frow';
+      r.innerHTML='<span class="fi">📁</span><span class="ft"><b></b><small></small></span><i class="chev"></i>';
+      r.querySelector('b').textContent=f.name;r.querySelector('small').textContent=T('fCount')(n);
+      r.onclick=()=>{openF=f.id;fillList();try{window.scrollTo(0,0)}catch(e){}};Ls.appendChild(r)});
+    const ad=document.createElement('button');ad.type='button';ad.className='frow fadd';ad.textContent='＋ '+T('fNew');ad.onclick=()=>folderAsk('',n=>{const f={id:'f'+Date.now().toString(36),name:n};folders.push(f);saveFolders();toast(T('fSaved'));fillList()});Ls.appendChild(ad)}
+  const list=sortedPlaces().filter(p=>catFilt==='all'||(p.cat||'pin')===catFilt).filter(p=>openF?p.f===openF:!inF(p));
+  if(!places.length&&!openF){const e=document.createElement('div');e.className='empty';e.innerHTML=T('empty');Ls.appendChild(e);return}
+  if(openF&&!list.length){const e=document.createElement('div');e.className='empty';e.textContent=T('fEmpty');Ls.appendChild(e);return}
+  list.forEach(p=>{const it=document.createElement('div');it.className='item';it.dataset.id=p.id;
     it.innerHTML='<div class="txt"><b></b><small></small><div class="at"></div><div class="nd"></div></div><div class="acts"><button class="primary" data-a="go"></button><button class="more" data-a="more">⋯</button></div>';
     it.querySelector('b').textContent=catOf(p.cat)[1]+' '+p.name;it.querySelector('small').textContent=fmtLL(p.lat,p.lon);it.querySelector('.at').textContent=showAt(p.at);
     it.querySelector('.nd').textContent=ndText(p);
@@ -1993,15 +2043,34 @@ function fillList(){const Ls=$('list');Ls.innerHTML='';fillList.t=Date.now();
     it.querySelector('[data-a=more]').onclick=()=>openPlace(p);
     it.querySelector('.txt').onclick=()=>openPlace(p);
     Ls.appendChild(it)})}
+/* ---------- folders: optional, a place without one stays in the main list ---------- */
+let folders=[],openF=null;try{folders=JSON.parse(localStorage.getItem('sahm.folders')||'[]')}catch(e){folders=[]}
+function saveFolders(){try{localStorage.setItem('sahm.folders',JSON.stringify(folders))}catch(e){}try{gdMark()}catch(e){}}
+function fName(id){const f=folders.find(x=>x.id===id);return f?f.name:''}
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function folderAsk(val,cb,skip){openSheet('<div class="fsheet"><div class="ab-hero"><div style="font-size:44px">📁</div><h2>'+(val?T('fRename'):T('fNew'))+'</h2></div><label for="fIn">'+T('fNewQ')+'</label><input id="fIn" maxlength="40" autocomplete="off" placeholder="'+esc(T('fNameEx'))+'"><div class="ferr" id="fErrF"></div><button class="shbtn primary" id="fOkF">'+T('ok')+'</button><button class="shbtn" id="fNoF">'+T('cancel')+'</button></div>',
+  ()=>{const i=$('fIn');i.value=val||'';const go=()=>{const n=i.value.trim().replace(/\s+/g,' ');if(!n){i.focus();return}
+      if(folders.some(f=>f.id!==skip&&f.name===n)){$('fErrF').textContent=T('fExists');return}closeSheet();cb(n)};
+    $('fOkF').onclick=go;i.onkeydown=e=>{if(e.key==='Enter')go()};$('fNoF').onclick=closeSheet;setTimeout(()=>i.focus(),250)})}
+$('fBack').onclick=()=>{openF=null;fillList()};
+$('fMenu').onclick=()=>{const f=folders.find(x=>x.id===openF);if(!f)return;
+  openSheet('<div class="ab-hero"><div style="font-size:44px">📁</div><h2>'+esc(f.name)+'</h2><div class="v">'+T('fCount')(places.filter(p=>p.f===f.id).length)+'</div></div><button class="shbtn" id="fRen">✏️ '+T('fRename')+'</button><button class="shbtn" id="fDelB" style="color:var(--bad)">🗑️ '+T('fDel')+'</button><button class="shbtn" id="fNo2">'+T('close')+'</button>',
+    ()=>{$('fNo2').onclick=closeSheet;
+      $('fRen').onclick=()=>folderAsk(f.name,n=>{f.name=n;saveFolders();fillList()},f.id);
+      $('fDelB').onclick=()=>openSheet('<div class="ab-hero"><div style="font-size:44px">🗑️</div><h2>'+T('fDelQ')+'</h2><div class="ab-sub">'+T('fDelNote')+'</div></div><button class="shbtn primary" id="fYes" style="background:var(--bad);border-color:var(--bad)">'+T('fDel')+'</button><button class="shbtn" id="fNo3">'+T('cancel')+'</button>',
+        ()=>{$('fNo3').onclick=closeSheet;$('fYes').onclick=()=>{places.forEach(p=>{if(p.f===f.id)delete p.f});folders=folders.filter(x=>x.id!==f.id);openF=null;save();saveFolders();closeSheet();fillList();toast(T('fDeleted'))}})})};
+function buildFolders(el,sel,cb){el.innerHTML='';const mk=(id,txt)=>{const b=document.createElement('button');b.type='button';b.textContent=txt;b.classList.toggle('on',id===sel);b.onclick=()=>{sel=id;cb(id);el.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))};el.appendChild(b)};
+  mk('',T('fNone'));folders.forEach(f=>mk(f.id,'📁 '+f.name));
+  const nb=document.createElement('button');nb.type='button';nb.textContent='＋ '+T('fNew');nb.onclick=()=>{$('dlgPlace').close();folderAsk('',n=>{const f={id:'f'+Date.now().toString(36),name:n};folders.push(f);saveFolders();openPlace.f=f.id;if(curP){curP.f=f.id;save()}toast(T('fSaved'));fillList();openPlace(curP)})};el.appendChild(nb)}
 // live distances; re-sort every 15 s while nothing is open
 function favTick(){$$('#list .item').forEach(it=>{const p=places.find(x=>x.id===it.dataset.id);if(p)it.querySelector('.nd').textContent=ndText(p)});
   if(cfg.sort==='near'&&Date.now()-(fillList.t||0)>15000&&!document.querySelector('dialog[open]'))fillList()}
 $$('#sortSeg button').forEach(b=>b.onclick=()=>{cfg.sort=b.dataset.s;saveCfg();fillList()});
 let curP=null;
 function openPlace(p){curP=p;$('pName').value=p.name;$('pCoords').textContent=fmtLL(p.lat,p.lon);$('pAt').textContent=showAt(p.at)||'--';
-  $('pAlt').textContent=p.alt!=null?p.alt+' m':'--';openPlace.cat=p.cat||'pin';buildCats($('pCats'),openPlace.cat,c=>openPlace.cat=c);const d=$('pDel');d.classList.remove('sure');d.textContent=T('del');$('dlgPlace').showModal()}
+  $('pAlt').textContent=p.alt!=null?p.alt+' m':'--';openPlace.cat=p.cat||'pin';buildCats($('pCats'),openPlace.cat,c=>openPlace.cat=c);openPlace.f=folders.some(f=>f.id===p.f)?p.f:'';buildFolders($('pFolders'),openPlace.f,f=>openPlace.f=f);const d=$('pDel');d.classList.remove('sure');d.textContent=T('del');$('dlgPlace').showModal()}
 $('pClose').onclick=()=>$('dlgPlace').close();
-$('pSave').onclick=()=>{const n=$('pName').value.trim();if(curP){if(n)curP.name=n;if(openPlace.cat==='pin')delete curP.cat;else curP.cat=openPlace.cat;save();toast(T('renamed'))}$('dlgPlace').close();fillList()};
+$('pSave').onclick=()=>{const n=$('pName').value.trim();if(curP){if(n)curP.name=n;if(openPlace.cat==='pin')delete curP.cat;else curP.cat=openPlace.cat;if(openPlace.f)curP.f=openPlace.f;else delete curP.f;save();toast(T('renamed'))}$('dlgPlace').close();fillList()};
 $('pGo').onclick=()=>{$('dlgPlace').close();navigateTo(curP.id)};
 $('pCopy').onclick=()=>copy(fmtLL(curP.lat,curP.lon));
 $('pShare').onclick=()=>sharePlace(curP);
@@ -2026,7 +2095,7 @@ $('resetStart').onclick=()=>{const b=$('resetStart');if(!b.classList.contains('s
   b.classList.remove('sure');clearStart();toast(T('startCleared'))};
 
 /* ---------- backup / restore: plain text, one place per line ---------- */
-function backupText(){return T('backupTitle')+'\n'+places.map(p=>p.name+': '+p.lat.toFixed(6)+', '+p.lon.toFixed(6)+(p.at?' | '+p.at:'')+(p.alt!=null?' | '+p.alt+'m':'')+(p.cat?' | '+catOf(p.cat)[1]:'')).join('\n')}
+function backupText(){return T('backupTitle')+'\n'+places.map(p=>p.name+': '+p.lat.toFixed(6)+', '+p.lon.toFixed(6)+(p.at?' | '+p.at:'')+(p.alt!=null?' | '+p.alt+'m':'')+(p.cat?' | '+catOf(p.cat)[1]:'')+(fName(p.f)?' | 📁'+fName(p.f):'')).join('\n')}
 $('backup').onclick=async()=>{
   if(!places.length){toast(T('noPlaces'));return}
   try{localStorage.setItem('sahm.lastBackup',Date.now())}catch(e){}pushSync();
@@ -2040,6 +2109,7 @@ $('rOk').onclick=()=>{
   $('rText').value.split(/\r?\n/).forEach((line,i)=>{
     line=line.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/،/g,',').trim();
     // "name: lat, lon" (old backups) or "name: lat, lon | YYYY-MM-DD HH:MM" (1.7+)
+    let fid=null;const fm=line.match(/\s*\|\s*📁\s*(.+?)\s*$/);if(fm){const nm=fm[1];let f=folders.find(x=>x.name===nm);if(!f){f={id:'f'+Date.now().toString(36)+i,name:nm};folders.push(f);saveFolders()}fid=f.id;line=line.slice(0,fm.index)}
     let cat=null;const cm=line.match(/\s*\|\s*(\S+)\s*$/);if(cm){const c0=CATS.find(c=>c[1]===cm[1]||c[1].replace('\ufe0f','')===cm[1].replace('\ufe0f',''));if(c0){cat=c0[0];line=line.slice(0,cm.index)}}
     let alt=null;const am=line.match(/\s*\|\s*(-?\d+)\s*m\s*$/i);if(am){alt=+am[1];line=line.slice(0,am.index)}
     let at='';const dm=line.match(/\s*\|\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2})\s*$/);
@@ -2048,13 +2118,121 @@ $('rOk').onclick=()=>{
     const c=okLL(m[1],m[2]);if(!c)return;
     const name=line.slice(0,m.index).replace(/[\s:|\-–—]+$/,'').trim()||T('place');
     if(places.some(p=>Math.abs(p.lat-c.lat)<1e-6&&Math.abs(p.lon-c.lon)<1e-6)){skipped++;return}
-    const np={id:Date.now().toString(36)+i,name,lat:c.lat,lon:c.lon,at};if(alt!=null)np.alt=alt;if(cat&&cat!=='pin')np.cat=cat;places.push(np);added++;
+    const np={id:Date.now().toString(36)+i,name,lat:c.lat,lon:c.lon,at};if(alt!=null)np.alt=alt;if(cat&&cat!=='pin')np.cat=cat;if(fid)np.f=fid;places.push(np);added++;
   });
   if(!added&&!skipped){$('rErr').textContent=T('restoreErr');return}
   save();fillList();$('dlgRestore').close();toast(T('restored')(added,skipped))};
 
+/* ---------- Google Drive backup (optional) ----------
+   drive.file only: Sahm sees just the files it creates, in a "سهم Sahm" folder in the user's Drive.
+   Backing up only uploads a snapshot (places, folders, camp, car); nothing on the phone is ever removed by Drive.
+   "Restore from Drive" adds the places and folders the phone doesn't have yet.
+   Sign-in sends this page to Google and back (the most reliable way from an iPhone Home Screen app). */
+const DRIVE_CLIENT_ID='34643255376-l5t3jlt1nh3hophn83ltg8bffn31e8qq.apps.googleusercontent.com';
+const GD={API:'https://www.googleapis.com/drive/v3',UP:'https://www.googleapis.com/upload/drive/v3',SCOPE:'https://www.googleapis.com/auth/drive.file',TK:'sahm.gd.token',ST:'sahm.gd.state',DIRTY:'sahm.gd.dirty'};
+let gdS={on:false};try{gdS=JSON.parse(localStorage.getItem('sahm.drive')||'{"on":false}')||{on:false}}catch(e){}
+function gdSave(){try{localStorage.setItem('sahm.drive',JSON.stringify(gdS))}catch(e){}}
+const gdOn=()=>!!gdS.on;
+function gdToken(){try{const t=JSON.parse(localStorage.getItem(GD.TK)||'null');return t&&t.exp>Date.now()+60000?t.v:null}catch(e){return null}}
+const gdDirty=()=>{try{return +localStorage.getItem(GD.DIRTY)||0}catch(e){return 0}};
+let gdBusy=false,gdTimer=null,gdNeedTap=false;
+function gdMark(){if(gdBusy||!gdOn())return;try{if(!gdDirty())localStorage.setItem(GD.DIRTY,String(Date.now()))}catch(e){}
+  if(gdToken()){clearTimeout(gdTimer);gdTimer=setTimeout(()=>gdSync(false),4000)}else renderDrive()}
+const gdRedirect=()=>location.origin+location.pathname.replace(/index\.html$/,'');
+function gdAuth(silent){const st=Date.now().toString(36)+Math.random().toString(36).slice(2);
+  try{localStorage.setItem(GD.ST,JSON.stringify({st,silent:!!silent,at:Date.now()}))}catch(e){}
+  const q=new URLSearchParams({client_id:DRIVE_CLIENT_ID,redirect_uri:gdRedirect(),response_type:'token',scope:GD.SCOPE,include_granted_scopes:'true',state:st});
+  if(silent)q.set('prompt','none');if(gdS.email)q.set('login_hint',gdS.email);
+  location.assign('https://accounts.google.com/o/oauth2/v2/auth?'+q.toString())}
+// coming back from Google: #access_token=…&expires_in=…&state=…  or  #error=…&state=…
+const gdReturn=(()=>{if(!/[#&]state=/.test(location.hash))return null;const p=new URLSearchParams(location.hash.slice(1));if(!p.get('state'))return null;
+  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+  let saved=null;try{saved=JSON.parse(localStorage.getItem(GD.ST)||'null');localStorage.removeItem(GD.ST)}catch(e){}
+  if(!saved||saved.st!==p.get('state'))return{error:'state'};
+  if(p.get('error'))return{error:p.get('error'),silent:saved.silent};
+  if(!(p.get('scope')||'').split(' ').includes(GD.SCOPE))return{error:'scope',silent:saved.silent};
+  try{localStorage.setItem(GD.TK,JSON.stringify({v:p.get('access_token'),exp:Date.now()+(+p.get('expires_in')||3600)*1000}))}catch(e){}
+  return{ok:true,silent:saved.silent}})();
+async function gdFetch(url,opt){const tk=gdToken();if(!tk){const e=new Error('auth');e.auth=true;throw e}
+  opt=opt||{};opt.headers=Object.assign({Authorization:'Bearer '+tk},opt.headers||{});const r=await fetch(url,opt);
+  if(r.status===401){try{localStorage.removeItem(GD.TK)}catch(e){}const e=new Error('auth');e.auth=true;throw e}
+  if(!r.ok)throw new Error('drive '+r.status);return r}
+const gdJSON=(u,o)=>gdFetch(u,o).then(r=>r.json());
+async function gdUpload(meta,text,id){const b='sahm'+Math.random().toString(36).slice(2);
+  const body=new Blob(['--'+b+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+'\r\n--'+b+'\r\nContent-Type: application/json\r\n\r\n',text,'\r\n--'+b+'--']);
+  return gdJSON(GD.UP+'/files'+(id?'/'+id:'')+'?uploadType=multipart&fields=id',{method:id?'PATCH':'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body})}
+async function gdFolder(){if(gdS.folder){try{const f=await gdJSON(GD.API+'/files/'+gdS.folder+'?fields=id,trashed');if(!f.trashed)return f.id}catch(e){if(e.auth)throw e}}
+  const r=await gdJSON(GD.API+'/files?spaces=drive&fields=files(id)&q='+encodeURIComponent("appProperties has { key='sahm' and value='root' } and trashed=false"));
+  let id=r.files&&r.files[0]&&r.files[0].id;
+  if(!id)id=(await gdJSON(GD.API+'/files?fields=id',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'سهم Sahm',mimeType:'application/vnd.google-apps.folder',appProperties:{sahm:'root'}})})).id;
+  gdS.folder=id;gdSave();return id}
+async function gdDataFile(folder){const r=await gdJSON(GD.API+'/files?spaces=drive&fields=files(id)&q='+encodeURIComponent("'"+folder+"' in parents and appProperties has { key='sahm' and value='data' } and trashed=false"));return r.files&&r.files[0]&&r.files[0].id}
+function gdSnapshot(){return JSON.stringify({app:'sahm',format:1,version:'3.9',exportedAt:new Date().toISOString(),places,folders,camp:campPt||null,car:startPt||null})}
+// add what the phone doesn't have yet (by id); never deletes or overwrites anything on the phone
+function gdMerge(d){if(!d||d.app!=='sahm')return 0;let n=0;
+  (d.folders||[]).forEach(f=>{if(f&&f.id&&f.name&&!folders.some(x=>x.id===f.id)){folders.push({id:f.id,name:f.name});n++}});
+  (d.places||[]).forEach(p=>{if(p&&p.id&&isFinite(p.lat)&&isFinite(p.lon)&&!places.some(x=>x.id===p.id||(Math.abs(x.lat-p.lat)<1e-6&&Math.abs(x.lon-p.lon)<1e-6))){places.push(p);n++}});
+  if(n){try{localStorage.setItem('sahm.places',JSON.stringify(places));localStorage.setItem('sahm.folders',JSON.stringify(folders))}catch(e){}setTimeout(pushSync,0);if(tab==='fav')fillList()}
+  return n}
+async function gdSync(manual){if(gdBusy||!gdOn())return;
+  if(!navigator.onLine){if(manual)toast(T('gdOffline'));return}
+  if(!gdToken()){if(manual)gdAuth(false);return}
+  gdBusy=true;clearTimeout(gdTimer);renderDrive();const dirtyAt=gdDirty();
+  try{if(manual)toast(T('gdSyncing'));const folder=await gdFolder(),id=await gdDataFile(folder);
+    await gdUpload(id?{name:'sahm-backup.json'}:{name:'sahm-backup.json',parents:[folder],appProperties:{sahm:'data'}},gdSnapshot(),id);
+    gdS.lastSync=Date.now();gdSave();try{localStorage.setItem('sahm.lastBackup',Date.now())}catch(e){}
+    try{if(gdDirty()===dirtyAt)localStorage.removeItem(GD.DIRTY)}catch(e){}gdNeedTap=false;if(manual)toast(T('gdDone'))}
+  catch(e){console.warn(e);if(e.auth){gdNeedTap=true;if(manual)gdAuth(false)}else if(manual)toast(T('gdFail'))}
+  finally{gdBusy=false;renderDrive();if(gdDirty()&&gdDirty()!==dirtyAt&&gdToken()){clearTimeout(gdTimer);gdTimer=setTimeout(()=>gdSync(false),4000)}}}
+async function gdRestore(first){if(!navigator.onLine){toast(T('gdOffline'));return}if(!gdToken()){gdS.restore=true;gdSave();gdAuth(false);return}
+  try{const folder=await gdFolder(),id=await gdDataFile(folder);if(!id){if(!first)toast(T('gdNoRemote'));return}
+    const n=gdMerge(await gdJSON(GD.API+'/files/'+id+'?alt=media'));if(n||!first)toast(T('gdPulled')(n));if(n)gdMark()}
+  catch(e){console.warn(e);if(e.auth)gdAuth(false);else toast(T('gdFail'))}}
+async function gdAccount(){try{const r=await gdJSON(GD.API+'/about?fields=user(emailAddress)');if(r.user){gdS.email=r.user.emailAddress||'';gdSave();renderDrive()}}catch(e){}}
+function gdAgo(ts){const m=Math.round((Date.now()-ts)/60000);if(m<1)return T('gdJust');if(m<60)return T('gdMin')(m);const h=Math.round(m/60);if(h<24)return T('gdHr')(h);
+  return new Date(ts).toLocaleDateString(cfg.lang==='en'?'en-GB':'ar-SA-u-nu-latn-ca-gregory',{day:'numeric',month:'short'})}
+const GD_ICON='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 3.5h7.6l5.7 9.9h-7.6z" fill="#FFBA00"/><path d="M8.2 3.5 2.5 13.4 6.3 20l5.7-9.9z" fill="#00AC47"/><path d="M6.3 20h11.4l3.8-6.6H10.1z" fill="#2684FC"/></svg>';
+const SIC=(g,svg)=>'<i class="sic" style="background:linear-gradient(135deg,'+g+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+svg+'</svg></i>';
+function renderDrive(){const box=$('gdSet');if(!box)return;const on=gdOn(),dirty=gdDirty(),tk=gdToken();let h='';
+  if(!on)h='<button class="link" id="gdConnect"><i class="sic gdi">'+GD_ICON+'</i><span>'+T('gdRow')+'</span><i class="chev"></i></button>';
+  else{const warn=(dirty&&!tk)||gdNeedTap,st=gdBusy?T('gdSyncing'):warn?T('gdPending'):gdS.lastSync?T('gdLast')(gdAgo(gdS.lastSync)):T('gdNever');
+    h='<div class="gdrow"><i class="sic gdi">'+GD_ICON+'</i><span class="gdt"><b dir="ltr">'+esc(gdS.email||'Google Drive')+'</b><small class="'+(warn?'warn':'')+'">'+st+'</small></span></div>'+
+      '<button class="link" id="gdNow"'+(gdBusy?' disabled':'')+'>'+SIC('#5AC8FA,#2C7FD6','<path d="M12 16V5M7 10l5-5 5 5"/><path d="M5 19h14"/>')+'<span>'+T('gdNow')+'</span>'+(gdBusy?'<span class="spin"></span>':'')+'</button>'+
+      '<button class="link" id="gdBack">'+SIC('#4FC79A,#21875F','<path d="M12 5v11M7 11l5 5 5-5"/><path d="M5 19h14"/>')+'<span>'+T('gdRestore')+'</span><i class="chev"></i></button>'+
+      '<button class="link red" id="gdOffB">'+SIC('#ff8a7a,#d9473a','<path d="M6 6l12 12M18 6L6 18"/>')+'<span>'+T('gdOff')+'</span></button>'}
+  h+='<button class="link" id="mBk">'+SIC('#FEAE47,#F0761C','<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>')+'<span>'+T('manualBk')+'</span><i class="chev"></i></button>'+
+    '<button class="link" id="mRs">'+SIC('#9D7BEA,#6A45C9','<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/>')+'<span>'+T('manualRs')+'</span><i class="chev"></i></button>';
+  box.innerHTML=h;$('gdNote').textContent=on?T('gdOnNote'):T('gdOffNote2');
+  const c=$('gdConnect');if(c)c.onclick=()=>{if(!navigator.onLine){toast(T('gdOffline'));return}
+    openSheet('<div class="ab-hero"><div style="width:64px;margin:4px auto 0">'+GD_ICON.replace(/width="18" height="18"/,'width="64" height="64"')+'</div><h2>Google Drive</h2><div class="ab-sub" style="font-size:14px;line-height:1.7">'+T('gdAskS')+'</div></div>'+
+      '<ul class="ab-list"><li><b>📁</b><span><b>'+T('gdF1')+'</b><i>'+T('gdF1s')+'</i></span></li><li><b>🔒</b><span><b>'+T('gdF2')+'</b><i>'+T('gdF2s')+'</i></span></li><li><b>📱</b><span><b>'+T('gdF3')+'</b><i>'+T('gdF3s')+'</i></span></li></ul>'+
+      '<button class="shbtn primary" id="gdGo">'+T('gdContinue')+'</button><button class="shbtn" id="gdNo">'+T('cancel')+'</button>',
+      ()=>{$('gdGo').onclick=()=>{gdS={on:false,pending:true};gdSave();gdAuth(false)};$('gdNo').onclick=closeSheet})};
+  const n=$('gdNow');if(n)n.onclick=()=>gdSync(true);
+  const r=$('gdBack');if(r)r.onclick=()=>gdRestore(false);
+  const o=$('gdOffB');if(o)o.onclick=()=>openSheet('<div class="ab-hero"><div style="width:56px;margin:4px auto 0">'+GD_ICON.replace(/width="18" height="18"/,'width="56" height="56"')+'</div><h2>'+T('gdOffQ')+'</h2><div class="ab-sub">'+T('gdOffNote')+'</div></div><button class="shbtn primary" id="gdYes" style="background:var(--bad);border-color:var(--bad)">'+T('gdOff')+'</button><button class="shbtn" id="gdNo2">'+T('cancel')+'</button>',
+    ()=>{$('gdNo2').onclick=closeSheet;$('gdYes').onclick=()=>{const tk=gdToken();
+      if(tk)fetch('https://oauth2.googleapis.com/revoke?token='+encodeURIComponent(tk),{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'}}).catch(()=>{});
+      try{localStorage.removeItem(GD.TK);localStorage.removeItem(GD.DIRTY)}catch(e){}gdS={on:false};gdSave();closeSheet();renderDrive();toast(T('gdOffT'))}});
+  $('mBk').onclick=()=>$('backup').click();$('mRs').onclick=()=>$('restore').click()}
+function gdBoot(){renderDrive();
+  if(gdReturn){
+    if(gdReturn.ok){const first=!gdOn(),wantRestore=gdS.restore;gdS.on=true;delete gdS.pending;delete gdS.restore;gdSave();
+      if(first)toast(T('gdConnected'));gdAccount();
+      (first||wantRestore?gdRestore(first):Promise.resolve()).then(()=>gdSync(false));
+      setTimeout(()=>go('set'),300)}
+    else if(gdReturn.silent)gdNeedTap=true;
+    else{if(gdS.pending){gdS={on:false};gdSave()}toast(T(gdReturn.error==='access_denied'?'gdDenied':gdReturn.error==='scope'?'gdScope':'gdFail'));if(gdReturn.error==='scope')setTimeout(()=>go('set'),300)}
+    renderDrive();return}
+  if(!gdOn())return;
+  if(gdToken()){if(gdDirty()||!gdS.lastSync||Date.now()-gdS.lastSync>24*3600e3)setTimeout(()=>gdSync(false),3000);return}
+  // token expired and there are changes: renew quietly (returns in a second, no question asked), at most every 6 hours
+  let last=0;try{last=+(localStorage.getItem('sahm.gd.silent')||0)}catch(e){}
+  if(gdDirty()&&navigator.onLine&&Date.now()-last>6*3600e3&&!window.__openLink&&isApp){try{localStorage.setItem('sahm.gd.silent',String(Date.now()))}catch(e){}setTimeout(()=>gdAuth(true),1500)}}
+addEventListener('online',()=>{if(gdOn()&&gdDirty()&&gdToken())gdSync(false)});
+
 /* ---------- settings ---------- */
-function paintSet(){paintNtf();$$('.seg[data-k]').forEach(s=>{const k=s.dataset.k;s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',String(cfg[k])===b.dataset.v))})}
+function paintSet(){paintNtf();renderDrive();$$('.seg[data-k]').forEach(s=>{const k=s.dataset.k;s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',String(cfg[k])===b.dataset.v))})}
 $$('.seg[data-k] button').forEach(b=>b.onclick=()=>{
   const k=b.parentNode.dataset.k,v=b.dataset.v;cfg[k]=k==='arrive'?+v:v;saveCfg();
   if(k==='theme'||k==='eco')applyTheme();
@@ -2069,12 +2247,12 @@ function closeSheet(){$('dlgSheet').close()}
 $('dlgSheet').addEventListener('click',e=>{if(e.target.id==='dlgSheet'){const r=e.target.getBoundingClientRect();if(e.clientY<r.top)closeSheet()}});
 const LOGO=()=>'<p class="ab-by">'+T('byDev')+'</p><a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>';
 const APPN=()=>cfg.lang==='en'?'Sahm | سهم':'سهم | Sahm';
-$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.8</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
+$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.9</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
   '<div class="ab-text"><p>'+T('blurb')+'</p><p>'+T('blurb2')+'</p></div>'+
   '<ul class="ab-list">'+T('aboutF').map(([e,t,d])=>'<li><b>'+e+'</b><span><b>'+t+'</b><i>'+d+'</i></span></li>').join('')+'</ul>'+LOGO()+
   '<button class="shbtn primary" id="abShare">'+T('share')+'</button><button class="shbtn" id="abClose">'+T('close')+'</button>',
   ()=>{$('abShare').onclick=()=>$('share').click();$('abClose').onclick=closeSheet});
-$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.8')};
+$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.9')};
 $('privacy').onclick=async()=>{let body='';
   try{const d=new DOMParser().parseFromString(await(await fetch('privacy.html')).text(),'text/html'),m=d.getElementById(cfg.lang==='en'?'en':'ar');
     if(m){m.querySelectorAll('script,style').forEach(x=>x.remove());body=m.innerHTML}}catch(e){}
@@ -2159,6 +2337,7 @@ $('instNow').onclick=async()=>{if(!installEvt)return;installEvt.prompt();try{awa
 $('go').onclick=()=>{if(!isApp&&!devBypass){showInstall();return}start()};
 // open straight into the app (the browser still shows the «add to Home Screen» page)
 setTimeout(()=>{if(!isApp&&!devBypass&&!window.__openLink)showInstall();else start()},0);
+setTimeout(()=>{try{gdBoot()}catch(e){console.warn(e)}},0);
 
 load();addEventListener('resize',fixGap);addEventListener('orientationchange',()=>setTimeout(fixGap,300));
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(fixGap,200)});applyTheme();applyLang();paintStart();seasonTick();moonTick();paintTrack();
