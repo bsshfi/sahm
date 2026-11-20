@@ -13,7 +13,7 @@ try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||ma
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.7">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.8">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -755,6 +755,26 @@ main,html.app main,html.igap main{display:block;flex:none;min-height:0;padding-b
 .scroll,.stage{overflow:visible}
 .stage{min-height:calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 86px - var(--headh,120px))}
 html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
+/* 3.8: the info card, laid out so nothing is cut off: full place name, four tiles, then the season line */
+.gstrip{padding:9px 10px 8px;gap:7px;font-size:12.5px}
+.gplace{display:flex;align-items:center;gap:6px;padding:0 4px;min-width:0}
+.gplace .pin{font-size:13px;flex:none}
+.gplace b{font-size:14.5px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.gcells{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:5px}
+.gc{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;column-gap:4px;padding:5px 2px 4px;border-radius:12px;background:var(--panel2);border:1px solid var(--sep);min-width:0;text-align:center}
+.gc[hidden]{display:none}
+.gc .ge{font-size:13px;line-height:1.2}
+.gc b{font-size:14.5px;font-weight:700;line-height:1.25;white-space:nowrap}
+.gc small{flex-basis:100%;font-size:10.5px;color:var(--dim);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gseason{display:flex;align-items:center;gap:7px;padding:0 4px;font-size:12.5px;white-space:nowrap;min-width:0}
+.gseason .ge{font-size:13px}
+.gseason .lft{color:var(--arrow);font-size:12px}.gseason .lft b{font-family:var(--num)}
+.gseason .bar{flex:1;min-width:24px;height:4px;border:0;border-radius:4px;background:var(--sep);overflow:hidden}
+.gseason .bar i{display:block;height:100%;background:linear-gradient(90deg,#ffb15e,var(--arrow));border-radius:4px}
+.gseason .star{flex:none}
+:root[data-theme="dark"] .gc,:root[data-theme="red"] .gc{background:rgba(255,255,255,.05)}
+.gcomp{width:min(48vw,21vh,196px)}
+:root[lang="en"] .gc b{font-size:13px}
 </style>
 </head>
 <body>
@@ -810,8 +830,14 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
         <b id="hSpd" hidden></b>
       </div>
       <div class="gstrip gl" id="seasonCard" role="button" tabindex="0">
-        <div class="r"><span class="place">📍 <b id="placeName">--</b></span><span class="wxb" id="wxRow" hidden><span id="wxTxt"></span></span><span class="nightb" id="nightTxt" hidden></span></div>
-        <div class="r2"><span>🌅 <b class="n" id="sunR">--</b></span><span>🌇 <b class="n" id="sunS">--</b></span><i class="sep"></i><span id="msEmoji">🍂</span><b id="msName">--</b><span class="lft"><b class="n" id="msLeft">--</b> <span id="msLeftLbl"></span></span><span class="bar" hidden><i id="msBar"></i></span><i class="sep"></i><span>⭐ <b id="tlName">--</b></span></div>
+        <div class="gplace"><span class="pin">📍</span><b id="placeName">--</b></div>
+        <div class="gcells">
+          <div class="gc" id="wxRow" hidden><span class="ge" id="wxE"></span><b class="n" id="wxT"></b><small id="wxN"></small><span id="wxTxt" hidden></span></div>
+          <div class="gc" id="nightTxt" hidden></div>
+          <div class="gc"><span class="ge">🌅</span><b class="n" id="sunR">--</b><small data-t="sunrise"></small></div>
+          <div class="gc"><span class="ge">🌇</span><b class="n" id="sunS">--</b><small data-t="sunset"></small></div>
+        </div>
+        <div class="gseason"><span class="ge" id="msEmoji">🍂</span><b id="msName">--</b><span class="lft"><b class="n" id="msLeft">--</b> <span id="msLeftLbl"></span></span><span class="bar"><i id="msBar"></i></span><span class="star">⭐ <b id="tlName">--</b></span></div>
         <div hidden><span id="windTxt"></span><span id="msRange"></span><span id="fsEmoji"></span><b id="fsName"></b><small id="fsLeft"></small><small id="tlLeft"></small><b id="tlTemp"></b><small id="tlAvg"></small><div id="msNext"></div></div>
       </div>
       <div class="camprow">
@@ -909,10 +935,10 @@ html.igap .tabbar{bottom:calc(env(safe-area-inset-bottom) + 4px)}
     <div class="gh" data-t="gApp"></div>
     <div class="group">
       <button class="link" id="addHome"><i class="sic" style="background:linear-gradient(135deg,#FF9A3D,#D9620C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 9v6M9 12h6"/></svg></i><span data-t="addHome"></span><i class="chev"></i></button>
-      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.6</span><i class="chev"></i></button>
+      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.8</span><i class="chev"></i></button>
     </div>
     <div class="foot">
-      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.7</div>
+      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.8</div>
       <div class="ft" data-t="footTxt"></div>
       <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
     </div>
@@ -1166,7 +1192,7 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  prNext:n=>'باقي على '+n,pr_fajr:'الفجر',pr_sunrise:'الشروق',pr_dhuhr:'الظهر',pr_asr:'العصر',pr_maghrib:'المغرب',pr_isha:'العشاء',
  prayNote:'أوقات الصلاة بطريقة أم القرى، محسوبة من موقعك بدون إنترنت.',
  sunWarn:m=>'باقي '+m+' د على الغروب',sunStart:d=>'الانطلاق '+d,sunNav:m=>'🌇 الغروب بعد '+m+' د',
- eta:t=>'⏱️ توصل بعد '+t,faslNow:'الفصل',taliNow:'الطالع',tempLbl:'الحرارة',avgT:c=>'المتوسط '+c+'°',dayLeft:'يوم باقي',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
+ eta:t=>'⏱️ توصل بعد '+t,faslNow:'الفصل',taliNow:'الطالع',tempLbl:'الحرارة',avgT:c=>'المتوسط '+c+'°',dayLeft:'يوم باقي',tonight:'الليلة',daysLeft:n=>'باقي '+n+' '+(n===1?'يوم':n===2?'يومين':n<=10?'أيام':'يوم'),
  lastDay:'آخر يوم',range:(a,b,d,L)=>a+' – '+b+' · اليوم '+d+' من '+L,
  next:(e,n,d,dt)=>'⏭️ يدخل '+e+' <b>'+n+'</b> '+(d===1?'بكرة':'بعد '+d+' '+(d===2?'يومين':d<=10?'أيام':'يوم'))+' · '+dt,soon:'قرّب',
  temp:(n,a,b,c)=>'🌡️ معدل الحرارة في '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (المتوسط '+c+'°)',
@@ -1245,7 +1271,7 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  prNext:n=>n+' in',pr_fajr:'Fajr',pr_sunrise:'Sunrise',pr_dhuhr:'Dhuhr',pr_asr:'Asr',pr_maghrib:'Maghrib',pr_isha:'Isha',
  prayNote:'Umm al-Qura prayer times, worked out from your location with no internet.',
  sunWarn:m=>m+' min to sunset',sunStart:d=>'start '+d+' away',sunNav:m=>'🌇 sunset in '+m+' min',
- eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
+ eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',tonight:'Tonight',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
  lastDay:'Last day',range:(a,b,d,L)=>a+' – '+b+' · day '+d+' of '+L,
  next:(e,n,d,dt)=>'⏭️ '+e+' <b>'+n+'</b> starts '+(d===1?'tomorrow':'in '+d+' days')+' · '+dt,soon:'Soon',
  temp:(n,a,b,c)=>'🌡️ Typical temperature in '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (avg '+c+'°)',
@@ -1535,7 +1561,7 @@ function infoTick(force){if(!pos)return;const now=Date.now();if(!force&&now-(inf
   $('placeName').textContent=near?net.place.txt:nearestCity(pos)+(navigator.onLine?'':' · '+T('approx'));
   const w=net.wx, fresh=w&&now-w.t<6*3600e3&&distance(pos,w)<20000;
   if(fresh){const ago=Math.round((now-w.t)/60e3);
-    $('wxTxt').innerHTML=wxName(w.code)+' <b>'+w.temp+'°</b>'+(ago>=15?' <span class="dimtxt">('+T('agoMin')(ago)+')</span>':'');$('wxRow').hidden=false;
+    $('wxTxt').innerHTML=wxName(w.code)+' <b>'+w.temp+'°</b>'+(ago>=15?' <span class="dimtxt">('+T('agoMin')(ago)+')</span>':'');$('wxRow').hidden=false;{const nm=wxName(w.code),sp=nm.indexOf(' ');$('wxE').textContent=nm.slice(0,sp);$('wxN').textContent=nm.slice(sp+1);$('wxT').textContent=w.temp+'°'}
     $('windTxt').innerHTML='💨 <b>'+w.wind+'</b> '+T('kmh');$('windTxt').hidden=false}
   else{$('wxRow').hidden=true;$('windTxt').hidden=true}
   if(cfg.eco!=='on'||!w)netFetch()}
@@ -1890,7 +1916,7 @@ function paintWind(){const w=net.wx,L=$('windLayer');if(!L)return;
   paintWind.txt=w.wind<2?T('windCalm'):T('windLine')(T('windFrom')[Math.round(w.dir/45)%8],w.wind)}
 function paintNight(){const n=net.night,el=$('nightTxt');
   if(!n||!pos||Date.now()>n.end||distance(pos,n)>30000){el.hidden=true;return}
-  el.textContent=T('night')(n.min,hm(new Date(n.at)));el.hidden=false}
+  el.innerHTML='<span class="ge">🌙</span><b class="n">'+n.min+'°</b><small>'+T('tonight')+' · '+((d=>(d.getHours()%12||12)+' '+(d.getHours()<12?T('am'):T('pm')))(new Date(n.at)))+'</small>';el.hidden=false}
 function paintQ(){const el=$('qline');if(!el)return;const cq=compassQ();let t='',warn=false;
   if(compassOK&&cq.n<=2){t=T('qComp')(compAcc>0?Math.round(compAcc):0);warn=true}
   else if(pos&&pos.acc>15){t=T('qGps')(Math.round(pos.acc));warn=true}
@@ -2043,12 +2069,12 @@ function closeSheet(){$('dlgSheet').close()}
 $('dlgSheet').addEventListener('click',e=>{if(e.target.id==='dlgSheet'){const r=e.target.getBoundingClientRect();if(e.clientY<r.top)closeSheet()}});
 const LOGO=()=>'<p class="ab-by">'+T('byDev')+'</p><a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>';
 const APPN=()=>cfg.lang==='en'?'Sahm | سهم':'سهم | Sahm';
-$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.7</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
+$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.8</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
   '<div class="ab-text"><p>'+T('blurb')+'</p><p>'+T('blurb2')+'</p></div>'+
   '<ul class="ab-list">'+T('aboutF').map(([e,t,d])=>'<li><b>'+e+'</b><span><b>'+t+'</b><i>'+d+'</i></span></li>').join('')+'</ul>'+LOGO()+
   '<button class="shbtn primary" id="abShare">'+T('share')+'</button><button class="shbtn" id="abClose">'+T('close')+'</button>',
   ()=>{$('abShare').onclick=()=>$('share').click();$('abClose').onclick=closeSheet});
-$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.7')};
+$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.8')};
 $('privacy').onclick=async()=>{let body='';
   try{const d=new DOMParser().parseFromString(await(await fetch('privacy.html')).text(),'text/html'),m=d.getElementById(cfg.lang==='en'?'en':'ar');
     if(m){m.querySelectorAll('script,style').forEach(x=>x.remove());body=m.innerHTML}}catch(e){}
