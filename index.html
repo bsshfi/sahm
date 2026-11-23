@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>سهم</title>
+<title>سهم | SAHM</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="سهم | Sahm">
-<meta name="theme-color" content="#f2ece5">
+<meta name="apple-mobile-web-app-title" content="سهم | SAHM">
+<meta name="theme-color" content="#7fa6c6">
 <script>/* pick the saved theme before the first paint, so the edges never flash another colour */
 try{if(location.hostname==='bsshfi.github.io'&&!(navigator.standalone===true||matchMedia('(display-mode: standalone)').matches)&&!/[?&]browser\b/.test(location.search)){location.replace('https://sahm.wamdarc.com/'+location.hash)}}catch(e){}
 try{var t=(JSON.parse(localStorage.getItem('sahm.set')||'{}').theme)||'light';if(['light','dark','red'].indexOf(t)<0)t='light';document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.json">
 <script src="wamd-push.js" defer></script>
-<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.9.3">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=3.9.4">
 <style>
 /* UI font: IBM Plex Sans Arabic (SIL Open Font License, see OFL-IBM-Plex.txt), bundled so it works offline */
 @font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(plex-ar-400.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}
@@ -308,7 +308,7 @@ dialog .row{margin-top:16px}
 .auto{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;color:var(--dim);font-family:var(--num);font-variant-numeric:tabular-nums}
 .auto span{font-family:var(--ui);font-size:12px;opacity:.8}
 .about{text-align:center}
-/* bottom sheet for About and Privacy (same layout as Falaq and Khuta) */
+/* bottom sheet for About and Privacy (same layout as FALAQ and KHUTA) */
 dialog.sheetd{margin:auto auto 0;width:100%;max-width:480px;max-height:88vh;border-radius:28px 28px 0 0;border-bottom:0;padding:10px 18px calc(env(safe-area-inset-bottom) + 22px);animation:shup .28s ease;text-align:start}
 @keyframes shup{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){dialog.sheetd{animation:none}}
@@ -745,7 +745,7 @@ html.igap main{padding-bottom:88px}
 /* winter: cooler sky and sand */
 :root.winter[data-theme="light"]{--sky1:#6b93bd;--sky2:#b2c7da;--haze:#dfe4ea;--sand:#eef0f0;--sand2:#e8ebec;--r1:#c2ccd6;--r2:#d2d6da;--r3:#dde1e4;--r4:#e6e9eb}
 :root.winter[data-theme="dark"]{--sky1:#0a1424;--sky2:#172640;--haze:#22304a}
-/* 3.6: the page itself scrolls (like Falaq and Khuta) instead of a fixed-height page with inner scrollers.
+/* 3.6: the page itself scrolls (like FALAQ and KHUTA) instead of a fixed-height page with inner scrollers.
    On iOS Home Screen apps a fixed-height page can be laid out shorter than the screen, which left an empty strip
    under the tab bar; a normal scrolling page always reaches the bottom, so the tab bar sits at the real edge. */
 html,body{height:auto;min-height:100%}
@@ -814,14 +814,41 @@ html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
 .favgd .gact{flex:none;padding:7px 14px;border-radius:12px;font-size:13px;font-weight:700;background:var(--arrow);color:#fff;border:0}
 .favgd .gact.soft{background:var(--panel2);color:var(--fg);border:1px solid var(--line);font-weight:600}
 .favgd .spin{margin:0 8px}
-/* 3.9.3: what Sahm is and the privacy link on the page Google reviews */
+/* 3.9.3: what SAHM is and the privacy link on the page Google reviews */
 .instfoot{margin-top:18px;padding:14px 4px 4px;border-top:1px solid var(--sep);text-align:center;font-size:12.5px;line-height:1.75;color:var(--dim)}
 .instfoot p{margin:0 0 8px}
 .instfoot .links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-weight:700}
 .instfoot a{color:var(--arrow);text-decoration:none}
+
+
+
+
+/* ===== WAMD ARC · توحيد 2026-11 (لا تعدّلها لتطبيق واحد) ===== */
+/* الشريط السفلي: نفس المقاس في كل تطبيقات ومض آرك، أنزل ما يمكن فوق خط الرجوع للرئيسية.
+   فاتح في الفاتح، داكن في الداكن، والخيار المختار بلون التطبيق */
+:root{--wb-b:max(14px,calc(env(safe-area-inset-bottom,0px) - 14px));--wb-h:68px}
+.tabbar{position:fixed!important;left:50%!important;right:auto!important;top:auto!important;bottom:var(--wb-b)!important;transform:translateX(-50%)!important;width:calc(100% - 28px)!important;max-width:452px!important;height:var(--wb-h)!important;box-sizing:border-box!important;margin:0!important;padding:6px!important;gap:2px!important;border-radius:26px!important;border:1px solid rgba(20,30,50,.08)!important;background:rgba(255,255,255,.82)!important;-webkit-backdrop-filter:blur(18px) saturate(1.4)!important;backdrop-filter:blur(18px) saturate(1.4)!important;box-shadow:0 10px 30px rgba(30,40,60,.14)!important;color:#7a8291!important}
+.tabbar button{display:flex;flex:1 1 0!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;height:54px!important;min-height:0!important;min-width:0!important;margin:0!important;padding:0 2px!important;border:0!important;border-radius:20px!important;background:transparent!important;box-shadow:none!important;color:#7a8291!important;font-size:11px!important;font-weight:500!important;line-height:1.2!important;letter-spacing:0!important;white-space:nowrap!important;opacity:1!important;transform:none!important;filter:none!important}
+.tabbar button svg{width:22px!important;height:22px!important;flex:none!important;filter:none!important}
+.tabbar button::after,.tabbar button::before{display:none!important}
+.tabbar button.on{background:linear-gradient(180deg,#ff9d45,#f5841f)!important;color:#fff!important;font-weight:700!important;box-shadow:0 6px 14px rgba(245,132,31,.35)!important}
+:root[data-theme="dark"] .tabbar{background:rgba(26,33,51,.9)!important;border-color:rgba(255,255,255,.09)!important;box-shadow:0 10px 30px rgba(0,0,0,.45)!important;color:#9aa3b5!important}
+:root[data-theme="dark"] .tabbar button{color:#9aa3b5!important}
+:root[data-theme="dark"] .tabbar button.on{color:#fff!important}
+:root[data-theme="red"] .tabbar{background:rgba(26,33,51,.9)!important;border-color:rgba(255,255,255,.09)!important;box-shadow:0 10px 30px rgba(0,0,0,.45)!important;color:#9aa3b5!important}
+:root[data-theme="red"] .tabbar button{color:#9aa3b5!important}
+:root[data-theme="red"] .tabbar button.on{color:#fff!important}
+:root[data-theme="red"] .tabbar button.on{background:var(--arrow)!important;color:var(--onArrow)!important;box-shadow:none!important}
+/* أعلى الشاشة عند الساعة: لون التطبيق دايماً، بدون شريط فاتح ولا محتوى يمر تحت الساعة */
+.wcap{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);z-index:7;pointer-events:none}
+:root{--wtc:var(--sky1)}
+html,html.app{background:var(--sky1)!important}
+.wcap{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 22%,var(--haze) 44%) 0 0/100% 100vh no-repeat}
+/* ===== /WAMD ARC · توحيد ===== */
 </style>
 </head>
 <body>
+<div class="wcap" aria-hidden="true"></div>
 
 <div id="start" hidden>
   <img src="icon.png" alt="" width="112" height="112">
@@ -984,11 +1011,10 @@ html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
     <div class="gh" data-t="gApp"></div>
     <div class="group">
       <button class="link" id="addHome"><i class="sic" style="background:linear-gradient(135deg,#FF9A3D,#D9620C)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 9v6M9 12h6"/></svg></i><span data-t="addHome"></span><i class="chev"></i></button>
-      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.9.3</span><i class="chev"></i></button>
+      <button class="link" id="updCheck"><i class="sic" style="background:linear-gradient(135deg,#5AC8FA,#2C7FD6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></i><span data-t="updCheck"></span><span class="v">3.9.4</span><i class="chev"></i></button>
     </div>
     <div class="foot">
-      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.9.3</div>
-      <div class="ft" data-t="footTxt"></div>
+      <div class="fv"><span data-t="appName"></span> — <span data-t="verLbl"></span> 3.9.4</div>
       <a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>
     </div>
   </section>
@@ -1146,18 +1172,18 @@ html[dir="ltr"] .fback .chev{transform:rotate(135deg)}
     <div class="card" id="stepsAr"></div>
     <div class="card en">
       <div class="lang">English</div>
-      <div style="font-weight:700;font-size:18px">Add Sahm to your Home Screen</div>
-      <div class="why" style="margin-top:-6px">Sahm runs as an app from your Home Screen: offline, full screen, and your places are kept there.</div>
+      <div style="font-weight:700;font-size:18px">Add SAHM to your Home Screen</div>
+      <div class="why" style="margin-top:-6px">SAHM runs as an app from your Home Screen: offline, full screen, and your places are kept there.</div>
       <div id="stepsEn" style="display:flex;flex-direction:column;gap:12px"></div>
     </div>
     <div class="note" id="instNote" hidden></div>
     <button id="instBackup" hidden style="flex-direction:column;gap:2px">📤 نسخة احتياطية لأماكنك<span style="font-size:13px;color:var(--dim)" dir="ltr">Back up your places</span></button>
-    <button class="primary" id="instNow" hidden style="font-size:17px;padding:16px">⬇️ ثبّت سهم الآن · Install Sahm</button>
+    <button class="primary" id="instNow" hidden style="font-size:17px;padding:16px">⬇️ ثبّت سهم الآن · Install SAHM</button>
     <div class="point" id="instPoint">⬇️</div>
     <button id="instClose" hidden>إغلاق · Close</button>
     <div class="instfoot">
       <p>سهم من تطوير ومض آرك WAMD ARC: يوجهك لأي مكان محفوظ أو إحداثيات بسهم واحد باستخدام GPS والبوصلة في جوالك، بدون خرائط وبدون حساب. مواقعك تنحفظ على جوالك، وتقدر تربط Google Drive اختيارياً عشان تنحفظ منها نسخة احتياطية في درايفك.</p>
-      <p lang="en" dir="ltr">Sahm by WAMD ARC points you to any saved place or coordinates with a single arrow, using your phone’s GPS and compass, with no maps and no account. Your places stay on your phone, and you can optionally connect Google Drive to keep a backup of them in your own Drive.</p>
+      <p lang="en" dir="ltr">SAHM by WAMD ARC points you to any saved place or coordinates with a single arrow, using your phone’s GPS and compass, with no maps and no account. Your places stay on your phone, and you can optionally connect Google Drive to keep a backup of them in your own Drive.</p>
       <div class="links"><a href="privacy.html">سياسة الخصوصية · Privacy Policy</a><span>·</span><a href="mailto:sahm@wamdarc.com" dir="ltr">sahm@wamdarc.com</a><span>·</span><a href="https://wamdarc.com" dir="ltr">wamdarc.com</a></div>
     </div>
   </div>
@@ -1175,7 +1201,7 @@ let arrived=false; // arrival flag
 
 /* ---------- words (Arabic / English) ---------- */
 const L={
-ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فقط. يعتمد على GPS والبوصلة، بدون خرائط وبدون إنترنت.',start:'ابدأ',
+ar:{appName:'سهم | SAHM',startText:'يوجهك لأي إحداثيات بسهم فقط. يعتمد على GPS والبوصلة، بدون خرائط وبدون إنترنت.',start:'ابدأ',
  tabSet:'الإعدادات',heroTag:'موقعك .. اتجاهك',tabQibla:'القبلة',tabFav:'مواقعي المفضلة',tabHome:'الرئيسية',
  gWait:'بانتظار GPS…',gStop:'GPS متوقف',gEx:'GPS ممتاز',gGood:'GPS جيد',gMid:'GPS متوسط',gWeak:'GPS ضعيف',gPerm:'لا يوجد إذن للموقع',gNone:'لا توجد إشارة GPS',
  live:'تحديث مباشر',ago:n=>'آخر تحديث قبل '+n+' ث',cOff:'البوصلة مقفلة',cOn:'البوصلة تعمل',cCal:'بوصلة تحتاج معايرة',cEx:'بوصلة ممتازة',cGood:'بوصلة جيدة',cMid:'بوصلة متوسطة',cWeak:'بوصلة ضعيفة',
@@ -1195,8 +1221,8 @@ ar:{appName:'سهم',startText:'يوجهك لأي إحداثيات بسهم فق
  restoreErr:'ما لقيت أماكن في النص. تأكد إنك لصقت النسخة الاحتياطية كاملة.',restored:(a,s)=>'تم استرجاع '+a+' مكان'+(s?' · '+s+' موجود مسبقاً':''),
  copied:'تم النسخ',canceled:'تم إلغاء التوجيه',waitGps:'بانتظار GPS',noPlaces:'ما فيه أماكن محفوظة',place:'مكان',fromLink:'من رابط',backupTitle:'سهم — أماكني',
  arriveLbl:'مسافة «وصلت»',arriveHint:'10 م مناسبة لو تدور على سيارة أو خيمة.',fmtLbl:'صيغة الإحداثيات',fmtHint:'للعرض والنسخ. النسخة الاحتياطية تبقى عشرية دائماً.',
- themeLbl:'نمط المظهر',light:'فاتح',dark:'مظلم',langLbl:'اللغة',share:'مشاركة التطبيق',about:'حول التطبيق',version:'نسخة التطبيق',contact:'تواصل معنا',privacy:'سياسة الخصوصية',gApp:'التطبيق',addHome:'إضافة إلى الشاشة الرئيسية',updCheck:'البحث عن تحديث',footTxt:'يعمل بالكامل على جوالك، بلا خرائط ولا حسابات.',mailSubject:'سهم — ملاحظة',upChecking:'جارٍ البحث عن تحديث…',upLatest:'عندك أحدث إصدار',upFound:'وجدنا تحديثاً، جارٍ تنزيله…',upOffline:'البحث عن تحديث يحتاج إنترنت',inHome:'سهم مضاف للشاشة الرئيسية ✓',privFail:'تعذّر فتح السياسة',
- shareText:'🏹 سهم | Sahm\nوجهتك بسهم واحد.\nاحفظ موقعك، أو أدخل الإحداثيات، واتبع السهم حتى تصل. بدون خرائط، وبدون إنترنت.\n📍 وجهة واضحة. طريق أبسط.\nجرّبه:',linkCopied:'تم نسخ رابط التطبيق',
+ themeLbl:'نمط المظهر',light:'فاتح',dark:'مظلم',langLbl:'اللغة',share:'مشاركة التطبيق',about:'حول التطبيق',version:'نسخة التطبيق',contact:'تواصل معنا',privacy:'سياسة الخصوصية',gApp:'التطبيق',addHome:'إضافة للشاشة الرئيسية',updCheck:'البحث عن تحديثات',footTxt:'يعمل بالكامل على جوالك، بلا خرائط ولا حسابات.',mailSubject:'سهم — ملاحظة',upChecking:'جارٍ البحث عن تحديث…',upLatest:'عندك أحدث إصدار',upFound:'وجدنا تحديثاً، جارٍ تنزيله…',upOffline:'البحث عن تحديث يحتاج إنترنت',inHome:'سهم مضاف للشاشة الرئيسية ✓',privFail:'تعذّر فتح السياسة',
+ shareText:'🏹 سهم | SAHM\nوجهتك بسهم واحد.\nاحفظ موقعك، أو أدخل الإحداثيات، واتبع السهم حتى تصل. بدون خرائط، وبدون إنترنت.\n📍 وجهة واضحة. طريق أبسط.\nجرّبه:',linkCopied:'تم نسخ رابط التطبيق',
  tagline:'وجهتك بسهم واحد.',aboutSub:'فكرة بسيطة. وصول مباشر.',
  blurb:'يمنحك سهم طريقة مختلفة للوصول إلى الأماكن؛ احفظ موقعًا تريد العودة إليه، أو أدخل إحداثيات وجهتك، واتبع اتجاه السهم واعرف المسافة المتبقية حتى تصل.',
  blurb2:'لا تحتاج إلى خرائط أو اتصال بالإنترنت لتحديد اتجاه وجهتك. يعتمد سهم على GPS والبوصلة في جهازك، وتبقى مواقعك المحفوظة على جهازك.',verLbl:'الإصدار',aboutEnd:'سهم — وجهتك، على طريقتك.',
@@ -1256,7 +1282,7 @@ gBackup:'النسخ الاحتياطي',gdOffShort:'غير مربوط · ارب�
  yearTitle:'المواسم والطوالع',yrMawasim:'المواسم (الدارجة)',yrTawali:'الطوالع',days:n=>n+' يوم',
  yrSrc:'المواسم والطوالع ومعدلات الحرارة من «دليل الطوالع والنجوم» للأستاذ الدكتور عبدالله المسند. كل التواريخ محفوظة في التطبيق وتشتغل بدون إنترنت.',
  months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']},
-en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow. GPS and compass only, no maps, no internet.',start:'Start',
+en:{appName:'سهم | SAHM',startText:'Guides you to any coordinates with a single arrow. GPS and compass only, no maps, no internet.',start:'Start',
  tabSet:'Settings',heroTag:'Your spot. Your way.',tabQibla:'Qibla',tabFav:'Favorites',tabHome:'Home',
  gWait:'Waiting for GPS…',gStop:'GPS stopped',gEx:'GPS excellent',gGood:'GPS good',gMid:'GPS fair',gWeak:'GPS weak',gPerm:'No location permission',gNone:'No GPS signal',
  live:'Live',ago:n=>'Updated '+n+' s ago',cOff:'Compass off',cOn:'Compass on',cCal:'Calibrate compass',cEx:'Compass excellent',cGood:'Compass good',cMid:'Compass fair',cWeak:'Compass weak',
@@ -1274,21 +1300,21 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  errBad:'Couldn\'t read the coordinates. Write them like 24.8860, 46.6484',
  restoreTitle:'Restore places',restoreHint:'Paste your backup here. One place per line; places you already have aren\'t duplicated.',
  restoreErr:'No places found in the text. Make sure you pasted the whole backup.',restored:(a,s)=>'Restored '+a+' place'+(a===1?'':'s')+(s?' · '+s+' already saved':''),
- copied:'Copied',canceled:'Guiding stopped',waitGps:'Waiting for GPS',noPlaces:'No saved places',place:'Place',fromLink:'From link',backupTitle:'Sahm — my places',
+ copied:'Copied',canceled:'Guiding stopped',waitGps:'Waiting for GPS',noPlaces:'No saved places',place:'Place',fromLink:'From link',backupTitle:'SAHM — my places',
  arriveLbl:'"Arrived" distance',arriveHint:'10 m works well when looking for a car or a tent.',fmtLbl:'Coordinate format',fmtHint:'For display and copying. Backups always stay decimal.',
- themeLbl:'Appearance',light:'Light',dark:'Dark',langLbl:'Language',share:'Share the app',about:'About',version:'App version',contact:'Contact us',privacy:'Privacy policy',gApp:'App',addHome:'Add to Home Screen',updCheck:'Check for updates',footTxt:'Runs entirely on your phone, no maps, no accounts.',mailSubject:'Sahm — feedback',upChecking:'Checking for updates…',upLatest:'You have the latest version',upFound:'Update found, downloading…',upOffline:'Checking for updates needs internet',inHome:'Sahm is on your Home Screen ✓',privFail:'Couldn’t open the policy',
- shareText:'🏹 Sahm | سهم\nYour destination, one arrow.\nSave your spot or enter coordinates, then follow the arrow until you arrive. No maps, no internet.\n📍 A clear destination. A simpler way.\nTry it:',linkCopied:'App link copied',
+ themeLbl:'Appearance',light:'Light',dark:'Dark',langLbl:'Language',share:'Share the app',about:'About',version:'App version',contact:'Contact us',privacy:'Privacy policy',gApp:'App',addHome:'Add to Home Screen',updCheck:'Check for updates',footTxt:'Runs entirely on your phone, no maps, no accounts.',mailSubject:'SAHM — feedback',upChecking:'Checking for updates…',upLatest:'You have the latest version',upFound:'Update found, downloading…',upOffline:'Checking for updates needs internet',inHome:'SAHM is on your Home Screen ✓',privFail:'Couldn’t open the policy',
+ shareText:'🏹 سهم | SAHM\nYour destination, one arrow.\nSave your spot or enter coordinates, then follow the arrow until you arrive. No maps, no internet.\n📍 A clear destination. A simpler way.\nTry it:',linkCopied:'App link copied',
  tagline:'Your destination, one arrow.',aboutSub:'A simple idea. A direct way there.',
- blurb:'Sahm gives you a different way to reach places: save a spot you want to come back to, or enter your destination’s coordinates, then follow the arrow and watch the distance left until you arrive.',
- blurb2:'You don’t need maps or an internet connection to find your way. Sahm uses your phone’s GPS and compass, and your saved places stay on your device.',verLbl:'Version',aboutEnd:'Sahm — your destination, your way.',
+ blurb:'SAHM gives you a different way to reach places: save a spot you want to come back to, or enter your destination’s coordinates, then follow the arrow and watch the distance left until you arrive.',
+ blurb2:'You don’t need maps or an internet connection to find your way. SAHM uses your phone’s GPS and compass, and your saved places stay on your device.',verLbl:'Version',aboutEnd:'SAHM — your destination, your way.',
  by:'Idea & development',byDev:'Developed by',done:'Done',aboutF:[['🏹','The arrow','Points to a saved place or any coordinates, with the distance left'],['⛺','Camp & car','Pin them in one tap and find your way back, with a reminder before sunset'],['🕋','Qibla','A true-north compass with the distance to the Kaaba'],['✨','Star guide','The stars and planets up tonight, and where each one is'],['👣','Track & area','Record your way and follow it back, and measure any plot of land'],['🆘','Emergency','Send your location in one message, with emergency numbers']],author:'sahm@wamdarc.com',close:'Close',am:'AM',pm:'PM',
  sunrise:'Sunrise',sunset:'Sunset',near:(c,d,dir)=>d+' '+dir+' of '+c,inCity:c=>'In '+c+' (approx.)',approx:'Approximate, offline',
  wx:{0:'☀️ Clear',1:'🌤️ Mostly clear',2:'⛅ Partly cloudy',3:'☁️ Cloudy',45:'🌫️ Fog',48:'🌫️ Fog',51:'🌦️ Drizzle',61:'🌧️ Rain',71:'❄️ Snow',80:'🌧️ Showers',95:'⛈️ Thunderstorm'},
  wind:'Wind',kmh:'km/h',agoMin:n=>n+' min ago',
  setStart:'📍 Pin starting point',goStart:'↩️ Take me back',startName:'Starting point',startSet:'Starting point pinned',startWeak:'Weak signal. Wait a moment, then pin it.',startReset:'Tap again to remove the starting point',startCleared:'Starting point removed',
  altUp:n=>'⬆️ Target is <b>'+n+'</b> m above you',altDown:n=>'⬇️ Target is <b>'+n+'</b> m below you',altSame:'↔️ About your altitude',altNote:' (approx.)',
- sortNear:'Nearest',sortNew:'Newest',details:'Place details',coordsK:'Coordinates',sharePlace:'Share',shareLink:(n,c,u)=>'📍 '+n+'\n'+c+'\nOpen the link and Sahm guides you there:\n'+u,renamed:'Name saved',
- shareMsg:(n,c)=>'📍 '+n+'\n'+c+'\nSent from Sahm: copy the coordinates and paste them into “Add coordinates”',
+ sortNear:'Nearest',sortNew:'Newest',details:'Place details',coordsK:'Coordinates',sharePlace:'Share',shareLink:(n,c,u)=>'📍 '+n+'\n'+c+'\nOpen the link and SAHM guides you there:\n'+u,renamed:'Name saved',
+ shareMsg:(n,c)=>'📍 '+n+'\n'+c+'\nSent from SAHM: copy the coordinates and paste them into “Add coordinates”',
  paste:'📋 Paste',pasteFail:'Long-press the field and choose Paste',
  red:'Red',redHint:'Red is for night: it keeps your eyes used to the dark and is easy on the battery.',ecoLbl:'Battery saver',on:'On',off:'Off',
  ecoHint:'Lets the screen turn off, updates the compass less often and stops animations. GPS keeps its full accuracy.',
@@ -1296,9 +1322,9 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  campLbl:'Pin camp',carLbl:'Pin car',campName:'Camp',carName:'Car',ptSaved:a=>'Pinned to ±'+a+' m',
  ptWeak:a=>'GPS is weak right now ('+(a?'±'+a+' m':'waiting for signal')+'). Move to open sky and wait until it is under ±25 m',
  ptGo:n=>'↩️ Take me to the '+n.toLowerCase(),ptShare:'📤 Send the location to friends',ptHere:'📍 Move it to where I am',ptDel:'🗑 Remove',ptDelSure:'Tap again to remove',ptDeleted:'Removed',
- ptInvite:(n,u)=>'⛺ '+n+'\nJoin us! Open the link and Sahm guides you there, even without internet:\n'+u,
+ ptInvite:(n,u)=>'⛺ '+n+'\nJoin us! Open the link and SAHM guides you there, even without internet:\n'+u,
  lkGot:'Someone sent you a place',lkGo:'↩️ Guide me there',lkSave:'⭐ Save to my places',lkSaved:'Saved to your places',lkAway:d=>d+' from you',
- lkWeb:'You can use Sahm right here in the browser. To keep your places and work offline, add it to your Home Screen from the Share button.',linkName:'Shared place',
+ lkWeb:'You can use SAHM right here in the browser. To keep your places and work offline, add it to your Home Screen from the Share button.',linkName:'Shared place',
  qComp:a=>'🧭 Compass weak'+(a?' ±'+a+'°':'')+': wave the phone in a figure 8',
  qGps:a=>'📡 GPS ±'+a+' m: move to open sky and wait a moment',
  windFrom:['north','north-east','east','south-east','south','south-west','west','north-west'],
@@ -1309,11 +1335,11 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  stNote:'Positions are worked out on the phone with no internet. Al-Jadi marks true north, and its height equals your latitude.',
  stInfo:{jadi:'Fixed in the north all night',suhail:'Rises in the south in winter',thurayya:'A small bright star cluster',shira:'The brightest star in the sky',jawza:'Three stars in a row'},
  ntfLbl:'Notifications',ntfOnN:'On: a reminder 30 minutes before sunset when your camp or car is pinned, new seasons, and backup reminders.',
- ntfOffN:'Off.',ntfInstall:'Add Sahm to your Home Screen to get notifications.',ntfBlocked:'Notifications are blocked for Sahm in your phone settings.',ntfFail:'Could not turn notifications on. Try again later with internet.',
- northLbl:'True north',northHint:'Phone compasses measure magnetic north. Sahm corrects it to true north for where you are (about 3° in Riyadh), so the Qibla and arrows are more accurate.',mvBar:'Sahm has a new address',mvMore:'Details',mvTitle:'📦 Sahm has moved',
+ ntfOffN:'Off.',ntfInstall:'Add SAHM to your Home Screen to get notifications.',ntfBlocked:'Notifications are blocked for SAHM in your phone settings.',ntfFail:'Could not turn notifications on. Try again later with internet.',
+ northLbl:'True north',northHint:'Phone compasses measure magnetic north. SAHM corrects it to true north for where you are (about 3° in Riyadh), so the Qibla and arrows are more accurate.',mvBar:'SAHM has a new address',mvMore:'Details',mvTitle:'📦 SAHM has moved',
  mvIntro:'The new address is sahm.wamdarc.com. This app keeps working, but future updates go to the new one. Move your places in three steps:',
  mvS1:'Copy your places from here',mvCopy:n=>'📋 Copy my places ('+n+')',mvS2:'Open the new address in Safari and add it to your Home Screen',
- mvS3:'Open the new Sahm → Favorites → 📥 Restore → paste',mvNote:'Once your places are there, you can delete the old Sahm from your Home Screen.',updReady:'A new version of Sahm is ready',updNow:'Update',updLater:'Later',
+ mvS3:'Open the new SAHM → Favorites → 📥 Restore → paste',mvNote:'Once your places are there, you can delete the old SAHM from your Home Screen.',updReady:'A new version of SAHM is ready',updNow:'Update',updLater:'Later',
  tSave:'Save spot',tAdd:'Coords',tTrack:'Trail',tArea:'Area',tSos:'SOS',catLbl:'Category',catAll:'All',
  trTitle:'🧭 Trail back',trStart:'▶︎ Record my trail',trResume:'▶︎ Keep recording',trStop:'⏸ Pause',trBack:'↩️ Take me back the same way',trClear:'🗑 Clear',
  trEmpty:'Start recording and walk; your trail appears here',trHintOn:'Records a point every 10 m straight from the GPS. Keep the app open with the screen on.',
@@ -1330,7 +1356,7 @@ en:{appName:'Sahm',startText:'Guides you to any coordinates with a single arrow.
  sunWarn:m=>m+' min to sunset',sunStart:d=>'start '+d+' away',sunNav:m=>'🌇 sunset in '+m+' min',
  eta:t=>'⏱️ arrive in '+t,faslNow:'Quarter',taliNow:'Star (Tali‘)',tempLbl:'Temperature',avgT:c=>'avg '+c+'°',dayLeft:'days left',tonight:'Tonight',
 fAll:'All places',fNew:'New folder',fNewQ:'Folder name',fNameEx:'e.g. Riyadh, Hafar Al-Batin, camping spots',fRename:'Rename',fDel:'Delete folder',fDelQ:'Delete folder?',fDelNote:'Its places aren’t deleted; they go back to the list without a folder.',fEmpty:'This folder is empty. Open any place and choose this folder, or save your spot while you’re inside it.',fNone:'No folder',folderLbl:'Folder',fCount:n=>n===0?'Empty':n===1?'1 place':n+' places',fSaved:'Folder created',fDeleted:'Folder deleted',fExists:'A folder with this name already exists',ok:'Save',cancel:'Cancel',
-gBackup:'Backup',gdOffShort:'Not connected · connect for automatic backup',gdOnShort:'Connected',gdLink:'Connect',bkPick:'Backup',rsPick:'Restore',toDrive:'Back up to Drive now',fromDrive:'From Google Drive',fromText:'From text (manual backup)',textBk:'Manual backup (text)',linkDrive:'Connect Google Drive for automatic backup',gdRow:'Back up to Google Drive',gdAskS:'A backup of your places and folders in your Drive, updated automatically whenever you add or change something.',gdF1:'Its own folder in your Drive',gdF1s:'Sahm creates a “سهم Sahm” folder and keeps the backup there',gdF2:'Sees only its own files',gdF2s:'It can’t open any other file in your Drive',gdF3:'Your data stays on your phone',gdF3s:'The app keeps working offline as before',gdContinue:'Continue with Google',gdNow:'Back up now',gdRestore:'Restore from Drive',gdOff:'Disconnect',gdOffQ:'Disconnect Drive?',gdOffNote:'Your places stay on your phone, and the backup in your Drive isn’t deleted.',gdOffT:'Disconnected',gdSyncing:'Backing up…',gdPending:'Changes waiting to back up',gdLast:a=>'Last backup '+a,gdNever:'Not backed up yet',gdJust:'just now',gdMin:m=>m+' min ago',gdHr:h=>h+' h ago',gdDone:'Backed up to Drive ✓',gdFail:'Couldn’t reach Drive',gdOffline:'Drive needs internet',gdDenied:'Not connected',gdScope:'Allow Sahm to access its files in Drive',gdConnected:'Google Drive connected ✓',gdNoRemote:'No backup in Drive yet',gdPulled:n=>n?'Restored '+n+' from Drive ✓':'All your places are here, nothing new',gdOnNote:'Your places and folders back up automatically to the “سهم Sahm” folder in your Drive.',gdOffNote2:'Connect Drive for an automatic backup of your places, or use the manual text backup in Favorites.',manualBk:'Manual backup (text)',manualRs:'Restore from text',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
+gBackup:'Backup',gdOffShort:'Not connected · connect for automatic backup',gdOnShort:'Connected',gdLink:'Connect',bkPick:'Backup',rsPick:'Restore',toDrive:'Back up to Drive now',fromDrive:'From Google Drive',fromText:'From text (manual backup)',textBk:'Manual backup (text)',linkDrive:'Connect Google Drive for automatic backup',gdRow:'Back up to Google Drive',gdAskS:'A backup of your places and folders in your Drive, updated automatically whenever you add or change something.',gdF1:'Its own folder in your Drive',gdF1s:'SAHM creates a “سهم Sahm” folder and keeps the backup there',gdF2:'Sees only its own files',gdF2s:'It can’t open any other file in your Drive',gdF3:'Your data stays on your phone',gdF3s:'The app keeps working offline as before',gdContinue:'Continue with Google',gdNow:'Back up now',gdRestore:'Restore from Drive',gdOff:'Disconnect',gdOffQ:'Disconnect Drive?',gdOffNote:'Your places stay on your phone, and the backup in your Drive isn’t deleted.',gdOffT:'Disconnected',gdSyncing:'Backing up…',gdPending:'Changes waiting to back up',gdLast:a=>'Last backup '+a,gdNever:'Not backed up yet',gdJust:'just now',gdMin:m=>m+' min ago',gdHr:h=>h+' h ago',gdDone:'Backed up to Drive ✓',gdFail:'Couldn’t reach Drive',gdOffline:'Drive needs internet',gdDenied:'Not connected',gdScope:'Allow SAHM to access its files in Drive',gdConnected:'Google Drive connected ✓',gdNoRemote:'No backup in Drive yet',gdPulled:n=>n?'Restored '+n+' from Drive ✓':'All your places are here, nothing new',gdOnNote:'Your places and folders back up automatically to the “سهم Sahm” folder in your Drive.',gdOffNote2:'Connect Drive for an automatic backup of your places, or use the manual text backup in Favorites.',manualBk:'Manual backup (text)',manualRs:'Restore from text',daysLeft:n=>n+' day'+(n===1?'':'s')+' left',
  lastDay:'Last day',range:(a,b,d,L)=>a+' – '+b+' · day '+d+' of '+L,
  next:(e,n,d,dt)=>'⏭️ '+e+' <b>'+n+'</b> starts '+(d===1?'tomorrow':'in '+d+' days')+' · '+dt,soon:'Soon',
  temp:(n,a,b,c)=>'🌡️ Typical temperature in '+n+': <b><bdi dir="ltr">'+a+'° – '+b+'°</bdi></b> (avg '+c+'°)',
@@ -1936,7 +1962,7 @@ $('ptDel').onclick=()=>{const b=$('ptDel');if(!b.classList.contains('sure')){b.c
 $('ptClose').onclick=()=>$('dlgPt').close();
 paintStart=function(){paintPts()};
 
-/* ---------- links that open a place in Sahm: sahm.wamdarc.com/#lat,lon~name ---------- */
+/* ---------- links that open a place in SAHM: sahm.wamdarc.com/#lat,lon~name ---------- */
 function linkOf(lat,lon,name){return 'https://sahm.wamdarc.com/#'+lat.toFixed(6)+','+lon.toFixed(6)+(name?'~'+encodeURIComponent(name):'')}
 function parseLink(str){if(!str)return null;let s=String(str);const i=s.indexOf('#');if(/sahm\.wamdarc\.com|bsshfi\.github\.io/.test(s)&&i>=0)s=s.slice(i+1);else if(i===0)s=s.slice(1);else if(/^https?:/.test(s))return null;
   let name='';const t=s.indexOf('~');if(t>=0){try{name=decodeURIComponent(s.slice(t+1))}catch(e){name=s.slice(t+1)}s=s.slice(0,t)}
@@ -2144,7 +2170,7 @@ $('rOk').onclick=()=>{
   save();fillList();$('dlgRestore').close();toast(T('restored')(added,skipped))};
 
 /* ---------- Google Drive backup (optional) ----------
-   drive.file only: Sahm sees just the files it creates, in a "سهم Sahm" folder in the user's Drive.
+   drive.file only: SAHM sees just the files it creates, in a "سهم Sahm" folder in the user's Drive.
    Backing up only uploads a snapshot (places, folders, camp, car); nothing on the phone is ever removed by Drive.
    "Restore from Drive" adds the places and folders the phone doesn't have yet.
    Sign-in sends this page to Google and back (the most reliable way from an iPhone Home Screen app). */
@@ -2187,7 +2213,7 @@ async function gdFolder(){if(gdS.folder){try{const f=await gdJSON(GD.API+'/files
   if(!id)id=(await gdJSON(GD.API+'/files?fields=id',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'سهم Sahm',mimeType:'application/vnd.google-apps.folder',appProperties:{sahm:'root'}})})).id;
   gdS.folder=id;gdSave();return id}
 async function gdDataFile(folder){const r=await gdJSON(GD.API+'/files?spaces=drive&fields=files(id)&q='+encodeURIComponent("'"+folder+"' in parents and appProperties has { key='sahm' and value='data' } and trashed=false"));return r.files&&r.files[0]&&r.files[0].id}
-function gdSnapshot(){return JSON.stringify({app:'sahm',format:1,version:'3.9.3',exportedAt:new Date().toISOString(),places,folders,camp:campPt||null,car:startPt||null})}
+function gdSnapshot(){return JSON.stringify({app:'sahm',format:1,version:'3.9.4',exportedAt:new Date().toISOString(),places,folders,camp:campPt||null,car:startPt||null})}
 // add what the phone doesn't have yet (by id); never deletes or overwrites anything on the phone
 function gdMerge(d){if(!d||d.app!=='sahm')return 0;let n=0;
   (d.folders||[]).forEach(f=>{if(f&&f.id&&f.name&&!folders.some(x=>x.id===f.id)){folders.push({id:f.id,name:f.name});n++}});
@@ -2282,13 +2308,13 @@ function openSheet(html,after){const d=$('dlgSheet');$('shBody').innerHTML=html;
 function closeSheet(){$('dlgSheet').close()}
 $('dlgSheet').addEventListener('click',e=>{if(e.target.id==='dlgSheet'){const r=e.target.getBoundingClientRect();if(e.clientY<r.top)closeSheet()}});
 const LOGO=()=>'<p class="ab-by">'+T('byDev')+'</p><a class="wamdf" href="https://wamdarc.com" target="_blank" rel="noopener" aria-label="WAMD ARC"><img class="wl" src="wamdarc-light.png" alt="WAMD ARC" width="132" height="21"><img class="wd" src="wamdarc-dark.png" alt="WAMD ARC" width="132" height="21"><span dir="ltr">WAMDARC.COM</span></a>';
-const APPN=()=>cfg.lang==='en'?'Sahm | سهم':'سهم | Sahm';
-$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.9.3</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
+const APPN=()=>cfg.lang==='en'?'سهم | SAHM':'سهم | SAHM';
+$('aboutBtn').onclick=()=>openSheet('<div class="ab-hero"><img src="icon.png" alt=""><h2>'+APPN()+'</h2><div class="v">v3.9.4</div><div class="ab-tag">'+T('tagline')+'</div><div class="ab-sub">'+T('aboutSub')+'</div></div>'+
   '<div class="ab-text"><p>'+T('blurb')+'</p><p>'+T('blurb2')+'</p></div>'+
   '<ul class="ab-list">'+T('aboutF').map(([e,t,d])=>'<li><b>'+e+'</b><span><b>'+t+'</b><i>'+d+'</i></span></li>').join('')+'</ul>'+LOGO()+
   '<button class="shbtn primary" id="abShare">'+T('share')+'</button><button class="shbtn" id="abClose">'+T('close')+'</button>',
   ()=>{$('abShare').onclick=()=>$('share').click();$('abClose').onclick=closeSheet});
-$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.9.3')};
+$('contact').onclick=()=>{location.href='mailto:sahm@wamdarc.com?subject='+encodeURIComponent(T('mailSubject')+' v3.9.4')};
 $('privacy').onclick=async()=>{let body='';
   try{const d=new DOMParser().parseFromString(await(await fetch('privacy.html')).text(),'text/html'),m=d.getElementById(cfg.lang==='en'?'en':'ar');
     if(m){m.querySelectorAll('script,style').forEach(x=>x.remove());body=m.innerHTML}}catch(e){}
@@ -2304,7 +2330,7 @@ $('updCheck').onclick=()=>{if(updReady){applyUpdate();return}
 /* ---------- start (iOS needs a tap to grant compass) ---------- */
 let wl=null;
 async function wakeOn(){try{if(cfg.eco==='on'){if(wl){await wl.release();wl=null}return}if(!wl||wl.released)wl=await navigator.wakeLock.request('screen')}catch(e){}}
-function edgeColor(){const app=document.documentElement.classList.contains('app'),c=getComputedStyle(app?document.body:document.documentElement).backgroundColor,m=document.querySelector('meta[name=theme-color]');if(m&&c)m.content=c}
+function edgeColor(){/* لون شريط الساعة = لون السماء أعلى التطبيق (مو لون الرمل الفاتح) */const c=getComputedStyle(document.documentElement).getPropertyValue('--sky1').trim(),m=document.querySelector('meta[name=theme-color]');if(m&&c)m.content=c}
 /* iOS 26 Home Screen apps can report the page shorter than the screen by the status-bar height, which leaves
    an empty strip under the tab bar. Measure it and move the tab bar down into it. It only applies when the
    missing height matches the status-bar inset (that bug and nothing else); otherwise it stays 0. */
@@ -2348,16 +2374,16 @@ function showInstall(){
   let ar,en;
   if(inChromeIOS){
     ar=st(1,SH,'اضغط زر <b>المشاركة</b> فوق جنب شريط العنوان')+st(2,PL,'اختر <b>إضافة إلى الشاشة الرئيسية</b> ثم <b>إضافة</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','افتح <b>سهم</b> من الشاشة الرئيسية');
-    en=st(1,SH,'Tap <b>Share</b> at the top, next to the address bar')+st(2,PL,'Choose <b>Add to Home Screen</b>, then <b>Add</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>Sahm</b> from your Home Screen');
+    en=st(1,SH,'Tap <b>Share</b> at the top, next to the address bar')+st(2,PL,'Choose <b>Add to Home Screen</b>, then <b>Add</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>SAHM</b> from your Home Screen');
   }else if(isIOS&&!inSafari){
     ar=st(1,'','افتح هذا الرابط في <b>سفاري</b>. التطبيق اللي أنت فيه ما يسمح بالإضافة للشاشة الرئيسية.')+st(2,SH,'في سفاري اضغط زر <b>المشاركة</b>')+st(3,PL,'اختر <b>إضافة إلى الشاشة الرئيسية</b>');
     en=st(1,'','Open this link in <b>Safari</b>. The app you’re in can’t add to the Home Screen.')+st(2,SH,'In Safari, tap <b>Share</b>')+st(3,PL,'Choose <b>Add to Home Screen</b>');
   }else if(isIOS){
     ar=st(1,SH,'اضغط زر <b>المشاركة</b> تحت في سفاري')+st(2,PL,'اختر <b>إضافة إلى الشاشة الرئيسية</b> ثم <b>إضافة</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','افتح <b>سهم</b> من الشاشة الرئيسية');
-    en=st(1,SH,'Tap <b>Share</b> at the bottom of Safari')+st(2,PL,'Choose <b>Add to Home Screen</b>, then <b>Add</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>Sahm</b> from your Home Screen');
+    en=st(1,SH,'Tap <b>Share</b> at the bottom of Safari')+st(2,PL,'Choose <b>Add to Home Screen</b>, then <b>Add</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>SAHM</b> from your Home Screen');
   }else{
     ar=st(1,DT,'افتح قائمة المتصفح <b>⋮</b>')+st(2,PL,'اختر <b>تثبيت التطبيق</b> أو <b>إضافة إلى الشاشة الرئيسية</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','افتح <b>سهم</b> من الشاشة الرئيسية');
-    en=st(1,DT,'Open the browser menu <b>⋮</b>')+st(2,PL,'Choose <b>Install app</b> or <b>Add to Home Screen</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>Sahm</b> from your Home Screen');
+    en=st(1,DT,'Open the browser menu <b>⋮</b>')+st(2,PL,'Choose <b>Install app</b> or <b>Add to Home Screen</b>')+st(3,'<img src="icon.png" width="22" height="22" style="border-radius:5px">','Open <b>SAHM</b> from your Home Screen');
   }
   $('stepsAr').innerHTML=ar;$('stepsEn').innerHTML=en;
   $('instPoint').hidden=!(isIOS&&inSafari);
@@ -2409,5 +2435,11 @@ $('updLater').onclick=()=>{$('upd').hidden=true};
 </script>
 <script src="wamd-stats.js" data-app="sahm"></script>
 <script src="wamd-cfg.js" data-app="sahm" defer></script>
+<!-- WAMD-TC --><script>/* WAMD ARC: لون شريط الساعة (theme-color) = لون أعلى التطبيق، ويتبع الفاتح والداكن */
+(function(){var busy=0;function c(){return (getComputedStyle(document.body||document.documentElement).getPropertyValue('--wtc')||'').trim()}
+function f(){var v=c();if(!v||busy)return;busy=1;document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){if(m.getAttribute('content')!==v)m.setAttribute('content',v)});busy=0}
+f();var o=new MutationObserver(f);o.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','class']});if(document.body)o.observe(document.body,{attributes:true,attributeFilter:['class','data-pal']});
+document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){o.observe(m,{attributes:true,attributeFilter:['content']})});
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){setTimeout(f,0)})}catch(e){}})();</script><!-- /WAMD-TC -->
 </body>
 </html>
