@@ -2,7 +2,7 @@
 // Updates still arrive: every new version changes this file (cache name below), the phone notices it,
 // downloads the new files in the background, and the app offers to switch.
 // Only the app's own files go through here; place-name and weather requests are left alone.
-const C='sahm-3.9.4';
+const C='sahm-3.9.5';
 const FILES=['./','index.html','manifest.json','icon.png','icon-180.png','logo.png','moon.png','wamd-push.js','plex-ar-400.woff2','plex-ar-700.woff2','plex-la-400.woff2','plex-la-700.woff2','wamd-stats.js','wamd-cfg.js','privacy.html','wamdarc-light.png','wamdarc-dark.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(FILES.map(u=>new Request(u,{cache:'reload'})))));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))));self.clients.claim()});
